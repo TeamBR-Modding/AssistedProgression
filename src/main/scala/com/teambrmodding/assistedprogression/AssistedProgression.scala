@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression
 
-import com.teambr.bookshelf.common.CommonProxy
+import com.teambrmodding.assistedprogression.common.CommonProxy
 import com.teambrmodding.assistedprogression.lib.Reference
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Items
