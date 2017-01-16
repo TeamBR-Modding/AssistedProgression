@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.managers
 
-import com.teambrmodding.assistedprogression.common.blocks.BlockCrafter
+import com.teambrmodding.assistedprogression.common.blocks.{BlockCrafter, BlockPlayerPlate}
 import com.teambrmodding.assistedprogression.common.tiles.TileCrafter
 import net.minecraft.block.Block
 import net.minecraft.item.ItemBlock
@@ -23,9 +23,15 @@ object BlockManager {
     // Crafter
     val blockCrafter = new BlockCrafter("blockCrafter", classOf[TileCrafter])
 
+    // Player Plate
+    val playerPlate = new BlockPlayerPlate
+
     def preInit(): Unit = {
         //Crafter
         registerBlock(blockCrafter, "blockCrafter", classOf[TileCrafter])
+
+        // Player Plate
+        registerBlock(playerPlate, "playerPlate", null)
     }
 
 

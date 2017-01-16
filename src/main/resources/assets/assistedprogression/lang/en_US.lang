@@ -17,6 +17,9 @@ PARSE_ESCAPES
 # Crafter
 tile.assistedprogression:blockCrafter.name=Dual Crafter
 
+# Player Sensitive Pressure Plate
+tile.assistedprogression:playerPlate.name=Player Sensitive Pressure Plate
+
 #######################
 # GUI
 #######################

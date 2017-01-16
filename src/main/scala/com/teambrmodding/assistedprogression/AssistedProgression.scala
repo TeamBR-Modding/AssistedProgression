@@ -2,7 +2,7 @@ package com.teambrmodding.assistedprogression
 
 import com.teambrmodding.assistedprogression.common.CommonProxy
 import com.teambrmodding.assistedprogression.lib.Reference
-import com.teambrmodding.assistedprogression.managers.BlockManager
+import com.teambrmodding.assistedprogression.managers.{BlockManager, CraftingRecipeManager}
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Items
 import net.minecraft.item.Item
@@ -39,6 +39,7 @@ object AssistedProgression {
 
     @EventHandler def preInit(event : FMLPreInitializationEvent) = {
         BlockManager.preInit()
+        CraftingRecipeManager.preInit()
         proxy.preInit()
     }
 

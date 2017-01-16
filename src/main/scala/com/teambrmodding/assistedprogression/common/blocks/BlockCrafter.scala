@@ -2,7 +2,7 @@ package com.teambrmodding.assistedprogression.common.blocks
 
 import com.teambr.bookshelf.common.blocks.traits.DropsItems
 import com.teambr.bookshelf.common.tiles.traits.OpensGui
-import com.teambr.bookshelf.loadables.CreatesTextures
+import com.teambrmodding.assistedprogression.AssistedProgression
 import com.teambrmodding.assistedprogression.client.gui.GuiCrafter
 import com.teambrmodding.assistedprogression.common.container.ContainerCrafter
 import com.teambrmodding.assistedprogression.common.tiles.TileCrafter
@@ -14,8 +14,6 @@ import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.{Side, SideOnly}
-
-import scala.collection.mutable.ArrayBuffer
 
 /**
  * This file was created for NeoTech
@@ -31,6 +29,7 @@ class BlockCrafter(name: String, tileEntity: Class[_ <: TileEntity]) extends Bas
         with OpensGui with DropsItems {
 
     setHardness(1.5F)
+    setCreativeTab(AssistedProgression.tabAssistedProgression)
 
     override def getRenderType(state : IBlockState) : EnumBlockRenderType = EnumBlockRenderType.MODEL
 
