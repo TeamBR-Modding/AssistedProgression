@@ -1,0 +1,88 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
+
+repositories {
+    maven {
+        name 'BR Repo'
+        url "http://www.teambrmodding.com/maven2/"
+    }
+    maven { //JEI
+        name 'DVS1 Maven FS'
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+}
+
+apply plugin: 'scala'
+apply plugin: 'maven'
+
+ext.configFile = file "gradle.properties"
+
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+String build = System.getenv("BUILD_NUMBER")
+
+if (build == null || build == '') {
+    version = "${config.minecraft_version}-${config.mod_version}"
+} else {
+    version = "${config.minecraft_version}-${config.mod_version}-B" + System.getenv("BUILD_NUMBER")
+}
+
+group= "com.teambrmodding.assistedprogression" 
+archivesBaseName = "AssistedProgression"
+
+sourceCompatibility = targetCompatibility = "1.6" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
+minecraft {
+    version = config.minecraft_version + "-" + config.forge_version
+    runDir = "run"
+    
+	mappings = "${config.MAPPINGS}"
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+dependencies {
+	deobfCompile "mezz.jei:jei_${config.minecraft_version}:${config.JEI_version}"
+	compile group: "com.teambr.bookshelf", name: "Bookshelf-API", version: "1.10.2-4.+", classifier: "dev", changing: true
+}
+
+processResources
+{
+
+	exclude '**/Thumbs.db'
+	
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
