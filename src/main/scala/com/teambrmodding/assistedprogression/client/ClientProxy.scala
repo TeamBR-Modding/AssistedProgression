@@ -14,4 +14,11 @@ import com.teambrmodding.assistedprogression.common.CommonProxy
   */
 class ClientProxy extends CommonProxy {
 
+    override def preInit(): Unit = {
+        ItemRenderManager.preInit()
+    }
+
+    override def init(): Unit = { }
+
+    override def postInit(): Unit = { }
 }

@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "assistedprogression",
+  "name": "Assisted Progression",
+  "description": "Tools to help you throughout your world",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["pauljoda", "dyonovan"],
+  "credits": "Beyond Reality team and their support",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

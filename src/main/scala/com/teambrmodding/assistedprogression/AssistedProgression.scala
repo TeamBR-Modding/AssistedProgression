@@ -2,6 +2,7 @@ package com.teambrmodding.assistedprogression
 
 import com.teambrmodding.assistedprogression.common.CommonProxy
 import com.teambrmodding.assistedprogression.lib.Reference
+import com.teambrmodding.assistedprogression.managers.BlockManager
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Items
 import net.minecraft.item.Item
@@ -37,15 +38,16 @@ object AssistedProgression {
     }
 
     @EventHandler def preInit(event : FMLPreInitializationEvent) = {
-
+        BlockManager.preInit()
+        proxy.preInit()
     }
 
     @EventHandler def init(event : FMLInitializationEvent) =  {
-
+        proxy.init()
     }
 
     @EventHandler def postInit(event : FMLPostInitializationEvent) = {
-
+        proxy.postInit()
     }
 
     @EventHandler def serverLoad(event : FMLServerStartingEvent): Unit = {
