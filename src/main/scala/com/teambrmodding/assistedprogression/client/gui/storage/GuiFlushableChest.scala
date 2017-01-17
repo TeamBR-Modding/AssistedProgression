@@ -18,5 +18,7 @@ import net.minecraft.entity.player.EntityPlayer
 class GuiFlushableChest(player: EntityPlayer, tile: TileFlushableChest) extends
         GuiBase[ContainerFlushableChest](new ContainerFlushableChest(player.inventory, tile), 175, 165, "assistedprogression.flushchest.title"){
 
-    override def addComponents(): Unit = { }
+    override def addComponents(): Unit = {
+
+    }
 }
