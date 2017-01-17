@@ -30,12 +30,13 @@ object ItemRenderManager {
         registerBlockModel(BlockManager.blockFlushableChest, "blockFlushableChest", "facing=north")
         registerBlockModel(BlockManager.playerPlate, "playerPlate", "powered=false")
         registerBlockModel(BlockManager.redstoneClock, "redstoneClock", "powered=false")
-
     }
 
     def registerItemRenderers(): Unit = {
         registerItem(ItemManager.cheapMagnet)
         registerItem(ItemManager.electroMagnet)
+        registerItem(ItemManager.trashBag)
+        registerItem(ItemManager.heftyBag)
     }
 
     /***

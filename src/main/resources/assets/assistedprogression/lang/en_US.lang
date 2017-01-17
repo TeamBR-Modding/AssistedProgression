@@ -11,8 +11,13 @@ itemGroup.tabAssistedProgression=Assisted Progression
 # Items
 #######################
 
+# Magnets
 item.assistedprogression:cheapMagnet.name=Cheap Magnet
 item.assistedprogression:electroMagnet.name=Electomagnet
+
+# TrashBags
+item.assistedprogression:trashBag.name=Trash Bag
+item.assistedprogression:heftyBag.name=Hefty Bag
 
 #######################
 # Tile Entities
@@ -35,8 +40,12 @@ tile.assistedprogression:blockFlushableChest.name=Flushable Chest
 #######################
 # Crafter
 assistedprogression.crafter.title=Dual Crafter
+
 # Flushable Chest
 assistedprogression.flushchest.title=Flushable Chest
+
+# Trash Bag
+inventory.trashBag.title=Trash Bag
 
 #######################
 # Common Text

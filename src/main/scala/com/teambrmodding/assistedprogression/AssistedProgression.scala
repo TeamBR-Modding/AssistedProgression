@@ -3,13 +3,16 @@ package com.teambrmodding.assistedprogression
 import java.io.File
 
 import com.teambrmodding.assistedprogression.common.CommonProxy
+import com.teambrmodding.assistedprogression.common.items.ItemTrashBag
 import com.teambrmodding.assistedprogression.lib.Reference
-import com.teambrmodding.assistedprogression.managers.{BlockManager, ConfigManager, CraftingRecipeManager, ItemManager}
+import com.teambrmodding.assistedprogression.managers._
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Items
 import net.minecraft.item.Item
+import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod.EventHandler
 import net.minecraftforge.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
+import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.{Mod, SidedProxy}
 import org.apache.logging.log4j.LogManager
 
@@ -46,10 +49,12 @@ object AssistedProgression {
         ItemManager.preInit()
         CraftingRecipeManager.preInit()
         proxy.preInit()
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ItemGuiManager)
     }
 
     @EventHandler def init(event : FMLInitializationEvent) =  {
         proxy.init()
+        MinecraftForge.EVENT_BUS.register(ItemTrashBag)
     }
 
     @EventHandler def postInit(event : FMLPostInitializationEvent) = {
