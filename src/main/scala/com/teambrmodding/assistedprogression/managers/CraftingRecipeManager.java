@@ -4,6 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 /**
  * This file was created for Assisted-Progression
@@ -31,5 +32,16 @@ public class CraftingRecipeManager {
                 "SRS",
                 "SBS",
                 "SRS", 'S', Blocks.STONE, 'R', Items.REDSTONE, 'B', Blocks.REDSTONE_BLOCK);
-    }
+
+        // Cheap Magnet
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.cheapMagnet()),
+                "I I",
+                "I I",
+                " I ", 'I', "ingotIron"));
+
+        // Electro Magnet
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.cheapMagnet()),
+                "I I",
+                "IRI",
+                " I ", 'I', "ingotIron", 'R', "blockRedstone"));    }
 }

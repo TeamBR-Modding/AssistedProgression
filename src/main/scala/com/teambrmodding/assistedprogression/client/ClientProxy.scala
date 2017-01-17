@@ -18,7 +18,9 @@ class ClientProxy extends CommonProxy {
         ItemRenderManager.preInit()
     }
 
-    override def init(): Unit = { }
+    override def init(): Unit = {
+        ItemRenderManager.registerItemRenderers()
+    }
 
     override def postInit(): Unit = { }
 }

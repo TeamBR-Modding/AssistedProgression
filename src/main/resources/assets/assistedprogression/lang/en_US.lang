@@ -1,6 +1,7 @@
 PARSE_ESCAPES
 
 # Creative Tabs
+itemGroup.tabAssistedProgression=Assisted Progression
 
 #######################
 # Blocks
@@ -9,6 +10,9 @@ PARSE_ESCAPES
 #######################
 # Items
 #######################
+
+item.assistedprogression:cheapMagnet.name=Cheap Magnet
+item.assistedprogression:electroMagnet.name=Electomagnet
 
 #######################
 # Tile Entities
@@ -32,6 +36,15 @@ assistedprogression.crafter.title=Dual Crafter
 #######################
 # Common Text
 #######################
+
+# Magnet
+assistedprogression.text.magnetism=Magnetism
+assistedprogression.text.magnetEvil=May attract unwanted objects
+
+assistedprogression.text.active=Active
+assistedprogression.text.disabled=Disabled
+
+assistedprogression.text.redstoneFlux=Redstone Flux
 
 #######################
 # Commands

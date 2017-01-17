@@ -18,4 +18,7 @@ object Reference {
     final val DEPENDENCIES = "required-after:Forge@[12.18.3.2185,);after:JEI@[3.14.3.402,);required-after:bookshelfapi@[4.0.0,);" //required-after:mcmultipart@[1.0.7,)
     final val UPDATE_JSON  = ""
 
+
+    // Config
+    final var CONFIG_MAGNET = "MAGNET"
 }

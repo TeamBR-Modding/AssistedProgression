@@ -1,11 +1,12 @@
 package com.teambrmodding.assistedprogression.client
 
 import com.teambrmodding.assistedprogression.lib.Reference
-import com.teambrmodding.assistedprogression.managers.BlockManager
+import com.teambrmodding.assistedprogression.managers.{BlockManager, ItemManager}
 import net.minecraft.block.Block
 import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.ItemMeshDefinition
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.item.Item
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.ModelLoader
 
@@ -24,11 +25,17 @@ import net.minecraftforge.client.model.ModelLoader
 object ItemRenderManager {
 
     def preInit(): Unit = {
+        // Blocks
         registerBlockModel(BlockManager.blockCrafter, "blockCrafter", "normal")
         registerBlockModel(BlockManager.playerPlate, "playerPlate", "powered=false")
         registerBlockModel(BlockManager.redstoneClock, "redstoneClock", "powered=false")
+
     }
 
+    def registerItemRenderers(): Unit = {
+        registerItem(ItemManager.cheapMagnet)
+        registerItem(ItemManager.electroMagnet)
+    }
 
     /***
       * Registers an item to a model
@@ -64,5 +71,4 @@ object ItemRenderManager {
         ModelLoader.setCustomModelResourceLocation(item,
             meta, new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, name), variants))
     }
-
 }

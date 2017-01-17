@@ -1,8 +1,10 @@
 package com.teambrmodding.assistedprogression
 
+import java.io.File
+
 import com.teambrmodding.assistedprogression.common.CommonProxy
 import com.teambrmodding.assistedprogression.lib.Reference
-import com.teambrmodding.assistedprogression.managers.{BlockManager, CraftingRecipeManager}
+import com.teambrmodding.assistedprogression.managers.{BlockManager, ConfigManager, CraftingRecipeManager, ItemManager}
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Items
 import net.minecraft.item.Item
@@ -38,7 +40,10 @@ object AssistedProgression {
     }
 
     @EventHandler def preInit(event : FMLPreInitializationEvent) = {
+        configFolderLocation = event.getModConfigurationDirectory.getAbsolutePath + File.separator + "AssistedProgression"
+        ConfigManager.preInit()
         BlockManager.preInit()
+        ItemManager.preInit()
         CraftingRecipeManager.preInit()
         proxy.preInit()
     }
