@@ -31,5 +31,9 @@ public class CraftingRecipeManager {
                 "SRS",
                 "SBS",
                 "SRS", 'S', Blocks.STONE, 'R', Items.REDSTONE, 'B', Blocks.REDSTONE_BLOCK);
+
+        // Flushable Chest
+        GameRegistry.addShapelessRecipe(new ItemStack(BlockManager.blockFlushableChest()),
+                Blocks.CHEST, Items.FLINT_AND_STEEL);
     }
 }

@@ -23,11 +23,16 @@ tile.assistedprogression:playerPlate.name=Player Sensitive Pressure Plate
 # Redstone Clock
 tile.assistedprogression:redstoneClock.name=Redstone Clock
 
+# Flushable Chest
+tile.assistedprogression:blockFlushableChest.name=Flushable Chest
+
 #######################
 # GUI
 #######################
 # Crafter
 assistedprogression.crafter.title=Dual Crafter
+# Flushable Chest
+assistedprogression.flushchest.title=Flushable Chest
 
 #######################
 # Common Text
