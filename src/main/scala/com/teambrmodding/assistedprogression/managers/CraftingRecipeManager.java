@@ -40,7 +40,7 @@ public class CraftingRecipeManager {
                 " I ", 'I', "ingotIron"));
 
         // Electro Magnet
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.cheapMagnet()),
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.electroMagnet()),
                 "I I",
                 "IRI",
                 " I ", 'I', "ingotIron", 'R', "blockRedstone"));
