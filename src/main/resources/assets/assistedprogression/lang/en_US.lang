@@ -60,6 +60,9 @@ assistedprogression.text.disabled=Disabled
 
 assistedprogression.text.redstoneFlux=Redstone Flux
 
+# Flushable Chest
+assistedprogression.text.config=Config
+
 #######################
 # Commands
 #######################

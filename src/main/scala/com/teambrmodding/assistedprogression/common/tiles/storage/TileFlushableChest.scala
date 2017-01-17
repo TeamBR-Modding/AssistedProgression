@@ -22,15 +22,32 @@ import net.minecraft.world.World
   */
 class TileFlushableChest extends Syncable with Inventory {
 
+    final val FLUSH_SOUND = 1
+    final val AUTO_FLUSH = 2
+    final val FLUSH_INTERVAL = 3
+
     override def initialSize: Int = 27
 
     var prevLidAngle : Float = 0
     var lidAngle : Float = 0
     var numUsingPlayers : Int = 0
     var ticksSinceSync : Int = -1
-
+    var flushSound : Boolean = true
+    var autoFlush : Boolean = false
+    var flushInterval : Int = 1
+    var flushTimer : Int = 0
 
     override def update(): Unit = {
+        //AutoFlush
+        if (getAutoFlush && !worldObj.isRemote) {
+            if (flushTimer / 20 >= flushInterval) {
+                this.clear()
+                flushTimer = 0
+            }
+            else
+                flushTimer += 1
+        }
+
         if(worldObj != null && !worldObj.isRemote && numUsingPlayers != 0 && (ticksSinceSync + pos.getX + pos.getY + pos.getZ) % 200 == 0) {
             numUsingPlayers = 0
             val f = 5.0F
@@ -89,6 +106,11 @@ class TileFlushableChest extends Syncable with Inventory {
         worldObj.addBlockEvent(pos, BlockManager.blockFlushableChest, 1, numUsingPlayers)
     }
 
+    override def onInventoryChanged(slot: Int): Unit = {
+        super.onInventoryChanged(slot)
+        flushTimer = 0
+    }
+
     override def markDirty(): Unit = {
         super[TileEntity].markDirty()
     }
@@ -96,19 +118,26 @@ class TileFlushableChest extends Syncable with Inventory {
     override def writeToNBT(tag: NBTTagCompound): NBTTagCompound = {
         super[TileEntity].writeToNBT(tag)
         super[Inventory].writeToNBT(tag)
+        tag.setBoolean("FlushSound", getFlushSound)
+        tag.setBoolean("AutoFlush", getAutoFlush)
+        tag.setInteger("FlushInterval", getFlushInterval)
         tag
     }
 
     override def readFromNBT(tag: NBTTagCompound): Unit = {
         super[TileEntity].readFromNBT(tag)
         super[Inventory].readFromNBT(tag)
+        setFlushSound(tag.getBoolean("FlushSound"))
+        setAutoFlush(tag.getBoolean("AutoFlush"))
+        setFlushInterval(tag.getInteger("FlushInterval"))
     }
 
     override def clear(): Unit = {
         super.clear()
         if(worldObj != null && !worldObj.isRemote) {
-            worldObj.playSound(null.asInstanceOf[EntityPlayer], pos, SoundEvents.BLOCK_LAVA_EXTINGUISH,
-                SoundCategory.BLOCKS, 0.3F, 0.5F)
+            if (flushSound)
+                worldObj.playSound(null.asInstanceOf[EntityPlayer], pos, SoundEvents.BLOCK_LAVA_EXTINGUISH,
+                    SoundCategory.BLOCKS, 0.3F, 0.5F)
             sendValueToClient(0, 0)
         }
     }
@@ -123,9 +152,25 @@ class TileFlushableChest extends Syncable with Inventory {
                     worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX + 0.3, pos.getY + 1, pos.getZ + 0.7, 0, 0, 0)
                     worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX + 0.7, pos.getY + 1, pos.getZ + 0.3, 0, 0, 0)
                 }
+            case 1 => setFlushSound(if (value == -1) false else true)
+            case 2 => setAutoFlush(if (value == -1) false else true)
+            case 3 => setFlushInterval(value.toInt)
             case _ =>
         }
+        markForUpdate()
     }
 
     override def getVariable(id: Int): Double = {0.0}
+
+    def getFlushSound: Boolean = flushSound
+
+    def setFlushSound(sound: Boolean): Unit = this.flushSound = sound
+
+    def getAutoFlush: Boolean = autoFlush
+
+    def setAutoFlush(flush: Boolean): Unit = this.autoFlush = flush
+
+    def getFlushInterval: Int = flushInterval
+
+    def setFlushInterval(timer: Int): Unit = this.flushInterval = timer
 }
