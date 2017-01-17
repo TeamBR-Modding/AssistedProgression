@@ -1,6 +1,11 @@
 package com.teambrmodding.assistedprogression.client
 
+import com.teambrmodding.assistedprogression.client.renderers.tiles.TileFlushableChestRenderer
 import com.teambrmodding.assistedprogression.common.CommonProxy
+import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest
+import com.teambrmodding.assistedprogression.managers.BlockManager
+import net.minecraft.client.Minecraft
+import net.minecraftforge.fml.client.registry.ClientRegistry
 
 /**
   * This file was created for AssistedProgression
@@ -20,6 +25,8 @@ class ClientProxy extends CommonProxy {
 
     override def init(): Unit = {
         ItemRenderManager.registerItemRenderers()
+        Minecraft.getMinecraft.getRenderItem.getItemModelMesher.getModelManager.getBlockModelShapes.registerBuiltInBlocks(BlockManager.blockFlushableChest)
+        ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileFlushableChest], new TileFlushableChestRenderer[TileFlushableChest])
     }
 
     override def postInit(): Unit = { }

@@ -44,4 +44,8 @@ public class CraftingRecipeManager {
                 "I I",
                 "IRI",
                 " I ", 'I', "ingotIron", 'R', "blockRedstone"));    }
+        // Flushable Chest
+        GameRegistry.addShapelessRecipe(new ItemStack(BlockManager.blockFlushableChest()),
+                Blocks.CHEST, Items.FLINT_AND_STEEL);
+    }
 }
