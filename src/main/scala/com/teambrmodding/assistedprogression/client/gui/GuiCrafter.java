@@ -4,9 +4,9 @@ import com.teambrmodding.assistedprogression.common.container.ContainerCrafter;
 import com.teambrmodding.assistedprogression.common.tiles.TileCrafter;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -31,8 +31,8 @@ public class GuiCrafter extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        this.fontRendererObj.drawString(I18n.translateToLocal("assistedprogression.crafter.title"), 88 - (fontRendererObj
-                .getStringWidth(I18n.translateToLocal("assistedprogression.crafter.title")) / 2), 5, 0x404040);
+        this.fontRendererObj.drawString(I18n.format("assistedprogression.crafter.title"), 88 - (fontRendererObj
+                .getStringWidth(I18n.format("assistedprogression.crafter.title")) / 2), 5, 0x404040);
     }
 
     @Override

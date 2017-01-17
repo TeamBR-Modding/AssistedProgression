@@ -6,9 +6,8 @@ import com.teambrmodding.assistedprogression.managers.BlockManager
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.SoundEvents
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.{EnumParticleTypes, SoundCategory}
 import net.minecraft.util.math.AxisAlignedBB
-import net.minecraft.world.World
+import net.minecraft.util.{EnumParticleTypes, SoundCategory}
 
 /**
   * This file was created for AssistedProgression
@@ -32,10 +31,10 @@ class TileFlushableChest extends Syncable with Inventory {
     var lidAngle : Float = 0
     var numUsingPlayers : Int = 0
     var ticksSinceSync : Int = -1
-    var flushSound : Boolean = true
-    var autoFlush : Boolean = false
-    var flushInterval : Int = 1
-    var flushTimer : Int = 0
+    private var flushSound : Boolean = true
+    private var autoFlush : Boolean = false
+    private var flushInterval : Int = 10
+    private var flushTimer : Int = 0
 
     override def update(): Unit = {
         //AutoFlush

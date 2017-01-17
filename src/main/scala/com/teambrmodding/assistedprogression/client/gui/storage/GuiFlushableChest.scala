@@ -38,7 +38,7 @@ class GuiFlushableChest(player: EntityPlayer, tile: TileFlushableChest) extends
                 tile.sendValueToServer(tile.AUTO_FLUSH, if (bool) 0 else -1)
             }
         }
-        infoTab += new GuiComponentSetNumber(72, 21, 25, tile.getFlushInterval, 1, 60) {
+        infoTab += new GuiComponentSetNumber(72, 21, 30, tile.getFlushInterval, 1, 60) {
             override def setValue(i: Int): Unit = {
                 tile.setFlushInterval(i)
                 tile.sendValueToServer(tile.FLUSH_INTERVAL, i.toDouble)
@@ -51,6 +51,6 @@ class GuiFlushableChest(player: EntityPlayer, tile: TileFlushableChest) extends
             }
         }
         infoTab += new GuiComponentText(GuiColor.ORANGE + I18n.format("assistedprogression.text.config"), 26, 6)
-        tabs.addTab(infoTab.toList, 105, 50, new Color(0, 155,0), new ItemStack(Item.getItemFromBlock(Blocks.STONE_BUTTON)))
+        tabs.addTab(infoTab.toList, 115, 50, new Color(0, 155,0), new ItemStack(Item.getItemFromBlock(Blocks.STONE_BUTTON)))
     }
 }
