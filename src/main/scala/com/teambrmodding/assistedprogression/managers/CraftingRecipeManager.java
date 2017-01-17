@@ -43,9 +43,10 @@ public class CraftingRecipeManager {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.cheapMagnet()),
                 "I I",
                 "IRI",
-                " I ", 'I', "ingotIron", 'R', "blockRedstone"));    }
+                " I ", 'I', "ingotIron", 'R', "blockRedstone"));
         // Flushable Chest
         GameRegistry.addShapelessRecipe(new ItemStack(BlockManager.blockFlushableChest()),
                 Blocks.CHEST, Items.FLINT_AND_STEEL);
+
     }
 }
