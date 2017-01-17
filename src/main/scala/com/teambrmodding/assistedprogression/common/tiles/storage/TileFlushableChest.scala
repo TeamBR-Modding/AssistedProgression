@@ -8,6 +8,7 @@ import net.minecraft.init.SoundEvents
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.{EnumParticleTypes, SoundCategory}
 import net.minecraft.util.math.AxisAlignedBB
+import net.minecraft.world.World
 
 /**
   * This file was created for AssistedProgression
@@ -27,6 +28,7 @@ class TileFlushableChest extends Syncable with Inventory {
     var lidAngle : Float = 0
     var numUsingPlayers : Int = 0
     var ticksSinceSync : Int = -1
+
 
     override def update(): Unit = {
         if(worldObj != null && !worldObj.isRemote && numUsingPlayers != 0 && (ticksSinceSync + pos.getX + pos.getY + pos.getZ) % 200 == 0) {
@@ -92,11 +94,15 @@ class TileFlushableChest extends Syncable with Inventory {
     }
 
     override def writeToNBT(tag: NBTTagCompound): NBTTagCompound = {
+        super[TileEntity].writeToNBT(tag)
         super[Inventory].writeToNBT(tag)
         tag
     }
 
-    override def readFromNBT(tag: NBTTagCompound): Unit = super[Inventory].readFromNBT(tag)
+    override def readFromNBT(tag: NBTTagCompound): Unit = {
+        super[TileEntity].readFromNBT(tag)
+        super[Inventory].readFromNBT(tag)
+    }
 
     override def clear(): Unit = {
         super.clear()
@@ -122,5 +128,4 @@ class TileFlushableChest extends Syncable with Inventory {
     }
 
     override def getVariable(id: Int): Double = {0.0}
-
 }

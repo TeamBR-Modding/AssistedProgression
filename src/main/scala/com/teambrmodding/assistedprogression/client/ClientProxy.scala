@@ -25,6 +25,7 @@ class ClientProxy extends CommonProxy {
 
     override def init(): Unit = {
         ItemRenderManager.registerItemRenderers()
+
         Minecraft.getMinecraft.getRenderItem.getItemModelMesher.getModelManager.getBlockModelShapes.registerBuiltInBlocks(BlockManager.blockFlushableChest)
         ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileFlushableChest], new TileFlushableChestRenderer[TileFlushableChest])
     }
