@@ -1,7 +1,7 @@
 package com.teambrmodding.assistedprogression.managers
 
-import com.teambrmodding.assistedprogression.common.blocks.{BlockCrafter, BlockPlayerPlate}
-import com.teambrmodding.assistedprogression.common.tiles.TileCrafter
+import com.teambrmodding.assistedprogression.common.blocks.{BlockCrafter, BlockPlayerPlate, BlockRedstoneClock}
+import com.teambrmodding.assistedprogression.common.tiles.{TileCrafter, TileRedstoneClock}
 import net.minecraft.block.Block
 import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
@@ -26,12 +26,18 @@ object BlockManager {
     // Player Plate
     val playerPlate = new BlockPlayerPlate
 
+    // Redstone Clock
+    val redstoneClock = new BlockRedstoneClock
+
     def preInit(): Unit = {
         //Crafter
         registerBlock(blockCrafter, "blockCrafter", classOf[TileCrafter])
 
         // Player Plate
         registerBlock(playerPlate, "playerPlate", null)
+
+        // Redstone Clock
+        registerBlock(redstoneClock, "redstoneClock", classOf[TileRedstoneClock])
     }
 
 

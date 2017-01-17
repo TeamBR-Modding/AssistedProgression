@@ -25,5 +25,11 @@ public class CraftingRecipeManager {
         // Player Plate
         GameRegistry.addShapelessRecipe(new ItemStack(BlockManager.playerPlate()),
                 new ItemStack(Items.BRICK), new ItemStack(Items.BRICK));
+
+        // Redstone Clock
+        GameRegistry.addRecipe(new ItemStack(BlockManager.redstoneClock()),
+                "SRS",
+                "SBS",
+                "SRS", 'S', Blocks.STONE, 'R', Items.REDSTONE, 'B', Blocks.REDSTONE_BLOCK);
     }
 }

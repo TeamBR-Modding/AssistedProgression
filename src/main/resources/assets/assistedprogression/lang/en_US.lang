@@ -20,6 +20,9 @@ tile.assistedprogression:blockCrafter.name=Dual Crafter
 # Player Sensitive Pressure Plate
 tile.assistedprogression:playerPlate.name=Player Sensitive Pressure Plate
 
+# Redstone Clock
+tile.assistedprogression:redstoneClock.name=Redstone Clock
+
 #######################
 # GUI
 #######################
