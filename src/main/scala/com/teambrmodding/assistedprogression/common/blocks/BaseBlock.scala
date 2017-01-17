@@ -4,9 +4,11 @@ import com.teambrmodding.assistedprogression.AssistedProgression
 import com.teambrmodding.assistedprogression.lib.Reference
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
+import net.minecraft.block.state.IBlockState
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.world.World
+import net.minecraft.util.math.{AxisAlignedBB, BlockPos}
+import net.minecraft.world.{IBlockAccess, World}
 
 /**
   * This file was created for AssistedProgression
@@ -19,6 +21,8 @@ import net.minecraft.world.World
   * @since 1/16/2017
   */
 class BaseBlock(material: Material, name: String, tileEntity: Class[_ <: TileEntity]) extends BlockContainer(material){
+
+    var BB = new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F)
 
     //Constructor
     setUnlocalizedName(Reference.MOD_ID + ":" + name)
@@ -42,5 +46,14 @@ class BaseBlock(material: Material, name: String, tileEntity: Class[_ <: TileEnt
 
     override def createNewTileEntity(world: World, meta: Int): TileEntity = {
         if (tileEntity != null) tileEntity.newInstance() else null
+    }
+
+    def setBlockBounds(x1 : Float, y1 : Float, z1 : Float, x2 : Float, y2 : Float, z2 : Float): AxisAlignedBB = {
+        BB = new AxisAlignedBB(x1, y1, z1, x2, y2, z2)
+        BB
+    }
+
+    override def getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos): AxisAlignedBB = {
+        BB
     }
 }

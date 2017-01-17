@@ -1,0 +1,14 @@
+{
+    "forge_marker": 1,
+    "defaults" : {
+        "model" : "assistedprogression:blockFlushableChest"
+    },
+    "variants": {
+        "facing": {
+            "north" : { "model" : "assistedprogression:blockFlushableChest" },
+            "south" : { "model" : "assistedprogression:blockFlushableChest" },
+            "east"  : { "model" : "assistedprogression:blockFlushableChest" },
+            "west"  : { "model" : "assistedprogression:blockFlushableChest" }
+        }
+    }
+}

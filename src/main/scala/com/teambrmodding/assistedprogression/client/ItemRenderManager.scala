@@ -25,6 +25,7 @@ object ItemRenderManager {
 
     def preInit(): Unit = {
         registerBlockModel(BlockManager.blockCrafter, "blockCrafter", "normal")
+        registerBlockModel(BlockManager.blockFlushableChest, "blockFlushableChest", "facing=north")
         registerBlockModel(BlockManager.playerPlate, "playerPlate", "powered=false")
         registerBlockModel(BlockManager.redstoneClock, "redstoneClock", "powered=false")
     }

@@ -1,5 +1,9 @@
 package com.teambrmodding.assistedprogression.managers
 
+import com.teambrmodding.assistedprogression.common.blocks.BlockCrafter
+import com.teambrmodding.assistedprogression.common.blocks.storage.BlockFlushableChest
+import com.teambrmodding.assistedprogression.common.tiles.TileCrafter
+import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest
 import com.teambrmodding.assistedprogression.common.blocks.{BlockCrafter, BlockPlayerPlate, BlockRedstoneClock}
 import com.teambrmodding.assistedprogression.common.tiles.{TileCrafter, TileRedstoneClock}
 import net.minecraft.block.Block
@@ -23,6 +27,9 @@ object BlockManager {
     // Crafter
     val blockCrafter = new BlockCrafter("blockCrafter", classOf[TileCrafter])
 
+    // Flushable Chest
+    val blockFlushableChest = new BlockFlushableChest
+
     // Player Plate
     val playerPlate = new BlockPlayerPlate
 
@@ -32,6 +39,8 @@ object BlockManager {
     def preInit(): Unit = {
         //Crafter
         registerBlock(blockCrafter, "blockCrafter", classOf[TileCrafter])
+        //FlushableChest
+        registerBlock(blockFlushableChest, "blockFlushableChest", classOf[TileFlushableChest])
 
         // Player Plate
         registerBlock(playerPlate, "playerPlate", null)
