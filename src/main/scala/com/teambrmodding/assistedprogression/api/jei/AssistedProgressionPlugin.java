@@ -1,12 +1,17 @@
 package com.teambrmodding.assistedprogression.api.jei;
 
 import com.teambr.bookshelf.client.gui.GuiBase;
+import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeCategory;
+import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeHandler;
+import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeMaker;
 import com.teambrmodding.assistedprogression.common.container.ContainerCrafter;
+import com.teambrmodding.assistedprogression.managers.BlockManager;
 import mezz.jei.api.*;
 import mezz.jei.api.gui.IAdvancedGuiHandler;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -37,6 +42,14 @@ public class AssistedProgressionPlugin implements IModPlugin {
         // Adds shift click to crafter
         registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerCrafter.class, VanillaRecipeCategoryUid.CRAFTING,
                 2, 9, 20, 36);
+
+        registry.addRecipeCategories(new JEIGrinderRecipeCategory());
+
+        registry.addRecipeHandlers(new JEIGrinderRecipeHandler());
+
+        registry.addRecipes(JEIGrinderRecipeMaker.getRecipes());
+
+        registry.addRecipeCategoryCraftingItem(new ItemStack(BlockManager.blockGrinder()), "assistedprogression.grinder");
 
         // Adds moving item pane for tabs
         registry.addAdvancedGuiHandlers(new IAdvancedGuiHandler<GuiBase>() {

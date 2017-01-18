@@ -30,6 +30,7 @@ object ItemRenderManager {
         registerBlockModel(BlockManager.blockFlushableChest, "blockFlushableChest", "facing=north")
         registerBlockModel(BlockManager.blockPlayerPlate, "blockPlayerPlate", "powered=false")
         registerBlockModel(BlockManager.blockRedstoneClock, "blockRedstoneClock", "powered=false")
+        registerBlockModel(BlockManager.blockGrinder, "blockGrinder", "normal")
     }
 
     def registerItemRenderers(): Unit = {

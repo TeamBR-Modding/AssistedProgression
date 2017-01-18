@@ -29,5 +29,9 @@ object ConfigManager {
         totalRFMagnet = config.get(Reference.CONFIG_MAGNET, "Total RF Magnet", 25000, "The max RF stored in the magnet").getInt()
 
         config.save()
+
+        //Check to make sure Registry Directory is made
+        val path: File = new File(AssistedProgression.configFolderLocation + File.separator + "Registries")
+        if (!path.exists) path.mkdirs
     }
 }

@@ -6,6 +6,7 @@ import com.teambrmodding.assistedprogression.common.CommonProxy
 import com.teambrmodding.assistedprogression.common.items.ItemTrashBag
 import com.teambrmodding.assistedprogression.lib.Reference
 import com.teambrmodding.assistedprogression.managers._
+import net.minecraft.command.ServerCommandManager
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Items
 import net.minecraft.item.Item
@@ -47,12 +48,13 @@ object AssistedProgression {
         ConfigManager.preInit()
         BlockManager.preInit()
         ItemManager.preInit()
-        CraftingRecipeManager.preInit()
+        RecipeManager.preInit()
         proxy.preInit()
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ItemGuiManager)
     }
 
     @EventHandler def init(event : FMLInitializationEvent) =  {
+        RecipeManager.init()
         proxy.init()
         MinecraftForge.EVENT_BUS.register(ItemTrashBag)
     }
@@ -62,6 +64,6 @@ object AssistedProgression {
     }
 
     @EventHandler def serverLoad(event : FMLServerStartingEvent): Unit = {
-
+        RecipeManager.initCommands(event.getServer.getCommandManager.asInstanceOf[ServerCommandManager])
     }
 }

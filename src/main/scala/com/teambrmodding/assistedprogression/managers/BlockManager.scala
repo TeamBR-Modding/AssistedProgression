@@ -1,11 +1,9 @@
 package com.teambrmodding.assistedprogression.managers
 
-import com.teambrmodding.assistedprogression.common.blocks.BlockCrafter
+import com.teambrmodding.assistedprogression.common.blocks.{BlockCrafter, BlockGrinder, BlockPlayerPlate, BlockRedstoneClock}
 import com.teambrmodding.assistedprogression.common.blocks.storage.BlockFlushableChest
-import com.teambrmodding.assistedprogression.common.tiles.TileCrafter
+import com.teambrmodding.assistedprogression.common.tiles.{TileCrafter, TileGrinder, TileRedstoneClock}
 import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest
-import com.teambrmodding.assistedprogression.common.blocks.{BlockCrafter, BlockPlayerPlate, BlockRedstoneClock}
-import com.teambrmodding.assistedprogression.common.tiles.{TileCrafter, TileRedstoneClock}
 import net.minecraft.block.Block
 import net.minecraft.item.ItemBlock
 import net.minecraft.tileentity.TileEntity
@@ -36,6 +34,9 @@ object BlockManager {
     // Redstone Clock
     val blockRedstoneClock = new BlockRedstoneClock
 
+    // Grinder
+    val blockGrinder = new BlockGrinder
+
     def preInit(): Unit = {
         //Crafter
         registerBlock(blockCrafter, "blockCrafter", classOf[TileCrafter])
@@ -47,6 +48,9 @@ object BlockManager {
 
         // Redstone Clock
         registerBlock(blockRedstoneClock, "blockRedstoneClock", classOf[TileRedstoneClock])
+
+        // Grinder
+        registerBlock(blockGrinder, "blockGrinder", classOf[TileGrinder])
     }
 
 

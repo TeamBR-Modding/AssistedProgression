@@ -59,5 +59,11 @@ public class CraftingRecipeManager {
                 "S S",
                 "L L",
                 "LLL", 'L', Items.LEATHER, 'S', Items.IRON_INGOT);
+
+        // Grinder
+        GameRegistry.addRecipe(new ItemStack(BlockManager.blockGrinder()),
+                "SSS",
+                "WFW",
+                "CCC", 'S', Blocks.STONE, 'F', Items.FLINT, 'C', Blocks.COBBLESTONE, 'W', Blocks.COBBLESTONE_WALL);
     }
 }

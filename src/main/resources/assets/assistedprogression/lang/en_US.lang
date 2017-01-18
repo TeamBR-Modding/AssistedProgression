@@ -35,6 +35,9 @@ tile.assistedprogression:blockRedstoneClock.name=Redstone Clock
 # Flushable Chest
 tile.assistedprogression:blockFlushableChest.name=Flushable Chest
 
+# Grinder
+tile.assistedprogression:blockGrinder.name=Grinder
+
 #######################
 # GUI
 #######################
@@ -46,6 +49,12 @@ assistedprogression.flushchest.title=Flushable Chest
 
 # Trash Bag
 inventory.trashBag.title=Trash Bag
+
+# Grinder
+assistedprogression.grinder.title=Grinder
+assistedprogression.grinder.input=Input
+assistedprogression.grinder.grinding=Grinding
+assistedprogression.grinder.output=Output
 
 #######################
 # Common Text
@@ -66,6 +75,8 @@ assistedprogression.text.config=Config
 #######################
 # Commands
 #######################
+
+commands.addGrinderRecipe.usage=§cUsage: <input> <output> <outputAmount> <secondaryOutput(Optional)> <secondaryOutputChance(Optional)>
 
 #######################
 # Descriptions
