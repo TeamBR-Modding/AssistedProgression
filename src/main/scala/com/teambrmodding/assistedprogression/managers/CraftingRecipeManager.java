@@ -65,5 +65,11 @@ public class CraftingRecipeManager {
                 "SSS",
                 "WFW",
                 "CCC", 'S', Blocks.STONE, 'F', Items.FLINT, 'C', Blocks.COBBLESTONE, 'W', Blocks.COBBLESTONE_WALL);
+
+        // Spawner Relocator
+        GameRegistry.addRecipe(new ItemStack(ItemManager.itemSpawnerRelocator()),
+                "  I",
+                " S ",
+                "E  ", 'I', Items.IRON_INGOT, 'S', Items.STICK, 'E', Items.ENDER_PEARL);
     }
 }

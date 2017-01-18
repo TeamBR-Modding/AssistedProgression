@@ -38,6 +38,7 @@ object ItemRenderManager {
         registerItem(ItemManager.itemElectroMagnet)
         registerItem(ItemManager.itemTrashBag)
         registerItem(ItemManager.itemHeftyBag)
+        registerItem(ItemManager.itemSpawnerRelocator)
     }
 
     /***

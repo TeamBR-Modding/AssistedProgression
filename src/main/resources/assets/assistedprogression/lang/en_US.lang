@@ -19,6 +19,9 @@ item.assistedprogression:itemElectroMagnet.name=Electomagnet
 item.assistedprogression:itemTrashBag.name=Trash Bag
 item.assistedprogression:itemHeftyBag.name=Hefty Bag
 
+# Spawner Relocator
+item.assistedprogression:itemSpawnerRelocator.name=Spawner Relocator
+
 #######################
 # Tile Entities
 #######################
