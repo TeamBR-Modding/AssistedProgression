@@ -46,7 +46,7 @@ class ContainerTrashBag(inventory : Inventory, playerInventory : InventoryPlayer
         }
     }
 
-    if(bag.getItem == ItemManager.trashBag)
+    if(bag.getItem == ItemManager.itemTrashBag)
         addSlotToContainer(new PhantomSlot(inventory, 0, 80, 35))
     else
         addInventoryGridPhantom(8, 35, 9)

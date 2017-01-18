@@ -12,12 +12,12 @@ itemGroup.tabAssistedProgression=Assisted Progression
 #######################
 
 # Magnets
-item.assistedprogression:cheapMagnet.name=Cheap Magnet
-item.assistedprogression:electroMagnet.name=Electomagnet
+item.assistedprogression:itemCheapMagnet.name=Cheap Magnet
+item.assistedprogression:itemElectroMagnet.name=Electomagnet
 
 # TrashBags
-item.assistedprogression:trashBag.name=Trash Bag
-item.assistedprogression:heftyBag.name=Hefty Bag
+item.assistedprogression:itemTrashBag.name=Trash Bag
+item.assistedprogression:itemHeftyBag.name=Hefty Bag
 
 #######################
 # Tile Entities
@@ -27,10 +27,10 @@ item.assistedprogression:heftyBag.name=Hefty Bag
 tile.assistedprogression:blockCrafter.name=Dual Crafter
 
 # Player Sensitive Pressure Plate
-tile.assistedprogression:playerPlate.name=Player Sensitive Pressure Plate
+tile.assistedprogression:blockPlayerPlate.name=Player Sensitive Pressure Plate
 
 # Redstone Clock
-tile.assistedprogression:redstoneClock.name=Redstone Clock
+tile.assistedprogression:blockRedstoneClock.name=Redstone Clock
 
 # Flushable Chest
 tile.assistedprogression:blockFlushableChest.name=Flushable Chest

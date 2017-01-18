@@ -19,7 +19,7 @@ import net.minecraft.world.{IBlockAccess, World}
   * @author Paul Davis <pauljoda>
   * @since 1/26/2016
   */
-class BlockRedstoneClock extends BaseBlock(Material.ROCK, "redstoneClock", classOf[TileRedstoneClock]) {
+class BlockRedstoneClock extends BaseBlock(Material.ROCK, "blockRedstoneClock", classOf[TileRedstoneClock]) {
 
     setCreativeTab(AssistedProgression.tabAssistedProgression)
     this.setDefaultState(this.blockState.getBaseState.withProperty(BlockPressurePlate.POWERED, false.asInstanceOf[java.lang.Boolean]))

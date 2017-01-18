@@ -23,7 +23,7 @@ import java.util.*;
  * @since 1/18/2017
  */
 @JEIPlugin
-public class AssistedProgressoinPlugin implements IModPlugin {
+public class AssistedProgressionPlugin implements IModPlugin {
 
     /**
      * Used to hold the helper object

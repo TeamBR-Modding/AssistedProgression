@@ -31,10 +31,10 @@ object BlockManager {
     val blockFlushableChest = new BlockFlushableChest
 
     // Player Plate
-    val playerPlate = new BlockPlayerPlate
+    val blockPlayerPlate = new BlockPlayerPlate
 
     // Redstone Clock
-    val redstoneClock = new BlockRedstoneClock
+    val blockRedstoneClock = new BlockRedstoneClock
 
     def preInit(): Unit = {
         //Crafter
@@ -43,10 +43,10 @@ object BlockManager {
         registerBlock(blockFlushableChest, "blockFlushableChest", classOf[TileFlushableChest])
 
         // Player Plate
-        registerBlock(playerPlate, "playerPlate", null)
+        registerBlock(blockPlayerPlate, "blockPlayerPlate", null)
 
         // Redstone Clock
-        registerBlock(redstoneClock, "redstoneClock", classOf[TileRedstoneClock])
+        registerBlock(blockRedstoneClock, "blockRedstoneClock", classOf[TileRedstoneClock])
     }
 
 

@@ -18,19 +18,19 @@ import net.minecraftforge.oredict.OreDictionary
 object ItemManager {
 
     // Magnets
-    val cheapMagnet  = new ItemMagnet(true, "cheapMagnet")
-    val electroMagnet = new ItemMagnet(false, "electroMagnet")
+    val itemCheapMagnet  = new ItemMagnet(true, "itemCheapMagnet")
+    val itemElectroMagnet = new ItemMagnet(false, "itemElectroMagnet")
 
     // Trash Bags
-    val trashBag = new ItemTrashBag("trashBag", 1)
-    val heftyBag = new ItemTrashBag("heftyBag", 18)
+    val itemTrashBag = new ItemTrashBag("itemTrashBag", 1)
+    val itemHeftyBag = new ItemTrashBag("itemHeftyBag", 18)
 
     def preInit(): Unit = {
-        registerItem(cheapMagnet, "cheapMagnet")
-        registerItem(electroMagnet, "electroMagnet")
+        registerItem(itemCheapMagnet, "itemCheapMagnet")
+        registerItem(itemElectroMagnet, "itemElectroMagnet")
 
-        registerItem(trashBag, "trashBag")
-        registerItem(heftyBag, "heftyBag")
+        registerItem(itemTrashBag, "itemTrashBag")
+        registerItem(itemHeftyBag, "itemHeftyBag")
     }
 
     /**

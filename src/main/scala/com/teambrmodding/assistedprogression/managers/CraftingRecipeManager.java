@@ -24,23 +24,23 @@ public class CraftingRecipeManager {
                 new ItemStack(Blocks.CRAFTING_TABLE), new ItemStack(Blocks.CHEST), new ItemStack(Blocks.CRAFTING_TABLE));
 
         // Player Plate
-        GameRegistry.addShapelessRecipe(new ItemStack(BlockManager.playerPlate()),
+        GameRegistry.addShapelessRecipe(new ItemStack(BlockManager.blockPlayerPlate()),
                 new ItemStack(Items.BRICK), new ItemStack(Items.BRICK));
 
         // Redstone Clock
-        GameRegistry.addRecipe(new ItemStack(BlockManager.redstoneClock()),
+        GameRegistry.addRecipe(new ItemStack(BlockManager.blockRedstoneClock()),
                 "SRS",
                 "SBS",
                 "SRS", 'S', Blocks.STONE, 'R', Items.REDSTONE, 'B', Blocks.REDSTONE_BLOCK);
 
         // Cheap Magnet
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.cheapMagnet()),
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.itemCheapMagnet()),
                 "I I",
                 "I I",
                 " I ", 'I', "ingotIron"));
 
         // Electro Magnet
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.electroMagnet()),
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.itemElectroMagnet()),
                 "I I",
                 "IRI",
                 " I ", 'I', "ingotIron", 'R', "blockRedstone"));
@@ -50,12 +50,12 @@ public class CraftingRecipeManager {
                 Blocks.CHEST, Items.FLINT_AND_STEEL);
 
         // Trash Bags
-        GameRegistry.addRecipe(new ItemStack(ItemManager.trashBag(), 1),
+        GameRegistry.addRecipe(new ItemStack(ItemManager.itemTrashBag(), 1),
                 "S S",
                 "L L",
                 "LLL", 'L', Items.LEATHER, 'S', Items.STRING);
 
-        GameRegistry.addRecipe(new ItemStack(ItemManager.heftyBag(), 1),
+        GameRegistry.addRecipe(new ItemStack(ItemManager.itemHeftyBag(), 1),
                 "S S",
                 "L L",
                 "LLL", 'L', Items.LEATHER, 'S', Items.IRON_INGOT);

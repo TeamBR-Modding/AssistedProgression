@@ -24,7 +24,7 @@ import net.minecraft.world.World
 class BlockPlayerPlate extends BlockBasePressurePlate(Material.IRON) {
 
     this.setDefaultState(this.blockState.getBaseState.withProperty(BlockPressurePlate.POWERED, false.asInstanceOf[java.lang.Boolean]))
-    setUnlocalizedName(Reference.MOD_ID + ":" + "playerPlate")
+    setUnlocalizedName(Reference.MOD_ID + ":" + "blockPlayerPlate")
     setCreativeTab(AssistedProgression.tabAssistedProgression)
     setHardness(2.0F)
 

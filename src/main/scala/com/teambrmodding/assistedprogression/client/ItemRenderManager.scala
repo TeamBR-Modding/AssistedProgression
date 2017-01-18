@@ -28,15 +28,15 @@ object ItemRenderManager {
         // Blocks
         registerBlockModel(BlockManager.blockCrafter, "blockCrafter", "normal")
         registerBlockModel(BlockManager.blockFlushableChest, "blockFlushableChest", "facing=north")
-        registerBlockModel(BlockManager.playerPlate, "playerPlate", "powered=false")
-        registerBlockModel(BlockManager.redstoneClock, "redstoneClock", "powered=false")
+        registerBlockModel(BlockManager.blockPlayerPlate, "blockPlayerPlate", "powered=false")
+        registerBlockModel(BlockManager.blockRedstoneClock, "blockRedstoneClock", "powered=false")
     }
 
     def registerItemRenderers(): Unit = {
-        registerItem(ItemManager.cheapMagnet)
-        registerItem(ItemManager.electroMagnet)
-        registerItem(ItemManager.trashBag)
-        registerItem(ItemManager.heftyBag)
+        registerItem(ItemManager.itemCheapMagnet)
+        registerItem(ItemManager.itemElectroMagnet)
+        registerItem(ItemManager.itemTrashBag)
+        registerItem(ItemManager.itemHeftyBag)
     }
 
     /***
