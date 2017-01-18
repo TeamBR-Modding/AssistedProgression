@@ -32,16 +32,16 @@ class GuiFlushableChest(player: EntityPlayer, tile: TileFlushableChest) extends
 
     override def addRightTabs(tabs: GuiTabCollection): Unit = {
         val infoTab = new ArrayBuffer[BaseComponent]()
-        infoTab += new GuiComponentCheckBox(10, 20, "AutoFlush", tile.getAutoFlush) {
-            override def setValue(bool: Boolean): Unit = {
-                tile.setAutoFlush(bool)
-                tile.sendValueToServer(tile.AUTO_FLUSH, if (bool) 0 else -1)
-            }
-        }
         infoTab += new GuiComponentSetNumber(72, 21, 30, tile.getFlushInterval, 1, 60) {
             override def setValue(i: Int): Unit = {
                 tile.setFlushInterval(i)
                 tile.sendValueToServer(tile.FLUSH_INTERVAL, i.toDouble)
+            }
+        }
+        infoTab += new GuiComponentCheckBox(10, 20, "AutoFlush", tile.getAutoFlush) {
+            override def setValue(bool: Boolean): Unit = {
+                tile.setAutoFlush(bool)
+                tile.sendValueToServer(tile.AUTO_FLUSH, if (bool) 0 else -1)
             }
         }
         infoTab += new GuiComponentCheckBox(10, 30, "Sound", tile.getFlushSound) {
