@@ -15,7 +15,7 @@ import net.minecraft.entity.item.{EntityItem, EntityTNTPrimed, EntityXPOrb}
 import net.minecraft.entity.monster.EntityCreeper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.entity.projectile.{EntityArrow, EntityLargeFireball, EntitySmallFireball}
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.math.{AxisAlignedBB, Vec3d}
 import net.minecraft.util.text.TextComponentString
@@ -76,7 +76,7 @@ class ItemMagnet(var evil : Boolean, var name : String) extends ItemBattery {
         super.onUpdate(stack, world, entityIn, itemSlot, isSelected)
         entityIn match {
             case player: EntityPlayer =>
-                if(stack.hasTagCompound) {
+                if(stack.hasTagCompound && !world.isRemote) {
                     val energy = stack.getTagCompound.getInteger("Energy")
                     if(stack.getTagCompound.getBoolean("Active") && (energy > 0 || evil)) {
                         val bb = new AxisAlignedBB(
@@ -85,7 +85,14 @@ class ItemMagnet(var evil : Boolean, var name : String) extends ItemBattery {
 
                         val entities = new util.ArrayList[Entity]()
 
-                        entities.addAll(world.getEntitiesWithinAABB(classOf[EntityItem], bb))
+                        val itemEntities = world.getEntitiesWithinAABB(classOf[EntityItem], bb)
+                        val itemEntitiesToAdd = new util.ArrayList[EntityItem]()
+                        for(x <- 0 until itemEntities.size()) {
+                            if(!itemEntities.get(x).cannotPickup())
+                                itemEntitiesToAdd.add(itemEntities.get(x))
+                        }
+
+                        entities.addAll(itemEntitiesToAdd)
                         entities.addAll(world.getEntitiesWithinAABB(classOf[EntityXPOrb], bb))
 
                         // EVIL!!
@@ -135,6 +142,28 @@ class ItemMagnet(var evil : Boolean, var name : String) extends ItemBattery {
                 }
             case _ =>
         }
+    }
+
+    /**
+      * Sets the Damage Bar on the item to correspond to amount of energy stored
+      */
+    override def updateDamage(stack: ItemStack): Unit = {
+        if(!evil) {
+            val r = getEnergyStored(stack).toFloat / getMaxEnergyStored(stack)
+            var res = 16 - Math.round(r * 16)
+            if (r < 1 && res == 0)
+                res = 1
+            stack.setItemDamage(res)
+        }
+    }
+
+    /***
+      * Show the enchanted effect when active, just so people can see
+      * @param stack The stack
+      * @return If active
+      */
+    override def hasEffect(stack: ItemStack): Boolean = {
+        stack.hasTagCompound && stack.getTagCompound.getBoolean("Active")
     }
 
     @SideOnly(Side.CLIENT)
