@@ -11,6 +11,14 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
 repositories {
+    maven { // Waila
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
+    }
+    maven { // Tesla
+        name "Darkhax Repo"
+        url 'http://maven.epoxide.xyz'
+    }
     maven {
         name 'BR Repo'
         url "http://www.teambrmodding.com/maven2/"
