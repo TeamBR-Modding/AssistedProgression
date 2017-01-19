@@ -40,7 +40,7 @@ object AssistedProgression {
     var proxy : CommonProxy = null
 
     val tabAssistedProgression: CreativeTabs = new CreativeTabs("tabAssistedProgression") {
-        override def getTabIconItem: Item = Items.BOOK
+        override def getTabIconItem: Item = Item.getItemFromBlock(BlockManager.blockGrinder)
     }
 
     @EventHandler def preInit(event : FMLPreInitializationEvent) = {
@@ -55,8 +55,8 @@ object AssistedProgression {
 
     @EventHandler def init(event : FMLInitializationEvent) =  {
         RecipeManager.init()
+        EventManager.registerEvents()
         proxy.init()
-        MinecraftForge.EVENT_BUS.register(ItemTrashBag)
     }
 
     @EventHandler def postInit(event : FMLPostInitializationEvent) = {

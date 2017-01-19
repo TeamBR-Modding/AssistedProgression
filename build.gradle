@@ -51,7 +51,7 @@ if (build == null || build == '') {
 group= "com.teambrmodding.assistedprogression" 
 archivesBaseName = "AssistedProgression"
 
-sourceCompatibility = targetCompatibility = "1.6" // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
 compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
 }

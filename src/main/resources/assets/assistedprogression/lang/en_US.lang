@@ -22,6 +22,9 @@ item.assistedprogression:itemHeftyBag.name=Hefty Bag
 # Spawner Relocator
 item.assistedprogression:itemSpawnerRelocator.name=Spawner Relocator
 
+# Exchanger
+item.assistedprogression:itemExchanger.name=Block Exchanger
+
 #######################
 # Tile Entities
 #######################
@@ -74,6 +77,9 @@ assistedprogression.text.redstoneFlux=Redstone Flux
 
 # Flushable Chest
 assistedprogression.text.config=Config
+
+# Exchanger
+assistedprogression.text.exchanger.blockSet=Block Set!
 
 #######################
 # Commands

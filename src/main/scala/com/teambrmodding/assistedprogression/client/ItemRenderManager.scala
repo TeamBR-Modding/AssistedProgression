@@ -39,6 +39,7 @@ object ItemRenderManager {
         registerItem(ItemManager.itemTrashBag)
         registerItem(ItemManager.itemHeftyBag)
         registerItem(ItemManager.itemSpawnerRelocator)
+        registerItem(ItemManager.itemExchanger)
     }
 
     /***
