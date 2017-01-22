@@ -9,7 +9,7 @@ import com.teambrmodding.assistedprogression.managers.ItemManager
 import com.teambrmodding.assistedprogression.utils.PlayerUtils
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.nbt.{NBTTagCompound, NBTTagList}
 import net.minecraft.util.EnumHand
 
 import scala.util.control.Breaks._
@@ -65,12 +65,35 @@ class ContainerTrashBag(inventory : Inventory, playerInventory : InventoryPlayer
     override def onContainerClosed(player : EntityPlayer) : Unit = {
         if(!player.worldObj.isRemote) {
             val hand = PlayerUtils.getHandStackIsIn(player, bag)
-            val compound = inventory.writeToNBT(new NBTTagCompound)
+            val compound = writeToNBT(inventory, new NBTTagCompound, "")
             bag.setTagCompound(compound)
             if (hand == EnumHand.MAIN_HAND)
                 player.inventory.setInventorySlotContents(player.inventory.currentItem, bag)
             else
                 player.inventory.offHandInventory(0) = bag
         }
+    }
+
+    /**
+      * Used to save the inventory to an NBT tag
+      *
+      * We have isolated this to attempt to avoid abstract methods errors that seems to happen on compile
+      *
+      * @param tag The tag to save to
+      * @param inventoryName The name, in case you have more than one
+      */
+    def writeToNBT(inventory: Inventory, tag : NBTTagCompound, inventoryName : String) : NBTTagCompound = {
+        tag.setInteger("Size:" + inventoryName, inventory.getSizeInventory)
+        val nbttaglist = new NBTTagList
+        for(i <- 0 until inventory.inventoryContents.size()) {
+            if(inventory.inventoryContents.get(i) != null) {
+                val stackTag = new NBTTagCompound
+                stackTag.setByte("Slot:" + inventoryName, i.asInstanceOf[Byte])
+                inventory.inventoryContents.get(i).writeToNBT(stackTag)
+                nbttaglist.appendTag(stackTag)
+            }
+        }
+        tag.setTag("Items:" + inventoryName, nbttaglist)
+        tag
     }
 }

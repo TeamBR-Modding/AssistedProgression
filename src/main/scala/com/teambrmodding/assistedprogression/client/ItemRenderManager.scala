@@ -34,6 +34,7 @@ object ItemRenderManager {
     }
 
     def registerItemRenderers(): Unit = {
+        // Items
         registerItem(ItemManager.itemCheapMagnet)
         registerItem(ItemManager.itemElectroMagnet)
         registerItem(ItemManager.itemTrashBag)
