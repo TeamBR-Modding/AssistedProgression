@@ -41,6 +41,7 @@ object ItemRenderManager {
         registerItem(ItemManager.itemHeftyBag)
         registerItem(ItemManager.itemSpawnerRelocator)
         registerItem(ItemManager.itemExchanger)
+        registerItem(ItemManager.itemPipette)
     }
 
     /***

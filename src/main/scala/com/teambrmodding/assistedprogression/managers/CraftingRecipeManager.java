@@ -71,5 +71,11 @@ public class CraftingRecipeManager {
                 "  I",
                 " S ",
                 "E  ", 'I', Items.IRON_INGOT, 'S', Items.STICK, 'E', Items.ENDER_PEARL);
+
+        // Pipette
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemManager.itemPipette()),
+                "P  ",
+                " P ",
+                "  G", 'P', "paneGlass", 'G', "blockGlass"));
     }
 }

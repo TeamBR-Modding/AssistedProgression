@@ -25,6 +25,9 @@ item.assistedprogression:itemSpawnerRelocator.name=Spawner Relocator
 # Exchanger
 item.assistedprogression:itemExchanger.name=Block Exchanger
 
+# Pipette
+item.assistedprogression:itemPipette.name=Pipette
+
 #######################
 # Tile Entities
 #######################
@@ -80,6 +83,10 @@ assistedprogression.text.config=Config
 
 # Exchanger
 assistedprogression.text.exchanger.blockSet=Block Set!
+
+# Pipette
+assistedprogression.text.pipette.empty=Empty
+assistedprogression.text.pipette.fluid=Fluid Contained:
 
 #######################
 # Commands

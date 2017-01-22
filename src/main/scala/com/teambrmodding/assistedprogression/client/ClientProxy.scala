@@ -1,11 +1,16 @@
 package com.teambrmodding.assistedprogression.client
 
+import com.teambrmodding.assistedprogression.client.models.ModelPipette
 import com.teambrmodding.assistedprogression.client.renderers.tiles.{TileFlushableChestRenderer, TileGrinderRenderer}
 import com.teambrmodding.assistedprogression.common.CommonProxy
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder
 import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest
-import com.teambrmodding.assistedprogression.managers.BlockManager
+import com.teambrmodding.assistedprogression.managers.{BlockManager, ItemManager}
 import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.ItemMeshDefinition
+import net.minecraft.client.renderer.block.model.{ModelBakery, ModelManager}
+import net.minecraft.item.ItemStack
+import net.minecraftforge.client.model.{ModelLoader, ModelLoaderRegistry}
 import net.minecraftforge.fml.client.registry.ClientRegistry
 
 /**
@@ -22,6 +27,15 @@ class ClientProxy extends CommonProxy {
 
     override def preInit(): Unit = {
         ItemRenderManager.preInit()
+
+        // Pipette Models
+
+        ModelLoader.setCustomMeshDefinition(ItemManager.itemPipette, new ItemMeshDefinition {
+            override def getModelLocation(stack: ItemStack) = ModelPipette.LOCATION
+        })
+        ModelBakery.registerItemVariants(ItemManager.itemPipette, ModelPipette.LOCATION)
+
+        ModelLoaderRegistry.registerLoader(ModelPipette.LoaderDynPipette.INSTANCE)
     }
 
     override def init(): Unit = {

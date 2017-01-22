@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.managers
 
-import com.teambrmodding.assistedprogression.common.items.{ItemExchanger, ItemMagnet, ItemSpanwerRelocator, ItemTrashBag}
+import com.teambrmodding.assistedprogression.common.items._
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.OreDictionary
@@ -31,6 +31,9 @@ object ItemManager {
     // Block Exchanger
     val itemExchanger = new ItemExchanger
 
+    // Pipette
+    val itemPipette = new ItemPipette
+
     def preInit(): Unit = {
         registerItem(itemCheapMagnet, "itemCheapMagnet")
         registerItem(itemElectroMagnet, "itemElectroMagnet")
@@ -41,6 +44,8 @@ object ItemManager {
         registerItem(itemSpawnerRelocator, "itemSpawnerRelocator")
 
         registerItem(itemExchanger, "itemExchanger")
+
+        registerItem(itemPipette, "itemPipette")
     }
 
     /**
