@@ -20,7 +20,6 @@ object EventManager {
       * Adds all events we use to the event handler system
       */
     def registerEvents(): Unit = {
-        MinecraftForge.EVENT_BUS.register(new RenderEvents)
         MinecraftForge.EVENT_BUS.register(ItemTrashBag)
     }
 }

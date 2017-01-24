@@ -4,6 +4,7 @@ import java.io.File
 
 import com.teambrmodding.assistedprogression.common.CommonProxy
 import com.teambrmodding.assistedprogression.common.items.ItemTrashBag
+import com.teambrmodding.assistedprogression.events.RenderEvents
 import com.teambrmodding.assistedprogression.lib.Reference
 import com.teambrmodding.assistedprogression.managers._
 import net.minecraft.command.ServerCommandManager
@@ -15,6 +16,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler
 import net.minecraftforge.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent, FMLServerStartingEvent}
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.{Mod, SidedProxy}
+import net.minecraftforge.fml.relauncher.Side
 import org.apache.logging.log4j.LogManager
 
 /**
@@ -56,6 +58,8 @@ object AssistedProgression {
     @EventHandler def init(event : FMLInitializationEvent) =  {
         RecipeManager.init()
         EventManager.registerEvents()
+        if(event.getSide == Side.CLIENT)
+            MinecraftForge.EVENT_BUS.register(new RenderEvents)
         proxy.init()
     }
 
