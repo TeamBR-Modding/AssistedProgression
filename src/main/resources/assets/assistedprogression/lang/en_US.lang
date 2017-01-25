@@ -83,6 +83,7 @@ assistedprogression.text.config=Config
 
 # Exchanger
 assistedprogression.text.exchanger.blockSet=Block Set!
+assistedprogression.text.exchanger.sizeSet=Size Set to
 
 # Pipette
 assistedprogression.text.pipette.empty=Empty

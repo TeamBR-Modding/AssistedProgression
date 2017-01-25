@@ -10,10 +10,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
@@ -71,6 +68,21 @@ public class ItemExchanger extends Item {
             world.playSound(player, pos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.HOSTILE, 0.5F, 1.0F);
 
         return EnumActionResult.SUCCESS;
+    }
+
+    @SuppressWarnings({"unchecked", "NullableProblems"})
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+        if (!world.isRemote && player.isSneaking()) {
+            if (getSize(stack) == 4)
+                setSize(stack, 1);
+            else
+                setSize(stack, getSize(stack) + 1);
+
+            String newSize = I18n.translateToLocal("assistedprogression.text.exchanger.sizeSet") + " " + getSizeString(stack);
+            player.addChatComponentMessage(new TextComponentString(newSize));
+        }
+        return new ActionResult(EnumActionResult.PASS, stack);
     }
 
     @Override
@@ -147,5 +159,26 @@ public class ItemExchanger extends Item {
     public void setExchangeBlock(ItemStack stack, ItemStack toWrite) {
         validateNBT(stack);
         stack.getTagCompound().setTag(EXCHANGE_NBT_TAG, toWrite.writeToNBT(new NBTTagCompound()));
+    }
+
+    /**
+     * Returns a string value for size
+     *
+     * @param stack     The {@link net.minecraft.item.ItemStack} to get the size from
+     * @return          String of the size
+     */
+    private String getSizeString(ItemStack stack) {
+        switch (getSize(stack)) {
+            case 1:
+                return "3x3";
+            case 2:
+                return "5x5";
+            case 3:
+                return "7x7";
+            case 4:
+                return "9x9";
+            default:
+                return "Opps. Something went wrong...";
+        }
     }
 }
