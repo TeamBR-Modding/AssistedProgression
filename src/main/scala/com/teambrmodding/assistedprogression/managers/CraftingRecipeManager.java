@@ -77,5 +77,11 @@ public class CraftingRecipeManager {
                 "P  ",
                 " P ",
                 "  G", 'P', "paneGlass", 'G', "blockGlass"));
+
+        // Block Exchanger
+        GameRegistry.addRecipe(new ItemStack(ItemManager.itemExchanger()),
+                "  E",
+                " S ",
+                "G  ", 'E', Items.ENDER_PEARL, 'S', Items.BLAZE_ROD, 'G', Items.GOLD_INGOT);
     }
 }
