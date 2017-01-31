@@ -79,7 +79,7 @@ assistedprogression.text.disabled=关闭
 assistedprogression.text.redstoneFlux=需要RF能量
 
 # Flushable Chest
-assistedprogression.text.config=配置文件
+assistedprogression.text.config=配置
 
 # Exchanger
 assistedprogression.text.exchanger.blockSet=转换方块配置！
