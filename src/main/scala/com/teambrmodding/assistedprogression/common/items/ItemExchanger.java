@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.common.items;
 
+import com.teambr.bookshelf.util.WorldUtils;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.utils.BlockUtils;
@@ -50,15 +51,29 @@ public class ItemExchanger extends Item {
                     String blockAdded = I18n.translateToLocal("assistedprogression.text.exchanger.blockSet") + " " + getExchangingStack(stack).getDisplayName();
                     player.addChatComponentMessage(new TextComponentString(blockAdded));
                 }
-            } else if (getExchangingStack(stack) != null) {
+            } else if (getExchangingStack(stack) != null) { // If we have a stack defined
+                // Create a block list for what we are looking for
                 List<BlockPos> posList = BlockUtils.getBlockList(getSize(stack), facing, pos, world);
-                    ItemStack compareStack = new ItemStack(world.getBlockState(pos).getBlock(), 1, world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)));
+                // Create a master stack based off what is in world
+                ItemStack compareStack = new ItemStack(world.getBlockState(pos).getBlock(), 1, world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)));
                 posList.stream().filter(blockPos -> world.getTileEntity(blockPos) == null).forEach(blockPos -> {
+                    // If this stack matches master, swap
                     ItemStack changeStack = new ItemStack(world.getBlockState(blockPos).getBlock(), 1, world.getBlockState(blockPos).getBlock().getMetaFromState(world.getBlockState(blockPos)));
                     if (compareStack.isItemEqual(changeStack)) {
-                        if (world.isAirBlock(blockPos.offset(facing)) || pos.equals(blockPos))
-                            if (player.capabilities.isCreativeMode || (player.inventory.clearMatchingItems(getExchangingStack(stack).getItem(), getExchangingStack(stack).getItemDamage(), 1, null) == 1))
+                        // Make sure it is a valid block to swap
+                        if ((world.isAirBlock(blockPos.offset(facing)) || pos.equals(blockPos)) && world.getBlockState(blockPos).getBlockHardness(world, blockPos) > 0)
+                            // Allow free in creative, must have stack to place if not
+                            if (player.capabilities.isCreativeMode || (player.inventory.clearMatchingItems(getExchangingStack(stack).getItem(), getExchangingStack(stack).getItemDamage(), 1, null) == 1)) {
+                                // Grab the world block
+                                Block worldBlock = world.getBlockState(blockPos).getBlock();
+                                // Get what this drops
+                                List<ItemStack> drops = worldBlock.getDrops(world, blockPos, world.getBlockState(blockPos), 0);
+                                // Spawn them at the player, if not in creative
+                                if(!player.capabilities.isCreativeMode)
+                                    drops.forEach(dropStack ->  WorldUtils.dropStack(world, dropStack, player.getPosition()));
+                                // Set the block to what we want
                                 world.setBlockState(blockPos, Block.getBlockFromItem(getExchangingStack(stack).getItem()).getStateFromMeta(getExchangingStack(stack).getItemDamage()));
+                            }
                     }
                 });
             }
