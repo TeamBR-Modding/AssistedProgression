@@ -14,7 +14,7 @@ object Reference {
 
     final val MOD_NAME     = "AssistedProgression"
     final val MOD_ID       = "assistedprogression"
-    final val VERSION      = "1.0.0"//@VERSION@"
+    final val VERSION      = "1.0.1"//@VERSION@"
     final val DEPENDENCIES = "required-after:Forge@[12.18.3.2185,);after:JEI@[3.14.3.402,);required-after:bookshelfapi@[4.0.0,);" //required-after:mcmultipart@[1.0.7,)
     final val UPDATE_JSON  = ""
 
