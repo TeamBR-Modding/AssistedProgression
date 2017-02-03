@@ -1,0 +1,104 @@
+PARSE_ESCAPES
+
+# Creative Tabs
+itemGroup.tabAssistedProgression=进阶辅助
+
+#######################
+# Blocks
+#######################
+
+#######################
+# Items
+#######################
+
+# Magnets
+item.assistedprogression:itemCheapMagnet.name=廉价磁铁
+item.assistedprogression:itemElectroMagnet.name=电磁体磁铁
+
+# TrashBags
+item.assistedprogression:itemTrashBag.name=垃圾袋
+item.assistedprogression:itemHeftyBag.name=大型垃圾袋
+
+# Spawner Relocator
+item.assistedprogression:itemSpawnerRelocator.name=刷怪笼移位器
+
+# Exchanger
+item.assistedprogression:itemExchanger.name=方块交换器
+
+# Pipette
+item.assistedprogression:itemPipette.name=移液器
+
+#######################
+# Tile Entities
+#######################
+
+# Crafter
+tile.assistedprogression:blockCrafter.name=双重工作台
+
+# Player Sensitive Pressure Plate
+tile.assistedprogression:blockPlayerPlate.name=玩家检测压力板
+
+# Redstone Clock
+tile.assistedprogression:blockRedstoneClock.name=红石钟
+
+# Flushable Chest
+tile.assistedprogression:blockFlushableChest.name=可控销毁箱子
+
+# Grinder
+tile.assistedprogression:blockGrinder.name=跳跃研磨机
+
+#######################
+# GUI
+#######################
+# Crafter
+assistedprogression.crafter.title=双重工作台
+
+# Flushable Chest
+assistedprogression.flushchest.title=可控销毁箱子
+
+# Trash Bag
+inventory.trashBag.title=垃圾袋
+
+# Grinder
+assistedprogression.grinder.title=跳跃研磨机
+assistedprogression.grinder.input=待处理
+assistedprogression.grinder.grinding=正在研磨
+assistedprogression.grinder.output=输出
+
+#######################
+# Common Text
+#######################
+
+# Magnet
+assistedprogression.text.magnetism=磁性
+assistedprogression.text.magnetEvil=可能吸引一些不需要的东西
+
+assistedprogression.text.active=开启
+assistedprogression.text.disabled=关闭
+
+assistedprogression.text.redstoneFlux=需要RF能量
+
+# Flushable Chest
+assistedprogression.text.config=配置
+
+# Exchanger
+assistedprogression.text.exchanger.blockSet=转换方块配置！
+assistedprogression.text.exchanger.sizeSet=范围设置为
+
+# Pipette
+assistedprogression.text.pipette.empty=无
+assistedprogression.text.pipette.fluid=包含流体：
+
+#######################
+# Commands
+#######################
+
+commands.addGrinderRecipe.usage=§c用法: <input> <output> <outputAmount> <secondaryOutput(Optional)> <secondaryOutputChance(Optional)>
+
+#######################
+# Descriptions
+#######################
+
+#######################
+# JEI
+#######################
