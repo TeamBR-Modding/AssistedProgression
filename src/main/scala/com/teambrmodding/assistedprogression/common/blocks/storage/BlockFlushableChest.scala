@@ -79,7 +79,7 @@ class BlockFlushableChest extends BaseBlock(Material.IRON, "blockFlushableChest"
 
     override def isOpaqueCube(state: IBlockState): Boolean = false
 
-    override def isFullCube(state: IBlockState): Boolean = false
+    override def isFullCube(state: IBlockState): Boolean = true
 
     override def getRenderType(state: IBlockState): EnumBlockRenderType = EnumBlockRenderType.ENTITYBLOCK_ANIMATED
 
