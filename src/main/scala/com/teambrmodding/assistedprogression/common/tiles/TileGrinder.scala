@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.tiles
 
-import com.teambr.bookshelf.common.tiles.traits.{Inventory, Syncable}
+import com.teambr.bookshelf.common.tiles.{InventoryHandler, Syncable}
 import com.teambrmodding.assistedprogression.managers.RecipeManager
 import com.teambrmodding.assistedprogression.registries.GrinderRecipeHandler
 import net.minecraft.block.Block
@@ -19,15 +19,15 @@ import net.minecraft.util.{EnumParticleTypes, SoundCategory}
   * @author Paul Davis <pauljoda>
   * @since 1/11/2016
   */
-class TileGrinder extends Syncable with Inventory {
-    override def initialSize: Int = 7
+class TileGrinder extends Syncable with InventoryHandler {
+    //override def initialSize: Int = 7
 
     var progress : Int = 0
     val MAX_PROGRESS : Int = 15
 
     def activateGrinder(progressValue : Int, multiplier : Double): Unit = {
         updateCurrentItem()
-        worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 6)
+        getWorld.notifyBlockUpdate(pos, getWorld.getBlockState(pos), getWorld.getBlockState(pos), 6)
         if(getStackInSlot(3) != null && hasOutputAvailable) {
             var movement = progressValue
             sendValueToClient(0, 0)
@@ -37,12 +37,12 @@ class TileGrinder extends Syncable with Inventory {
             if(progress >= MAX_PROGRESS) {
                 progress = progress - MAX_PROGRESS
                 grindItem()
-                //worldObj.playSound(null, pos.getX + 0.5, pos.getY + 0.5, pos.getZ + 0.5, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 0.6F, 1.1F)
-                worldObj.playSound(null, pos.getX + 0.5, pos.getY + 0.5, pos.getZ + 0.5, SoundEvents.BLOCK_SAND_BREAK, SoundCategory.BLOCKS,  0.6F, 1.1F)
-                worldObj.playSound(null, pos.getX + 0.5, pos.getY + 0.5, pos.getZ + 0.5, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 0.1F, 0.4F)
+                //getWorld.playSound(null, pos.getX + 0.5, pos.getY + 0.5, pos.getZ + 0.5, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 0.6F, 1.1F)
+                getWorld.playSound(null, pos.getX + 0.5, pos.getY + 0.5, pos.getZ + 0.5, SoundEvents.BLOCK_SAND_BREAK, SoundCategory.BLOCKS,  0.6F, 1.1F)
+                getWorld.playSound(null, pos.getX + 0.5, pos.getY + 0.5, pos.getZ + 0.5, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 0.1F, 0.4F)
                 if(getStackInSlot(3) == null)
                     progress = 0
-                worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 6)
+                getWorld.notifyBlockUpdate(pos, getWorld.getBlockState(pos), getWorld.getBlockState(pos), 6)
                 if(progress >= MAX_PROGRESS)
                     activateGrinder(0, 0)
             }
@@ -120,7 +120,7 @@ class TileGrinder extends Syncable with Inventory {
         }
     }
 
-    override def isItemValidForSlot(index : Int, stack : ItemStack) : Boolean = {
+    override def isItemValidForSlot(index: Int, stack: ItemStack) : Boolean = {
         if(index < 3)
             RecipeManager.getHandler[GrinderRecipeHandler](RecipeManager.Grinder).isValidInput(stack)
         else
@@ -148,7 +148,7 @@ class TileGrinder extends Syncable with Inventory {
         id match {
             case 0 =>
                 for(x <- 0 until 4)
-                worldObj.spawnParticle(EnumParticleTypes.FALLING_DUST, pos.getX + 0.5D, pos.getY + 0.3D, pos.getZ + 0.5, 0D, 0D, 0D,
+                getWorld.spawnParticle(EnumParticleTypes.FALLING_DUST, pos.getX + 0.5D, pos.getY + 0.3D, pos.getZ + 0.5, 0D, 0D, 0D,
                     Block.getStateId(Blocks.GRAVEL.getDefaultState))
             case _ =>
         }
