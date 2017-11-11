@@ -13,9 +13,11 @@ import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * This file was created for Assisted-Progression
@@ -30,29 +32,25 @@ import java.util.*;
 @JEIPlugin
 public class AssistedProgressionPlugin implements IModPlugin {
 
-    /**
-     * Used to hold the helper object
-     */
+    // JEI Helper Reference
     public static IJeiHelpers jeiHelpers;
+
+    // UUIDS
+    public static final String GRINDER_UUID = "assistedprogression.grinder";
 
     @Override
     public void register(IModRegistry registry) {
         jeiHelpers = registry.getJeiHelpers();
 
+
+
         // Adds shift click to crafter
         registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerCrafter.class, VanillaRecipeCategoryUid.CRAFTING,
                 2, 9, 20, 36);
 
-        registry.addRecipeCategories(new JEIGrinderRecipeCategory());
-
-        registry.addRecipeHandlers(new JEIGrinderRecipeHandler());
-
-        registry.addRecipes(JEIGrinderRecipeMaker.getRecipes());
-
-        registry.addRecipeCategoryCraftingItem(new ItemStack(BlockManager.blockGrinder()), "assistedprogression.grinder");
-
-        // Adds moving item pane for tabs
+        // Move JEI item pane around tabs
         registry.addAdvancedGuiHandlers(new IAdvancedGuiHandler<GuiBase>() {
+            @Nonnull
             @Override
             public Class<GuiBase> getGuiContainerClass() {
                 return GuiBase.class;
@@ -60,13 +58,13 @@ public class AssistedProgressionPlugin implements IModPlugin {
 
             @Nullable
             @Override
-            public java.util.List<Rectangle> getGuiExtraAreas(GuiBase guiContainer) {
+            public List<Rectangle> getGuiExtraAreas(@Nonnull GuiBase guiContainer) {
                 return guiContainer.getCoveredAreas();
             }
 
             @Nullable
             @Override
-            public Object getIngredientUnderMouse(GuiBase guiContainer, int mouseX, int mouseY) {
+            public Object getIngredientUnderMouse(@Nonnull GuiBase guiContainer, int mouseX, int mouseY) {
                 return null;
             }
         });

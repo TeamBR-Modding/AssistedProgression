@@ -2,7 +2,7 @@ package com.teambrmodding.assistedprogression.managers
 
 import java.util
 
-import com.teambrmodding.assistedprogression.registries.{AbstractRecipeHandler, GrinderRecipeHandler}
+import com.teambrmodding.assistedprogression.registries.GrinderRecipeHandler
 import net.minecraft.command.ServerCommandManager
 
 /**
