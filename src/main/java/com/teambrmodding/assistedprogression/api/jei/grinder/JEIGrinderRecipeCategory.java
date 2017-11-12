@@ -112,8 +112,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<JEIGrinderRecip
         for(GrinderRecipe recipe : grinderRecipeHandler.recipes) {
             ItemStack input = AbstractRecipe.getItemStackFromStringForDisplay(recipe.inputItemStack);
             ItemStack output = AbstractRecipe.getItemStackFromString(recipe.outputItemStack);
-            ItemStack outputTwo  = AbstractRecipe.getItemStackFromString(recipe.outputSecondary);
-            recipes.add(new JEIGrinderRecipeWrapper(input, output, outputTwo, recipe.secondaryOutputPercentChance));
+            recipes.add(new JEIGrinderRecipeWrapper(input, output));
         }
         return recipes;
     }
