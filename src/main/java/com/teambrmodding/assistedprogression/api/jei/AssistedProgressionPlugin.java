@@ -2,21 +2,22 @@ package com.teambrmodding.assistedprogression.api.jei;
 
 import com.teambr.bookshelf.client.gui.GuiBase;
 import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeCategory;
-import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeHandler;
-import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeMaker;
+import com.teambrmodding.assistedprogression.client.gui.GuiCrafter;
+import com.teambrmodding.assistedprogression.client.gui.GuiGrinder;
 import com.teambrmodding.assistedprogression.common.container.ContainerCrafter;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
-import mezz.jei.api.*;
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.gui.IAdvancedGuiHandler;
-import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -38,10 +39,28 @@ public class AssistedProgressionPlugin implements IModPlugin {
     // UUIDS
     public static final String GRINDER_UUID = "assistedprogression.grinder";
 
+    /**
+     * Register this mod plugin with the mod registry.
+     */
     @Override
     public void register(IModRegistry registry) {
         jeiHelpers = registry.getJeiHelpers();
 
+        // Fill in recipes
+        registry.addRecipes(JEIGrinderRecipeCategory.buildRecipeList(), GRINDER_UUID);
+
+        /*
+         * Add data for JEI
+         */
+
+        // Grinder
+        registry.addRecipeCatalyst(new ItemStack(BlockManager.blockGrinder()), GRINDER_UUID);
+        registry.addRecipeClickArea(GuiGrinder.class, 47, 36, 27, 20, GRINDER_UUID);
+
+        // Crafter
+        registry.addRecipeCatalyst(new ItemStack(BlockManager.blockCrafter()), VanillaRecipeCategoryUid.CRAFTING);
+        registry.addRecipeClickArea(GuiCrafter.class, 14, 9, 61, 34, VanillaRecipeCategoryUid.CRAFTING);
+        registry.addRecipeClickArea(GuiCrafter.class, 109, 68, 61, 34, VanillaRecipeCategoryUid.CRAFTING);
 
 
         // Adds shift click to crafter
@@ -70,12 +89,16 @@ public class AssistedProgressionPlugin implements IModPlugin {
         });
     }
 
+    /**
+     * Register the categories handled by this plugin.
+     * These are registered before recipes so they can be checked for validity.
+     *
+     * @since JEI 4.5.0
+     */
     @Override
-    public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {}
-
-    @Override
-    public void registerIngredients(IModIngredientRegistration registry) {}
-
-    @Override
-    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {}
+    public void registerCategories(IRecipeCategoryRegistration registry) {
+        registry.addRecipeCategories(
+                new JEIGrinderRecipeCategory()
+        );
+    }
 }

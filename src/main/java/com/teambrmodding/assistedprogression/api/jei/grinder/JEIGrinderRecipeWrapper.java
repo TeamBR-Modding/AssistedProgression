@@ -1,14 +1,14 @@
 package com.teambrmodding.assistedprogression.api.jei.grinder;
 
+import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.BlankRecipeWrapper;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * This file was created for AssistedProgression
@@ -24,6 +24,7 @@ public class JEIGrinderRecipeWrapper implements IRecipeWrapper {
 
     // Variables
     private ItemStack input, outputOne, outputTwo;
+    private int secondOutputChance;
 
     /*******************************************************************************************************************
      * Constructor                                                                                                     *
@@ -37,10 +38,11 @@ public class JEIGrinderRecipeWrapper implements IRecipeWrapper {
      * @param outThree Optional output three
      */
     public JEIGrinderRecipeWrapper(@Nonnull ItemStack in, @Nonnull ItemStack outOne,
-                                   @Nonnull ItemStack outTwo) {
+                                   @Nonnull ItemStack outTwo, int chance) {
         input = in;
         outputOne = outOne;
         outputTwo = outTwo;
+        secondOutputChance = chance;
     }
 
     /*******************************************************************************************************************
@@ -72,5 +74,24 @@ public class JEIGrinderRecipeWrapper implements IRecipeWrapper {
 
         // Set outputs
         ingredients.setOutputs(ItemStack.class, Arrays.asList(outputOne, outputTwo));
+
+        // Set chance
+        ingredients.setOutput(Integer.class, secondOutputChance);
+    }
+
+    /**
+     * Draw additional info about the recipe.
+     * Use the mouse position for things like button highlights.
+     * Tooltips are handled by {@link IRecipeWrapper#getTooltipStrings(int, int)}
+     *
+     * @param mouseX the X position of the mouse, relative to the recipe.
+     * @param mouseY the Y position of the mouse, relative to the recipe.
+     * @see IDrawable for a simple class for drawing things.
+     * @see IGuiHelper for useful functions.
+     * @since JEI 2.19.0
+     */
+    @Override
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+        minecraft.fontRendererObj.drawString(String.valueOf(secondOutputChance) + "%", 114, 41, 0xffffff);
     }
 }
