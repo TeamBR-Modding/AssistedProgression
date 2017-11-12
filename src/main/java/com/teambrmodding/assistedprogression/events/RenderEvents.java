@@ -38,8 +38,8 @@ public class RenderEvents implements IResourceManagerReloadListener {
     @SubscribeEvent
     public void renderBlockEvent(RenderWorldLastEvent event) {
         PlayerControllerMP controllerMP = Minecraft.getMinecraft().playerController;
-        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        World world = player.worldObj;
+        EntityPlayer player = Minecraft.getMinecraft().player;
+        World world = player.world;
         List<BlockPos> blockList;
         EnumHand hand;
 
@@ -54,9 +54,11 @@ public class RenderEvents implements IResourceManagerReloadListener {
         if (mop != null && !world.isAirBlock(mop.getBlockPos())) {
             int size = ((ItemExchanger) player.getHeldItem(hand).getItem()).getSize(player.getHeldItem(hand));
             blockList = BlockUtils.getBlockList(size, mop.sideHit, mop.getBlockPos(), world);
-            ItemStack centerStack = new ItemStack(world.getBlockState(mop.getBlockPos()).getBlock(), 1, world.getBlockState(mop.getBlockPos()).getBlock().getMetaFromState(world.getBlockState(mop.getBlockPos())));
+            ItemStack centerStack = new ItemStack(world.getBlockState(mop.getBlockPos()).getBlock(),
+                    1, world.getBlockState(mop.getBlockPos()).getBlock().getMetaFromState(world.getBlockState(mop.getBlockPos())));
             for (BlockPos pos : blockList) {
-                ItemStack stack = new ItemStack(world.getBlockState(pos).getBlock(), 1, world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)));
+                ItemStack stack = new ItemStack(world.getBlockState(pos).getBlock(),
+                        1, world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)));
                 if (centerStack.isItemEqual(stack))
                     event.getContext().drawSelectionBox(player, new RayTraceResult(new Vec3d(0, 0, 0), null, pos), 0, event.getPartialTicks());
             }

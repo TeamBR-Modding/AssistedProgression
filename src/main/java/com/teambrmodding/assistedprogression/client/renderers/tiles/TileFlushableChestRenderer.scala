@@ -1,6 +1,5 @@
 package com.teambrmodding.assistedprogression.client.renderers.tiles
 
-import com.teambr.bookshelf.common.blocks.properties.Properties
 import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest
 import com.teambrmodding.assistedprogression.lib.Reference
 import com.teambrmodding.assistedprogression.managers.BlockManager

@@ -1,8 +1,10 @@
 package com.teambrmodding.assistedprogression.registries.recipes;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.asm.transformers.ItemStackTransformer;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 
@@ -16,19 +18,15 @@ import javax.annotation.Nullable;
  * @author Paul Davis - pauljoda
  * @since 11/10/17
  */
-public class GrinderRecipe extends AbstractRecipe<ItemStack, Pair<Pair<ItemStack, ItemStack>, Integer>> {
-    public String inputItemStack, outputItemStack, outputSecondary;
-    public int secondaryOutputPercentChance;
+public class GrinderRecipe extends AbstractRecipe<ItemStack, ItemStack> {
+    public String inputItemStack, outputItemStack;
 
     /**
      * Creates the recipe
      */
-    public GrinderRecipe(String inputItemStack, String outputItemStack, String outputSecondary,
-                         int secondaryOutputPercentChance) {
+    public GrinderRecipe(String inputItemStack, String outputItemStack) {
         this.inputItemStack = inputItemStack;
         this.outputItemStack = outputItemStack;
-        this.outputSecondary = outputSecondary;
-        this.secondaryOutputPercentChance = secondaryOutputPercentChance;
     }
 
     /***************************************************************************************************************
@@ -41,14 +39,14 @@ public class GrinderRecipe extends AbstractRecipe<ItemStack, Pair<Pair<ItemStack
      * @param input The input object
      * @return The output object
      */
-    @Nullable
+    @Nonnull
     @Override
-    public Pair<Pair<ItemStack, ItemStack>, Integer> getOutput(ItemStack input) {
+    public ItemStack getOutput(ItemStack input) {
         if(input == null) // Safety Check
             return null;
 
         if(isValidInput(input))
-            return Pair.of(Pair.of(getItemStackFromString(outputItemStack), getItemStackFromString(outputSecondary)), secondaryOutputPercentChance);
+            return getItemStackFromString(outputItemStack);
 
         return null;
     }

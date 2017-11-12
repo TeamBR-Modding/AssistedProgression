@@ -5,6 +5,7 @@ import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.utils.BlockUtils;
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -43,13 +45,14 @@ public class ItemExchanger extends Item {
     }
 
     @Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
+            ItemStack stack = player.getHeldItem(hand);
             if (player.isSneaking()) {
                 if (world.getTileEntity(pos) == null) {
                     setExchangeBlock(stack, new ItemStack(world.getBlockState(pos).getBlock(), 1, world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos))));
                     String blockAdded = I18n.translateToLocal("assistedprogression.text.exchanger.blockSet") + " " + getExchangingStack(stack).getDisplayName();
-                    player.addChatComponentMessage(new TextComponentString(blockAdded));
+                    player.sendMessage(new TextComponentString(blockAdded));
                 }
             } else if (getExchangingStack(stack) != null) { // If we have a stack defined
                 // Create a block list for what we are looking for
@@ -87,7 +90,8 @@ public class ItemExchanger extends Item {
 
     @SuppressWarnings({"unchecked", "NullableProblems"})
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote && player.isSneaking()) {
             if (getSize(stack) == 4)
                 setSize(stack, 1);
@@ -95,18 +99,18 @@ public class ItemExchanger extends Item {
                 setSize(stack, getSize(stack) + 1);
 
             String newSize = I18n.translateToLocal("assistedprogression.text.exchanger.sizeSet") + " " + getSizeString(stack);
-            player.addChatComponentMessage(new TextComponentString(newSize));
+            player.sendMessage(new TextComponentString(newSize));
         }
         return new ActionResult(EnumActionResult.PASS, stack);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
+    public void addInformation(ItemStack stack, @Nullable World playerIn, List<String> tooltip, ITooltipFlag advanced) {
         if (getExchangingStack(stack) != null)
-            list.add("Set Block: " + getExchangingStack(stack).getDisplayName());
+            tooltip.add("Set Block: " + getExchangingStack(stack).getDisplayName());
         else
-            list.add("Set Block: No Block Set!");
+            tooltip.add("Set Block: No Block Set!");
     }
 
     /*******************************************************************************************************************
@@ -161,7 +165,7 @@ public class ItemExchanger extends Item {
      */
     public ItemStack getExchangingStack(ItemStack stack) {
         validateNBT(stack);
-        ItemStack returnStack = ItemStack.loadItemStackFromNBT(stack.getTagCompound().getCompoundTag(EXCHANGE_NBT_TAG));
+        ItemStack returnStack = new ItemStack(stack.getTagCompound().getCompoundTag(EXCHANGE_NBT_TAG));
         return returnStack != null && returnStack.getItem() != null && Block.getBlockFromItem(returnStack.getItem()) != Blocks.AIR
                 ? returnStack : null;
     }
