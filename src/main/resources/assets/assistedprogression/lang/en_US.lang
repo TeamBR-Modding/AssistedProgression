@@ -87,7 +87,10 @@ assistedprogression.text.exchanger.sizeSet=Size Set to
 
 # Pipette
 assistedprogression.text.pipette.empty=Empty
-assistedprogression.text.pipette.fluid=Fluid Contained:
+assistedprogression.text.pipette.fluidStored=Fluid Contained:
+
+# Spawner Relocator
+assistedprogression.text.spawnerRelocator.type=Type:
 
 #######################
 # Commands
