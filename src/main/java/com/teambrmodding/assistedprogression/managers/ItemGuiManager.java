@@ -37,7 +37,7 @@ public class ItemGuiManager implements IGuiHandler {
      */
     @Nullable
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID) {
             case TRASH_BAG_GUI_ID :
                 if(!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() instanceof ItemTrashBag)
@@ -66,7 +66,7 @@ public class ItemGuiManager implements IGuiHandler {
      */
     @Nullable
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID) {
             case TRASH_BAG_GUI_ID :
                 if(!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() instanceof ItemTrashBag)

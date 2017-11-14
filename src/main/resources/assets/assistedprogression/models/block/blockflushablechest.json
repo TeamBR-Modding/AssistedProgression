@@ -1,8 +1,8 @@
 {
     "parent" : "block/block",
     "textures" : {
-        "particle": "assistedprogression:blocks/blockFlushablechest",
-        "texture": "assistedprogression:blocks/blockFlushablechest"
+        "particle": "assistedprogression:blocks/blockflushablechest",
+        "texture": "assistedprogression:blocks/blockflushablechest"
     },
     "elements": [
         {   "from": [ 1, 0, 1 ],

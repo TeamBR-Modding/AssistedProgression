@@ -2,10 +2,10 @@
     "parent" : "block/block",
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "0": "assistedprogression:blocks/grinderRails",
-        "1": "assistedprogression:blocks/grinderTop",
-        "2": "assistedprogression:blocks/grinderSide",
-        "particle": "assistedprogression:blocks/grinderSide"
+        "0": "assistedprogression:blocks/grinderrails",
+        "1": "assistedprogression:blocks/grindertop",
+        "2": "assistedprogression:blocks/grinderside",
+        "particle": "assistedprogression:blocks/grinderside"
     },
     "elements": [
         {

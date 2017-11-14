@@ -28,7 +28,7 @@ public class BaseBlock extends BlockContainer {
     private Class<? extends TileEntity> tileClass;
     public String name;
 
-    protected BaseBlock(Material materialIn, String name, Class<? extends TileEntity> tileEntityClass) {
+    public BaseBlock(Material materialIn, String name, Class<? extends TileEntity> tileEntityClass) {
         super(materialIn);
         this.tileClass = tileEntityClass;
         this.name = name;

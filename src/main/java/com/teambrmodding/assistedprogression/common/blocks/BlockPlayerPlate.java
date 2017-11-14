@@ -9,6 +9,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -33,6 +34,7 @@ public class BlockPlayerPlate extends BlockBasePressurePlate {
         super(Material.IRON);
         setDefaultState(blockState.getBaseState().withProperty(BlockPressurePlate.POWERED, false));
         setUnlocalizedName(Reference.MOD_ID + ":" + "blockPlayerPlate");
+        setRegistryName(new ResourceLocation(Reference.MOD_ID, "blockPlayerPlate"));
         setCreativeTab(AssistedProgression.tabAssistedProgression);
         setHardness(2.0F);
     }

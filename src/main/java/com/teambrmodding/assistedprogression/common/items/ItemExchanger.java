@@ -41,6 +41,7 @@ public class ItemExchanger extends Item {
     public ItemExchanger() {
         super();
         this.setUnlocalizedName(Reference.MOD_ID + ":itemExchanger");
+        setRegistryName(Reference.MOD_ID, "itemExchanger");
         this.setCreativeTab(AssistedProgression.tabAssistedProgression);
     }
 

@@ -26,9 +26,11 @@ public class BaseItem extends Item {
      */
     public BaseItem(String itemName, int maxStackSize) {
         super();
+        name = itemName;
         setCreativeTab(AssistedProgression.tabAssistedProgression);
         setMaxStackSize(maxStackSize);
         setUnlocalizedName(Reference.MOD_ID + ":" + name);
+        setRegistryName(Reference.MOD_ID, itemName);
     }
 
     /*******************************************************************************************************************

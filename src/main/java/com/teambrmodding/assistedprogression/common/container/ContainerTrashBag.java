@@ -53,7 +53,8 @@ public class ContainerTrashBag extends BaseContainer {
         // Set replacer over the normal slot
         for(Slot slot : inventorySlots) {
             if(slot != null) {
-                if(!slot.getStack().isEmpty() && ItemStack.areItemStacksEqual(slot.getStack(), trashBag)) {
+                if(slot.getStack() != null &&
+                        !slot.getStack().isEmpty() && ItemStack.areItemStacksEqual(slot.getStack(), trashBag)) {
                     int x = slot.xPos;
                     int y = slot.yPos;
                     slot.xPos = -1000;

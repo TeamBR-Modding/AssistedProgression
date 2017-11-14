@@ -55,12 +55,12 @@ public class ItemTrashBag extends BaseItem {
      * Can be retrieved from stack.getCapabilities()
      * The NBT can be null if this is not called from readNBT or if the item the stack is
      * changing FROM is different then this item, or the previous item had no capabilities.
-     *
+     * <p>
      * This is called BEFORE the stacks item is set so you can use stack.getItem() to see the OLD item.
      * Remember that getItem CAN return null.
      *
      * @param stack The ItemStack
-     * @param nbt NBT of this item serialized, or null.
+     * @param nbt   NBT of this item serialized, or null.
      * @return A holder instance associated with this ItemStack where you can hold capabilities for the life of this item.
      */
     @Override
@@ -83,8 +83,11 @@ public class ItemTrashBag extends BaseItem {
      */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        playerIn.openGui(AssistedProgression.INSTANCE, 0, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        if (!worldIn.isRemote) {
+            playerIn.openGui(AssistedProgression.INSTANCE, 0, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        }
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     /*******************************************************************************************************************
@@ -93,18 +96,18 @@ public class ItemTrashBag extends BaseItem {
 
     @SubscribeEvent
     public static void onItemPickup(EntityItemPickupEvent event) {
-        EntityPlayer player     = event.getEntityPlayer();
-        ItemStack    pickedItem = event.getItem().getEntityItem();
+        EntityPlayer player = event.getEntityPlayer();
+        ItemStack pickedItem = event.getItem().getEntityItem();
 
-        if(pickedItem == null || player == null) return;
+        if (pickedItem == null || player == null) return;
 
-        for(ItemStack stack : player.inventory.mainInventory) {
-            if(!stack.isEmpty() && stack.getItem() instanceof ItemTrashBag && stack.hasTagCompound()) {
+        for (ItemStack stack : player.inventory.mainInventory) {
+            if (!stack.isEmpty() && stack.getItem() instanceof ItemTrashBag && stack.hasTagCompound()) {
                 IItemHandler trashBagHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                for(int x = 0; x < trashBagHandler.getSlots(); x++) {
+                for (int x = 0; x < trashBagHandler.getSlots(); x++) {
                     ItemStack trashKey = trashBagHandler.getStackInSlot(x);
-                    if(!trashKey.isEmpty()) {
-                        if(ItemStack.areItemStacksEqual(trashKey, pickedItem)) {
+                    if (!trashKey.isEmpty()) {
+                        if (ItemStack.areItemStacksEqual(trashKey, pickedItem)) {
                             pickedItem.shrink(pickedItem.getCount());
                             player.world.playSound(null,
                                     new BlockPos(player.posX, player.posY, player.posZ),

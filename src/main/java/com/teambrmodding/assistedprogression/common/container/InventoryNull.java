@@ -36,7 +36,7 @@ public class InventoryNull implements IInventory {
      */
     @Override
     public ItemStack getStackInSlot(int index) {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -47,7 +47,7 @@ public class InventoryNull implements IInventory {
      */
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -57,7 +57,7 @@ public class InventoryNull implements IInventory {
      */
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
