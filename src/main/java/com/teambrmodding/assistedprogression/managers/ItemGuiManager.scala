@@ -1,11 +1,13 @@
 package com.teambrmodding.assistedprogression.managers
 
+import com.teambr.bookshelf.common.items.InventoryHandlerItem
 import com.teambrmodding.assistedprogression.client.gui.GuiTrashBag
 import com.teambrmodding.assistedprogression.common.container.ContainerTrashBag
 import com.teambrmodding.assistedprogression.common.items.ItemTrashBag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.IGuiHandler
+import net.minecraftforge.items.CapabilityItemHandler
 
 /**
   * This file was created for NeoTech
@@ -26,7 +28,8 @@ class ItemGuiManager extends IGuiHandler {
         ID match {
             case ItemGuiManager.TRASH_BAG_GUI_ID =>
                 if(player.getHeldItemMainhand != null && player.getHeldItemMainhand.getItem.isInstanceOf[ItemTrashBag])
-                    new GuiTrashBag(ItemTrashBag.getInventory(player.getHeldItemMainhand), player.inventory, player.getHeldItemMainhand)
+                    new GuiTrashBag( player.getHeldItemMainhand.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null),
+        player.inventory, player.getHeldItemMainhand)
                 else if(player.getHeldItemOffhand != null && player.getHeldItemOffhand.getItem.isInstanceOf[ItemTrashBag])
                     new GuiTrashBag(ItemTrashBag.getInventory(player.getHeldItemOffhand), player.inventory, player.getHeldItemOffhand)
                 else

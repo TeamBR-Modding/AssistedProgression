@@ -28,7 +28,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit() {
-        ItemRenderManager.preInit();
+        ItemRenderManager.registerBlockRenderers();
 
         // Pipette models
         ModelLoader.setCustomMeshDefinition(ItemManager.itemPipette(), stack -> ModelPipette.LOCATION);

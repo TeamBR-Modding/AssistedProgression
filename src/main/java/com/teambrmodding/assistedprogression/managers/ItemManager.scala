@@ -26,7 +26,7 @@ object ItemManager {
     val itemHeftyBag = new ItemTrashBag("itemHeftyBag", 18)
 
     // Spawner Relocator
-    val itemSpawnerRelocator = new ItemSpanwerRelocator
+    val itemSpawnerRelocator = new ItemSpawnerRelocator
 
     // Block Exchanger
     val itemExchanger = new ItemExchanger

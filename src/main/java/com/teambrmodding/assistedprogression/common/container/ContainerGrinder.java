@@ -3,9 +3,7 @@ package com.teambrmodding.assistedprogression.common.container;
 import com.teambr.bookshelf.common.container.BaseContainer;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;

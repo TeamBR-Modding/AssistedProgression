@@ -5,7 +5,6 @@ import com.teambrmodding.assistedprogression.common.container.storage.ContainerF
 import com.teambrmodding.assistedprogression.managers.BlockManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
@@ -226,6 +225,15 @@ public class TileFlushableChest extends InventoryHandler {
      */
     @Override
     public Double getVariable(int id) {
-        return null;
+        switch (id) {
+            case PLAY_FLUSH_SOUND_VARID :
+                return playFlushSound ? 1.0 : -1.0;
+            case AUTO_FLUSH_VARID :
+                return autoFlush ? 1.0 : -1.0;
+            case FLUSH_INTERVAL_VARID :
+                return (double) flushInterval;
+            default :
+            return 0.0;
+        }
     }
 }

@@ -31,10 +31,10 @@ public class TileGrinder extends InventoryHandler {
     public static final int CREATE_EFFECTS_VARID = 0;
 
     // Defined variables
-    private static final int MAX_PROGRESS = 15;
+    public static final int MAX_PROGRESS = 15;
 
     // Operating variables
-    private int progress = 0;
+    public int progress = 0;
 
     /*******************************************************************************************************************
      * TileGrinder                                                                                                     *

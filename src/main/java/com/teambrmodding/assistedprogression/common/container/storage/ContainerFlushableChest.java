@@ -3,8 +3,6 @@ package com.teambrmodding.assistedprogression.common.container.storage;
 import com.teambr.bookshelf.common.container.BaseContainer;
 import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraftforge.items.IItemHandler;
 
 /**
  * This file was created for AssistedProgression
