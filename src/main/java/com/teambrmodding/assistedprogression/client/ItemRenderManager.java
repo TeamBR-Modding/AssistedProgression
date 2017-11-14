@@ -25,24 +25,24 @@ public class ItemRenderManager {
      * Call in preInit, registers block models for in hand model
      */
     public static void registerBlockRenderers() {
-        registerBlockModel(BlockManager.blockCrafter(), "blockCrafter", "normal");
-        registerBlockModel(BlockManager.blockFlushableChest(), "blockFlusableChest", "facing=north");
-        registerBlockModel(BlockManager.blockPlayerPlate(), "blockPlayerPlate", "powered=false");
-        registerBlockModel(BlockManager.blockRedstoneClock(), "blockRedstoneClock", "powered=false");
-        registerBlockModel(BlockManager.blockGrinder(), "blockGrinder", "normal");
+        registerBlockModel(BlockManager.blockCrafter, "blockCrafter", "normal");
+        registerBlockModel(BlockManager.blockFlushableChest, "blockFlusableChest", "facing=north");
+        registerBlockModel(BlockManager.blockPlayerPlate, "blockPlayerPlate", "powered=false");
+        registerBlockModel(BlockManager.blockRedstoneClock, "blockRedstoneClock", "powered=false");
+        registerBlockModel(BlockManager.blockGrinder, "blockGrinder", "normal");
     }
 
     /**
      * Call from init, registers item models
      */
     public static void registerItemRenderers() {
-        registerItem(ItemManager.itemCheapMagnet());
-        registerItem(ItemManager.itemElectroMagnet());
-        registerItem(ItemManager.itemTrashBag());
-        registerItem(ItemManager.itemHeftyBag());
-        registerItem(ItemManager.itemSpawnerRelocator());
-        registerItem(ItemManager.itemExchanger());
-        registerItem(ItemManager.itemPipette());
+        registerItem(ItemManager.itemCheapMagnet);
+        registerItem(ItemManager.itemElectroMagnet);
+        registerItem(ItemManager.itemTrashBag);
+        registerItem(ItemManager.itemHeftyBag);
+        registerItem(ItemManager.itemSpawnerRelocator);
+        registerItem(ItemManager.itemExchanger);
+        registerItem(ItemManager.itemPipette);
     }
 
     /**

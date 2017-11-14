@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern" : [
+    "I I",
+    "IRI",
+    " I "
+  ],
+  "key" : {
+    "I" : {
+      "type":"forge:ore_dict",
+      "ore":"ingotIron"
+    },
+    "R": {
+      "type":"forge:ore_dict",
+      "ore":"blockRedstone"
+    }
+  },
+  "result": {
+    "item":"assistedprogression:itemElectroMagnet"
+  }
+}

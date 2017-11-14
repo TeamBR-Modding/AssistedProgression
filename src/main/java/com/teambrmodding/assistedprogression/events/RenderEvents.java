@@ -1,8 +1,8 @@
 package com.teambrmodding.assistedprogression.events;
 
+import com.teambr.bookshelf.util.BlockUtils;
 import com.teambrmodding.assistedprogression.common.items.ItemExchanger;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
-import com.teambrmodding.assistedprogression.utils.BlockUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -44,9 +44,9 @@ public class RenderEvents implements IResourceManagerReloadListener {
         EnumHand hand;
 
         //Check which hand if any is holding wand
-        if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().isItemEqual(new ItemStack(ItemManager.itemExchanger())))
+        if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().isItemEqual(new ItemStack(ItemManager.itemExchanger)))
             hand = EnumHand.MAIN_HAND;
-        else if (player.getHeldItemOffhand() != null && player.getHeldItemOffhand().isItemEqual(new ItemStack(ItemManager.itemExchanger())))
+        else if (player.getHeldItemOffhand() != null && player.getHeldItemOffhand().isItemEqual(new ItemStack(ItemManager.itemExchanger)))
             hand = EnumHand.OFF_HAND;
         else return;
 

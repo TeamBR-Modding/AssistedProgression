@@ -1,12 +1,18 @@
 package com.teambrmodding.assistedprogression.common.items;
 
 import com.teambr.bookshelf.common.items.InventoryHandlerItem;
+import com.teambrmodding.assistedprogression.AssistedProgression;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -37,6 +43,7 @@ public class ItemTrashBag extends BaseItem {
     public ItemTrashBag(String name, int size) {
         super(name, 1);
         bagSize = size;
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     /*******************************************************************************************************************
@@ -69,6 +76,15 @@ public class ItemTrashBag extends BaseItem {
                 return true;
             }
         };
+    }
+
+    /**
+     * Called when the equipped item is right clicked.
+     */
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        playerIn.openGui(AssistedProgression.INSTANCE, 0, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
     /*******************************************************************************************************************

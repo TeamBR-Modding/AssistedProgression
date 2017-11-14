@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item" : "minecraft:brick"
+    },
+    {
+      "item" : "minecraft:brick"
+    }
+  ],
+  "result": {
+    "item" : "assistedprogression:blockPlayerPlate"
+  }
+}

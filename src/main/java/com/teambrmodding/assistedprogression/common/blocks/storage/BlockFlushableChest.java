@@ -38,7 +38,7 @@ public class BlockFlushableChest extends BaseBlock implements IOpensGui {
     /**
      * Constructor
      */
-    protected BlockFlushableChest() {
+    public BlockFlushableChest() {
         super(Material.ROCK, "flushableChest", TileFlushableChest.class);
     }
 

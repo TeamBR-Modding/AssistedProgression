@@ -86,7 +86,7 @@ public class ItemMagnet extends BaseItem {
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
         if(!isBasicMagnet)
-            return new EnergyContainingItem(stack, ConfigManager.totalRFMagnet());
+            return new EnergyContainingItem(stack, ConfigManager.totalRFMagnet);
         else
             return super.initCapabilities(stack, nbt);
     }

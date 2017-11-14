@@ -42,7 +42,7 @@ public class ContainerTrashBag extends BaseContainer {
             @Nullable
             @Override
             public String getSlotTexture() {
-                if(trashBag.getItem() == ItemManager.itemTrashBag())
+                if(trashBag.getItem() == ItemManager.itemTrashBag)
                     return "assistedprogression:items/trashBag";
                 else
                     return "assistedprogression:items/heftyBag";
@@ -64,7 +64,7 @@ public class ContainerTrashBag extends BaseContainer {
             }
         }
 
-        if(trashBag.getItem() == ItemManager.itemTrashBag())
+        if(trashBag.getItem() == ItemManager.itemTrashBag)
             addSlotToContainer(new PhantomSlot(inventory, 0, 79, 32));
         else
             addInventoryGridPhantom(8, 32, 9);

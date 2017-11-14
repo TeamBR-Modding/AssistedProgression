@@ -5,7 +5,6 @@ import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -27,7 +26,7 @@ public class BlockRedstoneClock extends BaseBlock {
     /**
      * Constructor
      */
-    protected BlockRedstoneClock() {
+    public BlockRedstoneClock() {
         super(Material.ROCK, "blockRedstoneClock", TileRedstoneClock.class);
         setDefaultState(blockState.getBaseState().withProperty(BlockPressurePlate.POWERED, false));
     }

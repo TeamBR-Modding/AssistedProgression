@@ -1,0 +1,22 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "  E",
+    " S ",
+    "G  "
+  ],
+  "key": {
+    "E": {
+      "item":"minecraft:ender_pearl"
+    },
+    "S": {
+      "item":"minecraft:blaze_rod"
+    },
+    "G": {
+      "item":"minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item":"assistedproression:itemExchanger"
+  }
+}

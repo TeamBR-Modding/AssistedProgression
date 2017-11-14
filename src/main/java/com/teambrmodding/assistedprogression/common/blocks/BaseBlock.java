@@ -72,7 +72,7 @@ public class BaseBlock extends BlockContainer {
      * @return Null if none, defaults to the main NeoTech Tab
      */
     protected CreativeTabs getCreativeTab() {
-        return AssistedProgression.tabAssistedProgression();
+        return AssistedProgression.tabAssistedProgression;
     }
 
     /**

@@ -24,9 +24,7 @@ public class RecipeManager {
     /**
       * Called to register things
       */
-    public static void preInit() {
-        CraftingRecipeManager.preInit();
-    }
+    public static void preInit() { }
 
     /**
       * Builds the recipe registry

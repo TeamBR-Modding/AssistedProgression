@@ -10,7 +10,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,7 @@ public class GrinderRecipeHandler extends AbstractRecipeHandler<GrinderRecipe, I
      */
     @Override
     public String getBaseFolderLocation() {
-        return AssistedProgression.configFolderLocation();
+        return AssistedProgression.configFolderLocation;
     }
 
     /**

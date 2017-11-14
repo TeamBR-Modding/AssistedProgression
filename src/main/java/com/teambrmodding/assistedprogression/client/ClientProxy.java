@@ -31,8 +31,8 @@ public class ClientProxy extends CommonProxy {
         ItemRenderManager.registerBlockRenderers();
 
         // Pipette models
-        ModelLoader.setCustomMeshDefinition(ItemManager.itemPipette(), stack -> ModelPipette.LOCATION);
-        ModelBakery.registerItemVariants(ItemManager.itemPipette(), ModelPipette.LOCATION);
+        ModelLoader.setCustomMeshDefinition(ItemManager.itemPipette, stack -> ModelPipette.LOCATION);
+        ModelBakery.registerItemVariants(ItemManager.itemPipette, ModelPipette.LOCATION);
         ModelLoaderRegistry.registerLoader(ModelPipette.LoaderDynPipette.INSTANCE);
     }
 
@@ -42,7 +42,7 @@ public class ClientProxy extends CommonProxy {
 
         // Flushable Chest
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes()
-                .registerBuiltInBlocks(BlockManager.blockFlushableChest());
+                .registerBuiltInBlocks(BlockManager.blockFlushableChest);
         ClientRegistry.bindTileEntitySpecialRenderer(TileFlushableChest.class,
                 new TileFlushableChestRenderer<>());
 

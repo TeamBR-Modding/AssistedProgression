@@ -30,7 +30,7 @@ public class BlockGrinder extends BaseBlock implements IOpensGui {
     /**
      * Block constructor
      */
-    protected BlockGrinder() {
+    public BlockGrinder() {
         super(Material.ROCK, "blockGrinder", TileGrinder.class);
     }
 
@@ -51,7 +51,7 @@ public class BlockGrinder extends BaseBlock implements IOpensGui {
             else if(landedBlock == Blocks.STONE_PRESSURE_PLATE)
                 ((TileGrinder)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
                         .activateGrinder((int) entityIn.fallDistance, 1.25);
-            else if(landedBlock == BlockManager.blockPlayerPlate())
+            else if(landedBlock == BlockManager.blockPlayerPlate)
                 ((TileGrinder)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
                         .activateGrinder((int) entityIn.fallDistance, 1.5);
             else if(landedBlock == Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)

@@ -32,7 +32,7 @@ public class TileFlushableChestRenderer<T extends TileFlushableChest> extends Ti
 
         int facing = 3;
 
-        if(tile.hasWorld() && tile.getWorld().getBlockState(tile.getPos()).getBlock() == BlockManager.blockFlushableChest())
+        if(tile.hasWorld() && tile.getWorld().getBlockState(tile.getPos()).getBlock() == BlockManager.blockFlushableChest)
             facing = tile.getWorld().getBlockState(tile.getPos()).getValue(BlockFourWayRotating.FOUR_WAY).getIndex();
 
         if(destroyStage >= 0) {

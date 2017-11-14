@@ -129,7 +129,7 @@ public class TileFlushableChest extends InventoryHandler {
         }
 
         if(world != null && ticksSinceSync < 0 && !world.isRemote)
-            world.addBlockEvent(pos, BlockManager.blockFlushableChest(), 0, numUsingPlayers);
+            world.addBlockEvent(pos, BlockManager.blockFlushableChest, 0, numUsingPlayers);
 
         ticksSinceSync += 1;
         prevLidAngle = lidAngle;

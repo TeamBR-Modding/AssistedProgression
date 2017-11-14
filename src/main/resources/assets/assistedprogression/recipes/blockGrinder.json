@@ -1,0 +1,27 @@
+{
+  "type":"forge:ore_shaped",
+  "pattern": [
+    "SSS",
+    "WFW",
+    "CCC"
+  ],
+  "key": {
+    "S" : {
+      "type":"forge:ore_dict",
+      "ore":"blockStone"
+    },
+    "W": {
+      "item":"minecraft:cobblestone_wall"
+    },
+    "F": {
+      "item":"minecraft:flint"
+    },
+    "C": {
+      "type":"forge:ore_dict",
+      "ore":"blockCobblestone"
+    }
+  },
+  "result": {
+    "item":"assistedprogression:blockGrinder"
+  }
+}

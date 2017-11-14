@@ -54,11 +54,11 @@ public class AssistedProgressionPlugin implements IModPlugin {
          */
 
         // Grinder
-        registry.addRecipeCatalyst(new ItemStack(BlockManager.blockGrinder()), GRINDER_UUID);
+        registry.addRecipeCatalyst(new ItemStack(BlockManager.blockGrinder), GRINDER_UUID);
         registry.addRecipeClickArea(GuiGrinder.class, 47, 36, 27, 20, GRINDER_UUID);
 
         // Crafter
-        registry.addRecipeCatalyst(new ItemStack(BlockManager.blockCrafter()), VanillaRecipeCategoryUid.CRAFTING);
+        registry.addRecipeCatalyst(new ItemStack(BlockManager.blockCrafter), VanillaRecipeCategoryUid.CRAFTING);
         registry.addRecipeClickArea(GuiCrafter.class, 14, 9, 61, 34, VanillaRecipeCategoryUid.CRAFTING);
         registry.addRecipeClickArea(GuiCrafter.class, 109, 68, 61, 34, VanillaRecipeCategoryUid.CRAFTING);
 
