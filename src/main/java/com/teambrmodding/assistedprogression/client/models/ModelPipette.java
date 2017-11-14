@@ -48,7 +48,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
  * @since 1/22/2017
  */
 
-public final class ModelPipette implements IModel, IModelCustomData, IRetexturableModel
+public final class ModelPipette implements IModel
 {
     public static final ModelResourceLocation LOCATION = new ModelResourceLocation(new ResourceLocation("assistedprogression", "itemPipette"), "inventory");
 
@@ -101,12 +101,12 @@ public final class ModelPipette implements IModel, IModelCustomData, IRetexturab
 
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format,
-                            Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+    java.util.function.Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
     {
 
-        ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transformMap = IPerspectiveAwareModel.MapWrapper.getTransforms(state);
+        ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transformMap = PerspectiveMapWrapper.getTransforms(state);
 
-        TRSRTransformation transform = state.apply(Optional.<IModelPart>absent()).or(TRSRTransformation.identity());
+        TRSRTransformation transform = state.apply(java.util.Optional.empty()).orElse(TRSRTransformation.identity());
         TextureAtlasSprite fluidSprite = null;
         ImmutableList.Builder<BakedQuad> builder = ImmutableList.builder();
 
@@ -255,7 +255,7 @@ public final class ModelPipette implements IModel, IModelCustomData, IRetexturab
     }
 
     // the dynamic bucket is based on the empty bucket
-    private static final class BakedDynPipette implements IPerspectiveAwareModel
+    private static final class BakedDynPipette extends BakedItemModel
     {
 
         private final ModelPipette parent;
@@ -266,9 +266,11 @@ public final class ModelPipette implements IModel, IModelCustomData, IRetexturab
         private final VertexFormat format;
 
         public BakedDynPipette(ModelPipette parent,
-                               ImmutableList<BakedQuad> quads, TextureAtlasSprite particle, VertexFormat format, ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transforms,
+                               ImmutableList<BakedQuad> quads, TextureAtlasSprite particle, VertexFormat format,
+                               ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transforms,
                                Map<String, IBakedModel> cache)
         {
+            super(quads, particle, transforms, BakedDynPipetteOverrideHandler.INSTANCE);
             this.quads = quads;
             this.particle = particle;
             this.format = format;
@@ -276,35 +278,5 @@ public final class ModelPipette implements IModel, IModelCustomData, IRetexturab
             this.transforms = transforms;
             this.cache = cache;
         }
-
-        @Override
-        public ItemOverrideList getOverrides()
-        {
-            return BakedDynPipetteOverrideHandler.INSTANCE;
-        }
-
-        @Override
-        public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType)
-        {
-            // Wrap the base and have it handle the movement
-            return IPerspectiveAwareModel.MapWrapper
-                    .handlePerspective(
-                            this,
-                             ModelHelper.DEFAULT_TOOL_STATE(),
-                            cameraTransformType);
-        }
-
-        @Override
-        public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand)
-        {
-            if(side == null) return quads;
-            return ImmutableList.of();
-        }
-
-        public boolean isAmbientOcclusion() { return true;  }
-        public boolean isGui3d() { return false; }
-        public boolean isBuiltInRenderer() { return false; }
-        public TextureAtlasSprite getParticleTexture() { return particle; }
-        public ItemCameraTransforms getItemCameraTransforms() { return ItemCameraTransforms.DEFAULT; }
     }
 }
