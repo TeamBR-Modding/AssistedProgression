@@ -74,7 +74,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<JEIGrinderRecip
      */
     @Override
     public IDrawable getBackground() {
-        return AssistedProgressionPlugin.jeiHelpers.getGuiHelper().createDrawable(new ResourceLocation(Reference.MOD_ID(),
+        return AssistedProgressionPlugin.jeiHelpers.getGuiHelper().createDrawable(new ResourceLocation(Reference.MOD_ID,
                 "textures/gui/jei/grinder.png"), 0, 0, 169, 80);
     }
 

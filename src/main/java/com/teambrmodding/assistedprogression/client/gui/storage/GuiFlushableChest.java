@@ -44,7 +44,7 @@ public class GuiFlushableChest extends GuiBase<ContainerFlushableChest> {
     public GuiFlushableChest(EntityPlayer player, TileFlushableChest tile) {
         super(new ContainerFlushableChest(player.inventory, tile), 175, 165,
                 "assistedprogression.flushchest.title",
-                new ResourceLocation(Reference.MOD_ID(), "textures/gui/flushableChest.png"));
+                new ResourceLocation(Reference.MOD_ID, "textures/gui/flushableChest.png"));
         chest = tile;
     }
 

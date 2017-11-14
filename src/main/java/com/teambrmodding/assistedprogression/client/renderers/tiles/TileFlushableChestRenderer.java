@@ -22,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
  * @since 11/13/17
  */
 public class TileFlushableChestRenderer<T extends TileFlushableChest> extends TileEntitySpecialRenderer<T> {
-    private ResourceLocation location = new ResourceLocation(Reference.MOD_ID(), "textures/blocks/blockFlushablechest.png");
+    private ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "textures/blocks/blockFlushablechest.png");
     private ModelChest modelChest     = new ModelChest();
 
     @Override

@@ -33,8 +33,8 @@ public class BaseBlock extends BlockContainer {
         this.tileClass = tileEntityClass;
         this.name = name;
 
-        setRegistryName(new ResourceLocation(Reference.MOD_ID(), name));
-        setUnlocalizedName(Reference.MOD_ID() + ":" + name);
+        setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
+        setUnlocalizedName(Reference.MOD_ID + ":" + name);
 
         setHardness(getHardness());
 

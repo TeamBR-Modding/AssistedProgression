@@ -44,11 +44,11 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes()
                 .registerBuiltInBlocks(BlockManager.blockFlushableChest());
         ClientRegistry.bindTileEntitySpecialRenderer(TileFlushableChest.class,
-                new TileFlushableChestRenderer<TileFlushableChest>());
+                new TileFlushableChestRenderer<>());
 
         // Grinder
         ClientRegistry.bindTileEntitySpecialRenderer(TileGrinder.class,
-                new TileGrinderRenderer<TileGrinder>());
+                new TileGrinderRenderer<>());
     }
 
     @Override

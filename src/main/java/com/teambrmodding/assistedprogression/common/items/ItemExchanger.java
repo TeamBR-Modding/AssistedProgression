@@ -1,9 +1,9 @@
 package com.teambrmodding.assistedprogression.common.items;
 
+import com.teambr.bookshelf.util.BlockUtils;
 import com.teambr.bookshelf.util.WorldUtils;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.lib.Reference;
-import com.teambrmodding.assistedprogression.utils.BlockUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,7 +40,7 @@ public class ItemExchanger extends Item {
 
     public ItemExchanger() {
         super();
-        this.setUnlocalizedName(Reference.MOD_ID() + ":itemExchanger");
+        this.setUnlocalizedName(Reference.MOD_ID + ":itemExchanger");
         this.setCreativeTab(AssistedProgression.tabAssistedProgression());
     }
 

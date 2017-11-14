@@ -28,7 +28,7 @@ public class BaseItem extends Item {
         super();
         setCreativeTab(AssistedProgression.tabAssistedProgression());
         setMaxStackSize(maxStackSize);
-        setUnlocalizedName(Reference.MOD_ID() + ":" + name);
+        setUnlocalizedName(Reference.MOD_ID + ":" + name);
     }
 
     /*******************************************************************************************************************

@@ -37,7 +37,7 @@ public class GuiGrinder extends GuiBase<ContainerGrinder> {
     public GuiGrinder(EntityPlayer player, TileGrinder tile) {
         super(new ContainerGrinder(player.inventory, tile), 175, 165,
                 tile.getBlockType().getLocalizedName(),
-                new ResourceLocation(Reference.MOD_ID(), "textures/gui/grinder.png"));
+                new ResourceLocation(Reference.MOD_ID, "textures/gui/grinder.png"));
         this.grinder = tile;
 
         addComponents();

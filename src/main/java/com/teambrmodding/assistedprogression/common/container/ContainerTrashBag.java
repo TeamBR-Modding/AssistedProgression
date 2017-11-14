@@ -4,14 +4,9 @@ import com.teambr.bookshelf.common.container.BaseContainer;
 import com.teambr.bookshelf.common.container.slots.PhantomSlot;
 import com.teambr.bookshelf.common.items.InventoryHandlerItem;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
-import com.teambrmodding.assistedprogression.utils.PlayerUtils;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 

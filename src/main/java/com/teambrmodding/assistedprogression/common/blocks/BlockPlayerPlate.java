@@ -32,7 +32,7 @@ public class BlockPlayerPlate extends BlockBasePressurePlate {
     protected BlockPlayerPlate() {
         super(Material.IRON);
         setDefaultState(blockState.getBaseState().withProperty(BlockPressurePlate.POWERED, false));
-        setUnlocalizedName(Reference.MOD_ID() + ":" + "blockPlayerPlate");
+        setUnlocalizedName(Reference.MOD_ID + ":" + "blockPlayerPlate");
         setCreativeTab(AssistedProgression.tabAssistedProgression());
         setHardness(2.0F);
     }

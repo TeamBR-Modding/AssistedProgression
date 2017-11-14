@@ -1,15 +1,13 @@
 package com.teambrmodding.assistedprogression.client.models;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import com.teambr.bookshelf.client.ModelHelper;
 import com.teambrmodding.assistedprogression.lib.Reference;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.IResourceManager;
@@ -19,23 +17,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.*;
-import net.minecraftforge.common.model.IModelPart;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.fluids.*;
-import org.apache.commons.lang3.tuple.Pair;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 
-import javax.vecmath.Matrix4f;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ItemOverride;
-import net.minecraft.client.renderer.block.model.ItemOverrideList;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 
 /**
  * This file was created for Assisted-Progression
@@ -50,7 +40,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 
 public final class ModelPipette implements IModel
 {
-    public static final ModelResourceLocation LOCATION = new ModelResourceLocation(new ResourceLocation("assistedprogression", "itemPipette"), "inventory");
+    public static final ModelResourceLocation LOCATION = new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, "itemPipette"), "inventory");
 
     // minimal Z offset to prevent depth-fighting
     private static final float NORTH_Z_BASE = 7.496f / 16f;
@@ -60,9 +50,9 @@ public final class ModelPipette implements IModel
 
     public static final IModel MODEL = new ModelPipette();
 
-    private final ResourceLocation baseLocation = new ResourceLocation(Reference.MOD_NAME(), "items/itemPipetteMask");
+    private final ResourceLocation baseLocation = new ResourceLocation(Reference.MOD_ID, "items/itemPipetteMask");
     private ResourceLocation liquidLocation;
-    private final ResourceLocation coverLocation = new ResourceLocation(Reference.MOD_NAME(), "items/itemPipette");
+    private final ResourceLocation coverLocation = new ResourceLocation(Reference.MOD_ID, "items/itemPipette");
 
     private final Fluid fluid;
 

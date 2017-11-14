@@ -43,7 +43,7 @@ public class BlockRedstoneClock extends BaseBlock {
      * @param state The state
      * @param max old power
      */
-    protected void updateState(World worldIn, BlockPos pos, IBlockState state, boolean max) {
+    public void updateState(World worldIn, BlockPos pos, IBlockState state, boolean max) {
         int redstonePower = max ? 15 : 0;
         worldIn.setBlockState(pos, setRedstoneStrength(state, redstonePower), 4);
         updateNeighbors(worldIn, pos);

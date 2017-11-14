@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class GuiCrafter extends GuiContainer {
 
-    private ResourceLocation background = new ResourceLocation(Reference.MOD_ID() + ":textures/gui/crafter.png");
+    private ResourceLocation background = new ResourceLocation(Reference.MOD_ID + ":textures/gui/crafter.png");
 
     public GuiCrafter(InventoryPlayer playerInv, TileCrafter crafter) {
         super(new ContainerCrafter(playerInv, crafter));
