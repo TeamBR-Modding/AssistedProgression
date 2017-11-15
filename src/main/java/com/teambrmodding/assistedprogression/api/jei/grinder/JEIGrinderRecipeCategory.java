@@ -52,7 +52,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<JEIGrinderRecip
      */
     @Override
     public String getTitle() {
-        return ClientUtils.translate("tile.assistedprogression:blockGrinder.name");
+        return ClientUtils.translate("tile.assistedprogression:block_grinder.name");
     }
 
     /**
@@ -75,7 +75,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<JEIGrinderRecip
     @Override
     public IDrawable getBackground() {
         return AssistedProgressionPlugin.jeiHelpers.getGuiHelper().createDrawable(new ResourceLocation(Reference.MOD_ID,
-                "textures/gui/jei/grinder.png"), 0, 0, 169, 80);
+                "textures/gui/jei/grinder.png"), 0, 0, 169, 60);
     }
 
     /**
@@ -90,9 +90,8 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<JEIGrinderRecip
     public void setRecipe(IRecipeLayout recipeLayout, JEIGrinderRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
 
-        itemStackGroup.init(0, true, 77, 23);
-        itemStackGroup.init(1, false, 59, 42);
-        itemStackGroup.init(2, false, 77, 42);
+        itemStackGroup.init(0, true,  76, 22);
+        itemStackGroup.init(1, false, 58, 41);
 
         recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
         recipeLayout.getItemStacks().set(1, ingredients.getOutputs(ItemStack.class).get(0));

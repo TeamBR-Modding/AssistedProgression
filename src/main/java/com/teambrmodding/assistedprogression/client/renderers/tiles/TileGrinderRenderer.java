@@ -2,7 +2,6 @@ package com.teambrmodding.assistedprogression.client.renderers.tiles;
 
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -23,7 +22,7 @@ import net.minecraft.item.ItemStack;
 public class TileGrinderRenderer<T extends TileGrinder> extends TileEntitySpecialRenderer<T> {
 
     @Override
-    public void renderTileEntityFast(T grinder, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
+    public void func_192841_a(T grinder, double x, double y, double z, float partialTicks, int destroyStage, float partial) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y, z + 0.5D);
         for(int i = 4; i < 7; i++) {
@@ -48,7 +47,7 @@ public class TileGrinderRenderer<T extends TileGrinder> extends TileEntitySpecia
                 int rotation = (i - 3) * 120;
                 double xRot = 0.25 * Math.cos(Math.toRadians(rotation));
                 double zRot = 0.25 * Math.sin(Math.toRadians(rotation));
-                renderManager.doRenderEntity(entityItem, x / 0.45, -0.1, zRot / 0.45,
+                renderManager.doRenderEntity(entityItem, xRot / 0.45, -0.1, zRot / 0.45,
                         0.0F, 0, true);
 
                 GlStateManager.popAttrib();

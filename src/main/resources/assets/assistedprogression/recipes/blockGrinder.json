@@ -11,7 +11,8 @@
       "ore":"blockStone"
     },
     "W": {
-      "item":"minecraft:cobblestone_wall"
+      "item":"minecraft:cobblestone_wall",
+      "data":0
     },
     "F": {
       "item":"minecraft:flint"
@@ -22,6 +23,6 @@
     }
   },
   "result": {
-    "item":"assistedprogression:blockGrinder"
+    "item":"assistedprogression:block_grinder"
   }
 }

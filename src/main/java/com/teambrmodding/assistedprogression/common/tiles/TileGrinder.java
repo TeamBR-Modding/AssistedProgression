@@ -108,7 +108,7 @@ public class TileGrinder extends InventoryHandler {
      */
     private boolean hasOutputAvailable() {
         ItemStack output = ((GrinderRecipeHandler)RecipeManager.getHandler(RecipeManager.RecipeType.GRINDER))
-                .getOutput(getStackInSlot(3));
+                    .getOutput(getStackInSlot(3));
         for(int x = 4; x < 7; x++) {
             if(!getStackInSlot(x).isEmpty() && getStackInSlot(x).getCount() <= getStackInSlot(x).getMaxStackSize() &&
                     getStackInSlot(x).getItem() == output.getItem() &&
@@ -118,7 +118,7 @@ public class TileGrinder extends InventoryHandler {
             }
         }
         for(int x = 4; x < 7; x++) {
-            if (getStackInSlot(x) == null) {
+            if (getStackInSlot(x).isEmpty()) {
                 return true;
             }
         }
@@ -131,8 +131,11 @@ public class TileGrinder extends InventoryHandler {
     private void grindItem() {
         ItemStack output = ((GrinderRecipeHandler)RecipeManager.getHandler(RecipeManager.RecipeType.GRINDER))
                 .getOutput(getStackInSlot(3));
+        if(output == null)
+            return;
         for(int x = 4; x < 7; x++) {
-            if(!getStackInSlot(x).isEmpty() && getStackInSlot(x).getCount() <= getStackInSlot(x).getMaxStackSize() &&
+            if(!getStackInSlot(x).isEmpty() &&
+                    getStackInSlot(x).getCount() <= getStackInSlot(x).getMaxStackSize() &&
                     getStackInSlot(x).getItem() == output.getItem() &&
                     getStackInSlot(x).getItemDamage() == output.getItemDamage() &&
                     getStackInSlot(x).getCount() + output.getCount() <= getStackInSlot(x).getMaxStackSize()) {
@@ -144,7 +147,7 @@ public class TileGrinder extends InventoryHandler {
             }
         }
         for(int x = 4; x < 7; x++) {
-            if(getStackInSlot(x) == null) {
+            if(getStackInSlot(x).isEmpty()) {
                 getStackInSlot(3).shrink(1);
                 setStackInSlot(x, output.copy());
                 if(getStackInSlot(3).getCount() <= 0)
@@ -191,7 +194,7 @@ public class TileGrinder extends InventoryHandler {
      * @return How big to make the inventory on creation
      */
     @Override
-    protected int getInventorySize() {
+    public int getInventorySize() {
         return 7;
     }
 
@@ -203,7 +206,7 @@ public class TileGrinder extends InventoryHandler {
      * @return True if you can put this there
      */
     @Override
-    protected boolean isItemValidForSlot(int index, ItemStack stack) {
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
         return index < 3 && RecipeManager.getHandler(RecipeManager.RecipeType.GRINDER).isValidInput(stack);
     }
 

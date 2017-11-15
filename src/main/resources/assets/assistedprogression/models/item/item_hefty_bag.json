@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "assistedprogression:items/cheapmagnet"
+    "layer0": "assistedprogression:items/hefty_bag"
   }
 }

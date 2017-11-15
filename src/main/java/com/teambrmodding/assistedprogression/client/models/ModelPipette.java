@@ -43,7 +43,7 @@ import java.util.Map;
 
 public final class ModelPipette implements IModel {
     public static final ModelResourceLocation LOCATION =
-            new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, "itempipette"), "inventory");
+            new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, "item_pipette"), "inventory");
 
     // minimal Z offset to prevent depth-fighting
     private static final float NORTH_Z_BASE = 7.496f / 16f;
@@ -53,9 +53,9 @@ public final class ModelPipette implements IModel {
 
     public static final IModel MODEL = new ModelPipette();
 
-    private final ResourceLocation baseLocation = new ResourceLocation(Reference.MOD_ID, "items/itemPipetteMask");
+    private final ResourceLocation baseLocation = new ResourceLocation(Reference.MOD_ID, "items/item_pipette_mask");
     private ResourceLocation liquidLocation;
-    private final ResourceLocation coverLocation = new ResourceLocation(Reference.MOD_ID, "items/itemPipette");
+    private final ResourceLocation coverLocation = new ResourceLocation(Reference.MOD_ID, "items/item_pipette");
 
     private final Fluid fluid;
 
@@ -178,7 +178,7 @@ public final class ModelPipette implements IModel {
 
         @Override
         public boolean accepts(ResourceLocation modelLocation) {
-            return modelLocation.getResourceDomain().equals("assistedprogression") && modelLocation.getResourcePath().contains("itempipette");
+            return modelLocation.getResourceDomain().equals("assistedprogression") && modelLocation.getResourcePath().contains("item_pipette");
         }
 
         @Override

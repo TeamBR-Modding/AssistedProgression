@@ -1,5 +1,7 @@
 package com.teambrmodding.assistedprogression.common.blocks;
 
+import com.teambr.bookshelf.Bookshelf;
+import com.teambr.bookshelf.common.IOpensGui;
 import com.teambr.bookshelf.util.WorldUtils;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.lib.Reference;
@@ -7,8 +9,11 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -64,6 +69,24 @@ public class BaseBlock extends BlockContainer {
             }
         }
         super.breakBlock(worldIn, pos, state);
+    }
+
+    /**
+     * Called when the block is clicked on
+     * @return True to prevent future logic
+     */
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        // Make sure our machine is reachable
+        if (worldIn.getTileEntity(pos) != null && worldIn.getBlockState(pos).getBlock() instanceof IOpensGui) {
+            // Open a GUI
+            if(!playerIn.isSneaking()) {
+                playerIn.openGui(Bookshelf.INSTANCE, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                return true;
+            }
+        }
+        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
     /**

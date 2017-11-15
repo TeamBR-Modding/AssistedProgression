@@ -41,7 +41,7 @@ public class ItemSpawnerRelocator extends BaseItem {
      * @param maxStackSize Maximum stack size
      */
     public ItemSpawnerRelocator() {
-        super("itemSpawnerRelocator", 1);
+        super("item_spawner_relocator", 1);
     }
 
     /*******************************************************************************************************************

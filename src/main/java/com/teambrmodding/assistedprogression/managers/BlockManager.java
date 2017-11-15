@@ -48,11 +48,11 @@ public class BlockManager {
 
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event) {
-        registerBlock(event, blockCrafter, TileCrafter.class, null);
-        registerBlock(event, blockFlushableChest, TileFlushableChest.class, "blockChest");
-        registerBlock(event, blockPlayerPlate, null, "blockPressurePlate");
-        registerBlock(event, blockRedstoneClock, TileRedstoneClock.class, null);
-        registerBlock(event, blockGrinder, TileGrinder.class, null);
+        registerBlock(event, blockCrafter,        TileCrafter.class,        null);
+        registerBlock(event, blockFlushableChest, TileFlushableChest.class, null);
+        registerBlock(event, blockPlayerPlate,    null,            null);
+        registerBlock(event, blockRedstoneClock,  TileRedstoneClock.class,  null);
+        registerBlock(event, blockGrinder,        TileGrinder.class,        null);
     }
 
     @SubscribeEvent

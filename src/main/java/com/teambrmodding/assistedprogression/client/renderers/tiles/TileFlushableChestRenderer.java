@@ -5,7 +5,6 @@ import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableC
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
 import net.minecraft.client.model.ModelChest;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityShulkerBoxRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -22,11 +21,11 @@ import net.minecraft.util.ResourceLocation;
  * @since 11/13/17
  */
 public class TileFlushableChestRenderer<T extends TileFlushableChest> extends TileEntitySpecialRenderer<T> {
-    private ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "textures/blocks/blockflushablechest.png");
+    private ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "textures/blocks/block_flushable_chest.png");
     private ModelChest modelChest     = new ModelChest();
 
     @Override
-    public void renderTileEntityFast(T tile, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
+    public void func_192841_a(T tile, double x, double y, double z, float partialTicks, int destroyStage, float partial) {
         if(tile == null)
             return;
 

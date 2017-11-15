@@ -25,7 +25,7 @@ public class BlockCrafter extends BaseBlock implements IOpensGui {
      * Constructor
      */
     public BlockCrafter() {
-        super(Material.WOOD, "blockcrafter", TileCrafter.class);
+        super(Material.WOOD, "block_crafter", TileCrafter.class);
     }
 
     /*******************************************************************************************************************

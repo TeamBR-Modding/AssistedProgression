@@ -33,7 +33,7 @@ public class GuiTrashBag extends GuiBase<ContainerTrashBag> {
     public GuiTrashBag(InventoryHandlerItem inventory, InventoryPlayer inventoryPlayer, ItemStack bag) {
         super(new ContainerTrashBag(inventoryPlayer, inventory, bag), 175, 165, bag.getDisplayName(),
                 new ResourceLocation(Reference.MOD_ID,
-                        "textures/gui/" + (bag.getItem() == ItemManager.itemTrashBag ? "trashbag.png" : "heftybag.png")));
+                        "textures/gui/" + (bag.getItem() == ItemManager.itemTrashBag ? "trash_bag.png" : "hefty_bag.png")));
     }
 
     /**

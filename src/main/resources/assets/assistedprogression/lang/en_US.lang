@@ -1,7 +1,7 @@
 PARSE_ESCAPES
 
 # Creative Tabs
-itemGroup.tabAssistedProgression=Assisted Progression
+itemGroup.tab_assisted_progression=Assisted Progression
 
 #######################
 # Blocks
@@ -12,53 +12,44 @@ itemGroup.tabAssistedProgression=Assisted Progression
 #######################
 
 # Magnets
-item.assistedprogression:itemCheapMagnet.name=Cheap Magnet
-item.assistedprogression:itemElectroMagnet.name=Electomagnet
+item.assistedprogression:item_cheap_magnet.name=Cheap Magnet
+item.assistedprogression:item_electro_magnet.name=Electomagnet
 
 # TrashBags
-item.assistedprogression:itemTrashBag.name=Trash Bag
-item.assistedprogression:itemHeftyBag.name=Hefty Bag
+item.assistedprogression:item_trash_bag.name=Trash Bag
+item.assistedprogression:item_hefty_bag.name=Hefty Bag
 
 # Spawner Relocator
-item.assistedprogression:itemSpawnerRelocator.name=Spawner Relocator
+item.assistedprogression:item_spawner_relocator.name=Spawner Relocator
 
 # Exchanger
-item.assistedprogression:itemExchanger.name=Block Exchanger
+item.assistedprogression:item_exchanger.name=Block Exchanger
 
 # Pipette
-item.assistedprogression:itemPipette.name=Pipette
+item.assistedprogression:item_pipette.name=Pipette
 
 #######################
 # Tile Entities
 #######################
 
 # Crafter
-tile.assistedprogression:blockcrafter.name=Dual Crafter
+tile.assistedprogression:block_crafter.name=Dual Crafter
 
 # Player Sensitive Pressure Plate
-tile.assistedprogression:blockplayerplate.name=Player Sensitive Pressure Plate
+tile.assistedprogression:block_player_plate.name=Player Sensitive Pressure Plate
 
 # Redstone Clock
-tile.assistedprogression:blockredstoneclock.name=Redstone Clock
+tile.assistedprogression:block_redstone_clock.name=Redstone Clock
 
 # Flushable Chest
-tile.assistedprogression:blockflushablechest.name=Flushable Chest
+tile.assistedprogression:block_flushable_chest.name=Flushable Chest
 
 # Grinder
-tile.assistedprogression:blockgrinder.name=Grinder
+tile.assistedprogression:block_grinder.name=Grinder
 
 #######################
 # GUI
 #######################
-# Crafter
-assistedprogression.crafter.title=Dual Crafter
-
-# Flushable Chest
-assistedprogression.flushchest.title=Flushable Chest
-
-# Trash Bag
-inventory.trashBag.title=Trash Bag
-
 # Grinder
 assistedprogression.grinder.title=Grinder
 assistedprogression.grinder.input=Input

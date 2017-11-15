@@ -35,7 +35,7 @@ public class GuiGrinder extends GuiBase<ContainerGrinder> {
      * @param texture   The location of the background texture
      */
     public GuiGrinder(EntityPlayer player, TileGrinder tile) {
-        super(new ContainerGrinder(player.inventory, tile), 175, 165,
+        super(new ContainerGrinder(player.inventory, tile), 176, 166,
                 tile.getBlockType().getLocalizedName(),
                 new ResourceLocation(Reference.MOD_ID, "textures/gui/grinder.png"));
         this.grinder = tile;
@@ -50,19 +50,19 @@ public class GuiGrinder extends GuiBase<ContainerGrinder> {
     protected void addComponents() {
         if(grinder != null) {
             // Input
-            components.add(new GuiComponentText(this, 8, 26,
+            components.add(new GuiComponentText(this, 6, 20,
                     ClientUtils.translate("assistedprogression.grinder.input"), new Color(77, 77, 77)));
 
             // Grinding
-            components.add(new GuiComponentText(this, 8, 48,
+            components.add(new GuiComponentText(this, 6, 42,
                     ClientUtils.translate("assistedprogression.grinder.grinding"), new Color(77,77, 77)));
 
             // Output
-            components.add(new GuiComponentText(this, 8, 70,
+            components.add(new GuiComponentText(this, 6, 64,
                     ClientUtils.translate("assistedprogression.grinder.output"), new Color(77, 77, 77)));
 
             // Percentage
-            components.add(new GuiComponentText(this, 100, 48,
+            components.add(new GuiComponentText(this, 105, 48,
                     new DecimalFormat("#.##").format((grinder.progress / (double) TileGrinder.MAX_PROGRESS) * 100) + "%",
                     new Color(77, 77, 77)) {
                 @Override

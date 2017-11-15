@@ -21,10 +21,10 @@ public class ItemManager {
      * Item Variables                                                                                                  *
      *******************************************************************************************************************/
 
-    public static ItemMagnet itemCheapMagnet = new ItemMagnet(true, "itemCheapMagnet");
-    public static ItemMagnet itemElectroMagnet = new ItemMagnet(false,"itemElectroMagnet");
-    public static ItemTrashBag itemTrashBag = new ItemTrashBag("itemTrashBag", 1);
-    public static ItemTrashBag itemHeftyBag = new ItemTrashBag("itemHeftyBag", 18);
+    public static ItemMagnet itemCheapMagnet = new ItemMagnet(true, "item_cheap_magnet");
+    public static ItemMagnet itemElectroMagnet = new ItemMagnet(false,"item_electro_magnet");
+    public static ItemTrashBag itemTrashBag = new ItemTrashBag("item_trash_bag", 1);
+    public static ItemTrashBag itemHeftyBag = new ItemTrashBag("item_hefty_bag", 18);
     public static ItemSpawnerRelocator itemSpawnerRelocator = new ItemSpawnerRelocator();
     public static ItemExchanger itemExchanger = new ItemExchanger();
     public static ItemPipette itemPipette = new ItemPipette();

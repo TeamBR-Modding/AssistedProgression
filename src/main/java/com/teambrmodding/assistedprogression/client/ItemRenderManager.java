@@ -25,11 +25,11 @@ public class ItemRenderManager {
      * Call in preInit, registers block models for in hand model
      */
     public static void registerBlockRenderers() {
-        registerBlockModel(BlockManager.blockCrafter, "blockcrafter", "normal");
-        registerBlockModel(BlockManager.blockFlushableChest, "blockflusablechest", "facing=north");
-        registerBlockModel(BlockManager.blockPlayerPlate, "blockplayerplate", "powered=false");
-        registerBlockModel(BlockManager.blockRedstoneClock, "blockredstoneclock", "powered=false");
-        registerBlockModel(BlockManager.blockGrinder, "blockgrinder", "normal");
+        registerBlockModel(BlockManager.blockCrafter,       "normal");
+        registerBlockModel(BlockManager.blockFlushableChest,"facing=north");
+        registerBlockModel(BlockManager.blockPlayerPlate,   "powered=false");
+        registerBlockModel(BlockManager.blockRedstoneClock, "powered=false");
+        registerBlockModel(BlockManager.blockGrinder,       "normal");
     }
 
     /**
@@ -59,8 +59,8 @@ public class ItemRenderManager {
     /**
      * Short hand for registerBlockModel with default meta
      */
-    public static void registerBlockModel(Block block, String name, String variants) {
-        registerBlockModel(block, name, variants, 0);
+    public static void registerBlockModel(Block block, String variants) {
+        registerBlockModel(block, variants, 0);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ItemRenderManager {
      * @param variants The variants
      * @param meta The meta
      */
-    public static void registerBlockModel(Block block, String name, String variants, int meta) {
+    public static void registerBlockModel(Block block, String variants, int meta) {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block),
                 meta, new ModelResourceLocation(new ResourceLocation(block.getRegistryName().toString().toLowerCase()), variants));
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block),

@@ -7,16 +7,17 @@
   ],
   "key": {
     "S": {
-      "item" : "minecraft:stone"
+      "item" : "minecraft:stone",
+      "data":0
     },
     "R": {
       "item" : "minecraft:redstone"
     },
     "B": {
-      "item" : "minecraft:restone_block"
+      "item": "minecraft:redstone_block"
     }
   },
   "result": {
-    "item" : "assistedprogression:blockRedstoneClock"
+    "item" : "assistedprogression:block_redstone_clock"
   }
 }

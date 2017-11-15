@@ -89,7 +89,7 @@ public abstract class AbstractRecipeHandler<R extends AbstractRecipe<I, O>, I, O
         if(!loadFromFile())
             generateDefaultRecipes();
         else
-            LogHelper.logger.info("[Neotech]" + getBaseName() + " Recipes loaded successfully");
+            LogHelper.logger.info("[Assisted Progression] " + getBaseName() + " Recipes loaded successfully");
         return this;
     }
 
@@ -99,7 +99,7 @@ public abstract class AbstractRecipeHandler<R extends AbstractRecipe<I, O>, I, O
      * @return True if successful
      */
     protected boolean loadFromFile() {
-        LogHelper.logger.info("[Neotech] Loading " + getBaseName() + " Recipes...");
+        LogHelper.logger.info("[Assisted Progression] Loading " + getBaseName() + " Recipes...");
         recipes = JsonUtils.readFromJson(getTypeToken(),
                 getBaseFolderLocation() + File.separator + "Registries" + File.separator + getBaseName() + "Recipes.json");
         if(recipes == null)

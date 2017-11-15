@@ -15,13 +15,13 @@ import java.util.List;
 
 /**
  * This file was created for NeoTech
- *
+ * <p>
  * NeoTech is licensed under the
  * Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License:
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
- *
+ * <p>
  * Used as the base class for all recipes handler recipes
- *
+ * <p>
  * I : Recipe Input
  * O : Recipe Output
  *
@@ -58,7 +58,7 @@ public abstract class AbstractRecipe<I, O> {
      * @return A string version of the stack in format MODID:ITEMID:DAMAGE:STACK_SIZE or ORE_DICT_TAG
      */
     public static String getItemStackString(@Nonnull ItemStack itemStack) {
-        if(OreDictionary.getOreIDs(itemStack).length > 0) { // Do we have an ore dict tag for this?
+        if (OreDictionary.getOreIDs(itemStack).length > 0) { // Do we have an ore dict tag for this?
             return OreDictionary.getOreName(OreDictionary.getOreIDs(itemStack)[0]) +
                     ":" + itemStack.getCount(); // Return the ore dict tag, always preferred
         }
@@ -73,7 +73,7 @@ public abstract class AbstractRecipe<I, O> {
      */
     @Nullable
     public static ItemStack getItemStackFromString(String itemString) {
-        if(itemString == null || itemString.isEmpty())
+        if (itemString == null || itemString.isEmpty())
             return ItemStack.EMPTY;
 
         String[] name = itemString.split(":");
@@ -84,14 +84,14 @@ public abstract class AbstractRecipe<I, O> {
                 stackSize = Integer.valueOf(name[3]);
             case 3:
                 damage = Integer.valueOf(name[2]); // Damage Defined
-                if(damage == OreDictionary.WILDCARD_VALUE || damage > 256) // Impossible, catches wild card when not caught
+                if (damage == OreDictionary.WILDCARD_VALUE || damage > 256) // Impossible, catches wild card when not caught
                     damage = -1;
             case 2: // Create the stack
                 List<ItemStack> ores = OreDictionary.getOres(name[0], false);
 
                 // The strong ID must match something
-                for(ItemStack oreStack : ores) {
-                    if(ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
+                for (ItemStack oreStack : ores) {
+                    if (ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
                         return new ItemStack(oreStack.getItem(), Integer.parseInt(name[1]), damage == -1 && oreStack.getItemDamage() != OreDictionary.WILDCARD_VALUE
                                 ? oreStack.getItemDamage() : damage);
                 }
@@ -101,12 +101,12 @@ public abstract class AbstractRecipe<I, O> {
             case 1: // Not a defined item already, search OreDict
                 List<ItemStack> itemOreTag = OreDictionary.getOres(name[0], false);
                 // The strong ID must match something
-                for(ItemStack oreStack : itemOreTag) {
-                    if(ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
+                for (ItemStack oreStack : itemOreTag) {
+                    if (ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
                         return new ItemStack(oreStack.getItem(), 1, damage == -1 ?
                                 oreStack.getItemDamage() == OreDictionary.WILDCARD_VALUE ? 0 : oreStack.getItemDamage() : damage);
                 }
-            default :
+            default:
                 LogHelper.logger.error("[AssistedProgression] Unable to get stack from string: " + itemString);
                 return ItemStack.EMPTY;
         }
@@ -114,7 +114,7 @@ public abstract class AbstractRecipe<I, O> {
 
     /**
      * Used to get a stack from a string
-     *
+     * <p>
      * This is used as we don't ever want to actually give out a OreDictionary.WILD_CARD valued stack, but need it
      * for displaying in JEI etc...
      *
@@ -123,7 +123,7 @@ public abstract class AbstractRecipe<I, O> {
      */
     @Nullable
     public static ItemStack getItemStackFromStringForDisplay(String itemString) {
-        if(itemString == null || itemString.isEmpty())
+        if (itemString == null || itemString.isEmpty())
             return ItemStack.EMPTY;
 
         String[] name = itemString.split(":");
@@ -138,8 +138,8 @@ public abstract class AbstractRecipe<I, O> {
                 List<ItemStack> ores = OreDictionary.getOres(name[0], false);
 
                 // The strong ID must match something
-                for(ItemStack oreStack : ores) {
-                    if(ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
+                for (ItemStack oreStack : ores) {
+                    if (ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
                         return new ItemStack(oreStack.getItem(), Integer.parseInt(name[1]), damage == -1 ? oreStack.getItemDamage() : damage);
                 }
                 // No ore dict found, lookup item
@@ -147,11 +147,11 @@ public abstract class AbstractRecipe<I, O> {
             case 1: // Not a defined item already, search OreDict
                 List<ItemStack> itemOreTag = OreDictionary.getOres(name[0], false);
                 // The strong ID must match something
-                for(ItemStack oreStack : itemOreTag) {
-                    if(ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
+                for (ItemStack oreStack : itemOreTag) {
+                    if (ArrayUtils.contains(OreDictionary.getOreIDs(oreStack), OreDictionary.getOreID(name[0])))
                         return new ItemStack(oreStack.getItem(), 1, damage == -1 ? oreStack.getItemDamage() : damage);
                 }
-            default :
+            default:
                 LogHelper.logger.error("[AssistedProgression] Unable to get stack from string: " + itemString);
                 return ItemStack.EMPTY;
         }
@@ -159,24 +159,25 @@ public abstract class AbstractRecipe<I, O> {
 
     /**
      * Checks if the passed string allows for normal match or OreDictionary match
+     *
      * @param recipeStack The recipe stack, formated MOD:ITEM:DAMAGE:STACK or ORE_DICT
-     * @param inputStack The stack to compare to
+     * @param inputStack  The stack to compare to
      * @return True if the input matches our defined stack
      */
     public boolean isItemStackValidForRecipeStack(String recipeStack, ItemStack inputStack) {
         ItemStack convertedStack = getItemStackFromString(recipeStack);
 
-        if(convertedStack.isEmpty())
+        if (convertedStack.isEmpty())
             return false;
 
         boolean oreDict = false;
 
         // Is the string in just ore dict
-        if(OreDictionary.doesOreNameExist(recipeStack)) { // Is input ore dict tag
+        if (OreDictionary.doesOreNameExist(recipeStack)) { // Is input ore dict tag
             int[] otherStackIDS = OreDictionary.getOreIDs(inputStack); // The list of ids for input
-            if(otherStackIDS.length > 0) { // Input must have ore dict to match
-                for(int oreID : otherStackIDS) { // Cycle Ore Dict ids
-                    if(OreDictionary.containsMatch(false,
+            if (otherStackIDS.length > 0) { // Input must have ore dict to match
+                for (int oreID : otherStackIDS) { // Cycle Ore Dict ids
+                    if (OreDictionary.containsMatch(false,
                             OreDictionary.getOres(OreDictionary.getOreName(oreID)), convertedStack)) { // Checks if there is a stack matching this
                         oreDict = true; // Found a match
                         break; // No need to continue
@@ -186,10 +187,10 @@ public abstract class AbstractRecipe<I, O> {
         }
 
         // Is actual full stack string, look for tags and compare
-        if(getItemStackFromStringForDisplay(recipeStack).getItemDamage() == OreDictionary.WILDCARD_VALUE) // Convert back into wild card
+        if (getItemStackFromStringForDisplay(recipeStack).getItemDamage() == OreDictionary.WILDCARD_VALUE) // Convert back into wild card
             convertedStack = getItemStackFromStringForDisplay(recipeStack);
 
-        if(!oreDict) {
+        if (!oreDict) {
             int[] recipeStackIDs = OreDictionary.getOreIDs(convertedStack);
             for (int ourOreID : recipeStackIDs) {
                 int[] otherStackIDS = OreDictionary.getOreIDs(inputStack); // The list of ids for input
@@ -205,15 +206,15 @@ public abstract class AbstractRecipe<I, O> {
         }
 
         // Still not found, one last test, check damage values vs item
-        if(!oreDict && convertedStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || convertedStack.getItemDamage() == -1) {
+        if (!oreDict && convertedStack.getItemDamage() == OreDictionary.WILDCARD_VALUE || convertedStack.getItemDamage() == -1) {
             oreDict = convertedStack.getItem() == inputStack.getItem(); // We just want item check, damage is wild card
         }
 
         return oreDict ||  // Signaled to check special conditions
-                convertedStack.isItemEqual(inputStack) && // Our item matches the input
-                        convertedStack.getCount() <= inputStack.getCount() && // Input must be equal or larger
-                        (convertedStack.getItemDamage() == -1 || convertedStack.getItemDamage() == inputStack.getItemDamage()) && // Our damage matches the input
-                        ItemStack.areItemStackTagsEqual(convertedStack, inputStack); // Make sure tags are equal
+                        convertedStack.isItemEqual(inputStack) && // Our item matches the input
+                                convertedStack.getCount() <= inputStack.getCount() && // Input must be equal or larger
+                                (convertedStack.getItemDamage() == -1 || convertedStack.getItemDamage() == inputStack.getItemDamage()) && // Our damage matches the input
+                                ItemStack.areItemStackTagsEqual(convertedStack, inputStack); // Make sure tags are equal
 
     }
 
@@ -236,7 +237,7 @@ public abstract class AbstractRecipe<I, O> {
     @Nullable
     public static FluidStack getFluidStackFromString(String fluidString) {
         String[] fluidStringSplit = fluidString.split(":");
-        if(fluidStringSplit.length != 2)
+        if (fluidStringSplit.length != 2)
             return null;
         return FluidRegistry.getFluidStack(fluidStringSplit[0], Integer.valueOf(fluidStringSplit[1]));
     }

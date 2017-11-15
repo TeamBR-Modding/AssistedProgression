@@ -46,9 +46,9 @@ public class ContainerTrashBag extends BaseContainer {
             @Override
             public String getSlotTexture() {
                 if(trashBag.getItem() == ItemManager.itemTrashBag)
-                    return "assistedprogression:items/trashbag";
+                    return "assistedprogression:items/trash_bag";
                 else
-                    return "assistedprogression:items/heftybag";
+                    return "assistedprogression:items/hefty_bag";
             }
         };
         addSlotToContainer(replacer);

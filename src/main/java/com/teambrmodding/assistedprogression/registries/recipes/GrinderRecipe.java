@@ -1,11 +1,6 @@
 package com.teambrmodding.assistedprogression.registries.recipes;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.asm.transformers.ItemStackTransformer;
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 
 /**
@@ -39,7 +34,6 @@ public class GrinderRecipe extends AbstractRecipe<ItemStack, ItemStack> {
      * @param input The input object
      * @return The output object
      */
-    @Nonnull
     @Override
     public ItemStack getOutput(ItemStack input) {
         if(input == null) // Safety Check

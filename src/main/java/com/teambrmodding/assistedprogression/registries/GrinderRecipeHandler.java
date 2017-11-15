@@ -76,7 +76,7 @@ public class GrinderRecipeHandler extends AbstractRecipeHandler<GrinderRecipe, I
 
     @Override
     protected void generateDefaultRecipes() {
-        LogHelper.logger.info("[Neotech] Creating Crusher Recipe List...");
+        LogHelper.logger.info("[Assisted Progression] Creating Grinder Recipe List...");
 
         addRecipe(new GrinderRecipe("oreRedstone", "dustRedstone:12"));
         addRecipe(new GrinderRecipe("oreLapis", "gemLapis:8"));

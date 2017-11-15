@@ -45,7 +45,7 @@ public class ItemPipette extends BaseItem {
      * @param maxStackSize Maximum stack size
      */
     public ItemPipette() {
-        super("itemPipette", 1);
+        super("item_pipette", 1);
     }
 
     /**
