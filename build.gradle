@@ -83,7 +83,7 @@ dependencies {
   deobfProvided "mezz.jei:jei_${config.minecraft_version}:${config.JEI_version}:api"
   // at runtime, use the full JEI jar
   runtime "mezz.jei:jei_${config.minecraft_version}:${config.JEI_version}"
-	compile group: "com.teambr.bookshelf", name: "Bookshelf-API", version: "1.12.2-" + "${config.bookshelf_version}" +"B+", classifier: "dev", changing: true
+	compile group: "com.teambr.bookshelf", name: "Bookshelf-API", version: "1.12.2-" + "${config.bookshelf_version}" +"-B+", classifier: "dev", changing: true
 	compile "mcp.mobius.waila:Waila:${config.WAILA_version}:dev"
 }
 
@@ -108,57 +108,57 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
 
-    uploadArchives {
-        if (project.hasProperty('username') && project.hasProperty('password')) {
-            repositories {
-                mavenDeployer {
-                    configuration = configurations.deployerJars
-                    //repository(url: System.properties['URL']) {
-                    repository(url: "ftp://dyonovan.com/srv/http/maven2") {
-                        authentication(userName: "${username}", password: "${password}")
-                    }
+uploadArchives {
+    if (project.hasProperty('username') && project.hasProperty('password')) {
+        repositories {
+            mavenDeployer {
+                configuration = configurations.deployerJars
+                //repository(url: System.properties['URL']) {
+                repository(url: "ftp://dyonovan.com/srv/http/maven2") {
+                    authentication(userName: "${username}", password: "${password}")
+                }
 
-                    pom {
-                        groupId = project.group
-                        version = project.version
-                        artifactId = project.archivesBaseName
+                pom {
+                    groupId = project.group
+                    version = project.version
+                    artifactId = project.archivesBaseName
 
-                        pom.project {
-                            name project.archivesBaseName
-                            packaging 'jar'
-                            description 'Bookshelf'
+                    pom.project {
+                        name project.archivesBaseName
+                        packaging 'jar'
+                        description 'Bookshelf'
+                        url 'https://github.com/TeamBR-Modding/AssistedProgression'
+                        scm {
                             url 'https://github.com/TeamBR-Modding/AssistedProgression'
-                            scm {
-                                url 'https://github.com/TeamBR-Modding/AssistedProgression'
-                                connection 'scm:git:git@github.com/TeamBR-Modding/AssistedProgression.git'
-                                developerConnection 'scm:git:git@github.com/TeamBR-Modding/AssistedProgression.git'
+                            connection 'scm:git:git@github.com/TeamBR-Modding/AssistedProgression.git'
+                            developerConnection 'scm:git:git@github.com/TeamBR-Modding/AssistedProgression.git'
+                        }
+                        issueManagement {
+                            system 'github'
+                            url 'https://github.com/TeamBR-Modding/AssistedProgression/issues'
+                        }
+                        licenses {
+                            license {
+                                name 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License'
+                                url 'http://creativecommons.org/licenses/by-nc-sa/4.0/'
+                                distribution 'repo'
                             }
-                            issueManagement {
-                                system 'github'
-                                url 'https://github.com/TeamBR-Modding/AssistedProgression/issues'
-                            }
-                            licenses {
-                                license {
-                                    name 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License'
-                                    url 'http://creativecommons.org/licenses/by-nc-sa/4.0/'
-                                    distribution 'repo'
+                        }
+                        developers {
+                            developer {
+                                id 'Dyonovan'
+                                name 'Dyonovan'
+                                roles {
+                                    role 'developer'
                                 }
                             }
-                            developers {
-                                developer {
-                                    id 'Dyonovan'
-                                    name 'Dyonovan'
-                                    roles {
-                                        role 'developer'
-                                    }
-                                }
-                                developer {
-                                    id 'pauljoda'
-                                    name 'pauljoda'
-                                    roles {
-                                        role 'developer'
-                                    }
+                            developer {
+                                id 'pauljoda'
+                                name 'pauljoda'
+                                roles {
+                                    role 'developer'
                                 }
                             }
                         }
