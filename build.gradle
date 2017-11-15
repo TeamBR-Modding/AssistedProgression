@@ -49,6 +49,10 @@ configFile.withReader {
     project.ext.config = new ConfigSlurper().parse prop
 }
 
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+}
+
 String build = ""
 if (project.hasProperty("teamcity")) {
     build = "B" +"${project.ext['build.number']}"
@@ -108,6 +112,10 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+configurations {
+    deployerJars
 }
 
 uploadArchives {
