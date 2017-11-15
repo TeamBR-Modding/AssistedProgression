@@ -31,7 +31,7 @@ public class BlockGrinder extends BaseBlock implements IOpensGui {
      * Block constructor
      */
     public BlockGrinder() {
-        super(Material.ROCK, "blockGrinder", TileGrinder.class);
+        super(Material.ROCK, "blockgrinder", TileGrinder.class);
     }
 
     /*******************************************************************************************************************

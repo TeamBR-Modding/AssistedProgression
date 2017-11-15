@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.teambr.bookshelf.client.ModelHelper;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.*;
@@ -23,7 +24,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
+import org.apache.commons.lang3.tuple.Pair;
 
+import javax.vecmath.Matrix4f;
 import java.util.Collection;
 import java.util.Map;
 
@@ -38,9 +41,9 @@ import java.util.Map;
  * @since 1/22/2017
  */
 
-public final class ModelPipette implements IModel
-{
-    public static final ModelResourceLocation LOCATION = new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, "itemPipette"), "inventory");
+public final class ModelPipette implements IModel {
+    public static final ModelResourceLocation LOCATION =
+            new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, "itempipette"), "inventory");
 
     // minimal Z offset to prevent depth-fighting
     private static final float NORTH_Z_BASE = 7.496f / 16f;
@@ -56,28 +59,19 @@ public final class ModelPipette implements IModel
 
     private final Fluid fluid;
 
-    public ModelPipette()
-    {
+    public ModelPipette() {
         this(null, null, null, null);
     }
 
-    public ModelPipette(ResourceLocation baseLocation, ResourceLocation liquidLocation, ResourceLocation coverLocation, Fluid fluid)
-    {
-       // this.baseLocation = baseLocation;
+    public ModelPipette(ResourceLocation baseLocation, ResourceLocation liquidLocation, ResourceLocation coverLocation, Fluid fluid) {
+        // this.baseLocation = baseLocation;
         this.liquidLocation = liquidLocation;
-       // this.coverLocation = coverLocation;
+        // this.coverLocation = coverLocation;
         this.fluid = fluid;
     }
 
     @Override
-    public Collection<ResourceLocation> getDependencies()
-    {
-        return ImmutableList.of();
-    }
-
-    @Override
-    public Collection<ResourceLocation> getTextures()
-    {
+    public Collection<ResourceLocation> getTextures() {
         ImmutableSet.Builder<ResourceLocation> builder = ImmutableSet.builder();
         if (baseLocation != null)
             builder.add(baseLocation);
@@ -91,8 +85,7 @@ public final class ModelPipette implements IModel
 
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format,
-    java.util.function.Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
-    {
+                            java.util.function.Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
 
         ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transformMap = PerspectiveMapWrapper.getTransforms(state);
 
@@ -100,25 +93,22 @@ public final class ModelPipette implements IModel
         TextureAtlasSprite fluidSprite = null;
         ImmutableList.Builder<BakedQuad> builder = ImmutableList.builder();
 
-        if(fluid != null) {
+        if (fluid != null) {
             fluidSprite = bakedTextureGetter.apply(fluid.getStill());
         }
 
-        if (baseLocation != null)
-        {
+        if (baseLocation != null) {
             // build base (insidest)
             IBakedModel model = (new ItemLayerModel(ImmutableList.of(baseLocation))).bake(state, format, bakedTextureGetter);
             builder.addAll(model.getQuads(null, null, 0));
         }
-        if (liquidLocation != null && fluidSprite != null)
-        {
+        if (liquidLocation != null && fluidSprite != null) {
             TextureAtlasSprite liquid = bakedTextureGetter.apply(baseLocation);
             // build liquid layer (inside)
             builder.addAll(ItemTextureQuadConverter.convertTexture(format, transform, liquid, fluidSprite, NORTH_Z_FLUID, EnumFacing.NORTH, fluid.getColor()));
             builder.addAll(ItemTextureQuadConverter.convertTexture(format, transform, liquid, fluidSprite, SOUTH_Z_FLUID, EnumFacing.SOUTH, fluid.getColor()));
         }
-        if (coverLocation != null)
-        {
+        if (coverLocation != null) {
             // cover (the actual item around the other two)
             IBakedModel model = (new ItemLayerModel(ImmutableList.of(coverLocation))).bake(state, format, bakedTextureGetter);
             builder.addAll(model.getQuads(null, null, 0));
@@ -128,9 +118,14 @@ public final class ModelPipette implements IModel
         return new BakedDynPipette(this, builder.build(), fluidSprite, format, Maps.immutableEnumMap(transformMap), Maps.<String, IBakedModel>newHashMap());
     }
 
+
     @Override
-    public IModelState getDefaultState()
-    {
+    public Collection<ResourceLocation> getDependencies() {
+        return ImmutableList.of();
+    }
+
+    @Override
+    public IModelState getDefaultState() {
         return TRSRTransformation.identity();
     }
 
@@ -142,8 +137,7 @@ public final class ModelPipette implements IModel
      * If the fluid can't be found, water is used
      */
     @Override
-    public ModelPipette process(ImmutableMap<String, String> customData)
-    {
+    public ModelPipette process(ImmutableMap<String, String> customData) {
         String fluidName = customData.get("fluid");
         Fluid fluid = FluidRegistry.getFluid(fluidName);
 
@@ -163,8 +157,7 @@ public final class ModelPipette implements IModel
      * If no liquid is given a hardcoded variant for the bucket is used.
      */
     @Override
-    public ModelPipette retexture(ImmutableMap<String, String> textures)
-    {
+    public ModelPipette retexture(ImmutableMap<String, String> textures) {
 
         ResourceLocation base = baseLocation;
         ResourceLocation liquid = liquidLocation;
@@ -180,61 +173,53 @@ public final class ModelPipette implements IModel
         return new ModelPipette(base, liquid, cover, fluid);
     }
 
-    public enum LoaderDynPipette implements ICustomModelLoader
-    {
+    public enum LoaderDynPipette implements ICustomModelLoader {
         INSTANCE;
 
         @Override
-        public boolean accepts(ResourceLocation modelLocation)
-        {
-            return modelLocation.getResourceDomain().equals("assistedprogression") && modelLocation.getResourcePath().contains("itemPipette");
+        public boolean accepts(ResourceLocation modelLocation) {
+            return modelLocation.getResourceDomain().equals("assistedprogression") && modelLocation.getResourcePath().contains("itempipette");
         }
 
         @Override
-        public IModel loadModel(ResourceLocation modelLocation)
-        {
+        public IModel loadModel(ResourceLocation modelLocation) {
             return MODEL;
         }
 
         @Override
-        public void onResourceManagerReload(IResourceManager resourceManager)
-        {
+        public void onResourceManagerReload(IResourceManager resourceManager) {
             // no need to clear cache since we create a new model instance
         }
     }
 
-    private static final class BakedDynPipetteOverrideHandler extends ItemOverrideList
-    {
+    private static final class BakedDynPipetteOverrideHandler extends ItemOverrideList {
         public static final BakedDynPipetteOverrideHandler INSTANCE = new BakedDynPipetteOverrideHandler();
-        private BakedDynPipetteOverrideHandler()
-        {
+
+        private BakedDynPipetteOverrideHandler() {
             super(ImmutableList.<ItemOverride>of());
         }
 
         @Override
-        public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity)
-        {
+        public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
             FluidStack fluidStack = FluidUtil.getFluidContained(stack);
 
             // not a fluid item apparently
-            if (fluidStack == null)
-            {
+            if (fluidStack == null) {
                 // empty bucket
                 return originalModel;
             }
 
-            BakedDynPipette model = (BakedDynPipette)originalModel;
+            BakedDynPipette model = (BakedDynPipette) originalModel;
 
             Fluid fluid = fluidStack.getFluid();
             String name = fluid.getName();
 
-            if (!model.cache.containsKey(name))
-            {
+            if (!model.cache.containsKey(name)) {
                 IModel parent = model.parent.process(ImmutableMap.of("fluid", name));
                 Function<ResourceLocation, TextureAtlasSprite> textureGetter;
                 textureGetter = location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
 
-                ((ModelPipette)parent).liquidLocation = fluid.getFlowing();
+                ((ModelPipette) parent).liquidLocation = fluid.getFlowing();
                 IBakedModel bakedModel = parent.bake(new SimpleModelState(model.transforms), model.format, textureGetter);
                 model.cache.put(name, bakedModel);
                 return bakedModel;
@@ -245,8 +230,7 @@ public final class ModelPipette implements IModel
     }
 
     // the dynamic bucket is based on the empty bucket
-    private static final class BakedDynPipette extends BakedItemModel
-    {
+    private static final class BakedDynPipette extends BakedItemModel {
 
         private final ModelPipette parent;
         private final Map<String, IBakedModel> cache; // contains all the baked models since they'll never change
@@ -258,8 +242,7 @@ public final class ModelPipette implements IModel
         public BakedDynPipette(ModelPipette parent,
                                ImmutableList<BakedQuad> quads, TextureAtlasSprite particle, VertexFormat format,
                                ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transforms,
-                               Map<String, IBakedModel> cache)
-        {
+                               Map<String, IBakedModel> cache) {
             super(quads, particle, transforms, BakedDynPipetteOverrideHandler.INSTANCE);
             this.quads = quads;
             this.particle = particle;
@@ -267,6 +250,16 @@ public final class ModelPipette implements IModel
             this.parent = parent;
             this.transforms = transforms;
             this.cache = cache;
+        }
+
+        @Override
+        public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+            // Wrap the base and have it handle the movement
+            return PerspectiveMapWrapper
+                    .handlePerspective(
+                            this,
+                            ModelHelper.DEFAULT_TOOL_STATE,
+                            cameraTransformType);
         }
     }
 }

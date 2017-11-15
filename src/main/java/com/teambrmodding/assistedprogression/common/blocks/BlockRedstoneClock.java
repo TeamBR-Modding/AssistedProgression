@@ -27,7 +27,7 @@ public class BlockRedstoneClock extends BaseBlock {
      * Constructor
      */
     public BlockRedstoneClock() {
-        super(Material.ROCK, "blockRedstoneClock", TileRedstoneClock.class);
+        super(Material.ROCK, "blockredstoneclock", TileRedstoneClock.class);
         setDefaultState(blockState.getBaseState().withProperty(BlockPressurePlate.POWERED, false));
     }
 

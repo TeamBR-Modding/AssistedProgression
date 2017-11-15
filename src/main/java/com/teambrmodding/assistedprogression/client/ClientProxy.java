@@ -28,8 +28,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit() {
-        ItemRenderManager.registerBlockRenderers();
-
         // Pipette models
         ModelLoader.setCustomMeshDefinition(ItemManager.itemPipette, stack -> ModelPipette.LOCATION);
         ModelBakery.registerItemVariants(ItemManager.itemPipette, ModelPipette.LOCATION);
@@ -39,6 +37,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
         ItemRenderManager.registerItemRenderers();
+        ItemRenderManager.registerBlockRenderers();
 
         // Flushable Chest
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes()

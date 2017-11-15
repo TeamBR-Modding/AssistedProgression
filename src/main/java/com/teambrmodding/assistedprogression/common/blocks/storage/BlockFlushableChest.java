@@ -14,6 +14,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -39,7 +40,7 @@ public class BlockFlushableChest extends BaseBlock implements IOpensGui {
      * Constructor
      */
     public BlockFlushableChest() {
-        super(Material.ROCK, "flushableChest", TileFlushableChest.class);
+        super(Material.ROCK, "blockflushablechest", TileFlushableChest.class);
     }
 
     /*******************************************************************************************************************
@@ -94,6 +95,11 @@ public class BlockFlushableChest extends BaseBlock implements IOpensGui {
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     /*******************************************************************************************************************

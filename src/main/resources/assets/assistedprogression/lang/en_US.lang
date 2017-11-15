@@ -33,19 +33,19 @@ item.assistedprogression:itemPipette.name=Pipette
 #######################
 
 # Crafter
-tile.assistedprogression:blockCrafter.name=Dual Crafter
+tile.assistedprogression:blockcrafter.name=Dual Crafter
 
 # Player Sensitive Pressure Plate
-tile.assistedprogression:blockPlayerPlate.name=Player Sensitive Pressure Plate
+tile.assistedprogression:blockplayerplate.name=Player Sensitive Pressure Plate
 
 # Redstone Clock
-tile.assistedprogression:blockRedstoneClock.name=Redstone Clock
+tile.assistedprogression:blockredstoneclock.name=Redstone Clock
 
 # Flushable Chest
-tile.assistedprogression:blockFlushableChest.name=Flushable Chest
+tile.assistedprogression:blockflushablechest.name=Flushable Chest
 
 # Grinder
-tile.assistedprogression:blockGrinder.name=Grinder
+tile.assistedprogression:blockgrinder.name=Grinder
 
 #######################
 # GUI
