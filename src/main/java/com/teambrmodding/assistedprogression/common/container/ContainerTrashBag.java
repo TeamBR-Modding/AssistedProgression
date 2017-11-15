@@ -4,6 +4,7 @@ import com.teambr.bookshelf.common.container.BaseContainer;
 import com.teambr.bookshelf.common.container.slots.PhantomSlot;
 import com.teambr.bookshelf.common.items.InventoryHandlerItem;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -69,6 +70,11 @@ public class ContainerTrashBag extends BaseContainer {
             addSlotToContainer(new PhantomSlot(inventory, 0, 79, 32));
         else
             addInventoryGridPhantom(8, 32, 9);
+    }
+
+    @Override
+    public void onContainerClosed(EntityPlayer playerIn) {
+        super.onContainerClosed(playerIn);
     }
 
     /**
