@@ -118,6 +118,25 @@ configurations {
     deployerJars
 }
 
+task devJar(type: Jar, dependsOn: 'classes') {
+    from(sourceSets.main.output) {
+        include '**'
+    }
+    extension = 'jar'
+    classifier = 'dev'
+}
+
+task javadocJar(type: Zip, dependsOn: javadoc) {
+    from 'build/docs/javadoc'
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives devJar
+    //archives javadocJar
+}
+
+
 uploadArchives {
     if (project.hasProperty('username') && project.hasProperty('password')) {
         repositories {
