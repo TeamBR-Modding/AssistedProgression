@@ -8,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
 
@@ -44,9 +46,9 @@ public class ContainerTrashBag extends BaseContainer {
             @Override
             public String getSlotTexture() {
                 if(trashBag.getItem() == ItemManager.itemTrashBag)
-                    return "assistedprogression:items/trashBag";
+                    return "assistedprogression:items/trashbag";
                 else
-                    return "assistedprogression:items/heftyBag";
+                    return "assistedprogression:items/heftybag";
             }
         };
         addSlotToContainer(replacer);
@@ -75,6 +77,18 @@ public class ContainerTrashBag extends BaseContainer {
     @Override
     public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
+
+        if(!playerIn.world.isRemote) {
+            if (ItemStack.areItemsEqual(playerIn.getHeldItemMainhand(), trashBag)) {
+                ((InventoryHandlerItem) playerIn.getHeldItemMainhand()
+                        .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+                        .writeToNBT(trashBag.writeToNBT(new NBTTagCompound()));
+            }
+            else if (ItemStack.areItemsEqual(playerIn.getHeldItemOffhand(), trashBag))
+                ((InventoryHandlerItem) playerIn.getHeldItemOffhand()
+                        .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+                        .writeToNBT(trashBag.writeToNBT(new NBTTagCompound()));
+        }
     }
 
     /**

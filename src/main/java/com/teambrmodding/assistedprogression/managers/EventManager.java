@@ -20,6 +20,7 @@ public class EventManager {
     public static void registerEvents() {
         registerEvent(new BlockManager());
         registerEvent(new ItemManager());
+        registerEvent(ItemManager.itemTrashBag);
     }
 
     public static void registerEvent(Object obj) {

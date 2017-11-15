@@ -65,7 +65,7 @@ public class ItemTrashBag extends BaseItem {
      */
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-        return new InventoryHandlerItem(stack) {
+        return new InventoryHandlerItem(stack, nbt) {
             @Override
             protected int getInventorySize() {
                 return bagSize;
@@ -85,7 +85,7 @@ public class ItemTrashBag extends BaseItem {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if (!worldIn.isRemote) {
             playerIn.openGui(AssistedProgression.INSTANCE, 0, worldIn, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
-            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
@@ -95,7 +95,7 @@ public class ItemTrashBag extends BaseItem {
      *******************************************************************************************************************/
 
     @SubscribeEvent
-    public static void onItemPickup(EntityItemPickupEvent event) {
+    public void onItemPickup(EntityItemPickupEvent event) {
         EntityPlayer player = event.getEntityPlayer();
         ItemStack pickedItem = event.getItem().getEntityItem();
 
