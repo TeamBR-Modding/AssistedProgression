@@ -4,11 +4,9 @@ import com.teambrmodding.assistedprogression.common.blocks.BlockCrafter;
 import com.teambrmodding.assistedprogression.common.blocks.BlockGrinder;
 import com.teambrmodding.assistedprogression.common.blocks.BlockPlayerPlate;
 import com.teambrmodding.assistedprogression.common.blocks.BlockRedstoneClock;
-import com.teambrmodding.assistedprogression.common.blocks.storage.BlockFlushableChest;
 import com.teambrmodding.assistedprogression.common.tiles.TileCrafter;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
 import com.teambrmodding.assistedprogression.common.tiles.TileRedstoneClock;
-import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -37,7 +35,6 @@ public class BlockManager {
      *******************************************************************************************************************/
 
     public static BlockCrafter blockCrafter = new BlockCrafter();
-    public static BlockFlushableChest blockFlushableChest = new BlockFlushableChest();
     public static BlockPlayerPlate blockPlayerPlate = new BlockPlayerPlate();
     public static BlockRedstoneClock blockRedstoneClock = new BlockRedstoneClock();
     public static BlockGrinder blockGrinder = new BlockGrinder();
@@ -49,7 +46,6 @@ public class BlockManager {
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event) {
         registerBlock(event, blockCrafter,        TileCrafter.class,        null);
-        registerBlock(event, blockFlushableChest, TileFlushableChest.class, null);
         registerBlock(event, blockPlayerPlate,    null,            null);
         registerBlock(event, blockRedstoneClock,  TileRedstoneClock.class,  null);
         registerBlock(event, blockGrinder,        TileGrinder.class,        null);
@@ -58,7 +54,6 @@ public class BlockManager {
     @SubscribeEvent
     public void registerItemBlocks(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlock(blockCrafter).setRegistryName(blockCrafter.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(blockFlushableChest).setRegistryName(blockFlushableChest.getRegistryName()));
         event.getRegistry().register(new ItemBlock(blockPlayerPlate).setRegistryName(blockPlayerPlate.getRegistryName()));
         event.getRegistry().register(new ItemBlock(blockRedstoneClock).setRegistryName(blockRedstoneClock.getRegistryName()));
         event.getRegistry().register(new ItemBlock(blockGrinder).setRegistryName(blockGrinder.getRegistryName()));

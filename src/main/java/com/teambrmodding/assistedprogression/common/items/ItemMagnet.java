@@ -48,7 +48,7 @@ public class ItemMagnet extends BaseItem {
 
     // Defined values
     public static final int    RANGE        = 10;
-    public static final float ATTRACT_SPEED = 0.075F;
+    public static final float ATTRACT_SPEED = 0.0075F;
 
     // NBT Tags
     public static final String ACTIVE = "ActiveCharging";

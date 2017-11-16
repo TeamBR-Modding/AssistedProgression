@@ -8,18 +8,18 @@
   "key": {
     "S" : {
       "type":"forge:ore_dict",
-      "ore":"blockStone"
+      "ore":"stone"
     },
     "W": {
-      "item":"minecraft:cobblestone_wall",
-      "data":0
+      "item": "minecraft:cobblestone_wall",
+      "data": 0
     },
     "F": {
       "item":"minecraft:flint"
     },
     "C": {
       "type":"forge:ore_dict",
-      "ore":"blockCobblestone"
+      "ore":"cobblestone"
     }
   },
   "result": {

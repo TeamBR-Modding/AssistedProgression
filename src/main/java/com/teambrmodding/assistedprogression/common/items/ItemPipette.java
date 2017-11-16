@@ -47,6 +47,7 @@ public class ItemPipette extends BaseItem {
      */
     public ItemPipette() {
         super("item_pipette", 1);
+        setCreativeTab(AssistedProgression.tabPipette);
     }
 
     /**
@@ -114,7 +115,7 @@ public class ItemPipette extends BaseItem {
 
     @Override
     public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> tab) {
-        if(itemIn == AssistedProgression.tabAssistedProgression) {
+        if(itemIn == AssistedProgression.tabPipette) {
             tab.add(new ItemStack(this));
 
             // Add for all fluids

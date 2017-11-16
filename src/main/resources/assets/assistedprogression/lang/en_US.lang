@@ -1,7 +1,8 @@
 PARSE_ESCAPES
 
 # Creative Tabs
-itemGroup.tab_assisted_progression=Assisted Progression
+itemGroup.assistedprogression:main=Assisted Progression
+itemGroup.assistedprogression:pipette=Assisted Progression : Pipettes
 
 #######################
 # Blocks
@@ -41,9 +42,6 @@ tile.assistedprogression:block_player_plate.name=Player Sensitive Pressure Plate
 # Redstone Clock
 tile.assistedprogression:block_redstone_clock.name=Redstone Clock
 
-# Flushable Chest
-tile.assistedprogression:block_flushable_chest.name=Flushable Chest
-
 # Grinder
 tile.assistedprogression:block_grinder.name=Grinder
 
@@ -68,11 +66,6 @@ assistedprogression.text.active=Active
 assistedprogression.text.disabled=Disabled
 
 assistedprogression.text.redstoneFlux=Redstone Flux
-
-# Flushable Chest
-assistedprogression.text.config=Config
-assistedprogression.text.flushableChest.autoFlush=Auto Flush
-assistedprogression.text.flushableChest.playSound=Play Sound
 
 # Exchanger
 assistedprogression.text.exchanger.blockSet=Block Set!

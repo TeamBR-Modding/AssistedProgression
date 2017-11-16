@@ -43,10 +43,17 @@ public class AssistedProgression {
             serverSide = "com.teambrmodding.assistedprogression.common.CommonProxy")
     public static CommonProxy proxy;
 
-    public static CreativeTabs tabAssistedProgression = new CreativeTabs("tab_assisted_progression") {
+    public static CreativeTabs tabAssistedProgression = new CreativeTabs("assistedprogression:main") {
         @Override
         public ItemStack getTabIconItem() {
             return new ItemStack(Item.getItemFromBlock(BlockManager.blockGrinder));
+        }
+    };
+
+    public static CreativeTabs tabPipette = new CreativeTabs("assistedprogression:pipette") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(ItemManager.itemPipette);
         }
     };
 

@@ -78,7 +78,7 @@ public class ContainerCrafter extends BaseContainer {
     private void addCraftingGrid(IInventory inventory, int startSlot, int x, int y, int width, int height) {
         int i = 0;
         for(int h = 0; h < height; h++) {
-            for(int w = 0; w < width; x++) {
+            for(int w = 0; w < width; w++) {
                 addSlotToContainer(new Slot(inventory, startSlot + i, x + (w * 18), y + (h * 18)));
                 i++;
             }
@@ -102,29 +102,48 @@ public class ContainerCrafter extends BaseContainer {
         return !(slotIn instanceof SlotCrafting);
     }
 
+    /**
+     * Take a stack from the specified inventory slot.
+     */
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        if(index < 0 || index > inventorySlots.size())
+            return super.transferStackInSlot(playerIn, index);
         Slot slot = inventorySlots.get(index);
-        if(slot != null && !slot.getStack().isEmpty()) {
+        if(slot != null && slot.getHasStack()) {
             ItemStack itemToTransfer = slot.getStack();
             ItemStack copy = itemToTransfer.copy();
-            if(index < inventorySize)
-                if(!mergeItemStack(itemToTransfer, 0, inventorySize, false))
+
+            if(index < getInventorySizeNotPlayer()) {
+                if (!mergeItemStack(itemToTransfer, getInventorySizeNotPlayer(), inventorySlots.size(), true))
                     return ItemStack.EMPTY;
-            else if(!mergeItemStack(itemToTransfer, 9, inventorySize, false))
+            } else if(!mergeItemStack(itemToTransfer, 0, getInventorySizeNotPlayer(), false))
                 return ItemStack.EMPTY;
 
-            if(itemToTransfer.getCount() <= 0)
+            if(index == 0)
+                slot.onTake(playerIn, copy);
+            else if(index == 1)
+                slot.onTake(playerIn, copy);
+
+            if(itemToTransfer.getCount() == 0) {
                 slot.putStack(ItemStack.EMPTY);
+                slot.onSlotChanged();
+            }
             else
                 slot.onSlotChanged();
 
-            if(itemToTransfer.getCount() != copy.getCount()) {
-                slot.onTake(playerIn, copy);
+            onCraftMatrixChanged(craftingGrid1);
+            onCraftMatrixChanged(craftingGrid2);
+
+            if(itemToTransfer.getCount() != copy.getCount())
                 return copy;
-            }
         }
         return ItemStack.EMPTY;
+    }
+
+    @Override
+    public int getInventorySizeNotPlayer() {
+        return 20;
     }
 
     /*******************************************************************************************************************

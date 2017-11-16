@@ -26,7 +26,6 @@ public class ItemRenderManager {
      */
     public static void registerBlockRenderers() {
         registerBlockModel(BlockManager.blockCrafter,       "normal");
-        registerBlockModel(BlockManager.blockFlushableChest,"facing=north");
         registerBlockModel(BlockManager.blockPlayerPlate,   "powered=false");
         registerBlockModel(BlockManager.blockRedstoneClock, "powered=false");
         registerBlockModel(BlockManager.blockGrinder,       "normal");

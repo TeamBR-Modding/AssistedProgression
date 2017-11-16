@@ -59,8 +59,8 @@ public class AssistedProgressionPlugin implements IModPlugin {
 
         // Crafter
         registry.addRecipeCatalyst(new ItemStack(BlockManager.blockCrafter), VanillaRecipeCategoryUid.CRAFTING);
-        registry.addRecipeClickArea(GuiCrafter.class, 14, 9, 61, 34, VanillaRecipeCategoryUid.CRAFTING);
-        registry.addRecipeClickArea(GuiCrafter.class, 109, 68, 61, 34, VanillaRecipeCategoryUid.CRAFTING);
+        registry.addRecipeClickArea(GuiCrafter.class, 61,  34, 14, 9, VanillaRecipeCategoryUid.CRAFTING);
+        registry.addRecipeClickArea(GuiCrafter.class, 101, 63, 14, 9, VanillaRecipeCategoryUid.CRAFTING);
 
 
         // Adds shift click to crafter

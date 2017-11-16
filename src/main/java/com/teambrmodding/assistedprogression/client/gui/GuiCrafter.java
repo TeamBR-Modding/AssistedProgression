@@ -25,14 +25,14 @@ public class GuiCrafter extends GuiContainer {
 
     public GuiCrafter(InventoryPlayer playerInv, TileCrafter crafter) {
         super(new ContainerCrafter(playerInv, crafter));
-        xSize = 196;
+        xSize = 176;
         ySize = 166;
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        this.fontRendererObj.drawString(I18n.format("assistedprogression.crafter.title"), 88 - (fontRendererObj
-                .getStringWidth(I18n.format("assistedprogression.crafter.title")) / 2), 5, 0x404040);
+        this.fontRendererObj.drawString(I18n.format("tile.assistedprogression:block_crafter.name"), (xSize / 2) - (fontRendererObj
+                .getStringWidth(I18n.format("tile.assistedprogression:block_crafter.name")) / 2), 5, 0x404040);
     }
 
     @Override

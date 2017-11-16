@@ -1,14 +1,10 @@
 package com.teambrmodding.assistedprogression.client;
 
 import com.teambrmodding.assistedprogression.client.models.ModelPipette;
-import com.teambrmodding.assistedprogression.client.renderers.tiles.TileFlushableChestRenderer;
 import com.teambrmodding.assistedprogression.client.renderers.tiles.TileGrinderRenderer;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
-import com.teambrmodding.assistedprogression.common.tiles.storage.TileFlushableChest;
-import com.teambrmodding.assistedprogression.managers.BlockManager;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -38,12 +34,6 @@ public class ClientProxy extends CommonProxy {
     public void init() {
         ItemRenderManager.registerItemRenderers();
         ItemRenderManager.registerBlockRenderers();
-
-        // Flushable Chest
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes()
-                .registerBuiltInBlocks(BlockManager.blockFlushableChest);
-        ClientRegistry.bindTileEntitySpecialRenderer(TileFlushableChest.class,
-                new TileFlushableChestRenderer<>());
 
         // Grinder
         ClientRegistry.bindTileEntitySpecialRenderer(TileGrinder.class,
