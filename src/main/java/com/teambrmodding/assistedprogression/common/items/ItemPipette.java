@@ -3,6 +3,7 @@ package com.teambrmodding.assistedprogression.common.items;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import com.teambr.bookshelf.client.gui.GuiColor;
 import com.teambr.bookshelf.util.ClientUtils;
+import com.teambrmodding.assistedprogression.AssistedProgression;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -113,14 +114,16 @@ public class ItemPipette extends BaseItem {
 
     @Override
     public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> tab) {
-        tab.add(new ItemStack(this));
+        if(itemIn == AssistedProgression.tabAssistedProgression) {
+            tab.add(new ItemStack(this));
 
-        // Add for all fluids
-        for(Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
-            ItemStack pipetteStack = new ItemStack(this);
-            FluidHandlerItemStack fluidStack = new FluidHandlerItemStack(pipetteStack, Fluid.BUCKET_VOLUME);
-            if(fluidStack.fill(new FluidStack(fluid, Fluid.BUCKET_VOLUME), true) == Fluid.BUCKET_VOLUME)
-                tab.add(pipetteStack);
+            // Add for all fluids
+            for (Fluid fluid : FluidRegistry.getRegisteredFluids().values()) {
+                ItemStack pipetteStack = new ItemStack(this);
+                FluidHandlerItemStack fluidStack = new FluidHandlerItemStack(pipetteStack, Fluid.BUCKET_VOLUME);
+                if (fluidStack.fill(new FluidStack(fluid, Fluid.BUCKET_VOLUME), true) == Fluid.BUCKET_VOLUME)
+                    tab.add(pipetteStack);
+            }
         }
     }
 }

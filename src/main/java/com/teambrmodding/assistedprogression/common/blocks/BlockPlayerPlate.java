@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -55,12 +54,9 @@ public class BlockPlayerPlate extends BlockBasePressurePlate {
                 SoundCategory.BLOCKS, 0.3F, 0.5F);
     }
 
-    @Override
     protected int computeRedstoneStrength(World worldIn, BlockPos pos) {
         return worldIn.getEntitiesWithinAABB(EntityPlayer.class,
-                new AxisAlignedBB(pos.getX() + 0.125F, pos.getY(), pos.getZ() + 0.125F,
-                        pos.getX() + 1 - 0.125F, pos.getY() + 0.25D, pos.getZ() + 1 - 0.125F)).isEmpty() ?
-                15 : 0;
+                PRESSURE_AABB.offset(pos)).size() >= 1 ? 15 : 0;
     }
 
     @Override
