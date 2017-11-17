@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.tiles;
 
-import com.teambr.bookshelf.common.tiles.Syncable;
+import com.teambr.nucleus.common.tiles.Syncable;
 import com.teambrmodding.assistedprogression.common.blocks.BlockPlayerPlate;
 import com.teambrmodding.assistedprogression.common.blocks.BlockRedstoneClock;
 import net.minecraft.block.BlockPressurePlate;

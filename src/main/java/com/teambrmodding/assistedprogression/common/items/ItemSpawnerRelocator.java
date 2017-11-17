@@ -1,8 +1,8 @@
 package com.teambrmodding.assistedprogression.common.items;
 
-import com.teambr.bookshelf.client.gui.GuiColor;
-import com.teambr.bookshelf.client.gui.GuiTextFormat;
-import com.teambr.bookshelf.util.ClientUtils;
+import com.teambr.nucleus.client.gui.GuiColor;
+import com.teambr.nucleus.client.gui.GuiTextFormat;
+import com.teambr.nucleus.util.ClientUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

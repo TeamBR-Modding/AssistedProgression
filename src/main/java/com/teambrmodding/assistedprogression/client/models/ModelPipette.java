@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import com.teambr.bookshelf.client.ModelHelper;
+import com.teambr.nucleus.client.ModelHelper;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.*;

@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.items;
 
-import com.teambr.bookshelf.common.items.InventoryHandlerItem;
+import com.teambr.nucleus.common.items.InventoryHandlerItem;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

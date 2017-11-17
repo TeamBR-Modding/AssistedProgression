@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.tiles;
 
-import com.teambr.bookshelf.common.tiles.InventoryHandler;
+import com.teambr.nucleus.common.tiles.InventoryHandler;
 import com.teambrmodding.assistedprogression.managers.RecipeManager;
 import com.teambrmodding.assistedprogression.registries.GrinderRecipeHandler;
 import net.minecraft.block.Block;

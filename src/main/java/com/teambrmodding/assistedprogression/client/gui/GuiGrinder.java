@@ -1,8 +1,8 @@
 package com.teambrmodding.assistedprogression.client.gui;
 
-import com.teambr.bookshelf.client.gui.GuiBase;
-import com.teambr.bookshelf.client.gui.component.display.GuiComponentText;
-import com.teambr.bookshelf.util.ClientUtils;
+import com.teambr.nucleus.client.gui.GuiBase;
+import com.teambr.nucleus.client.gui.component.display.GuiComponentText;
+import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.common.container.ContainerGrinder;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
 import com.teambrmodding.assistedprogression.lib.Reference;

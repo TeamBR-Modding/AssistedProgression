@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.container;
 
-import com.teambr.bookshelf.common.container.BaseContainer;
+import com.teambr.nucleus.common.container.BaseContainer;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;

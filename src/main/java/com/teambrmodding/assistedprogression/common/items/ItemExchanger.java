@@ -1,7 +1,7 @@
 package com.teambrmodding.assistedprogression.common.items;
 
-import com.teambr.bookshelf.util.BlockUtils;
-import com.teambr.bookshelf.util.WorldUtils;
+import com.teambr.nucleus.util.BlockUtils;
+import com.teambr.nucleus.util.WorldUtils;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.Block;

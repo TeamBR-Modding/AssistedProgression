@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.blocks;
 
-import com.teambr.bookshelf.common.IOpensGui;
+import com.teambr.nucleus.common.IOpensGui;
 import com.teambrmodding.assistedprogression.client.gui.GuiGrinder;
 import com.teambrmodding.assistedprogression.common.container.ContainerGrinder;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;

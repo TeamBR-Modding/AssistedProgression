@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.api.jei.grinder;
 
-import com.teambr.bookshelf.util.ClientUtils;
+import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.api.jei.AssistedProgressionPlugin;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeManager;

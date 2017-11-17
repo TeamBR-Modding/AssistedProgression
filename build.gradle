@@ -87,12 +87,11 @@ dependencies {
   // at runtime, use the full JEI jar
   runtime "mezz.jei:jei_${config.minecraft_version}:${config.JEI_version}"
 
-    compile group: "com.teambr.bookshelf", name: "Bookshelf-API", version: "1.12.2-" + "${config.bookshelf_version}" +"-B+", classifier: "dev", changing: true
+  compile group: "com.teambr.nucleus", name: "Nucleus", version: "1.12.2-" + "${config.nucleus_version}" +"-B+", classifier: "dev", changing: true
 	compile "mcp.mobius.waila:Waila:${config.WAILA_version}:dev"
 }
 
-processResources
-{
+processResources{
 
 	exclude '**/Thumbs.db'
 

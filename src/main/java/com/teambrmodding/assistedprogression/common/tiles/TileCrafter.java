@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.tiles;
 
-import com.teambr.bookshelf.common.tiles.InventoryHandler;
+import com.teambr.nucleus.common.tiles.InventoryHandler;
 import net.minecraft.item.ItemStack;
 
 /**

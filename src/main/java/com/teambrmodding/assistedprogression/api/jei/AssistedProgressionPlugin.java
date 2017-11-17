@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.api.jei;
 
-import com.teambr.bookshelf.client.gui.GuiBase;
+import com.teambr.nucleus.client.gui.GuiBase;
 import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeCategory;
 import com.teambrmodding.assistedprogression.client.gui.GuiCrafter;
 import com.teambrmodding.assistedprogression.client.gui.GuiGrinder;

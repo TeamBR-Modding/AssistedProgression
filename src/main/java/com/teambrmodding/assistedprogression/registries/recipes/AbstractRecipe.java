@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.registries.recipes;
 
-import com.teambr.bookshelf.helper.LogHelper;
+import com.teambr.nucleus.helper.LogHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

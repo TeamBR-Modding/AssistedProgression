@@ -1,7 +1,7 @@
 package com.teambrmodding.assistedprogression.common.items;
 
-import com.teambr.bookshelf.common.items.EnergyContainingItem;
-import com.teambr.bookshelf.util.EnergyUtils;
+import com.teambr.nucleus.common.items.EnergyContainingItem;
+import com.teambr.nucleus.util.EnergyUtils;
 import com.teambrmodding.assistedprogression.managers.ConfigManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

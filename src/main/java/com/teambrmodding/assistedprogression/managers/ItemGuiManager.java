@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambr.bookshelf.common.items.InventoryHandlerItem;
+import com.teambr.nucleus.common.items.InventoryHandlerItem;
 import com.teambrmodding.assistedprogression.client.gui.GuiTrashBag;
 import com.teambrmodding.assistedprogression.common.container.ContainerTrashBag;
 import com.teambrmodding.assistedprogression.common.items.ItemTrashBag;

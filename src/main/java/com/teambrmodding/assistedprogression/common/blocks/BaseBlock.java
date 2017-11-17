@@ -1,8 +1,8 @@
 package com.teambrmodding.assistedprogression.common.blocks;
 
-import com.teambr.bookshelf.Bookshelf;
-import com.teambr.bookshelf.common.IOpensGui;
-import com.teambr.bookshelf.util.WorldUtils;
+import com.teambr.nucleus.Nucleus;
+import com.teambr.nucleus.common.IOpensGui;
+import com.teambr.nucleus.util.WorldUtils;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.BlockContainer;
@@ -82,7 +82,7 @@ public class BaseBlock extends BlockContainer {
         if (worldIn.getTileEntity(pos) != null && worldIn.getBlockState(pos).getBlock() instanceof IOpensGui) {
             // Open a GUI
             if(!playerIn.isSneaking()) {
-                playerIn.openGui(Bookshelf.INSTANCE, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                playerIn.openGui(Nucleus.INSTANCE, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
                 return true;
             }
         }

@@ -1,7 +1,7 @@
 package com.teambrmodding.assistedprogression.registries;
 
 import com.google.gson.reflect.TypeToken;
-import com.teambr.bookshelf.helper.LogHelper;
+import com.teambr.nucleus.helper.LogHelper;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.registries.recipes.GrinderRecipe;
 import net.minecraft.command.CommandBase;

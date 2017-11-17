@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.events;
 
-import com.teambr.bookshelf.util.BlockUtils;
+import com.teambr.nucleus.util.BlockUtils;
 import com.teambrmodding.assistedprogression.common.items.ItemExchanger;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.client.Minecraft;

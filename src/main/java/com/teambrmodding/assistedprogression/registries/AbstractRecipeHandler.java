@@ -1,8 +1,8 @@
 package com.teambrmodding.assistedprogression.registries;
 
 import com.google.gson.reflect.TypeToken;
-import com.teambr.bookshelf.helper.LogHelper;
-import com.teambr.bookshelf.util.JsonUtils;
+import com.teambr.nucleus.helper.LogHelper;
+import com.teambr.nucleus.util.JsonUtils;
 import com.teambrmodding.assistedprogression.registries.recipes.AbstractRecipe;
 import net.minecraft.command.CommandBase;
 import net.minecraft.item.ItemStack;

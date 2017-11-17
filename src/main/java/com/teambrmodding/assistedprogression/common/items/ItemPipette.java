@@ -1,8 +1,8 @@
 package com.teambrmodding.assistedprogression.common.items;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import com.teambr.bookshelf.client.gui.GuiColor;
-import com.teambr.bookshelf.util.ClientUtils;
+import com.teambr.nucleus.client.gui.GuiColor;
+import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
