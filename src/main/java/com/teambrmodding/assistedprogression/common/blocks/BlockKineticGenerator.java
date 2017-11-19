@@ -5,9 +5,7 @@ import com.teambrmodding.assistedprogression.client.gui.GuiKineticGenerator;
 import com.teambrmodding.assistedprogression.common.container.ContainerKineticGenerator;
 import com.teambrmodding.assistedprogression.common.tiles.TileKineticGenerator;
 import net.minecraft.block.BlockPistonExtension;
-import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -42,11 +40,6 @@ public class BlockKineticGenerator extends BaseBlock implements IOpensGui {
             generator.sendValueToClient(TileKineticGenerator.UPDATE_ENERGY_ID, generator.getEnergyStored());
         }
         super.onNeighborChange(world, pos, neighbor);
-    }
-
-    @Override
-    public EnumPushReaction getMobilityFlag(IBlockState state) {
-        return EnumPushReaction.NORMAL;
     }
 
     /*******************************************************************************************************************
