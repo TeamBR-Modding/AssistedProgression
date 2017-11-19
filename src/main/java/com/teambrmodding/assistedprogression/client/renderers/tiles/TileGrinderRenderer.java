@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack;
 public class TileGrinderRenderer<T extends TileGrinder> extends TileEntitySpecialRenderer<T> {
 
     @Override
-    public void func_192841_a(T grinder, double x, double y, double z, float partialTicks, int destroyStage, float partial) {
+    public void render(T grinder, double x, double y, double z, float partialTicks, int destroyStage, float partial) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y, z + 0.5D);
         for(int i = 4; i < 7; i++) {
@@ -47,7 +47,7 @@ public class TileGrinderRenderer<T extends TileGrinder> extends TileEntitySpecia
                 int rotation = (i - 3) * 120;
                 double xRot = 0.25 * Math.cos(Math.toRadians(rotation));
                 double zRot = 0.25 * Math.sin(Math.toRadians(rotation));
-                renderManager.doRenderEntity(entityItem, xRot / 0.45, -0.1, zRot / 0.45,
+                renderManager.renderEntity(entityItem, xRot / 0.45, -0.1, zRot / 0.45,
                         0.0F, 0, true);
 
                 GlStateManager.popAttrib();

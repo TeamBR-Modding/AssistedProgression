@@ -45,6 +45,9 @@ tile.assistedprogression:block_redstone_clock.name=Redstone Clock
 # Grinder
 tile.assistedprogression:block_grinder.name=Grinder
 
+# Kinetic Generator
+tile.assistedprogression:block_kinetic_generator.name=Kinetic Generator
+
 #######################
 # GUI
 #######################

@@ -1,11 +1,9 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambrmodding.assistedprogression.common.blocks.BlockCrafter;
-import com.teambrmodding.assistedprogression.common.blocks.BlockGrinder;
-import com.teambrmodding.assistedprogression.common.blocks.BlockPlayerPlate;
-import com.teambrmodding.assistedprogression.common.blocks.BlockRedstoneClock;
+import com.teambrmodding.assistedprogression.common.blocks.*;
 import com.teambrmodding.assistedprogression.common.tiles.TileCrafter;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
+import com.teambrmodding.assistedprogression.common.tiles.TileKineticGenerator;
 import com.teambrmodding.assistedprogression.common.tiles.TileRedstoneClock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -38,6 +36,7 @@ public class BlockManager {
     public static BlockPlayerPlate blockPlayerPlate = new BlockPlayerPlate();
     public static BlockRedstoneClock blockRedstoneClock = new BlockRedstoneClock();
     public static BlockGrinder blockGrinder = new BlockGrinder();
+    public static BlockKineticGenerator blockKineticGenerator = new BlockKineticGenerator();
 
     /*******************************************************************************************************************
      * Registration                                                                                                    *
@@ -45,10 +44,11 @@ public class BlockManager {
 
     @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event) {
-        registerBlock(event, blockCrafter,        TileCrafter.class,        null);
-        registerBlock(event, blockPlayerPlate,    null,            null);
-        registerBlock(event, blockRedstoneClock,  TileRedstoneClock.class,  null);
-        registerBlock(event, blockGrinder,        TileGrinder.class,        null);
+        registerBlock(event, blockCrafter,          TileCrafter.class,          null);
+        registerBlock(event, blockPlayerPlate,      null,              null);
+        registerBlock(event, blockRedstoneClock,    TileRedstoneClock.class,    null);
+        registerBlock(event, blockGrinder,          TileGrinder.class,          null);
+        registerBlock(event, blockKineticGenerator, TileKineticGenerator.class, null);
     }
 
     @SubscribeEvent
@@ -57,6 +57,7 @@ public class BlockManager {
         event.getRegistry().register(new ItemBlock(blockPlayerPlate).setRegistryName(blockPlayerPlate.getRegistryName()));
         event.getRegistry().register(new ItemBlock(blockRedstoneClock).setRegistryName(blockRedstoneClock.getRegistryName()));
         event.getRegistry().register(new ItemBlock(blockGrinder).setRegistryName(blockGrinder.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(blockKineticGenerator).setRegistryName(blockKineticGenerator.getRegistryName()));
     }
 
     /*******************************************************************************************************************

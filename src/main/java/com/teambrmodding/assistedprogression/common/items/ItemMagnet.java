@@ -165,9 +165,9 @@ public class ItemMagnet extends BaseItem {
                         // Apply speed
                         motionVector.addVector(speed, speed, speed);
 
-                        entity.motionX = motionVector.xCoord;
-                        entity.motionY = motionVector.yCoord;
-                        entity.motionZ = motionVector.zCoord;
+                        entity.motionX = motionVector.x;
+                        entity.motionY = motionVector.y;
+                        entity.motionZ = motionVector.z;
                         entity.velocityChanged = true;
                     }
 

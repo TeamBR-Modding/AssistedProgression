@@ -97,7 +97,7 @@ public class ItemTrashBag extends BaseItem {
     @SubscribeEvent
     public void onItemPickup(EntityItemPickupEvent event) {
         EntityPlayer player = event.getEntityPlayer();
-        ItemStack pickedItem = event.getItem().getEntityItem();
+        ItemStack pickedItem = event.getItem().getItem();
 
         if (pickedItem == null || player == null) return;
 
