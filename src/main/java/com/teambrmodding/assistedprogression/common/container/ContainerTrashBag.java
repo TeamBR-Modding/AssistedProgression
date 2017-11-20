@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -69,7 +70,12 @@ public class ContainerTrashBag extends BaseContainer {
         }
 
         if(trashBag.getItem() == ItemManager.itemTrashBag)
-            addSlotToContainer(new PhantomSlot(inventory, 0, 79, 32));
+            addSlotToContainer(new PhantomSlot(inventory, 0, 79, 32) {
+                @Override
+                public boolean isItemValid(@Nonnull ItemStack stack) {
+                    return true;
+                }
+            });
         else
             addInventoryGridPhantom(8, 32, 9);
     }
@@ -102,7 +108,12 @@ public class ContainerTrashBag extends BaseContainer {
         int slotId = 0;
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                addSlotToContainer(new PhantomSlot(inventory, slotId, offsetX + x * 18, offsetY + y * 18));
+                addSlotToContainer(new PhantomSlot(inventory, slotId, offsetX + x * 18, offsetY + y * 18) {
+                    @Override
+                    public boolean isItemValid(@Nonnull ItemStack stack) {
+                        return true;
+                    }
+                });
                 slotId++;
             }
         }
