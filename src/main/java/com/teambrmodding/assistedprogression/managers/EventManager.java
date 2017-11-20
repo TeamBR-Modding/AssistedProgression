@@ -18,8 +18,7 @@ public class EventManager {
      * Registers the events for this mod
      */
     public static void registerEvents() {
-        registerEvent(new BlockManager());
-        registerEvent(new ItemManager());
+        registerEvent(new RegistrationManager());
         registerEvent(ItemManager.itemTrashBag);
     }
 

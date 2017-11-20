@@ -68,8 +68,8 @@ public class RecipeManager {
         }
 
         /**
-          * Get the name of this recipe type
-          * @return The name
+          * Get the registryName of this recipe type
+          * @return The registryName
           */
         public String getName() {
             return name;

@@ -1,5 +1,7 @@
 package com.teambrmodding.assistedprogression.client;
 
+import com.teambr.nucleus.annotation.IRegisterable;
+import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.client.models.ModelPipette;
 import com.teambrmodding.assistedprogression.client.renderers.tiles.TileGrinderRenderer;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
@@ -9,6 +11,9 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * This file was created for AssistedProgression
@@ -23,7 +28,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 public class ClientProxy extends CommonProxy {
 
     @Override
-    public void preInit() {
+    public void preInit(FMLPreInitializationEvent event) {
         // Pipette models
         ModelLoader.setCustomMeshDefinition(ItemManager.itemPipette, stack -> ModelPipette.LOCATION);
         ModelBakery.registerItemVariants(ItemManager.itemPipette, ModelPipette.LOCATION);
@@ -31,9 +36,10 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void init() {
-        ItemRenderManager.registerItemRenderers();
-        ItemRenderManager.registerBlockRenderers();
+    public void init(FMLInitializationEvent event) {
+        // Item Models
+        AssistedProgression.registrationData.getBlocks().forEach(block -> ((IRegisterable<?>)block).registerRender());
+        AssistedProgression.registrationData.getItems().forEach(item   -> ((IRegisterable<?>)item).registerRender());
 
         // Grinder
         ClientRegistry.bindTileEntitySpecialRenderer(TileGrinder.class,
@@ -41,5 +47,5 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void postInit() { }
+    public void postInit(FMLPostInitializationEvent event) { }
 }

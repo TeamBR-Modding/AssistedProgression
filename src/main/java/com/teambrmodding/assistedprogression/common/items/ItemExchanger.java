@@ -2,14 +2,11 @@ package com.teambrmodding.assistedprogression.common.items;
 
 import com.teambr.nucleus.util.BlockUtils;
 import com.teambr.nucleus.util.WorldUtils;
-import com.teambrmodding.assistedprogression.AssistedProgression;
-import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -33,16 +30,13 @@ import java.util.List;
  * @author Dyonovan - Paul Davis
  * @since 10/8/2016 - 01/18/2017
  */
-public class ItemExchanger extends Item {
+public class ItemExchanger extends BaseItem {
 
     private static final String SIZE_NBT_TAG = "size";
     private static final String EXCHANGE_NBT_TAG = "exchanging";
 
     public ItemExchanger() {
-        super();
-        this.setUnlocalizedName(Reference.MOD_ID + ":item_exchanger");
-        setRegistryName(Reference.MOD_ID, "item_exchanger");
-        this.setCreativeTab(AssistedProgression.tabAssistedProgression);
+        super("item_exchanger", 1);
     }
 
     @Override

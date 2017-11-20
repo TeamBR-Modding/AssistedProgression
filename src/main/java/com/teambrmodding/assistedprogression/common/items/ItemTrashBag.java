@@ -37,7 +37,7 @@ public class ItemTrashBag extends BaseItem {
     /**
      * Base constructor for all items
      *
-     * @param itemName     The item name
+     * @param itemName     The item registryName
      * @param maxStackSize Maximum stack size
      */
     public ItemTrashBag(String name, int size) {

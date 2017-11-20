@@ -1,0 +1,24 @@
+{
+  "type":"forge:ore_shaped",
+  "pattern": [
+    "III",
+    "IRI",
+    "ICI"
+  ],
+  "key": {
+    "I" : {
+      "type":"forge:ore_dict",
+      "ore":"ingotIron"
+    },
+    "R": {
+      "type":"forge:ore_dict",
+      "ore":"dustRedstone"
+    },
+    "C": {
+      "item":"minecraft:chest"
+    }
+  },
+  "result": {
+    "item":"assistedprogression:block_kinetic_generator"
+  }
+}

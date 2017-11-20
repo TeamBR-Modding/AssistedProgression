@@ -47,7 +47,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<JEIGrinderRecip
     }
 
     /**
-     * Returns the localized name for this recipe type.
+     * Returns the localized registryName for this recipe type.
      * Drawn at the top of the recipe GUI pages for this category.
      */
     @Override
@@ -56,7 +56,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<JEIGrinderRecip
     }
 
     /**
-     * Return the mod name or id associated with this recipe category.
+     * Return the mod registryName or id associated with this recipe category.
      * Used for the recipe category tab's tooltip.
      *
      * @since JEI 4.5.0

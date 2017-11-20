@@ -1,5 +1,7 @@
 package com.teambrmodding.assistedprogression;
 
+import com.teambr.nucleus.data.RegistrationData;
+import com.teambr.nucleus.helper.RegistrationHelper;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.events.RenderEvents;
 import com.teambrmodding.assistedprogression.lib.Reference;
@@ -11,7 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -33,6 +38,8 @@ import java.io.File;
         dependencies   = Reference.DEPENDENCIES,
         updateJSON     = Reference.UPDATE_JSON)
 public class AssistedProgression {
+
+    public static RegistrationData registrationData = new RegistrationData(Reference.MOD_NAME);
 
     @Mod.Instance
     public static AssistedProgression INSTANCE;
@@ -60,10 +67,11 @@ public class AssistedProgression {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         configFolderLocation = event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "AssistedProgression";
+        RegistrationHelper.fillRegistrationData(event, registrationData);
         ConfigManager.preinit();
         EventManager.registerEvents();
         RecipeManager.preInit();
-        proxy.preInit();
+        proxy.preInit(event);
         NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new ItemGuiManager());
     }
 
@@ -72,11 +80,11 @@ public class AssistedProgression {
         RecipeManager.init();
         if(event.getSide() == Side.CLIENT)
             MinecraftForge.EVENT_BUS.register(new RenderEvents());
-        proxy.init();
+        proxy.init(event);
     }
 
     public static void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit();
+        proxy.postInit(event);
     }
 
     @Mod.EventHandler

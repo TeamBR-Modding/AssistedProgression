@@ -38,9 +38,9 @@ public abstract class AbstractRecipeHandler<R extends AbstractRecipe<I, O>, I, O
      *******************************************************************************************************************/
 
     /**
-     * Used to get the base name of the files
+     * Used to get the base registryName of the files
      *
-     * @return The base name for the files
+     * @return The base registryName for the files
      */
     public abstract String getBaseName();
 

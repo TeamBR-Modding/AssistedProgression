@@ -1,20 +1,7 @@
 package com.teambrmodding.assistedprogression.managers;
 
+import com.teambr.nucleus.annotation.RegisteringBlock;
 import com.teambrmodding.assistedprogression.common.blocks.*;
-import com.teambrmodding.assistedprogression.common.tiles.TileCrafter;
-import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
-import com.teambrmodding.assistedprogression.common.tiles.TileKineticGenerator;
-import com.teambrmodding.assistedprogression.common.tiles.TileRedstoneClock;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-
-import javax.annotation.Nullable;
 
 /**
  * This file was created for AssistedProgression
@@ -32,56 +19,18 @@ public class BlockManager {
      * Block Variables                                                                                                 *
      *******************************************************************************************************************/
 
+    @RegisteringBlock
     public static BlockCrafter blockCrafter = new BlockCrafter();
+
+    @RegisteringBlock
     public static BlockPlayerPlate blockPlayerPlate = new BlockPlayerPlate();
+
+    @RegisteringBlock
     public static BlockRedstoneClock blockRedstoneClock = new BlockRedstoneClock();
+
+    @RegisteringBlock
     public static BlockGrinder blockGrinder = new BlockGrinder();
+
+    @RegisteringBlock
     public static BlockKineticGenerator blockKineticGenerator = new BlockKineticGenerator();
-
-    /*******************************************************************************************************************
-     * Registration                                                                                                    *
-     *******************************************************************************************************************/
-
-    @SubscribeEvent
-    public void registerBlocks(RegistryEvent.Register<Block> event) {
-        registerBlock(event, blockCrafter,          TileCrafter.class,          null);
-        registerBlock(event, blockPlayerPlate,      null,              null);
-        registerBlock(event, blockRedstoneClock,    TileRedstoneClock.class,    null);
-        registerBlock(event, blockGrinder,          TileGrinder.class,          null);
-        registerBlock(event, blockKineticGenerator, TileKineticGenerator.class, null);
-    }
-
-    @SubscribeEvent
-    public void registerItemBlocks(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ItemBlock(blockCrafter).setRegistryName(blockCrafter.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(blockPlayerPlate).setRegistryName(blockPlayerPlate.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(blockRedstoneClock).setRegistryName(blockRedstoneClock.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(blockGrinder).setRegistryName(blockGrinder.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(blockKineticGenerator).setRegistryName(blockKineticGenerator.getRegistryName()));
-    }
-
-    /*******************************************************************************************************************
-     * Helper Methods                                                                                                  *
-     *******************************************************************************************************************/
-
-    /**
-     * Helper Method to register a block
-     * @param block The block to register
-     * @param tileEntity The tile class
-     * @param oreDict The ore dict tag
-     * @return The block registered
-     */
-    public static <T extends Block> T registerBlock(RegistryEvent.Register<Block> event, T block,
-                                                    @Nullable Class<? extends TileEntity> tileEntity,
-                                                    @Nullable String oreDict) {
-
-        event.getRegistry().register(block);
-
-        if(tileEntity != null)
-            GameRegistry.registerTileEntity(tileEntity, block.getRegistryName().toString());
-        if(oreDict != null)
-            OreDictionary.registerOre(oreDict, block);
-
-        return block;
-    }
 }

@@ -58,7 +58,7 @@ public class ItemMagnet extends BaseItem {
     /**
      * Base constructor for all items
      *
-     * @param itemName     The item name
+     * @param itemName     The item registryName
      * @param maxStackSize Maximum stack size
      */
     public ItemMagnet(boolean basic, String name) {

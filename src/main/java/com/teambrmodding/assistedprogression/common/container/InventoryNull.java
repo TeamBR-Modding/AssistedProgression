@@ -141,7 +141,7 @@ public class InventoryNull implements IInventory {
     }
 
     /**
-     * Get the name of this object. For players this returns their username
+     * Get the registryName of this object. For players this returns their username
      */
     @Override
     public String getName() {

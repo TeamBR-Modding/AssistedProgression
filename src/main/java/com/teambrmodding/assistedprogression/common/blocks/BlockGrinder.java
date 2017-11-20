@@ -1,6 +1,8 @@
 package com.teambrmodding.assistedprogression.common.blocks;
 
+import com.teambr.nucleus.client.gui.GuiColor;
 import com.teambr.nucleus.common.IOpensGui;
+import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.client.gui.GuiGrinder;
 import com.teambrmodding.assistedprogression.common.container.ContainerGrinder;
 import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
@@ -11,9 +13,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This file was created for AssistedProgression
@@ -112,5 +120,31 @@ public class BlockGrinder extends BaseBlock implements IOpensGui {
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         return new GuiGrinder(player, (TileGrinder) world.getTileEntity(new BlockPos(x, y, z)));
+    }
+
+
+    /*******************************************************************************************************************
+     * IAdvancedToolTipProvided                                                                                        *
+     *******************************************************************************************************************/
+
+    /**
+     * Get the tool tip to present when shift is pressed
+     *
+     * @param stack The itemstack
+     * @return The list to display
+     */
+    @Nullable
+    @Override
+    public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
+        List<String> tip = new ArrayList<>();
+        tip.add(ClientUtils.translate(this.registryName + ".desc"));
+        tip.add("");
+        tip.add(GuiColor.ORANGE + ClientUtils.translate(this.registryName + ".desc1"));
+        tip.add("  " + GuiColor.GREEN + Blocks.WOODEN_PRESSURE_PLATE.getLocalizedName() + GuiColor.BLUE + ": 1.00x");
+        tip.add("  " + GuiColor.GREEN + Blocks.STONE_PRESSURE_PLATE.getLocalizedName() + GuiColor.BLUE + ": 1.25x");
+        tip.add("  " + GuiColor.GREEN + BlockManager.blockPlayerPlate.getLocalizedName() + GuiColor.BLUE + ": 1.50x");
+        tip.add("  " + GuiColor.GREEN + Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE.getLocalizedName() + GuiColor.BLUE + ": 1.75x");
+        tip.add("  " + GuiColor.GREEN + Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE.getLocalizedName() + GuiColor.BLUE + ": 2.00x");
+        return tip;
     }
 }

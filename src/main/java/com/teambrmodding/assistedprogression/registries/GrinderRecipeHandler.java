@@ -27,9 +27,9 @@ import java.util.List;
 public class GrinderRecipeHandler extends AbstractRecipeHandler<GrinderRecipe, ItemStack, ItemStack> {
 
     /**
-     * Used to get the base name of the files
+     * Used to get the base registryName of the files
      *
-     * @return The base name for the files
+     * @return The base registryName for the files
      */
     @Override
     public String getBaseName() {

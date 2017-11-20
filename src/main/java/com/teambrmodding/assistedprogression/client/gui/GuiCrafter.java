@@ -31,8 +31,8 @@ public class GuiCrafter extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        this.fontRenderer.drawString(I18n.format("tile.assistedprogression:block_crafter.name"), (xSize / 2) - (fontRenderer
-                .getStringWidth(I18n.format("tile.assistedprogression:block_crafter.name")) / 2), 5, 0x404040);
+        this.fontRenderer.drawString(I18n.format("tile.assistedprogression:block_crafter.registryName"), (xSize / 2) - (fontRenderer
+                .getStringWidth(I18n.format("tile.assistedprogression:block_crafter.registryName")) / 2), 5, 0x404040);
     }
 
     @Override

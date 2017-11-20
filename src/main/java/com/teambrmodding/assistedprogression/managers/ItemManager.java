@@ -1,9 +1,7 @@
 package com.teambrmodding.assistedprogression.managers;
 
+import com.teambr.nucleus.annotation.RegisteringItem;
 import com.teambrmodding.assistedprogression.common.items.*;
-import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * This file was created for AssistedProgression
@@ -21,21 +19,24 @@ public class ItemManager {
      * Item Variables                                                                                                  *
      *******************************************************************************************************************/
 
+    @RegisteringItem
     public static ItemMagnet itemCheapMagnet = new ItemMagnet(true, "item_cheap_magnet");
+
+    @RegisteringItem
     public static ItemMagnet itemElectroMagnet = new ItemMagnet(false,"item_electro_magnet");
+
+    @RegisteringItem
     public static ItemTrashBag itemTrashBag = new ItemTrashBag("item_trash_bag", 1);
+
+    @RegisteringItem
     public static ItemTrashBag itemHeftyBag = new ItemTrashBag("item_hefty_bag", 18);
+
+    @RegisteringItem
     public static ItemSpawnerRelocator itemSpawnerRelocator = new ItemSpawnerRelocator();
+
+    @RegisteringItem
     public static ItemExchanger itemExchanger = new ItemExchanger();
+
+    @RegisteringItem
     public static ItemPipette itemPipette = new ItemPipette();
-
-    /*******************************************************************************************************************
-     * Registration                                                                                                    *
-     *******************************************************************************************************************/
-
-    @SubscribeEvent
-    public void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(itemCheapMagnet, itemElectroMagnet,
-                itemTrashBag, itemHeftyBag, itemSpawnerRelocator, itemExchanger, itemPipette);
-    }
 }
