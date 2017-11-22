@@ -93,10 +93,10 @@ public class ContainerCrafter extends BaseContainer {
     public void onCraftMatrixChanged(IInventory inventoryIn) {
         if(inventoryIn == craftingGrid1)
             craftResult1.setInventorySlotContents(0, CraftingManager.findMatchingRecipe(craftingGrid1, crafter.getWorld()) == null ?
-                    ItemStack.EMPTY : CraftingManager.findMatchingRecipe(craftingGrid1, crafter.getWorld()).getRecipeOutput());
+                    ItemStack.EMPTY : CraftingManager.findMatchingRecipe(craftingGrid1, crafter.getWorld()).getRecipeOutput().copy());
         else if(inventoryIn == craftingGrid2)
             craftResult2.setInventorySlotContents(0, CraftingManager.findMatchingRecipe(craftingGrid2, crafter.getWorld()) == null ?
-                    ItemStack.EMPTY : CraftingManager.findMatchingRecipe(craftingGrid2, crafter.getWorld()).getRecipeOutput());
+                    ItemStack.EMPTY : CraftingManager.findMatchingRecipe(craftingGrid2, crafter.getWorld()).getRecipeOutput().copy());
     }
 
     @Override
