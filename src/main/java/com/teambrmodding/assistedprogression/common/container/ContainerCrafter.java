@@ -117,9 +117,9 @@ public class ContainerCrafter extends BaseContainer {
             ItemStack copy = itemToTransfer.copy();
 
             if(index < getInventorySizeNotPlayer()) {
-                if (!mergeItemStack(copy, getInventorySizeNotPlayer(), inventorySlots.size(), true))
+                if (!mergeItemStack(itemToTransfer, getInventorySizeNotPlayer(), inventorySlots.size(), true))
                     return ItemStack.EMPTY;
-            } else if(!mergeItemStack(copy, 0, getInventorySizeNotPlayer(), false))
+            } else if(!mergeItemStack(itemToTransfer, 0, getInventorySizeNotPlayer(), false))
                 return ItemStack.EMPTY;
 
             if(index == 0)
@@ -127,7 +127,7 @@ public class ContainerCrafter extends BaseContainer {
             else if(index == 1)
                 slot.onTake(playerIn, copy);
 
-            if(copy.getCount() == 0) {
+            if(itemToTransfer.getCount() == 0) {
                 slot.putStack(ItemStack.EMPTY);
                 slot.onSlotChanged();
             }
@@ -138,7 +138,7 @@ public class ContainerCrafter extends BaseContainer {
             onCraftMatrixChanged(craftingGrid2);
 
             if(itemToTransfer.getCount() != copy.getCount())
-                return itemToTransfer;
+                return copy;
         }
         return ItemStack.EMPTY;
     }
