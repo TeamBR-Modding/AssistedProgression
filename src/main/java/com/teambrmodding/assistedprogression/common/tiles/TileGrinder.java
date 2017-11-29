@@ -42,7 +42,7 @@ public class TileGrinder extends InventoryHandler {
 
     public void activateGrinder(int progressValue, double multiplier) {
         updateCurrentItem();
-        world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 6);
+        markForUpdate(6);
         if(!getStackInSlot(3).isEmpty() && hasOutputAvailable()) {
             int movement = progressValue;
 
@@ -63,7 +63,7 @@ public class TileGrinder extends InventoryHandler {
                         pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
                         SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS,
                         0.1F, 0.4F);
-                world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 6);
+                markForUpdate(6);
                 if(progress >= MAX_PROGRESS)
                     activateGrinder(progressValue - MAX_PROGRESS, multiplier);
             }
@@ -208,6 +208,12 @@ public class TileGrinder extends InventoryHandler {
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         return index < 3 && RecipeManager.getHandler(RecipeManager.RecipeType.GRINDER).isValidInput(stack);
+    }
+
+    @Override
+    protected void onInventoryChanged(int slot) {
+        super.onInventoryChanged(slot);
+        markForUpdate(6);
     }
 
     /*******************************************************************************************************************
