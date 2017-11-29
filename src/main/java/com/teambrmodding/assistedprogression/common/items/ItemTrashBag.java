@@ -107,7 +107,8 @@ public class ItemTrashBag extends BaseItem {
                 for (int x = 0; x < trashBagHandler.getSlots(); x++) {
                     ItemStack trashKey = trashBagHandler.getStackInSlot(x);
                     if (!trashKey.isEmpty()) {
-                        if (ItemStack.areItemStacksEqual(trashKey, pickedItem)) {
+                        if (ItemStack.areItemsEqual(trashKey, pickedItem) &&
+                                ItemStack.areItemStackTagsEqual(trashKey, pickedItem)) {
                             pickedItem.shrink(pickedItem.getCount());
                             player.world.playSound(null,
                                     new BlockPos(player.posX, player.posY, player.posZ),
