@@ -39,7 +39,7 @@ import java.io.File;
         updateJSON     = Reference.UPDATE_JSON)
 public class AssistedProgression {
 
-    public static RegistrationData registrationData = new RegistrationData(Reference.MOD_NAME);
+    public static RegistrationData registrationData = new RegistrationData(Reference.MOD_ID);
 
     @Mod.Instance
     public static AssistedProgression INSTANCE;
