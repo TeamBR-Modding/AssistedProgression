@@ -1,0 +1,104 @@
+{
+    "_comment": "Creative Tabs",
+    "itemGroup.tabAssistedProgression": "进阶辅助",
+
+    "_comment": "######################",
+    "_comment": "Blocks",
+    "_comment": "######################",
+
+    "_comment": "######################",
+    "_comment": "Items",
+    "_comment": "######################",
+
+    "_comment": "Magnets",
+    "item.assistedprogression:itemCheapMagnet": "廉价磁铁",
+    "item.assistedprogression:itemElectroMagnet": "电磁体磁铁",
+
+    "_comment": "TrashBags",
+    "item.assistedprogression:itemTrashBag": "垃圾袋",
+    "item.assistedprogression:itemHeftyBag": "大型垃圾袋",
+
+    "_comment": "Spawner Relocator",
+    "item.assistedprogression:itemSpawnerRelocator": "刷怪笼移位器",
+
+    "_comment": "Exchanger",
+    "item.assistedprogression:itemExchanger": "方块交换器",
+
+    "_comment": "Pipette",
+    "item.assistedprogression:itemPipette": "移液器",
+
+    "_comment": "######################",
+    "_comment": "Tile Entities",
+    "_comment": "######################",
+
+    "_comment": "Crafter",
+    "block.assistedprogression:blockCrafter": "双重工作台",
+
+    "_comment": "Player Sensitive Pressure Plate",
+    "block.assistedprogression:blockPlayerPlate": "玩家检测压力板",
+
+    "_comment": "Redstone Clock",
+    "block.assistedprogression:blockRedstoneClock": "红石钟",
+
+    "_comment": "Flushable Chest",
+    "block.assistedprogression:blockFlushableChest": "可控销毁箱子",
+
+    "_comment": "Grinder",
+    "block.assistedprogression:blockGrinder": "跳跃研磨机",
+
+    "_comment": "######################",
+    "_comment": "GUI",
+    "_comment": "######################",
+    "_comment": "Crafter",
+    "assistedprogression.crafter.title": "双重工作台",
+
+    "_comment": "Flushable Chest",
+    "assistedprogression.flushchest.title": "可控销毁箱子",
+
+    "_comment": "Trash Bag",
+    "inventory.trashBag.title": "垃圾袋",
+
+    "_comment": "Grinder",
+    "assistedprogression.grinder.title": "跳跃研磨机",
+    "assistedprogression.grinder.input": "待处理",
+    "assistedprogression.grinder.grinding": "正在研磨",
+    "assistedprogression.grinder.output": "输出",
+
+    "_comment": "######################",
+    "_comment": "Common Text",
+    "_comment": "######################",
+
+    "_comment": "Magnet",
+    "assistedprogression.text.magnetism": "磁性",
+    "assistedprogression.text.magnetEvil": "可能吸引一些不需要的东西",
+
+    "assistedprogression.text.active": "开启",
+    "assistedprogression.text.disabled": "关闭",
+
+    "assistedprogression.text.redstoneFlux": "需要RF能量",
+
+    "_comment": "Flushable Chest",
+    "assistedprogression.text.config": "配置",
+
+    "_comment": "Exchanger",
+    "assistedprogression.text.exchanger.blockSet": "转换方块配置！",
+    "assistedprogression.text.exchanger.sizeSet": "范围设置为",
+
+    "_comment": "Pipette",
+    "assistedprogression.text.pipette.empty": "无",
+    "assistedprogression.text.pipette.fluid": "包含流体：",
+
+    "_comment": "######################",
+    "_comment": "Commands",
+    "_comment": "######################",
+
+    "commands.addGrinderRecipe.usage": "§c用法: <input> <output> <outputAmount> <secondaryOutput(Optional)> <secondaryOutputChance(Optional)>",
+
+    "_comment": "######################",
+    "_comment": "Descriptions",
+    "_comment": "######################",
+
+    "_comment": "######################",
+    "_comment": "JEI",
+    "_comment": "######################"
+}

@@ -1,7 +1,16 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambr.nucleus.annotation.RegisteringItem;
-import com.teambrmodding.assistedprogression.common.items.*;
+import com.teambrmodding.assistedprogression.lib.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
 /**
  * This file was created for AssistedProgression
@@ -11,32 +20,36 @@ import com.teambrmodding.assistedprogression.common.items.*;
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * @author Paul Davis - pauljoda
- * @since 11/13/17
+ * @since 8/24/2019
  */
+@ObjectHolder(Reference.MOD_ID)
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ItemManager {
 
-    /*******************************************************************************************************************
-     * Item Variables                                                                                                  *
-     *******************************************************************************************************************/
+    // Create tab
+    public static ItemGroup itemGroupAssistedProgression;
 
-    @RegisteringItem
-    public static ItemMagnet itemCheapMagnet = new ItemMagnet(true, "item_cheap_magnet");
+    @ObjectHolder("player_plate")
+    public static Item player_plate;
 
-    @RegisteringItem
-    public static ItemMagnet itemElectroMagnet = new ItemMagnet(false,"item_electro_magnet");
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        // Setup ItemGroup
+        itemGroupAssistedProgression = new ItemGroup(Reference.MOD_ID) {
+            @Override
+            public ItemStack createIcon() {
+                return new ItemStack(BlockManager.player_plate);
+            }
+        };
 
-    @RegisteringItem
-    public static ItemTrashBag itemTrashBag = new ItemTrashBag("item_trash_bag", 1);
+        // Register Items
+        registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);
+    }
 
-    @RegisteringItem
-    public static ItemTrashBag itemHeftyBag = new ItemTrashBag("item_hefty_bag", 18);
-
-    @RegisteringItem
-    public static ItemSpawnerRelocator itemSpawnerRelocator = new ItemSpawnerRelocator();
-
-    @RegisteringItem
-    public static ItemExchanger itemExchanger = new ItemExchanger();
-
-    @RegisteringItem
-    public static ItemPipette itemPipette = new ItemPipette();
+    @SuppressWarnings("ConstantConditions")
+    public static void registerBlockItemForBlock(IForgeRegistry<Item> registry, Block block) {
+        Item itemBlock = new BlockItem(block, new Item.Properties().group(itemGroupAssistedProgression));
+        itemBlock.setRegistryName(block.getRegistryName());
+        registry.register(itemBlock);
+    }
 }

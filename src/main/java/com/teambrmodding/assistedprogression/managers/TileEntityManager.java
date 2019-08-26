@@ -1,8 +1,7 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambrmodding.assistedprogression.common.block.PlayerPlateBlock;
 import com.teambrmodding.assistedprogression.lib.Reference;
-import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,13 +19,9 @@ import net.minecraftforge.registries.ObjectHolder;
  */
 @ObjectHolder(Reference.MOD_ID)
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class BlockManager {
-
-    @ObjectHolder("player_plate")
-    public static Block player_plate;
-
+public class TileEntityManager {
     @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new PlayerPlateBlock());
+    public static void registerTileEntityTypes(RegistryEvent.Register<TileEntityType<?>> event) {
+
     }
 }
