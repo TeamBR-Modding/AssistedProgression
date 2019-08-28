@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "tag": "forge:ores/redstone"
+  },
+  "output": {
+    "item": "minecraft:redstone",
+    "count": 12
+  }
+}

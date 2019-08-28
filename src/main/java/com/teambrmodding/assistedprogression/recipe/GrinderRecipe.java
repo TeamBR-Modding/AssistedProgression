@@ -3,15 +3,20 @@ package com.teambrmodding.assistedprogression.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.teambrmodding.assistedprogression.lib.Reference;
+import com.teambrmodding.assistedprogression.managers.BlockManager;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * This file was created for AssistedProgression
@@ -89,6 +94,13 @@ public class GrinderRecipe implements IRecipe<IInventory> {
     @Override
     public ItemStack getRecipeOutput() {
         return this.output;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> returnList = NonNullList.create();
+        returnList.add(0, input);
+        return returnList;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.teambrmodding.assistedprogression.common.tile;
 
-import com.teambr.nucleus.common.tiles.InventoryHandler;
-import com.teambr.nucleus.util.ClientUtils;
+import com.teambr.nucleus.common.tiles.InventorySided;
 import com.teambrmodding.assistedprogression.common.container.GrinderContainer;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
@@ -15,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
  * @author Paul Davis - pauljoda
  * @since 8/27/2019
  */
-public class GrinderTile extends InventoryHandler implements INamedContainerProvider {
+public class GrinderTile extends InventorySided implements INamedContainerProvider {
 
     /*******************************************************************************************************************
      * Variables                                                                                                       *
@@ -225,6 +225,45 @@ public class GrinderTile extends InventoryHandler implements INamedContainerProv
     protected void onInventoryChanged(int slot) {
         super.onInventoryChanged(slot);
         markForUpdate(6);
+    }
+
+    /**
+     * Get the slots for the given face
+     *
+     * @param face The face
+     * @return What slots can be accessed
+     */
+    @Override
+    public int[] getSlotsForFace(Direction face) {
+        if(face == Direction.DOWN)
+            return new int[] {4, 5, 6};
+        return new int[] {1, 2, 3};
+    }
+
+    /**
+     * Can insert the item into the inventory
+     *
+     * @param slot        The slot
+     * @param itemStackIn The stack to insert
+     * @param dir         The dir
+     * @return True if can insert
+     */
+    @Override
+    public boolean canInsertItem(int slot, ItemStack itemStackIn, Direction dir) {
+        return dir != Direction.DOWN && isItemValidForSlot(slot, itemStackIn);
+    }
+
+    /**
+     * Can this extract the item
+     *
+     * @param slot  The slot
+     * @param stack The stack
+     * @param dir   The dir
+     * @return True if can extract
+     */
+    @Override
+    public boolean canExtractItem(int slot, ItemStack stack, Direction dir) {
+        return dir == Direction.DOWN && slot > 3;
     }
 
     /*******************************************************************************************************************

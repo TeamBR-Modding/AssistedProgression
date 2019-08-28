@@ -1,20 +1,28 @@
 package com.teambrmodding.assistedprogression;
 
 import com.teambrmodding.assistedprogression.client.ClientProxy;
-import com.teambrmodding.assistedprogression.client.render.GrinderTileRenderer;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
-import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import com.teambrmodding.assistedprogression.managers.ScreenHelper;
+import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Collection;
 
 /**
  * This file was created for AssistedProgression
@@ -33,11 +41,30 @@ public class AssistedProgression {
 
     public AssistedProgression() {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, RecipeHelper::registerRecipeSerializers);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::preInit);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
     }
 
-    protected void preInit(final FMLCommonSetupEvent event) {
+    protected void setup(final FMLCommonSetupEvent event) {
         proxy.init();
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ScreenHelper::registerScreens);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected void serverStarted(FMLServerStartedEvent event) {
+        // Add grinder recipes to our list
+        RecipeHelper.grinderRecipes.clear();
+        RecipeManager recipeManager = event.getServer().getRecipeManager();
+        RecipeHelper
+                .getRecipes(RecipeHelper.GRINDER_RECIPE_TYPE, recipeManager)
+                .values().forEach((recipe) -> {
+            if(recipe instanceof GrinderRecipe) {
+                GrinderRecipe localRecipe = (GrinderRecipe) recipe;
+                RecipeHelper.grinderRecipes.add(localRecipe);
+            }
+        });
+
+        // Add custom recipes
+
     }
 }
