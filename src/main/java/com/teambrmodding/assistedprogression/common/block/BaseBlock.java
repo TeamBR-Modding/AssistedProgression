@@ -2,10 +2,15 @@ package com.teambrmodding.assistedprogression.common.block;
 
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambr.nucleus.util.ClientUtils;
+import com.teambr.nucleus.util.WorldUtils;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,6 +48,29 @@ public class BaseBlock extends ContainerBlock implements IAdvancedToolTipProvide
         this.registryName = name;
 
         setRegistryName(name);
+    }
+
+    /*******************************************************************************************************************
+     * Block Methods                                                                                                   *
+     *******************************************************************************************************************/
+
+    /**
+     * Called when the block is broken, allows us to drop items from inventory
+     * @param worldIn The world
+     * @param pos The pos
+     * @param state The state
+     */
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if(!worldIn.isRemote) {
+            if(worldIn.getTileEntity(pos) != null
+                    && worldIn.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).isPresent()) {
+                // Drop the inventory
+                WorldUtils.dropStacksInInventory(worldIn.getTileEntity(pos)
+                        .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElseGet(null), worldIn, pos);
+            }
+        }
+        super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
     /*******************************************************************************************************************

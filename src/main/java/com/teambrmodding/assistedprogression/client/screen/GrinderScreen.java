@@ -1,19 +1,14 @@
 package com.teambrmodding.assistedprogression.client.screen;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.teambr.nucleus.client.gui.GuiBase;
 import com.teambr.nucleus.client.gui.component.display.GuiComponentText;
 import com.teambr.nucleus.util.ClientUtils;
-import com.teambr.nucleus.util.RenderUtils;
 import com.teambrmodding.assistedprogression.common.container.GrinderContainer;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import com.teambrmodding.assistedprogression.lib.Reference;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.awt.*;
 import java.text.DecimalFormat;

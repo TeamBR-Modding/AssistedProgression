@@ -4,6 +4,7 @@ import com.teambr.nucleus.common.container.BaseContainer;
 import com.teambr.nucleus.common.tiles.InventoryHandler;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import com.teambrmodding.assistedprogression.managers.ContainerManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -50,6 +51,7 @@ public class GrinderContainer extends BaseContainer {
     }
 
     public GrinderContainer(int windowId, PlayerInventory playerInv, PacketBuffer extraData) {
-        this(windowId, playerInv, new GrinderTile()); // not used dummy
+        this(windowId, playerInv,
+                ((GrinderTile) Minecraft.getInstance().world.getTileEntity(extraData.readBlockPos()))); // Only used on client
     }
 }

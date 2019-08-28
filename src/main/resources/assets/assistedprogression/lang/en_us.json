@@ -42,7 +42,7 @@
   "block.assistedprogression:block_redstone_clock": "Redstone Clock",
 
   "_comment": "Grinder",
-  "block.assistedprogression:grinder": "Grinder",
+  "block.assistedprogression.grinder": "Grinder",
 
   "_comment": "Kinetic Generator",
   "block.assistedprogression:block_kinetic_generator": "Kinetic Generator",
@@ -91,7 +91,7 @@
   "_comment": "######################",
 
   "block_crafter.desc": "Has two crafting grids with persistent inventories",
-  "block_grinder.desc": "Grinds ores and other resources for double ore output. Activate by placing a pressure plate on top and jumping on the plate. The higher you jump from, the more it progresses. The better the pressure plate the faster it processes",
+  "grinder.desc": "Grinds ores and other resources for double ore output. Activate by placing a pressure plate on top and jumping on the plate. The higher you jump from, the more it progresses. The better the pressure plate the faster it processes",
   "block_grinder.desc1": "Multiplier:",
   "block_redstone_clock.desc": "Emits a redstone pulse once per second. Disable with a lever or other redstone signal",
   "block_kinetic_generator.desc": "When this block is hit by a piston head, it will generate some power. Hit all sides as fast as you can for best results",

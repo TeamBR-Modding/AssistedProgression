@@ -1,6 +1,7 @@
 package com.teambrmodding.assistedprogression.common.block;
 
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
+import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -12,10 +13,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 /**
@@ -33,7 +36,8 @@ public class GrinderBlock extends BaseBlock {
      * Base Constructor
      */
     public GrinderBlock() {
-        super(Properties.create(Material.ROCK), "grinder", GrinderTile.class);
+        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.0F),
+                "grinder", GrinderTile.class);
     }
 
     /*******************************************************************************************************************
@@ -47,7 +51,7 @@ public class GrinderBlock extends BaseBlock {
         if(entityIn instanceof PlayerEntity && entityIn.fallDistance > 0.0 &&
                 !worldIn.getBlockState(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ)).isAir(worldIn, new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ))) {
             Block landedBlock = worldIn.getBlockState(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ)).getBlock();
-            if(landedBlock == Blocks.ACACIA_PRESSURE_PLATE)
+            if(landedBlock.getTags().contains(new ResourceLocation(Reference.MOD_ID, "pressure_plate")))
                 ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
                         .activateGrinder((int) entityIn.fallDistance, 1.0);
             else if(landedBlock == Blocks.STONE_PRESSURE_PLATE)
