@@ -5,11 +5,10 @@ import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import com.teambrmodding.assistedprogression.managers.ScreenHelper;
+import com.teambrmodding.assistedprogression.network.PacketManager;
 import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.RecipeManager;
@@ -23,9 +22,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Collection;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryManager;
 
 /**
  * This file was created for AssistedProgression
@@ -46,6 +45,7 @@ public class AssistedProgression {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, RecipeHelper::registerRecipeSerializers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
+        PacketManager.initPackets();
     }
 
     protected void setup(final FMLCommonSetupEvent event) {
@@ -53,11 +53,11 @@ public class AssistedProgression {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ScreenHelper::registerScreens);
     }
 
-    @SuppressWarnings({"unchecked", "ConstantConditions"})
+    @SuppressWarnings({"ConstantConditions"})
     protected void serverStarted(FMLServerStartedEvent event) {
         // Add grinder recipes to our list
-        RecipeHelper.grinderRecipes.clear();
         RecipeManager recipeManager = event.getServer().getRecipeManager();
+        RecipeHelper.grinderRecipes.clear();
         RecipeHelper
                 .getRecipes(RecipeHelper.GRINDER_RECIPE_TYPE, recipeManager)
                 .values().forEach((recipe) -> {
@@ -80,7 +80,7 @@ public class AssistedProgression {
         // Get all items in the ore forge tag
         for(Item oreItem : oreTag.getAllElements()) {
             // Don't want to add something already made by built in
-            if (!RecipeHelper.isValidGrinderInput(new ItemStack(oreItem), recipeManager)) {
+            if (!RecipeHelper.isValidGrinderInput(new ItemStack(oreItem), null)) {
                 // Iterate all tags for item in forge ore tag
                 for (ResourceLocation tag : oreItem.getTags()) {
                     // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
@@ -108,7 +108,7 @@ public class AssistedProgression {
         // Get all items in the ore forge tag
         for(Item ingotItem : ingotTag.getAllElements()) {
             // Don't want to add something already made by built in
-            if (!RecipeHelper.isValidGrinderInput(new ItemStack(ingotItem), recipeManager)) {
+            if (!RecipeHelper.isValidGrinderInput(new ItemStack(ingotItem), null)) {
                 // Iterate all tags for item in forge ingot tag
                 for (ResourceLocation tag : ingotItem.getTags()) {
                     // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust

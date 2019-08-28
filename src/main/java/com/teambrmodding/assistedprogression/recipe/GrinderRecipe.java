@@ -3,7 +3,6 @@ package com.teambrmodding.assistedprogression.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.teambrmodding.assistedprogression.lib.Reference;
-import com.teambrmodding.assistedprogression.managers.BlockManager;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -14,9 +13,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.Collections;
-import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * This file was created for AssistedProgression
@@ -32,9 +31,9 @@ public class GrinderRecipe implements IRecipe<IInventory> {
 
     public static final Serializer SERIALIZER = new Serializer();
 
-    private final Ingredient input;
-    private final ItemStack output;
-    private final ResourceLocation id;
+    public final Ingredient input;
+    public final ItemStack output;
+    public final ResourceLocation id;
 
     public GrinderRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
         this.id = id;
@@ -117,7 +116,6 @@ public class GrinderRecipe implements IRecipe<IInventory> {
     public IRecipeType<?> getType() {
         return RecipeHelper.GRINDER_RECIPE_TYPE;
     }
-
 
     /*******************************************************************************************************************
      * Serializer to send/receive recipes and load                                                                     *

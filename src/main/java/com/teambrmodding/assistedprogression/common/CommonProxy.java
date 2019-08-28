@@ -1,5 +1,8 @@
 package com.teambrmodding.assistedprogression.common;
 
+import com.teambrmodding.assistedprogression.managers.EventManager;
+import net.minecraftforge.common.MinecraftForge;
+
 /**
  * This file was created for AssistedProgression
  * <p>
@@ -11,5 +14,7 @@ package com.teambrmodding.assistedprogression.common;
  * @since 8/27/2019
  */
 public class CommonProxy {
-    public void init() {}
+    public void init() {
+        MinecraftForge.EVENT_BUS.addListener(EventManager::onPlayerLogin);
+    }
 }

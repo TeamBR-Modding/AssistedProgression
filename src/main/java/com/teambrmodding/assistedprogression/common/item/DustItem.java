@@ -1,9 +1,7 @@
 package com.teambrmodding.assistedprogression.common.item;
 
 import com.teambrmodding.assistedprogression.managers.ItemManager;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 /**
  * This file was created for AssistedProgression
@@ -15,7 +13,7 @@ import net.minecraft.item.ItemStack;
  * @author Paul Davis - pauljoda
  * @since 8/28/2019
  */
-public class DustItem extends Item implements IItemColor {
+public class DustItem extends Item {
     private int color;
     public DustItem(String name, int itemColor) {
         super(new Properties()
@@ -24,8 +22,7 @@ public class DustItem extends Item implements IItemColor {
         this.color = itemColor;
     }
 
-    @Override
-    public int getColor(ItemStack p_getColor_1_, int p_getColor_2_) {
+    public int getColor() {
         return color;
     }
 }

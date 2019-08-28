@@ -8,6 +8,7 @@ import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -25,9 +26,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
         ClientRegistry.bindTileEntitySpecialRenderer(GrinderTile.class, new GrinderTileRenderer<>());
-        Minecraft.getInstance().getItemColors().register((IItemColor) ItemManager.iron_dust,
+        Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.iron_dust).getColor(),
                 (IItemProvider) () -> ItemManager.iron_dust);
-        Minecraft.getInstance().getItemColors().register((IItemColor) ItemManager.gold_dust,
+        Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.gold_dust).getColor(),
                 (IItemProvider) () -> ItemManager.gold_dust);
     }
 }
