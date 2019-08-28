@@ -4,11 +4,10 @@ import com.teambr.nucleus.helper.LogHelper;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
 import com.teambrmodding.assistedprogression.recipe.RecipeTypeGrinderRecipe;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.item.crafting.*;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
@@ -129,5 +128,31 @@ public class RecipeHelper {
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    /**
+     * Adds a grinder recipe with a stack input and output
+     * @param label The label for this recipe, null to generate label
+     * @param input Input ItemStack
+     * @param output Output ItemStack
+     */
+    public static void addGrinderRecipe(@Nullable String label, ItemStack input, ItemStack output) {
+        grinderRecipes.add(new GrinderRecipe(
+                new ResourceLocation(Reference.MOD_ID,
+                        label == null ? "grinder_recipe_auto_" + grinderRecipes.size() : label),
+                Ingredient.fromStacks(input), output));
+    }
+
+    /**
+     * Adds a grinder recipe with a tag and stack output
+     * @param label The label for this recipe, null to generate label
+     * @param input Input Tag
+     * @param output Output ItemStack
+     */
+    public static void addGrinderRecipe(@Nullable String label, Tag<Item> input, ItemStack output) {
+        grinderRecipes.add(new GrinderRecipe(
+                new ResourceLocation(Reference.MOD_ID,
+                        label == null ? "grinder_recipe_auto_" + grinderRecipes.size() : label),
+                Ingredient.fromTag(input), output));
     }
 }

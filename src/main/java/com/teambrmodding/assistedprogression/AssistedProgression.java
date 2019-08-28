@@ -7,11 +7,14 @@ import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import com.teambrmodding.assistedprogression.managers.ScreenHelper;
 import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,7 +53,7 @@ public class AssistedProgression {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ScreenHelper::registerScreens);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     protected void serverStarted(FMLServerStartedEvent event) {
         // Add grinder recipes to our list
         RecipeHelper.grinderRecipes.clear();
@@ -65,6 +68,63 @@ public class AssistedProgression {
         });
 
         // Add custom recipes
+        ResourceLocation dustLocation   = new ResourceLocation("forge", "dusts");
+        ResourceLocation ingotLocation  = new ResourceLocation("forge", "ingots");
+        ResourceLocation oreLocation    = new ResourceLocation("forge", "ores");
 
+        /***************************************************************************************************************
+         * Dust from Ore                                                                                               *
+         ***************************************************************************************************************/
+        Tag<Item> oreTag  = ItemTags.getCollection().get(oreLocation);
+
+        // Get all items in the ore forge tag
+        for(Item oreItem : oreTag.getAllElements()) {
+            // Don't want to add something already made by built in
+            if (!RecipeHelper.isValidGrinderInput(new ItemStack(oreItem), recipeManager)) {
+                // Iterate all tags for item in forge ore tag
+                for (ResourceLocation tag : oreItem.getTags()) {
+                    // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
+                    ResourceLocation testDustLocation
+                            = new ResourceLocation(tag.toString().replace("ores", "dusts"));
+
+                    // We don't want to re-add the whole dust tag
+                    if (!testDustLocation.equals(dustLocation)
+                            && ItemTags.getCollection().get(testDustLocation) != null
+                            && ItemTags.getCollection().get(tag) != null) {
+                        ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
+                        output.setCount(2);
+                        RecipeHelper.addGrinderRecipe(null,
+                                ItemTags.getCollection().get(tag), output);
+                    }
+                }
+            }
+        }
+
+        /***************************************************************************************************************
+         * Dust from Ingot                                                                                             *
+         ***************************************************************************************************************/
+        Tag<Item> ingotTag  = ItemTags.getCollection().get(ingotLocation);
+
+        // Get all items in the ore forge tag
+        for(Item ingotItem : ingotTag.getAllElements()) {
+            // Don't want to add something already made by built in
+            if (!RecipeHelper.isValidGrinderInput(new ItemStack(ingotItem), recipeManager)) {
+                // Iterate all tags for item in forge ingot tag
+                for (ResourceLocation tag : ingotItem.getTags()) {
+                    // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
+                    ResourceLocation testDustLocation
+                            = new ResourceLocation(tag.toString().replace("ingots", "dusts"));
+
+                    // We don't want to re-add the whole dust tag
+                    if (!testDustLocation.equals(dustLocation)
+                            && ItemTags.getCollection().get(testDustLocation) != null
+                            && ItemTags.getCollection().get(tag) != null) {
+                        ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
+                        RecipeHelper.addGrinderRecipe(null,
+                                ItemTags.getCollection().get(tag), output);
+                    }
+                }
+            }
+        }
     }
 }

@@ -28,6 +28,10 @@
   "_comment": "Pipette",
   "item.assistedprogression.pipette": "Pipette",
 
+  "_comment:": "Dusts",
+  "item.assistedprogression.iron_dust": "Iron Dust",
+  "item.assistedprogression.gold_dust": "Gold Dust",
+
   "_comment": "######################",
   "_comment": "Tile Entities",
   "_comment": "######################",

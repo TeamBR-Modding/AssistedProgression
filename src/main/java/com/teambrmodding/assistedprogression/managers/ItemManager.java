@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
+import com.teambrmodding.assistedprogression.common.item.DustItem;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -37,6 +38,11 @@ public class ItemManager {
     @ObjectHolder("pipette")
     public static Item pipette;
 
+    @ObjectHolder("iron_dust")
+    public static Item iron_dust;
+
+    @ObjectHolder("gold_dust")
+    public static Item gold_dust;
 
     /*******************************************************************************************************************
      * BlockItems                                                                                                      *
@@ -64,6 +70,8 @@ public class ItemManager {
 
         // Register Items
         event.getRegistry().register(new PipetteItem());
+        event.getRegistry().register(new DustItem("iron_dust", 0xFFd8d8d8));
+        event.getRegistry().register(new DustItem("gold_dust", 0xFFdede00));
 
         // Register BlockItems
         registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);
