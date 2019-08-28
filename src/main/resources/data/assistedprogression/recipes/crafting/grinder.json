@@ -1,0 +1,25 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "WFW",
+    "CCC"
+  ],
+  "key": {
+    "S" : {
+      "tag": "forge:stone"
+    },
+    "W": {
+      "tag": "minecraft:walls"
+    },
+    "F": {
+      "item":"minecraft:flint"
+    },
+    "C": {
+      "tag": "forge:cobblestone"
+    }
+  },
+  "result": {
+    "item":"assistedprogression:grinder"
+  }
+}

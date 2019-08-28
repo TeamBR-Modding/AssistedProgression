@@ -288,7 +288,7 @@ public class GrinderTile extends InventoryHandler implements INamedContainerProv
 
     @Override
     public ITextComponent getDisplayName() {
-        return new StringTextComponent(ClientUtils.translate(Reference.MOD_ID + ".grinder"));
+        return new StringTextComponent(Reference.MOD_ID + ".grinder");
     }
 
     @Nullable

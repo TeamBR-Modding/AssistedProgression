@@ -69,7 +69,8 @@ public class GrinderBlock extends BaseBlock {
         }
     }
 
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos,
+                                    PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (worldIn.isRemote) {
             return true;
         }

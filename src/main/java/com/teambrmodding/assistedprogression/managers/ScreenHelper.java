@@ -2,6 +2,8 @@ package com.teambrmodding.assistedprogression.managers;
 
 import com.teambrmodding.assistedprogression.client.screen.GrinderScreen;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * This file was created for AssistedProgression
@@ -14,6 +16,7 @@ import net.minecraft.client.gui.ScreenManager;
  * @since 8/27/2019
  */
 public class ScreenHelper {
+    @OnlyIn(Dist.CLIENT)
     public static void registerScreens() {
         ScreenManager.registerFactory(ContainerManager.grinder, GrinderScreen::new);
     }

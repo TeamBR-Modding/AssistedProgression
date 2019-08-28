@@ -4,8 +4,6 @@ import com.google.common.primitives.SignedBytes;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.EntityType;
