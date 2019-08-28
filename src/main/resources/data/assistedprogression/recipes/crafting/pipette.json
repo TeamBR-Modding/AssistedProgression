@@ -1,0 +1,19 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "P  ",
+    " P ",
+    "  G"
+  ],
+  "key": {
+    "P" : {
+      "tag": "forge:pane/glass"
+    },
+    "G": {
+      "tag": "forge:glass"
+    }
+  },
+  "result": {
+    "item":"assistedprogression:pipette"
+  }
+}

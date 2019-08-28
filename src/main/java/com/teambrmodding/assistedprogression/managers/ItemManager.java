@@ -11,6 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
+import com.teambrmodding.assistedprogression.common.item.PipetteItem;
 
 /**
  * This file was created for AssistedProgression
@@ -29,8 +30,27 @@ public class ItemManager {
     // Create tab
     public static ItemGroup itemGroupAssistedProgression;
 
+    /*******************************************************************************************************************
+     * Items                                                                                                           *
+     *******************************************************************************************************************/
+
+    @ObjectHolder("pipette")
+    public static Item pipette;
+
+
+    /*******************************************************************************************************************
+     * BlockItems                                                                                                      *
+     *******************************************************************************************************************/
+
     @ObjectHolder("player_plate")
     public static Item player_plate;
+
+    @ObjectHolder("grinder")
+    public static Item grinder;
+
+    /*******************************************************************************************************************
+     * Register                                                                                                        *
+     *******************************************************************************************************************/
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
@@ -43,7 +63,11 @@ public class ItemManager {
         };
 
         // Register Items
+        event.getRegistry().register(new PipetteItem());
+
+        // Register BlockItems
         registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);
+        registerBlockItemForBlock(event.getRegistry(), BlockManager.grinder);
     }
 
     @SuppressWarnings("ConstantConditions")

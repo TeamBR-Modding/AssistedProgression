@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
+import com.teambrmodding.assistedprogression.common.block.GrinderBlock;
 import com.teambrmodding.assistedprogression.common.block.PlayerPlateBlock;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.Block;
@@ -25,8 +26,12 @@ public class BlockManager {
     @ObjectHolder("player_plate")
     public static Block player_plate;
 
+    @ObjectHolder("grinder")
+    public static Block grinder;
+
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(new PlayerPlateBlock());
+        event.getRegistry().register(new GrinderBlock());
     }
 }

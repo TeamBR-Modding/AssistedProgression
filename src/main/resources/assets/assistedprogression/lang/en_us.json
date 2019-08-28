@@ -1,6 +1,6 @@
 {
   "_comment": "Creative Tabs",
-  "itemGroup.assistedprogression:main": "Assisted Progression",
+  "itemGroup.assistedprogression": "Assisted Progression",
   "itemGroup.assistedprogression:pipette": "Assisted Progression : Pipettes",
 
   "_comment": "######################",
@@ -26,7 +26,7 @@
   "item.assistedprogression:item_exchanger": "Block Exchanger",
 
   "_comment": "Pipette",
-  "item.assistedprogression:item_pipette": "Pipette",
+  "item.assistedprogression.pipette": "Pipette",
 
   "_comment": "######################",
   "_comment": "Tile Entities",
@@ -42,7 +42,7 @@
   "block.assistedprogression:block_redstone_clock": "Redstone Clock",
 
   "_comment": "Grinder",
-  "block.assistedprogression:block_grinder": "Grinder",
+  "block.assistedprogression:grinder": "Grinder",
 
   "_comment": "Kinetic Generator",
   "block.assistedprogression:block_kinetic_generator": "Kinetic Generator",
@@ -51,7 +51,7 @@
   "_comment": "GUI",
   "_comment": "######################",
   "_comment": "Grinder",
-  "assistedprogression.grinder.title": "Grinder",
+  "assistedprogression.grinder": "Grinder",
   "assistedprogression.grinder.input": "Input",
   "assistedprogression.grinder.grinding": "Grinding",
   "assistedprogression.grinder.output": "Output",

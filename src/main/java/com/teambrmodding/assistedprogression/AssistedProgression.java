@@ -1,7 +1,12 @@
 package com.teambrmodding.assistedprogression;
 
 import com.teambrmodding.assistedprogression.lib.Reference;
+import com.teambrmodding.assistedprogression.managers.RecipeHelper;
+import com.teambrmodding.assistedprogression.managers.ScreenHelper;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 /**
  * This file was created for AssistedProgression
@@ -16,5 +21,12 @@ import net.minecraftforge.fml.common.Mod;
 @Mod(Reference.MOD_ID)
 public class AssistedProgression {
 
-    public AssistedProgression() { }
+    public AssistedProgression() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, RecipeHelper::registerRecipeSerializers);
+    }
+
+    private void setupClient(FMLClientSetupEvent event) {
+        ScreenHelper.registerScreens();
+    }
 }
