@@ -46,12 +46,13 @@ public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRender
 
                 @Override
                 public boolean shouldSpreadItems() {
-                    return true;
+                    return false;
                 }
             };
         }
 
         GlStateManager.pushMatrix();
+        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.translated(x + 0.5D, y, z + 0.5D);
         for(int i = 4; i < 7; i++) {
             ItemStack stack = grinder.getStackInSlot(i);

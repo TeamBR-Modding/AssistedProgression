@@ -8,10 +8,13 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -36,7 +39,12 @@ public class GrinderBlock extends BaseBlock {
      * Base Constructor
      */
     public GrinderBlock() {
-        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.0F),
+        super(Properties.create(
+                new Material(MaterialColor.STONE, false, false,
+                        true, false,
+                        false, false,
+                        false, PushReaction.NORMAL))
+                        .harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.0F),
                 "grinder", GrinderTile.class);
     }
 
@@ -82,6 +90,19 @@ public class GrinderBlock extends BaseBlock {
             }
             return true;
         }
+    }
+
+    @Override
+    public boolean isSolid(BlockState state) {
+        return false;
+    }
+
+    /**
+     * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
+     * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
+     */
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
