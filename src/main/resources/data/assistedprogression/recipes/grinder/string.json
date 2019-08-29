@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "tag": "minecraft:wool"
+  },
+  "output": {
+    "item": "minecraft:string",
+    "count": 4
+  }
+}

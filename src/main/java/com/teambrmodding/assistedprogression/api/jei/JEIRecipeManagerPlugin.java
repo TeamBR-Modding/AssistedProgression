@@ -1,6 +1,5 @@
-package com.teambrmodding.assistedprogression.api.grinder;
+package com.teambrmodding.assistedprogression.api.jei;
 
-import com.teambrmodding.assistedprogression.api.JEIAssistedProgression;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import mezz.jei.api.recipe.IFocus;

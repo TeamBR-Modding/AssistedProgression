@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "tag": "forge:ores/quartz"
+  },
+  "output": {
+    "item": "minecraft:quartz",
+    "count": 4
+  }
+}

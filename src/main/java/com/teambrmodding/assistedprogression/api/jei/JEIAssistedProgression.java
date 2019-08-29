@@ -1,12 +1,9 @@
-package com.teambrmodding.assistedprogression.api;
+package com.teambrmodding.assistedprogression.api.jei;
 
-import com.teambrmodding.assistedprogression.api.grinder.JEIGrinderRecipeCategory;
-import com.teambrmodding.assistedprogression.api.grinder.JEIRecipeManagerPlugin;
+import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeCategory;
 import com.teambrmodding.assistedprogression.client.screen.GrinderScreen;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
-import com.teambrmodding.assistedprogression.managers.RecipeHelper;
-import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IJeiHelpers;
@@ -14,7 +11,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.RegistryManager;
 
 /**
  * This file was created for AssistedProgression
@@ -45,13 +41,6 @@ public class JEIAssistedProgression implements IModPlugin {
 
         grinderCategory = new JEIGrinderRecipeCategory();
         registration.addRecipeCategories(grinderCategory);
-    }
-
-    @Override
-    public void registerRecipes(IRecipeRegistration registration) {
-       /* registration
-                .addRecipes(RecipeHelper.grinderRecipes,
-                        new ResourceLocation(Reference.MOD_ID, "grinder"));*/
     }
 
     @Override

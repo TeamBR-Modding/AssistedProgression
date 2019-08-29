@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "item": "minecraft:gravel"
+  },
+  "output": {
+    "item": "minecraft:flint",
+    "count": 3
+  }
+}

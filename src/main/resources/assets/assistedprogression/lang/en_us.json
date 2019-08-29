@@ -111,5 +111,8 @@
 
   "_comment": "######################",
   "_comment": "JEI",
-  "_comment": "######################"
+  "_comment": "######################",
+
+  "jei_grinder_progress": "Progress Multiplier",
+  "jei_assistedprogression_grinder_place": "Place pressure plate on top and jump on top to grind"
 }

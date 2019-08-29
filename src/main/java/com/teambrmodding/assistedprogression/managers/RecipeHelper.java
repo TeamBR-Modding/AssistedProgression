@@ -4,9 +4,13 @@ import com.teambr.nucleus.helper.LogHelper;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
 import com.teambrmodding.assistedprogression.recipe.RecipeTypeGrinderRecipe;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -17,6 +21,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,6 +82,121 @@ public class RecipeHelper {
      * recipes, we are going to wrap around it and add our own. Use this list for all references to recipes
      */
     public static List<GrinderRecipe> grinderRecipes = new ArrayList<>();
+
+    /**
+     * List of valid pressure plates that can be used to progress grinder, returns their multiplier
+     *
+     * Wood   - 1.0
+     * Stone  - 1.25
+     * Player - 1.5
+     * Iron   - 1.75
+     * Gold   - 2.0
+     *
+     */
+    public static Map<Block, Double> pressurePlates = new HashMap<>();
+
+    /**
+     * Add dynamic recipes to the grinder registry, used for ores
+     * @param recipeManager The recipe manager
+     */
+    @SuppressWarnings({"ConstantConditions"})
+    public static void generateDynamicGrinderRecipes(RecipeManager recipeManager) {
+        // Add grinder recipes to our list
+        grinderRecipes.clear();
+        getRecipes(GRINDER_RECIPE_TYPE, recipeManager)
+                .values().forEach((recipe) -> {
+            if(recipe instanceof GrinderRecipe) {
+                GrinderRecipe localRecipe = (GrinderRecipe) recipe;
+                grinderRecipes.add(localRecipe);
+            }
+        });
+
+        // Add custom recipes
+        ResourceLocation dustLocation   = new ResourceLocation("forge", "dusts");
+        ResourceLocation ingotLocation  = new ResourceLocation("forge", "ingots");
+        ResourceLocation oreLocation    = new ResourceLocation("forge", "ores");
+
+        /***************************************************************************************************************
+         * Dust from Ore                                                                                               *
+         ***************************************************************************************************************/
+        Tag<Item> oreTag  = ItemTags.getCollection().get(oreLocation);
+
+        // Get all items in the ore forge tag
+        for(Item oreItem : oreTag.getAllElements()) {
+            // Don't want to add something already made by built in
+            if (!isValidGrinderInput(new ItemStack(oreItem), null)) {
+                // Iterate all tags for item in forge ore tag
+                for (ResourceLocation tag : oreItem.getTags()) {
+                    // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
+                    ResourceLocation testDustLocation
+                            = new ResourceLocation(tag.toString().replace("ores", "dusts"));
+
+                    // We don't want to re-add the whole dust tag
+                    if (!testDustLocation.equals(dustLocation)
+                            && ItemTags.getCollection().get(testDustLocation) != null
+                            && ItemTags.getCollection().get(tag) != null) {
+                        ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
+                        output.setCount(2);
+                        addGrinderRecipe(null,
+                                ItemTags.getCollection().get(tag), output);
+                    }
+                }
+            }
+        }
+
+        /***************************************************************************************************************
+         * Dust from Ingot                                                                                             *
+         ***************************************************************************************************************/
+        Tag<Item> ingotTag  = ItemTags.getCollection().get(ingotLocation);
+
+        // Get all items in the ore forge tag
+        for(Item ingotItem : ingotTag.getAllElements()) {
+            // Don't want to add something already made by built in
+            if (!isValidGrinderInput(new ItemStack(ingotItem), null)) {
+                // Iterate all tags for item in forge ingot tag
+                for (ResourceLocation tag : ingotItem.getTags()) {
+                    // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
+                    ResourceLocation testDustLocation
+                            = new ResourceLocation(tag.toString().replace("ingots", "dusts"));
+
+                    // We don't want to re-add the whole dust tag
+                    if (!testDustLocation.equals(dustLocation)
+                            && ItemTags.getCollection().get(testDustLocation) != null
+                            && ItemTags.getCollection().get(tag) != null) {
+                        ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
+                        addGrinderRecipe(null,
+                                ItemTags.getCollection().get(tag), output);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Define the values for pressure plate progress in grinder
+     */
+    public static void definePressurePlateValues() {
+        pressurePlates.clear();
+
+        // Wooden
+        pressurePlates.put(Blocks.ACACIA_PRESSURE_PLATE, 1.0);
+        pressurePlates.put(Blocks.BIRCH_PRESSURE_PLATE, 1.0);
+        pressurePlates.put(Blocks.DARK_OAK_PRESSURE_PLATE, 1.0);
+        pressurePlates.put(Blocks.OAK_PRESSURE_PLATE, 1.0);
+        pressurePlates.put(Blocks.SPRUCE_PRESSURE_PLATE, 1.0);
+
+        // Stone
+        pressurePlates.put(Blocks.STONE_PRESSURE_PLATE, 1.25);
+
+        // Player
+        pressurePlates.put(BlockManager.player_plate, 1.5);
+
+        // Heavy
+        pressurePlates.put(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 1.75);
+
+        // Light
+        pressurePlates.put(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE, 2.0);
+    }
 
     /**
      * Checks if the given stack is valid in a grinder

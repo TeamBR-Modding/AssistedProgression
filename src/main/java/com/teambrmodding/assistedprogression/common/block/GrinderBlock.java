@@ -3,6 +3,7 @@ package com.teambrmodding.assistedprogression.common.block;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
+import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -58,22 +59,12 @@ public class GrinderBlock extends BaseBlock {
 
         if(entityIn instanceof PlayerEntity && entityIn.fallDistance > 0.0 &&
                 !worldIn.getBlockState(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ)).isAir(worldIn, new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ))) {
+
             Block landedBlock = worldIn.getBlockState(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ)).getBlock();
-            if(landedBlock.getTags().contains(new ResourceLocation(Reference.MOD_ID, "pressure_plate")))
+
+            if(RecipeHelper.pressurePlates.containsKey(landedBlock))
                 ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
-                        .activateGrinder((int) entityIn.fallDistance, 1.0);
-            else if(landedBlock == Blocks.STONE_PRESSURE_PLATE)
-                ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
-                        .activateGrinder((int) entityIn.fallDistance, 1.25);
-            else if(landedBlock == BlockManager.player_plate)
-                ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
-                        .activateGrinder((int) entityIn.fallDistance, 1.5);
-            else if(landedBlock == Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
-                ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
-                        .activateGrinder((int) entityIn.fallDistance, 1.75);
-            else if(landedBlock == Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE)
-                ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
-                        .activateGrinder((int) entityIn.fallDistance, 2.0);
+                        .activateGrinder((int) entityIn.fallDistance, RecipeHelper.pressurePlates.get(landedBlock));
         }
     }
 

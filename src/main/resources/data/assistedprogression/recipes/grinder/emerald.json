@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "tag": "forge:ores/emerald"
+  },
+  "output": {
+    "item": "minecraft:emerald",
+    "count": 2
+  }
+}

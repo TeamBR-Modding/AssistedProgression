@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "item": "minecraft:glass"
+  },
+  "output": {
+    "item": "minecraft:sand",
+    "count": 1
+  }
+}
