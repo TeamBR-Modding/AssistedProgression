@@ -1,7 +1,9 @@
 package com.teambrmodding.assistedprogression.api.jei;
 
 import com.teambrmodding.assistedprogression.api.jei.grinder.JEIGrinderRecipeCategory;
+import com.teambrmodding.assistedprogression.client.screen.CrafterScreen;
 import com.teambrmodding.assistedprogression.client.screen.GrinderScreen;
+import com.teambrmodding.assistedprogression.common.container.CrafterContainer;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
 import mezz.jei.api.IModPlugin;
@@ -53,9 +55,18 @@ public class JEIAssistedProgression implements IModPlugin {
     }
 
     @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        registration.addRecipeTransferHandler(CrafterContainer.class, VanillaRecipeCategoryUid.CRAFTING,
+                2, 9, 20, 36);
+    }
+
+    @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(GrinderScreen.class, 47, 36, 27, 20,
                 new ResourceLocation(Reference.MOD_ID, "grinder"));
+
+        registration.addRecipeClickArea(CrafterScreen.class, 61,  34, 14, 9, VanillaRecipeCategoryUid.CRAFTING);
+        registration.addRecipeClickArea(CrafterScreen.class, 101, 63, 14, 9, VanillaRecipeCategoryUid.CRAFTING);
     }
 
     @Override
