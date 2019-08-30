@@ -1,0 +1,19 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+      "particle": "block/crafting_table_front",
+      "down": "block/oak_planks",
+      "up": "block/crafting_table_top",
+      "north": "block/crafting_table_front",
+      "east": "block/bookshelf",
+      "south": "block/crafting_table_side",
+      "west": "block/bookshelf"
+	},
+    "display": {
+        "thirdperson": {
+            "rotation": [ 10, -45, 170 ],
+            "translation": [ 0, 1.5, -2.75 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        }
+    }
+}

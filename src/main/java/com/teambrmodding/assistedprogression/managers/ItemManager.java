@@ -54,6 +54,9 @@ public class ItemManager {
     @ObjectHolder("grinder")
     public static Item grinder;
 
+    @ObjectHolder("crafter")
+    public static Item crafter;
+
     /*******************************************************************************************************************
      * Register                                                                                                        *
      *******************************************************************************************************************/
@@ -76,6 +79,7 @@ public class ItemManager {
         // Register BlockItems
         registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);
         registerBlockItemForBlock(event.getRegistry(), BlockManager.grinder);
+        registerBlockItemForBlock(event.getRegistry(), BlockManager.crafter);
     }
 
     @SuppressWarnings("ConstantConditions")

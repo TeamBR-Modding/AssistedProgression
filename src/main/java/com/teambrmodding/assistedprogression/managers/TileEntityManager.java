@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambrmodding.assistedprogression.common.block.GrinderBlock;
+import com.teambrmodding.assistedprogression.common.tile.CrafterTile;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.tileentity.TileEntityType;
@@ -26,10 +26,16 @@ public class TileEntityManager {
     @ObjectHolder("grinder")
     public static TileEntityType<GrinderTile> grinder;
 
+    @ObjectHolder("crafter")
+    public static TileEntityType<CrafterTile> crafter;
+
     @SubscribeEvent
     public static void registerTileEntityTypes(RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry()
                 .register(TileEntityType.Builder.create(GrinderTile::new, BlockManager.grinder)
                         .build(null).setRegistryName("grinder"));
+        event.getRegistry()
+                .register(TileEntityType.Builder.create(CrafterTile::new, BlockManager.crafter)
+                .build(null).setRegistryName("crafter"));
     }
 }

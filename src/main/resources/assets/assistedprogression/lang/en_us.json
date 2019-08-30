@@ -37,7 +37,7 @@
   "_comment": "######################",
 
   "_comment": "Crafter",
-  "block.assistedprogression:block_crafter": "Dual Crafter",
+  "block.assistedprogression.crafter": "Dual Crafter",
 
   "_comment": "Player Sensitive Pressure Plate",
   "block.assistedprogression.player_plate": "Player Sensitive Pressure Plate",
@@ -54,6 +54,7 @@
   "_comment": "######################",
   "_comment": "GUI",
   "_comment": "######################",
+
   "_comment": "Grinder",
   "assistedprogression.grinder": "Grinder",
   "assistedprogression.grinder.input": "Input",
@@ -94,7 +95,7 @@
   "_comment": "Descriptions",
   "_comment": "######################",
 
-  "block_crafter.desc": "Has two crafting grids with persistent inventories",
+  "crafter.desc": "Has two crafting grids with persistent inventories",
   "grinder.desc": "Grinds ores and other resources for double ore output. Activate by placing a pressure plate on top and jumping on the plate. The higher you jump from, the more it progresses. The better the pressure plate the faster it processes",
   "block_grinder.desc1": "Multiplier:",
   "block_redstone_clock.desc": "Emits a redstone pulse once per second. Disable with a lever or other redstone signal",

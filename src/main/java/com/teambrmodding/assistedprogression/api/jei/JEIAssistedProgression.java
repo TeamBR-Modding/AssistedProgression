@@ -6,6 +6,7 @@ import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.*;
@@ -47,6 +48,8 @@ public class JEIAssistedProgression implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(BlockManager.grinder),
                 new ResourceLocation(Reference.MOD_ID, "grinder"));
+        registration.addRecipeCatalyst(new ItemStack(BlockManager.crafter),
+                VanillaRecipeCategoryUid.CRAFTING);
     }
 
     @Override

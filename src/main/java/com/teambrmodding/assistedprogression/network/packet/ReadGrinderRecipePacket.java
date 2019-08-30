@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.network.packet;
 
-import com.teambr.nucleus.network.INetworkMessage;
+import com.teambr.nucleus.network.packet.INetworkMessage;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
 import net.minecraft.item.ItemStack;

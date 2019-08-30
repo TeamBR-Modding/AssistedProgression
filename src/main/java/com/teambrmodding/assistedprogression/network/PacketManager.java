@@ -1,18 +1,17 @@
 package com.teambrmodding.assistedprogression.network;
 
-import com.teambr.nucleus.network.INetworkMessage;
+import com.teambr.nucleus.network.packet.INetworkMessage;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.network.packet.ReadGrinderRecipePacket;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.event.EventNetworkChannel;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
+
+;
 
 /**
  * This file was created for AssistedProgression

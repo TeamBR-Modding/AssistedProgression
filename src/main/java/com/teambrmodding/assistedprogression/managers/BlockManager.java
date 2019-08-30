@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
+import com.teambrmodding.assistedprogression.common.block.CrafterBlock;
 import com.teambrmodding.assistedprogression.common.block.GrinderBlock;
 import com.teambrmodding.assistedprogression.common.block.PlayerPlateBlock;
 import com.teambrmodding.assistedprogression.lib.Reference;
@@ -29,9 +30,13 @@ public class BlockManager {
     @ObjectHolder("grinder")
     public static Block grinder;
 
+    @ObjectHolder("crafter")
+    public static Block crafter;
+
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(new PlayerPlateBlock());
         event.getRegistry().register(new GrinderBlock());
+        event.getRegistry().register(new CrafterBlock());
     }
 }

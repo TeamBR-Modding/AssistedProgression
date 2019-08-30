@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
+import com.teambrmodding.assistedprogression.client.screen.CrafterScreen;
 import com.teambrmodding.assistedprogression.client.screen.GrinderScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,5 +20,6 @@ public class ScreenHelper {
     @OnlyIn(Dist.CLIENT)
     public static void registerScreens() {
         ScreenManager.registerFactory(ContainerManager.grinder, GrinderScreen::new);
+        ScreenManager.registerFactory(ContainerManager.crafter, CrafterScreen::new);
     }
 }

@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
+import com.teambrmodding.assistedprogression.common.container.CrafterContainer;
 import com.teambrmodding.assistedprogression.common.container.GrinderContainer;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.inventory.container.ContainerType;
@@ -26,8 +27,12 @@ public class ContainerManager {
     @ObjectHolder("grinder")
     public static ContainerType<GrinderContainer> grinder;
 
+    @ObjectHolder("crafter")
+    public static ContainerType<CrafterContainer> crafter;
+
     @SubscribeEvent
     public static void registerContainerTypes(RegistryEvent.Register<ContainerType<?>> event) {
         event.getRegistry().register(IForgeContainerType.create(GrinderContainer::new).setRegistryName("grinder"));
+        event.getRegistry().register(IForgeContainerType.create(CrafterContainer::new).setRegistryName("crafter"));
     }
 }
