@@ -1,6 +1,7 @@
 package com.teambrmodding.assistedprogression;
 
 import com.teambrmodding.assistedprogression.client.ClientProxy;
+import com.teambrmodding.assistedprogression.client.tooltip.EnchantmentToolTip;
 import com.teambrmodding.assistedprogression.commands.GetEnchantmentList;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.lib.Reference;
@@ -44,6 +45,7 @@ public class AssistedProgression {
         proxy.init();
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ScreenHelper::registerScreens);
         RecipeHelper.definePressurePlateValues();
+        MinecraftForge.EVENT_BUS.register(new EnchantmentToolTip());
     }
 
     protected void serverStarting(FMLServerStartingEvent event) {
