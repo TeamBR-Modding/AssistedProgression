@@ -1,6 +1,7 @@
 package com.teambrmodding.assistedprogression;
 
 import com.teambrmodding.assistedprogression.client.ClientProxy;
+import com.teambrmodding.assistedprogression.commands.GetEnchantmentList;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 /**
@@ -33,6 +35,7 @@ public class AssistedProgression {
     public AssistedProgression() {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, RecipeHelper::registerRecipeSerializers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
         MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
         PacketManager.initPackets();
     }
@@ -41,6 +44,10 @@ public class AssistedProgression {
         proxy.init();
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ScreenHelper::registerScreens);
         RecipeHelper.definePressurePlateValues();
+    }
+
+    protected void serverStarting(FMLServerStartingEvent event) {
+        new GetEnchantmentList(event.getCommandDispatcher());
     }
 
     protected void serverStarted(FMLServerStartedEvent event) {
