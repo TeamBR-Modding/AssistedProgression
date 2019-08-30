@@ -14,6 +14,16 @@ apply plugin: 'maven-publish'
 
 ext.configFile = file "gradle.properties"
 
+String build = ""
+if (project.hasProperty("teamcity")) {
+    build = "B" + project.ext["build.number"]
+}
+if (build == null || build == '') {
+    version = "${project.minecraft_version}-${project.mod_version}"
+} else {
+    version = "${project.minecraft_version}-${project.mod_version}-" + build
+}
+
 group= "com.teambrmodding.assistedprogression"
 archivesBaseName = "AssistedProgression"
 
@@ -80,8 +90,69 @@ repositories {
     }
 }
 
+configurations {
+    deployerJars
+}
+
+processResources {
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'META-INF/mods.toml'
+
+        // replace version and mcversion
+        expand 'version': project.version
+    }
+
+    // copy everything else, thats not the mods.toml
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'META-INF/mods.toml', '**/psd/**'
+    }
+}
+
 configurations.all {
     resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+}
+
+task devJar(type: Jar, dependsOn: 'classes') {
+    from(sourceSets.main.output) {
+        include '**'
+    }
+    extension = 'jar'
+    classifier = 'dev'
+}
+
+task deobfJar(type: Jar) {
+    classifier = "deobf"
+    from sourceSets.main.output
+}
+
+task javadocJar(type: Zip, dependsOn: javadoc) {
+    from 'build/docs/javadoc'
+    classifier = 'javadoc'
+}
+
+task sourceJarJava(type: Jar, dependsOn: "classes") {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives devJar
+    archives sourceJarJava
+    archives javadocJar
+    archives deobfJar
+}
+
+configurations {
+    deployerJars
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
 }
 
 dependencies {
