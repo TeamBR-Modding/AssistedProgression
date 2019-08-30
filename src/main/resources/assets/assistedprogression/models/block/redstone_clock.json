@@ -1,9 +1,9 @@
 {
     "parent" : "block/block",
     "textures" : {
-        "particle" : "blocks/redstone_block",
-        "block" : "blocks/stone",
-        "redstone" : "blocks/redstone_block"
+        "particle" : "block/redstone_block",
+        "block" : "block/stone",
+        "redstone" : "block/redstone_block"
     },
     "elements" : [
         {

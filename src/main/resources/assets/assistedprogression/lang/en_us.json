@@ -43,7 +43,7 @@
   "block.assistedprogression.player_plate": "Player Sensitive Pressure Plate",
 
   "_comment": "Redstone Clock",
-  "block.assistedprogression:block_redstone_clock": "Redstone Clock",
+  "block.assistedprogression.redstone_clock": "Redstone Clock",
 
   "_comment": "Grinder",
   "block.assistedprogression.grinder": "Grinder",
@@ -98,7 +98,7 @@
   "crafter.desc": "Has two crafting grids with persistent inventories",
   "grinder.desc": "Grinds ores and other resources for double ore output. Activate by placing a pressure plate on top and jumping on the plate. The higher you jump from, the more it progresses. The better the pressure plate the faster it processes",
   "block_grinder.desc1": "Multiplier:",
-  "block_redstone_clock.desc": "Emits a redstone pulse once per second. Disable with a lever or other redstone signal",
+  "redstone_clock.desc": "Emits a redstone pulse once per second. Disable with a lever or other redstone signal",
   "block_kinetic_generator.desc": "When this block is hit by a piston head, it will generate some power. Hit all sides as fast as you can for best results",
   "block_player_plate.desc": "Like a normal pressure plate, but will only respond to a player entity",
 

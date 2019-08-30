@@ -57,6 +57,9 @@ public class ItemManager {
     @ObjectHolder("crafter")
     public static Item crafter;
 
+    @ObjectHolder("redstone_clock")
+    public static Item redstone_clock;
+
     /*******************************************************************************************************************
      * Register                                                                                                        *
      *******************************************************************************************************************/
@@ -80,6 +83,7 @@ public class ItemManager {
         registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);
         registerBlockItemForBlock(event.getRegistry(), BlockManager.grinder);
         registerBlockItemForBlock(event.getRegistry(), BlockManager.crafter);
+        registerBlockItemForBlock(event.getRegistry(), BlockManager.redstone_clock);
     }
 
     @SuppressWarnings("ConstantConditions")

@@ -2,6 +2,7 @@ package com.teambrmodding.assistedprogression.managers;
 
 import com.teambrmodding.assistedprogression.common.tile.CrafterTile;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
+import com.teambrmodding.assistedprogression.common.tile.RedstoneClockTile;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
@@ -29,6 +30,9 @@ public class TileEntityManager {
     @ObjectHolder("crafter")
     public static TileEntityType<CrafterTile> crafter;
 
+    @ObjectHolder("redstone_clock")
+    public static TileEntityType<RedstoneClockTile> redstone_clock;
+
     @SubscribeEvent
     public static void registerTileEntityTypes(RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry()
@@ -37,5 +41,8 @@ public class TileEntityManager {
         event.getRegistry()
                 .register(TileEntityType.Builder.create(CrafterTile::new, BlockManager.crafter)
                 .build(null).setRegistryName("crafter"));
+        event.getRegistry()
+                .register(TileEntityType.Builder.create(RedstoneClockTile::new, BlockManager.redstone_clock)
+                .build(null).setRegistryName("redstone_clock"));
     }
 }

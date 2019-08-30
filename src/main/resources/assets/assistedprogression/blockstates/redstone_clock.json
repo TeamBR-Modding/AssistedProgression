@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=true" : { "model": "assistedprogression:block/redstone_clock"},
+    "powered=false" : { "model": "assistedprogression:block/redstone_clock"}
+  }
+}
