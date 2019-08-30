@@ -2,9 +2,12 @@ package com.teambrmodding.assistedprogression.api.jei;
 
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
+import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.advanced.IRecipeManagerPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
@@ -29,7 +32,23 @@ public class JEIRecipeManagerPlugin implements IRecipeManagerPlugin {
      */
     @Override
     public <V> List<ResourceLocation> getRecipeCategoryUids(IFocus<V> focus) {
-        return Arrays.asList(new ResourceLocation(Reference.MOD_ID, "grinder"));
+        if(focus != null && focus.getValue() instanceof ItemStack) {
+            ItemStack filterStack = (ItemStack) focus.getValue();
+            switch (focus.getMode()) {
+                case INPUT:
+                    for(GrinderRecipe recipe : RecipeHelper.grinderRecipes)
+                        if(recipe.isValid(filterStack))
+                            return Arrays.asList(new ResourceLocation(Reference.MOD_ID, "grinder"));
+                    break;
+                case OUTPUT:
+                    for(GrinderRecipe recipe : RecipeHelper.grinderRecipes)
+                        if(recipe.getRecipeOutput().getItem() == filterStack.getItem())
+                            return Arrays.asList(new ResourceLocation(Reference.MOD_ID, "grinder"));
+                    break;
+                default:
+            }
+        }
+        return new ArrayList<>();
     }
 
     /**
@@ -41,8 +60,21 @@ public class JEIRecipeManagerPlugin implements IRecipeManagerPlugin {
     @SuppressWarnings("unchecked")
     @Override
     public <T, V> List<T> getRecipes(IRecipeCategory<T> recipeCategory, IFocus<V> focus) {
-        if(recipeCategory == JEIAssistedProgression.grinderCategory)
-            return (List<T>) RecipeHelper.grinderRecipes;
+        if(recipeCategory == JEIAssistedProgression.grinderCategory) {
+            if(focus == null)
+                return (List<T>) RecipeHelper.grinderRecipes;
+            else if(focus.getValue() instanceof ItemStack){
+                switch (focus.getMode()) {
+                    case INPUT:
+                        return (List<T>) Arrays.asList(RecipeHelper.grinderRecipes.stream()
+                                .filter(recipe -> recipe.input.test((ItemStack)focus.getValue())).toArray());
+                    case OUTPUT:
+                        return (List<T>) Arrays.asList(RecipeHelper.grinderRecipes.stream()
+                                .filter(recipe -> recipe.getRecipeOutput().getItem() == ((ItemStack)focus.getValue()).getItem()).toArray());
+                    default:
+                }
+            }
+        }
         return new ArrayList<>();
     }
 
