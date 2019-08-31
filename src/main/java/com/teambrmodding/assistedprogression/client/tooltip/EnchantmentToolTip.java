@@ -1,6 +1,7 @@
 package com.teambrmodding.assistedprogression.client.tooltip;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import com.teambrmodding.assistedprogression.managers.ConfigManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
@@ -26,7 +27,6 @@ import java.util.List;
  * @author James Rogers - Dyonovan
  * @since 08/30/19
  */
-
 public class EnchantmentToolTip {
 
     private static final KeyBinding keyBindSneak = Minecraft.getInstance().gameSettings.keyBindSneak;
@@ -38,7 +38,7 @@ public class EnchantmentToolTip {
     public void changeToolTip(ItemTooltipEvent event) {
         ItemStack itemStack = event.getItemStack();
 
-       if (itemStack.isEnchanted() || itemStack.getItem() instanceof EnchantedBookItem) {
+       if (ConfigManager.GENERAL.showEnchantTooltip.get() && (itemStack.isEnchanted() || itemStack.getItem() instanceof EnchantedBookItem)) {
            List<ITextComponent> tooltip = event.getToolTip();
 
            if (!InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), keyBindSneak.getKey().getKeyCode())) {

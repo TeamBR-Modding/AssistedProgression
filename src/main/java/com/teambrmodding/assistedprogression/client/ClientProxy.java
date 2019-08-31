@@ -1,6 +1,7 @@
 package com.teambrmodding.assistedprogression.client;
 
 import com.teambrmodding.assistedprogression.client.render.GrinderTileRenderer;
+import com.teambrmodding.assistedprogression.client.tooltip.EnchantmentToolTip;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.common.item.DustItem;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 /**
@@ -30,5 +32,7 @@ public class ClientProxy extends CommonProxy {
                 (IItemProvider) () -> ItemManager.iron_dust);
         Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.gold_dust).getColor(),
                 (IItemProvider) () -> ItemManager.gold_dust);
+
+        MinecraftForge.EVENT_BUS.register(new EnchantmentToolTip());
     }
 }
