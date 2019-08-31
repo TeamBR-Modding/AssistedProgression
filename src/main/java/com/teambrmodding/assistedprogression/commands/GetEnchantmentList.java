@@ -18,7 +18,7 @@ import static net.minecraft.command.Commands.literal;
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * @author James Rogers - Dyonovan
- * @since 11/13/17
+ * @since 08/30/19
  */
 
 public class GetEnchantmentList {
