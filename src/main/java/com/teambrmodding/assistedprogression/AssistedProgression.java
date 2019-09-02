@@ -1,7 +1,6 @@
 package com.teambrmodding.assistedprogression;
 
 import com.teambrmodding.assistedprogression.client.ClientProxy;
-import com.teambrmodding.assistedprogression.client.tooltip.EnchantmentToolTip;
 import com.teambrmodding.assistedprogression.commands.GetEnchantmentList;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.lib.Reference;
@@ -11,7 +10,6 @@ import com.teambrmodding.assistedprogression.managers.ScreenHelper;
 import com.teambrmodding.assistedprogression.network.PacketManager;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -21,8 +19,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import java.nio.file.Paths;
 
 /**
  * This file was created for AssistedProgression
