@@ -1,7 +1,7 @@
 package com.teambrmodding.assistedprogression;
 
 import com.teambrmodding.assistedprogression.client.ClientProxy;
-import com.teambrmodding.assistedprogression.commands.GetEnchantmentList;
+import com.teambrmodding.assistedprogression.common.commands.GetEnchantmentList;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.ConfigManager;
