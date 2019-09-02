@@ -12,7 +12,7 @@
   "_comment": "######################",
 
   "_comment": "Magnets",
-  "item.assistedprogression:item_cheap_magnet": "Cheap Magnet",
+  "item.assistedprogression.magnet": "Magnet",
   "item.assistedprogression:item_electro_magnet": "Electomagnet",
 
   "_comment": "TrashBags",
@@ -103,7 +103,7 @@
   "block_player_plate.desc": "Like a normal pressure plate, but will only respond to a player entity",
 
   "item_electro_magnet.desc": "Attacts item entities and xp orbs, requires power. Shift+Right-Click to toggle activation",
-  "item_cheap_magnet.desc": "Attracts all sorts of things, some dangerous. Requires no power. Shift+Right-Click to toggle activation",
+  "item_cheap_magnet.desc": "Attracts all sorts of things, some dangerous. Shift+Right-Click to toggle activation",
   "item_exchanger.desc": "Exchanges blocks in a given area. Shift+Right-Click on a block to set as target and normal Right-Click to swap shown area. Shift-Right-Click on no blocks toggles exchange size",
   "item_trash_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup",
   "item_hefty_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup. Has 18 slots",

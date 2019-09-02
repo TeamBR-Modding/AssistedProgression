@@ -1,6 +1,8 @@
 package com.teambrmodding.assistedprogression.common.item;
 
 import com.teambrmodding.assistedprogression.managers.ItemManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -17,12 +19,26 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * This file was created for AssistedProgression
+ * <p>
+ * AssistedProgression is licensed under the
+ * Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License:
+ * http://creativecommons.org/licenses/by-nc-sa/4.0/
+ *
+ * @author James Rogers - Dyonovan
+ * @since 09/01/19
+ */
 
 public class MagnetItem extends Item {
 
@@ -31,11 +47,11 @@ public class MagnetItem extends Item {
      *******************************************************************************************************************/
 
     // Defined values
-    public static final int    RANGE        = 10;
-    public static final float ATTRACT_SPEED = 0.0075F;
+    private static final int RANGE = 10;
+    private static final float ATTRACT_SPEED = 0.0075F;
 
     // NBT Tags
-    public static final String ACTIVE = "ActiveCharging";
+    private static final String ACTIVE = "ActiveCharging";
 
     public MagnetItem(String name) {
         super(new Properties()
@@ -51,11 +67,6 @@ public class MagnetItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        /*if (!stack.hasTag()) {
-            CompoundNBT compound = new CompoundNBT();
-            compound.putBoolean(ACTIVE, false);
-            stack.setTag(compound);
-        }*/
 
         if (!worldIn.isRemote && stack.hasTag() && stack.getTag().contains(ACTIVE) && stack.getTag().getBoolean(ACTIVE) && entityIn instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entityIn;
@@ -78,18 +89,18 @@ public class MagnetItem extends Item {
 
             //Bad things also happen
             // Explosive stuff
-            entitiesInBox.addAll(worldIn.getEntitiesWithinAABB(CreeperEntity.class,   bb));
+            entitiesInBox.addAll(worldIn.getEntitiesWithinAABB(CreeperEntity.class, bb));
             entitiesInBox.addAll(worldIn.getEntitiesWithinAABB(TNTEntity.class, bb));
 
             // Need to expand, these next few are too fast for a small box
             bb.expand(RANGE * 2, RANGE * 2, RANGE * 2);
 
             // Projectiles
-            entitiesInBox.addAll(worldIn.getEntitiesWithinAABB(ArrowEntity.class,         bb));
+            entitiesInBox.addAll(worldIn.getEntitiesWithinAABB(ArrowEntity.class, bb));
             entitiesInBox.addAll(worldIn.getEntitiesWithinAABB(FireballEntity.class, bb));
 
             // Make sure the list is populated
-            if(!entitiesInBox.isEmpty()) {
+            if (!entitiesInBox.isEmpty()) {
                 for (Entity entity : entitiesInBox) {
                     // Create a vector pointing to the player
                     Vec3d motionVector = new Vec3d(
@@ -121,7 +132,7 @@ public class MagnetItem extends Item {
             ItemStack stack = player.getHeldItem(hand);
 
             CompoundNBT compound = new CompoundNBT();
-            compound.putBoolean(ACTIVE, (stack.hasTag() ? !stack.getTag().getBoolean(ACTIVE) : true));
+            compound.putBoolean(ACTIVE, (!stack.hasTag() || !stack.getTag().getBoolean(ACTIVE)));
             stack.setTag(compound);
             return new ActionResult<>(ActionResultType.SUCCESS, stack);
         }
@@ -131,6 +142,13 @@ public class MagnetItem extends Item {
     @Override
     public boolean hasEffect(ItemStack stack) {
         return stack.hasTag() && stack.getTag().contains(ACTIVE) && stack.getTag().getBoolean(ACTIVE);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
+        super.addInformation(stack, world, tooltip, advanced);
+
+        tooltip.add(new StringTextComponent(I18n.format("item_cheap_magnet.desc")));
     }
 }
 
