@@ -1,4 +1,4 @@
-package com.teambrmodding.assistedprogression.commands;
+package com.teambrmodding.assistedprogression.common.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.teambrmodding.assistedprogression.lib.Reference;

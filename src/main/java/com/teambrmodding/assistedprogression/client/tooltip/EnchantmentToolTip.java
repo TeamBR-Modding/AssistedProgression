@@ -46,7 +46,7 @@ public class EnchantmentToolTip {
                        I18n.format("assistedprogression:tooltip.activate",
                        ChatFormatting.RED,
                        I18n.format(keyBindSneak.getTranslationKey()),
-                       ChatFormatting.GRAY)));
+                       ChatFormatting.WHITE)));
            } else {
                ListNBT listNBT;
                if (itemStack.getItem() instanceof EnchantedBookItem) {
