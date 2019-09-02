@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * This file was created for AssistedProgression
- *
+ * <p>
  * AssistedProgression is licensed under the
  * Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License:
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
@@ -38,28 +38,30 @@ public class EnchantmentToolTip {
     public void changeToolTip(ItemTooltipEvent event) {
         ItemStack itemStack = event.getItemStack();
 
-       if (ConfigManager.GENERAL.showEnchantTooltip.get() && (itemStack.isEnchanted() || itemStack.getItem() instanceof EnchantedBookItem)) {
-           List<ITextComponent> tooltip = event.getToolTip();
+        if (ConfigManager.GENERAL.showEnchantTooltip.get() && (itemStack.isEnchanted() || itemStack.getItem() instanceof EnchantedBookItem)) {
+            List<ITextComponent> tooltip = event.getToolTip();
 
-           if (!InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), keyBindSneak.getKey().getKeyCode())) {
-               tooltip.add(new StringTextComponent(
-                       I18n.format("assistedprogression:tooltip.activate",
-                       ChatFormatting.RED,
-                       I18n.format(keyBindSneak.getTranslationKey()),
-                       ChatFormatting.WHITE)));
-           } else {
-               ListNBT listNBT;
-               if (itemStack.getItem() instanceof EnchantedBookItem) {
-                   listNBT = EnchantedBookItem.getEnchantments(itemStack);
-               } else {
-                   listNBT = itemStack.getEnchantmentTagList();
-               }
-               for (int i = 0; i < listNBT.size(); i++) {
-                   CompoundNBT nbt = listNBT.getCompound(i);
-                   String s = nbt.getString("id");
-                   tooltip.add(new StringTextComponent(I18n.format("assistedprogression:" + s)));
-               }
-           }
-       }
+            if (!InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), keyBindSneak.getKey().getKeyCode())) {
+                tooltip.add(new StringTextComponent(
+                        I18n.format("assistedprogression:tooltip.activate",
+                                ChatFormatting.RED,
+                                I18n.format(keyBindSneak.getTranslationKey()),
+                                ChatFormatting.WHITE)));
+            } else {
+                ListNBT listNBT;
+                if (itemStack.getItem() instanceof EnchantedBookItem) {
+                    listNBT = EnchantedBookItem.getEnchantments(itemStack);
+                } else {
+                    listNBT = itemStack.getEnchantmentTagList();
+                }
+                for (int i = 0; i < listNBT.size(); i++) {
+                    CompoundNBT nbt = listNBT.getCompound(i);
+                    String s = nbt.getString("id");
+                    String formatted = I18n.format("assistedprogression:" + s);
+                    if (!formatted.equals("assistedprogression:" + s))
+                        tooltip.add(new StringTextComponent(I18n.format("assistedprogression:" + s)));
+                }
+            }
+        }
     }
 }
