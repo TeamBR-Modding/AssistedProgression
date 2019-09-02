@@ -2,6 +2,7 @@ package com.teambrmodding.assistedprogression.managers;
 
 import com.teambrmodding.assistedprogression.common.item.DustItem;
 import com.teambrmodding.assistedprogression.common.item.MagnetItem;
+import com.teambrmodding.assistedprogression.common.item.SpawnerReclocatorItem;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -48,6 +49,9 @@ public class ItemManager {
     @ObjectHolder("magnet")
     public static Item magnet;
 
+    @ObjectHolder("spawner_relocator")
+    public static Item spawner_relocator;
+
     /*******************************************************************************************************************
      * BlockItems                                                                                                      *
      *******************************************************************************************************************/
@@ -83,6 +87,7 @@ public class ItemManager {
         event.getRegistry().register(new DustItem("iron_dust", 0xFFd8d8d8));
         event.getRegistry().register(new DustItem("gold_dust", 0xFFdede00));
         event.getRegistry().register(new MagnetItem("magnet"));
+        event.getRegistry().register(new SpawnerReclocatorItem("spawner_relocator"));
 
         // Register BlockItems
         registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);
