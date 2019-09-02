@@ -20,7 +20,7 @@
   "item.assistedprogression:item_hefty_bag": "Hefty Bag",
 
   "_comment": "Spawner Relocator",
-  "item.assistedprogression:item_spawner_relocator": "Spawner Relocator",
+  "item.assistedprogression.spawner_relocator": "Spawner Relocator",
 
   "_comment": "Exchanger",
   "item.assistedprogression:item_exchanger": "Block Exchanger",
@@ -83,7 +83,7 @@
   "assistedprogression.text.pipette.fluidStored": "Fluid Contained:",
 
   "_comment": "Spawner Relocator",
-  "assistedprogression.text.spawnerRelocator.type": "Type:",
+  "assistedprogression.text.spawnerRelocator.type": "%s%sType: %s",
 
   "_comment": "######################",
   "_comment": "Commands",

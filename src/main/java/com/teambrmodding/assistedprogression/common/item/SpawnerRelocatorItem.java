@@ -1,7 +1,10 @@
 package com.teambrmodding.assistedprogression.common.item;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -17,7 +20,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * This file was created for AssistedProgression
@@ -29,12 +37,12 @@ import net.minecraft.world.World;
  * @author James Rogers - Dyonovan
  * @since 9/2/2019
  */
-public class SpawnerReclocatorItem extends Item {
+public class SpawnerRelocatorItem extends Item {
 
     /**
      * @param name The item registry name
      */
-    public SpawnerReclocatorItem(String name) {
+    public SpawnerRelocatorItem(String name) {
         super(new Properties()
                 .maxStackSize(1)
                 .group(ItemManager.itemGroupAssistedProgression));
@@ -89,5 +97,22 @@ public class SpawnerReclocatorItem extends Item {
                 }
             }
         }
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
+
+        if (stack.hasTag()) {
+            CompoundNBT compoundNBT = stack.getTag();
+            CompoundNBT spawnData = compoundNBT.getCompound("SpawnData");
+            String spawnType = I18n.format("entity." + spawnData.getString("id").replace(":", ".")); //TODO replace with actual registry lookup
+
+            tooltip.add(new StringTextComponent(I18n.format("assistedprogression.text.spawnerRelocator.type",
+                    ChatFormatting.GOLD,
+                    ChatFormatting.ITALIC,
+                    spawnType)));
+        }
+
+        super.addInformation(stack, world, tooltip, advanced);
     }
 }
