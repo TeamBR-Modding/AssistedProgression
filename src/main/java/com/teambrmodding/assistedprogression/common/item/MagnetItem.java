@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.common.item;
 
+import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -27,6 +28,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ import java.util.List;
  * @since 09/01/19
  */
 
-public class MagnetItem extends Item {
+public class MagnetItem extends Item implements IAdvancedToolTipProvider {
 
     /*******************************************************************************************************************
      * Variables                                                                                                       *
@@ -144,11 +146,16 @@ public class MagnetItem extends Item {
         return stack.hasTag() && stack.getTag().contains(ACTIVE) && stack.getTag().getBoolean(ACTIVE);
     }
 
+    /**
+     * Get the tool tip to present when shift is pressed
+     *
+     * @param stack The itemstack
+     * @return The list to display
+     */
+    @Nullable
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
-        super.addInformation(stack, world, tooltip, advanced);
-
-        tooltip.add(new StringTextComponent(I18n.format("item_cheap_magnet.desc")));
+    public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
+        return Collections.singletonList(I18n.format("item_cheap_magnet.desc"));
     }
 }
 
