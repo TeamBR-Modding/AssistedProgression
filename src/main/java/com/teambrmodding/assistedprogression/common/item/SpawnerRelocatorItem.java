@@ -5,6 +5,7 @@ import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
@@ -23,6 +25,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -105,7 +108,8 @@ public class SpawnerRelocatorItem extends Item {
         if (stack.hasTag()) {
             CompoundNBT compoundNBT = stack.getTag();
             CompoundNBT spawnData = compoundNBT.getCompound("SpawnData");
-            String spawnType = I18n.format("entity." + spawnData.getString("id").replace(":", ".")); //TODO replace with actual registry lookup
+            EntityType entity =  ForgeRegistries.ENTITIES.getValue(new ResourceLocation(spawnData.getString("id")));
+            String spawnType = I18n.format(entity.getName().getUnformattedComponentText());
 
             tooltip.add(new StringTextComponent(I18n.format("assistedprogression.text.spawnerRelocator.type",
                     ChatFormatting.GOLD,
