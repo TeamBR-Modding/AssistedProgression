@@ -1,6 +1,7 @@
 package com.teambrmodding.assistedprogression.managers;
 
 import com.teambrmodding.assistedprogression.common.item.DustItem;
+import com.teambrmodding.assistedprogression.common.item.MagnetItem;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -44,6 +45,9 @@ public class ItemManager {
     @ObjectHolder("gold_dust")
     public static Item gold_dust;
 
+    @ObjectHolder("magnet")
+    public static Item magnet;
+
     /*******************************************************************************************************************
      * BlockItems                                                                                                      *
      *******************************************************************************************************************/
@@ -78,6 +82,7 @@ public class ItemManager {
         event.getRegistry().register(new PipetteItem());
         event.getRegistry().register(new DustItem("iron_dust", 0xFFd8d8d8));
         event.getRegistry().register(new DustItem("gold_dust", 0xFFdede00));
+        event.getRegistry().register(new MagnetItem("magnet"));
 
         // Register BlockItems
         registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);
