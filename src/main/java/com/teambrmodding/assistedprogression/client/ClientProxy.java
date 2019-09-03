@@ -1,18 +1,24 @@
 package com.teambrmodding.assistedprogression.client;
 
+import com.teambrmodding.assistedprogression.client.model.ModelPipette;
 import com.teambrmodding.assistedprogression.client.render.GrinderTileRenderer;
 import com.teambrmodding.assistedprogression.client.tooltip.EnchantmentToolTip;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
 import com.teambrmodding.assistedprogression.common.item.DustItem;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
+import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.util.IItemProvider;
+import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.Random;
 
 /**
  * This file was created for AssistedProgression
@@ -24,6 +30,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
  * @author Paul Davis - pauljoda
  * @since 8/27/2019
  */
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
@@ -34,5 +41,17 @@ public class ClientProxy extends CommonProxy {
                 (IItemProvider) () -> ItemManager.gold_dust);
 
         MinecraftForge.EVENT_BUS.register(new EnchantmentToolTip());
+    }
+
+    @SubscribeEvent
+    public static void textureStitch(TextureStitchEvent.Pre event) {
+        event.addSprite(ModelPipette.maskLocation);
+    }
+
+    @SubscribeEvent
+    public static void modelBake(ModelBakeEvent event) {
+        IBakedModel baseModel = event.getModelRegistry().get(ModelPipette.LOCATION);
+        event.getModelRegistry().put(ModelPipette.LOCATION,
+                new ModelPipette.PipetteDynamicModel(event.getModelLoader(), baseModel));
     }
 }
