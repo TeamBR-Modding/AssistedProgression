@@ -106,8 +106,13 @@ public class SpawnerRelocatorItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
+    public boolean hasEffect(ItemStack stack) {
+        return stack.hasTag();
+    }
 
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag advanced) {
         if (stack.hasTag()) {
             CompoundNBT compoundNBT = stack.getTag();
             CompoundNBT spawnData = compoundNBT.getCompound("SpawnData");
@@ -119,7 +124,6 @@ public class SpawnerRelocatorItem extends Item {
                     ChatFormatting.ITALIC,
                     spawnType)));
         }
-
         super.addInformation(stack, world, tooltip, advanced);
     }
 }
