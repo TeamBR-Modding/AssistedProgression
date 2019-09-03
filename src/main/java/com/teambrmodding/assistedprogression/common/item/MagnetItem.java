@@ -23,6 +23,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import javax.annotation.Nonnull;
@@ -153,6 +155,7 @@ public class MagnetItem extends Item implements IAdvancedToolTipProvider {
      * @return The list to display
      */
     @Nullable
+    @OnlyIn(Dist.CLIENT)
     @Override
     public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
         return Collections.singletonList(I18n.format("item_cheap_magnet.desc"));
