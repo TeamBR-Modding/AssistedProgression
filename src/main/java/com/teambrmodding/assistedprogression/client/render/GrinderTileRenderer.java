@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * This file was created for AssistedProgression
@@ -20,6 +22,7 @@ import net.minecraft.item.ItemStack;
  * @author Paul Davis - pauljoda
  * @since 8/27/2019
  */
+@OnlyIn(Dist.CLIENT)
 public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRenderer<T> {
     private ItemRenderer itemRenderer;
     private static ItemEntity customItem;
