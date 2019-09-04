@@ -20,6 +20,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
@@ -36,6 +39,27 @@ import net.minecraftforge.fml.network.NetworkHooks;
  * @since 8/27/2019
  */
 public class GrinderBlock extends BaseBlock {
+
+    private static final VoxelShape NORTH_LOWER_RIM = Block.makeCuboidShape(2.0, 0.0, 0.0, 14.0, 2.0, 2.0);
+    private static final VoxelShape EAST_LOWER_RIM  = Block.makeCuboidShape(14.0, 0.0, 2.0, 16.0, 2.0, 14.0);
+    private static final VoxelShape SOUTH_LOWER_RIM = Block.makeCuboidShape(2.0, 0.0, 14.0, 14.0, 2.0, 16.0);
+    private static final VoxelShape WEST_LOWER_RIM  = Block.makeCuboidShape(0.0, 0.0, 2.0, 2.0, 2.0, 14.0);
+    private static final VoxelShape NEUP            = Block.makeCuboidShape(14.0, 0.0, 0.0, 16.0, 14.0, 2.0);
+    private static final VoxelShape SEUP            = Block.makeCuboidShape(14.0, 0.0, 14.0, 16.0, 14.0, 16.0);
+    private static final VoxelShape SWUP            = Block.makeCuboidShape(0.0, 0.0, 14.0, 2.0, 14.0, 16.0);
+    private static final VoxelShape NWUP            = Block.makeCuboidShape(0.0, 0.0, 0.0, 2.0, 14.0, 2.0);
+    private static final VoxelShape LOWER_PLANE     = Block.makeCuboidShape(2.0, 0.001, 2.0, 14.0, 0.05, 14.0);
+    private static final VoxelShape TOP_SLAB        = Block.makeCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 16.0);
+    private static final VoxelShape CHUTE_TOP       = Block.makeCuboidShape(2.0, 10.0, 2.0, 14.0, 14.0, 14.0);
+    private static final VoxelShape CHUTE_MIDDLE    = Block.makeCuboidShape(3.0, 8.0, 3.0, 13.0, 10.0, 13.0);
+    private static final VoxelShape CHUTE_BOTTOM_N  = Block.makeCuboidShape(6.0, 5.0, 6.0, 10.0, 8.0, 7.0);
+    private static final VoxelShape CHUTE_BOTTOM_E  = Block.makeCuboidShape(9.0, 5.0, 7.0, 10.0, 8.0, 9.0);
+    private static final VoxelShape CHUTE_BOTTOM_W  = Block.makeCuboidShape(6.0, 5.0, 7.0, 7.0, 8.0, 9.0);
+    private static final VoxelShape CHUTE_BOTTOM_S  = Block.makeCuboidShape(6.0, 5.0, 9.0, 10.0, 8.0, 10.0);
+    private static final VoxelShape ALL_COMBINED    = VoxelShapes.or(NORTH_LOWER_RIM, EAST_LOWER_RIM, SOUTH_LOWER_RIM,
+            WEST_LOWER_RIM, NEUP, SEUP, SWUP, NWUP, LOWER_PLANE, TOP_SLAB, CHUTE_TOP, CHUTE_MIDDLE, CHUTE_BOTTOM_N,
+            CHUTE_BOTTOM_E, CHUTE_BOTTOM_S, CHUTE_BOTTOM_W);
+
     /**
      * Base Constructor
      */
@@ -52,6 +76,11 @@ public class GrinderBlock extends BaseBlock {
     /*******************************************************************************************************************
      * Block                                                                                                           *
      *******************************************************************************************************************/
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return ALL_COMBINED;
+    }
 
     @Override
     public void onLanded(IBlockReader worldIn, Entity entityIn) {

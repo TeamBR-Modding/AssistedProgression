@@ -72,7 +72,6 @@ public class PipetteItem extends Item {
     @Override
     public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
         if(!context.getWorld().isRemote) {
-            //ItemStack stack = context.getPlayer().getHeldItem(context.getHand());
             if(stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null).isPresent()
                     && context.getWorld().getTileEntity(context.getPos()) != null
                     && context.getWorld().getTileEntity(context.getPos())
@@ -104,7 +103,8 @@ public class PipetteItem extends Item {
             if(currentStored == null)
                 return;
 
-            tooltip.add(new StringTextComponent("  " + currentStored.getDisplayName().getFormattedText()
+            tooltip.add(new StringTextComponent("  " +
+                    ClientUtils.translate(currentStored.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey()) //TODO: Go back to fluid name when forge fixes
                     + ": " + ClientUtils.formatNumber(currentStored.getAmount()) + " mb"));
         } else
             tooltip.add(new StringTextComponent("  "

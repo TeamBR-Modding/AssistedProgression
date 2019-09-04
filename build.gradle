@@ -1,12 +1,12 @@
 buildscript {
-  repositories {
-    maven { url = 'https://files.minecraftforge.net/maven' }
-    jcenter()
-    mavenCentral()
-  }
-  dependencies {
-    classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-  }
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+    }
 }
 apply plugin: 'net.minecraftforge.gradle'
 
@@ -35,42 +35,60 @@ minecraft {
 //  replace "@VERSION@", project.mod_version
 //  replaceIn "Reference.java"
 
-  runs {
-    client {
-      workingDirectory project.file('run')
+    runs {
+        client {
+            workingDirectory project.file('run')
 
-      // Recommended logging data for a userdev environment
-      property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-      // Recommended logging level for the console
-      property 'forge.logging.console.level', 'debug'
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
 
-      mods {
-        assistedprogression {
-          source sourceSets.main
+            mods {
+                assistedprogression {
+                    source sourceSets.main
+                }
+            }
         }
-      }
-    }
 
-    server {
-      workingDirectory project.file('run')
+        server {
+            workingDirectory project.file('run')
 
-      // Recommended logging data for a userdev environment
-      property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-      // Recommended logging level for the console
-      property 'forge.logging.console.level', 'debug'
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
 
-      mods {
-        assistedprogression {
-          source sourceSets.main
+            mods {
+                assistedprogression {
+                    source sourceSets.main
+                }
+            }
         }
-      }
-    }
 
-      mappings channel: 'snapshot', version: '20190719-1.14.3'
+        data {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'assistedprogression', '--all', '--output', file('src/generated/resources/')
+
+            mods {
+                assistedprogression {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        mappings channel: 'snapshot', version: '20190719-1.14.3'
 //    makeObfSourceJar = false
-  }
+    }
 }
 
 repositories {
