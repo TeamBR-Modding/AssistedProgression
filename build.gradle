@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.0.139', changing: true
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -86,7 +86,7 @@ minecraft {
             }
         }
 
-        mappings channel: 'snapshot', version: '20190719-1.14.3'
+        mappings channel: 'snapshot', version: '20190903-1.14.3'
 //    makeObfSourceJar = false
     }
 }

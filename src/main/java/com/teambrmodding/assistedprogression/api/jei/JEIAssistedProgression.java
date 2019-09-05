@@ -12,6 +12,7 @@ import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.*;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -72,5 +73,12 @@ public class JEIAssistedProgression implements IModPlugin {
     @Override
     public void registerAdvanced(IAdvancedRegistration registration) {
         registration.addRecipeManagerPlugin(new JEIRecipeManagerPlugin());
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        // JEI sometimes fails, not sure root cause but to prevent this from failing to register, check for add here
+        if(!jeiRuntime.getRecipeManager().getRecipeCategories().contains(grinderCategory))
+            jeiRuntime.getRecipeManager().getRecipeCategories().add(grinderCategory);
     }
 }
