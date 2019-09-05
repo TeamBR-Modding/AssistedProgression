@@ -2,7 +2,7 @@ package com.teambrmodding.assistedprogression.api.jei.grinder;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teambr.nucleus.util.ClientUtils;
-import com.teambrmodding.assistedprogression.api.jei.JEIAssistedProgression;
+import com.teambrmodding.assistedprogression.api.jei.AssistedProgressionJEIPlugin;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
@@ -17,13 +17,11 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +35,7 @@ import java.util.List;
  * @author Paul Davis - pauljoda
  * @since 8/28/2019
  */
-public class JEIGrinderRecipeCategory implements IRecipeCategory<GrinderRecipe> {
+public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> {
 
     private ITickTimer timer;
     private ItemStack grinderStack;
@@ -74,7 +72,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<GrinderRecipe> 
      */
     @Override
     public IDrawable getBackground() {
-        return JEIAssistedProgression.jeiHelpers.getGuiHelper().createDrawable(new ResourceLocation(Reference.MOD_ID,
+        return AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper().createDrawable(new ResourceLocation(Reference.MOD_ID,
                 "textures/gui/jei/grinder.png"), 0, 0, 170, 80);
     }
 
@@ -84,7 +82,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<GrinderRecipe> 
      */
     @Override
     public IDrawable getIcon() {
-        return JEIAssistedProgression.jeiHelpers.getGuiHelper()
+        return AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper()
                 .createDrawableIngredient(new ItemStack(BlockManager.grinder));
     }
 
@@ -101,7 +99,7 @@ public class JEIGrinderRecipeCategory implements IRecipeCategory<GrinderRecipe> 
     @Override
     public void draw(GrinderRecipe recipe, double mouseX, double mouseY) {
         if(timer == null) {
-            timer = JEIAssistedProgression.jeiHelpers.getGuiHelper()
+            timer = AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper()
                     .createTickTimer((RecipeHelper.pressurePlates.keySet().size() - 1) * 20,
                             (RecipeHelper.pressurePlates.keySet().size() * 20) - 1, false);
         }

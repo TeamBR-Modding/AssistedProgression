@@ -7,7 +7,6 @@ import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.advanced.IRecipeManagerPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import java.util.List;
  * @author Paul Davis - pauljoda
  * @since 8/28/2019
  */
-public class JEIRecipeManagerPlugin implements IRecipeManagerPlugin {
+public class AssistedProgressionJEIPluginAdvanced implements IRecipeManagerPlugin {
     /**
      * Returns a list of Recipe Categories offered for the focus.
      *
@@ -60,7 +59,7 @@ public class JEIRecipeManagerPlugin implements IRecipeManagerPlugin {
     @SuppressWarnings("unchecked")
     @Override
     public <T, V> List<T> getRecipes(IRecipeCategory<T> recipeCategory, IFocus<V> focus) {
-        if(recipeCategory == JEIAssistedProgression.grinderCategory) {
+        if(recipeCategory == AssistedProgressionJEIPlugin.grinderCategory) {
             if(focus == null)
                 return (List<T>) RecipeHelper.grinderRecipes;
             else if(focus.getValue() instanceof ItemStack){
@@ -86,7 +85,7 @@ public class JEIRecipeManagerPlugin implements IRecipeManagerPlugin {
     @SuppressWarnings("unchecked")
     @Override
     public <T> List<T> getRecipes(IRecipeCategory<T> recipeCategory) {
-        if(recipeCategory == JEIAssistedProgression.grinderCategory)
+        if(recipeCategory == AssistedProgressionJEIPlugin.grinderCategory)
             return (List<T>) RecipeHelper.grinderRecipes;
         return new ArrayList<>();
     }

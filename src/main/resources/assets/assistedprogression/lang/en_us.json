@@ -1,7 +1,7 @@
 {
   "_comment": "Creative Tabs",
   "itemGroup.assistedprogression": "Assisted Progression",
-  "itemGroup.assistedprogression:pipette": "Assisted Progression : Pipettes",
+  "itemGroup.assistedprogression.pipettes": "Assisted Progression : Pipettes",
 
   "_comment": "######################",
   "_comment": "Blocks",
@@ -13,17 +13,14 @@
 
   "_comment": "Magnets",
   "item.assistedprogression.magnet": "Magnet",
-  "item.assistedprogression:item_electro_magnet": "Electomagnet",
+  "item.assistedprogression.electro_magnet": "Electomagnet",
 
   "_comment": "TrashBags",
-  "item.assistedprogression:item_trash_bag": "Trash Bag",
-  "item.assistedprogression:item_hefty_bag": "Hefty Bag",
+  "item.assistedprogression.trash_bag": "Trash Bag",
+  "item.assistedprogression.hefty_bag": "Hefty Bag",
 
   "_comment": "Spawner Relocator",
   "item.assistedprogression.spawner_relocator": "Spawner Relocator",
-
-  "_comment": "Exchanger",
-  "item.assistedprogression:item_exchanger": "Block Exchanger",
 
   "_comment": "Pipette",
   "item.assistedprogression.pipette": "Pipette",
@@ -48,9 +45,6 @@
   "_comment": "Grinder",
   "block.assistedprogression.grinder": "Grinder",
 
-  "_comment": "Kinetic Generator",
-  "block.assistedprogression:block_kinetic_generator": "Kinetic Generator",
-
   "_comment": "######################",
   "_comment": "GUI",
   "_comment": "######################",
@@ -71,12 +65,6 @@
 
   "assistedprogression.text.active": "Active",
   "assistedprogression.text.disabled": "Disabled",
-
-  "assistedprogression.text.redstoneFlux": "Redstone Flux",
-
-  "_comment": "Exchanger",
-  "assistedprogression.text.exchanger.blockSet": "Block Set!",
-  "assistedprogression.text.exchanger.sizeSet": "Size Set to",
 
   "_comment": "Pipette",
   "assistedprogression.text.pipette.empty": "Empty",
@@ -99,15 +87,14 @@
   "grinder.desc": "Grinds ores and other resources for double ore output. Activate by placing a pressure plate on top and jumping on the plate. The higher you jump from, the more it progresses. The better the pressure plate the faster it processes",
   "block_grinder.desc1": "Multiplier:",
   "redstone_clock.desc": "Emits a redstone pulse once per second. Disable with a lever or other redstone signal",
-  "block_kinetic_generator.desc": "When this block is hit by a piston head, it will generate some power. Hit all sides as fast as you can for best results",
-  "block_player_plate.desc": "Like a normal pressure plate, but will only respond to a player entity",
+  "player_plate.desc": "Like a normal pressure plate, but will only respond to a player entity",
 
   "item_electro_magnet.desc": "Attacts item entities and xp orbs, requires power. Shift+Right-Click to toggle activation",
   "item_cheap_magnet.desc": "Attracts all sorts of things, some dangerous. Shift+Right-Click to toggle activation",
   "item_exchanger.desc": "Exchanges blocks in a given area. Shift+Right-Click on a block to set as target and normal Right-Click to swap shown area. Shift-Right-Click on no blocks toggles exchange size",
-  "item_trash_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup",
-  "item_hefty_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup. Has 18 slots",
-  "item_spawner_relocator.desc": "Hold right click and release while looking at a spawner to pick it up, hold right click while aiming at a block to place it back down",
+  "trash_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup",
+  "hefty_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup. Has 18 slots",
+  "spawner_relocator.desc": "Hold right click and release while looking at a spawner to pick it up, hold right click while aiming at a block to place it back down",
   "item_pipette.desc": "Holds up to one bucket of fluid, useful for removing fluid amounts less than one bucket. Right click fluid handling tiles to insert and extract fluid",
 
   "_comment": "######################",

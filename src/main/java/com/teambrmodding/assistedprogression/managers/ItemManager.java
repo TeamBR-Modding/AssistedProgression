@@ -1,8 +1,6 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambrmodding.assistedprogression.common.item.DustItem;
-import com.teambrmodding.assistedprogression.common.item.MagnetItem;
-import com.teambrmodding.assistedprogression.common.item.SpawnerRelocatorItem;
+import com.teambrmodding.assistedprogression.common.item.*;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -14,7 +12,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
-import com.teambrmodding.assistedprogression.common.item.PipetteItem;
+
+import java.sql.Ref;
 
 /**
  * This file was created for AssistedProgression
@@ -30,8 +29,12 @@ import com.teambrmodding.assistedprogression.common.item.PipetteItem;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ItemManager {
 
-    // Create tab
+    // Create tabs
+    // Main Tab
     public static ItemGroup itemGroupAssistedProgression;
+
+    // Pipette Tag
+    public static ItemGroup itemGroupAssistedProgressionPipettes;
 
     /*******************************************************************************************************************
      * Items                                                                                                           *
@@ -51,6 +54,12 @@ public class ItemManager {
 
     @ObjectHolder("spawner_relocator")
     public static Item spawner_relocator;
+
+    @ObjectHolder("hefty_bag")
+    public static Item hefty_bag;
+
+    @ObjectHolder("trash_bag")
+    public static Item trash_bag;
 
     /*******************************************************************************************************************
      * BlockItems                                                                                                      *
@@ -82,12 +91,21 @@ public class ItemManager {
             }
         };
 
+        itemGroupAssistedProgressionPipettes = new ItemGroup(Reference.MOD_ID + ".pipettes") {
+            @Override
+            public ItemStack createIcon() {
+                return new ItemStack(ItemManager.pipette);
+            }
+        };
+
         // Register Items
         event.getRegistry().register(new PipetteItem());
         event.getRegistry().register(new DustItem("iron_dust", 0xFFd8d8d8));
         event.getRegistry().register(new DustItem("gold_dust", 0xFFdede00));
         event.getRegistry().register(new MagnetItem("magnet"));
         event.getRegistry().register(new SpawnerRelocatorItem("spawner_relocator"));
+        event.getRegistry().register(new TrashBagItem("trash_bag", 1));
+        event.getRegistry().register(new TrashBagItem("hefty_bag", 18));
 
         // Register BlockItems
         registerBlockItemForBlock(event.getRegistry(), BlockManager.player_plate);

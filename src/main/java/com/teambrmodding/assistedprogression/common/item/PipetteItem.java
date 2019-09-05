@@ -50,7 +50,7 @@ public class PipetteItem extends Item {
     public PipetteItem() {
         super(new Properties()
                 .maxStackSize(1)
-                .group(ItemManager.itemGroupAssistedProgression));
+                .group(ItemManager.itemGroupAssistedProgressionPipettes));
         setRegistryName("pipette");
     }
 
@@ -116,7 +116,7 @@ public class PipetteItem extends Item {
      */
     @Override
     public void fillItemGroup(ItemGroup itemIn, NonNullList<ItemStack> tab) {
-        if(itemIn == ItemManager.itemGroupAssistedProgression) {
+        if(itemIn == ItemManager.itemGroupAssistedProgressionPipettes) {
             tab.add(new ItemStack(this));
 
             // Add for all fluids

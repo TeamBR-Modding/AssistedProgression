@@ -2,6 +2,7 @@ package com.teambrmodding.assistedprogression.network;
 
 import com.teambr.nucleus.network.packet.INetworkMessage;
 import com.teambrmodding.assistedprogression.lib.Reference;
+import com.teambrmodding.assistedprogression.network.packet.NotifyServerOfTrashBagChanges;
 import com.teambrmodding.assistedprogression.network.packet.ReadGrinderRecipePacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkEvent;
@@ -38,6 +39,7 @@ public class PacketManager {
      */
     public static void initPackets() {
         registerMessage(ReadGrinderRecipePacket.class, ReadGrinderRecipePacket::process);
+        registerMessage(NotifyServerOfTrashBagChanges.class, NotifyServerOfTrashBagChanges::process);
     }
 
     // Local hold for next packet id

@@ -7,13 +7,13 @@
   ],
   "key": {
     "S": {
-      "item":"minecraft:string"
+      "tag":"forge:string"
     },
     "L": {
-      "item":"minecraft:leather"
+      "tag":"forge:ingots/iron"
     }
   },
   "result": {
-    "item":"assistedprogression:item_trash_bag"
+    "item":"assistedprogression:hefty_bag"
   }
 }
