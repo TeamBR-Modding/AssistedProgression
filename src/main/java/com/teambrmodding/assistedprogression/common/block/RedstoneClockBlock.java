@@ -108,11 +108,6 @@ public class RedstoneClockBlock extends BaseBlock {
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
     public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return true;
     }

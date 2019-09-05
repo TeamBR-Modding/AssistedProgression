@@ -67,9 +67,7 @@ public class InventoryNull implements IInventory {
      * @param stack
      */
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
-
-    }
+    public void setInventorySlotContents(int index, ItemStack stack) { }
 
     /**
      * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
@@ -84,9 +82,7 @@ public class InventoryNull implements IInventory {
      * hasn't changed and skip it.
      */
     @Override
-    public void markDirty() {
-
-    }
+    public void markDirty() { }
 
     /**
      * Don't rename this method to canInteractWith due to conflicts with Container
@@ -99,14 +95,10 @@ public class InventoryNull implements IInventory {
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
-
-    }
+    public void openInventory(PlayerEntity player) { }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
-
-    }
+    public void closeInventory(PlayerEntity player) { }
 
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
@@ -121,7 +113,5 @@ public class InventoryNull implements IInventory {
     }
 
     @Override
-    public void clear() {
-
-    }
+    public void clear() { }
 }

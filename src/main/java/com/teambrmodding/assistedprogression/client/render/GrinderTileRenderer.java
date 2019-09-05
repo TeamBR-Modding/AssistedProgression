@@ -24,7 +24,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRenderer<T> {
+
+    // We use our own renderer, minecraft has limited access to some things we need
     private ItemRenderer itemRenderer;
+
+    // Custom entity, to pass around so we don't have to keep making so many instances
     private static ItemEntity customItem;
 
     @Override
@@ -54,6 +58,7 @@ public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRender
             };
         }
 
+        // Render items
         GlStateManager.pushMatrix();
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.translated(x + 0.5D, y, z + 0.5D);
@@ -63,6 +68,8 @@ public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRender
                 customItem.setItem(stack);
                 GlStateManager.pushMatrix();
                 GlStateManager.scaled(0.45D, 0.45D, 0.45D);
+
+                // Each slot rotates 120 degrees, dropping 3 to offset slot to normal range for calculation
                 int rotation = (i - 3) * 120;
                 double xRot = 0.25 * Math.cos(Math.toRadians(rotation));
                 double zRot = 0.25 * Math.sin(Math.toRadians(rotation));

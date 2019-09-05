@@ -22,13 +22,24 @@ import org.lwjgl.opengl.GL11;
  */
 public class CrafterScreen extends ContainerScreen<CrafterContainer> {
 
+    // Display Image
     private ResourceLocation background = new ResourceLocation(Reference.MOD_ID + ":textures/gui/crafter.png");
 
+    /**
+     * Creates a gui for the crafter
+     * @param container THe container for the object
+     * @param playerInventory The player's inventory of the one openning
+     * @param title Title for display
+     */
     public CrafterScreen(CrafterContainer container, PlayerInventory playerInventory, ITextComponent title) {
         super(container, playerInventory, title);
         xSize = 176;
         ySize = 166;
     }
+
+    /*******************************************************************************************************************
+     * Screen                                                                                                          *
+     *******************************************************************************************************************/
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override

@@ -45,7 +45,7 @@ import java.util.List;
  * @author Paul Davis - pauljoda
  * @since 8/25/2019
  */
-public class PipetteItem extends Item {
+public class PipetteItem extends Item implements IAdvancedToolTipProvider{
 
     public PipetteItem() {
         super(new Properties()
@@ -130,5 +130,21 @@ public class PipetteItem extends Item {
                             tab.add(pipetteStack);
                     });
         }
+    }
+
+    /*******************************************************************************************************************
+     * IAdvancedToolTipProvider                                                                                        *
+     *******************************************************************************************************************/
+
+    /**
+     * Get the tool tip to present when shift is pressed
+     *
+     * @param stack The itemstack
+     * @return The list to display
+     */
+    @Nullable
+    @Override
+    public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
+        return Collections.singletonList(ClientUtils.translate("pipette.desc"));
     }
 }

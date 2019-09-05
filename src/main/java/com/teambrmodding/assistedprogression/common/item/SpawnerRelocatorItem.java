@@ -1,6 +1,9 @@
 package com.teambrmodding.assistedprogression.common.item;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import com.teambr.nucleus.common.IAdvancedToolTipProvider;
+import com.teambr.nucleus.common.IToolTipProvider;
+import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.resources.I18n;
@@ -29,7 +32,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,11 +48,8 @@ import java.util.List;
  * @author James Rogers - Dyonovan
  * @since 9/2/2019
  */
-public class SpawnerRelocatorItem extends Item {
+public class SpawnerRelocatorItem extends Item implements IAdvancedToolTipProvider {
 
-    /**
-     * @param name The item registry name
-     */
     public SpawnerRelocatorItem(String name) {
         super(new Properties()
                 .maxStackSize(1)
@@ -63,6 +66,10 @@ public class SpawnerRelocatorItem extends Item {
     public int getUseDuration(ItemStack stack) {
         return 7200;
     }
+
+    /*******************************************************************************************************************
+     * Item                                                                                                            *
+     *******************************************************************************************************************/
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
@@ -104,6 +111,10 @@ public class SpawnerRelocatorItem extends Item {
         }
     }
 
+    /*******************************************************************************************************************
+     * Display Info                                                                                                    *
+     *******************************************************************************************************************/
+
     @OnlyIn(Dist.CLIENT)
     @Override
     public boolean hasEffect(ItemStack stack) {
@@ -125,5 +136,21 @@ public class SpawnerRelocatorItem extends Item {
                     spawnType)));
         }
         super.addInformation(stack, world, tooltip, advanced);
+    }
+
+    /*******************************************************************************************************************
+     * IAdvancedToolTipProvider                                                                                        *
+     *******************************************************************************************************************/
+
+    /**
+     * Get the tool tip to present when shift is pressed
+     *
+     * @param stack The itemstack
+     * @return The list to display
+     */
+    @Nullable
+    @Override
+    public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
+        return Collections.singletonList(ClientUtils.translate("spawner_relocator.desc"));
     }
 }

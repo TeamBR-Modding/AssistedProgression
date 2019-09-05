@@ -89,7 +89,6 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
     /**
      * Draw extras or additional info about the recipe.
      * Use the mouse position for things like button highlights.
-     * Tooltips are handled by {@link #getTooltipStrings(Object, double, double)}
      *
      * @param mouseX the X position of the mouse, relative to the recipe.
      * @param mouseY the Y position of the mouse, relative to the recipe.
@@ -129,6 +128,13 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
                 48, 18, 0xFFFFFF);
     }
 
+    /**
+     * Get tooltips for dispay
+     * @param recipe The recipe
+     * @param mouseX Cursor x
+     * @param mouseY Curson y
+     * @return A list of strings, empty for nothing
+     */
     @Override
     public List<String> getTooltipStrings(GrinderRecipe recipe, double mouseX, double mouseY) {
         if(mouseX > 15 && mouseX < 43) {

@@ -42,7 +42,7 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.gold_dust).getColor(),
                 (IItemProvider) () -> ItemManager.gold_dust);
 
-        MinecraftForge.EVENT_BUS.register(new EnchantmentToolTip());
+        MinecraftForge.EVENT_BUS.addListener(EnchantmentToolTip::changeToolTip);
     }
 
     @SubscribeEvent

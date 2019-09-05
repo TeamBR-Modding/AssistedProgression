@@ -66,6 +66,10 @@ public class MagnetItem extends Item implements IAdvancedToolTipProvider {
         return super.initCapabilities(stack, nbt);
     }
 
+    /*******************************************************************************************************************
+     * Item                                                                                                            *
+     *******************************************************************************************************************/
+
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 

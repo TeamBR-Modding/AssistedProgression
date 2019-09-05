@@ -34,28 +34,4 @@ public class CrafterBlock extends BaseBlock {
         super(Properties.create(Material.WOOD).harvestTool(ToolType.AXE).hardnessAndResistance(1.0F),
                 "crafter", CrafterTile.class);
     }
-
-    /*******************************************************************************************************************
-     * Block                                                                                                           *
-     *******************************************************************************************************************/
-
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-                                    PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
-            return true;
-        }
-        else {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof CrafterTile) {
-                CrafterTile grinder = (CrafterTile) tileentity;
-                NetworkHooks.openGui((ServerPlayerEntity) player, grinder, pos);
-            }
-            return true;
-        }
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
 }

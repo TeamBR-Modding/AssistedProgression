@@ -40,6 +40,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
  */
 public class GrinderBlock extends BaseBlock {
 
+    // Build voxels based on model file
     private static final VoxelShape NORTH_LOWER_RIM = Block.makeCuboidShape(2.0, 0.0, 0.0, 14.0, 2.0, 2.0);
     private static final VoxelShape EAST_LOWER_RIM  = Block.makeCuboidShape(14.0, 0.0, 2.0, 16.0, 2.0, 14.0);
     private static final VoxelShape SOUTH_LOWER_RIM = Block.makeCuboidShape(2.0, 0.0, 14.0, 14.0, 2.0, 16.0);
@@ -56,6 +57,8 @@ public class GrinderBlock extends BaseBlock {
     private static final VoxelShape CHUTE_BOTTOM_E  = Block.makeCuboidShape(9.0, 5.0, 7.0, 10.0, 8.0, 9.0);
     private static final VoxelShape CHUTE_BOTTOM_W  = Block.makeCuboidShape(6.0, 5.0, 7.0, 7.0, 8.0, 9.0);
     private static final VoxelShape CHUTE_BOTTOM_S  = Block.makeCuboidShape(6.0, 5.0, 9.0, 10.0, 8.0, 10.0);
+
+    // All voxels stitched together
     private static final VoxelShape ALL_COMBINED    = VoxelShapes.or(NORTH_LOWER_RIM, EAST_LOWER_RIM, SOUTH_LOWER_RIM,
             WEST_LOWER_RIM, NEUP, SEUP, SWUP, NWUP, LOWER_PLANE, TOP_SLAB, CHUTE_TOP, CHUTE_MIDDLE, CHUTE_BOTTOM_N,
             CHUTE_BOTTOM_E, CHUTE_BOTTOM_S, CHUTE_BOTTOM_W);
@@ -77,11 +80,18 @@ public class GrinderBlock extends BaseBlock {
      * Block                                                                                                           *
      *******************************************************************************************************************/
 
+    /**
+     * Gets the list of shapes for bounding box
+     */
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return ALL_COMBINED;
     }
 
+    /**
+     * Called when an Entity lands on this Block. This method *must* update motionY because the entity will not do that
+     * on its own
+     */
     @Override
     public void onLanded(IBlockReader worldIn, Entity entityIn) {
         super.onLanded(worldIn, entityIn);
@@ -97,21 +107,6 @@ public class GrinderBlock extends BaseBlock {
         }
     }
 
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-                                    PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (worldIn.isRemote) {
-            return true;
-        }
-        else {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof GrinderTile) {
-                GrinderTile grinder = (GrinderTile) tileentity;
-                NetworkHooks.openGui((ServerPlayerEntity) player, grinder, pos);
-            }
-            return true;
-        }
-    }
-
     @Override
     public boolean isSolid(BlockState state) {
         return false;
@@ -123,10 +118,5 @@ public class GrinderBlock extends BaseBlock {
      */
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
     }
 }

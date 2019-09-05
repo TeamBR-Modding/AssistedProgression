@@ -3,13 +3,21 @@ package com.teambrmodding.assistedprogression.common.block;
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambr.nucleus.util.ClientUtils;
 import com.teambr.nucleus.util.WorldUtils;
+import com.teambrmodding.assistedprogression.common.tile.CrafterTile;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nonnull;
@@ -33,7 +41,10 @@ public class BaseBlock extends ContainerBlock implements IAdvancedToolTipProvide
      * Variables                                                                                                       *
      *******************************************************************************************************************/
 
+    // Tile class, will make new instance per block created
     private Class<? extends TileEntity> tileClass;
+
+    // Name in the registry
     public String registryName;
 
     /**
@@ -71,6 +82,32 @@ public class BaseBlock extends ContainerBlock implements IAdvancedToolTipProvide
             }
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
+    }
+
+    /**
+     * Called when block is clicked, we will be using this to show the gui
+     */
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos,
+                                    PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (worldIn.isRemote) {
+            return true;
+        }
+        else {
+            TileEntity tileentity = worldIn.getTileEntity(pos);
+            if (tileentity instanceof INamedContainerProvider) {
+                INamedContainerProvider grinder = (INamedContainerProvider) tileentity;
+                NetworkHooks.openGui((ServerPlayerEntity) player, grinder, pos);
+            }
+            return true;
+        }
+    }
+
+    /**
+     * Things with containers default to not use the normal models, kinda dumb so lets put it back to normal
+     */
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
     /*******************************************************************************************************************

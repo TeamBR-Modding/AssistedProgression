@@ -29,31 +29,33 @@ import java.util.List;
  */
 public class EnchantmentToolTip {
 
-    private static final KeyBinding keyBindSneak = Minecraft.getInstance().gameSettings.keyBindSneak;
-
-    public EnchantmentToolTip() {
-    }
-
+    /**
+     * Called on tool tip, here we are checking if there is a translation for the item, and adding it in the list
+     * for the tooltip
+     */
     @SubscribeEvent
-    public void changeToolTip(ItemTooltipEvent event) {
+    public static void changeToolTip(ItemTooltipEvent event) {
         ItemStack itemStack = event.getItemStack();
 
-        if (ConfigManager.GENERAL.showEnchantTooltip.get() && (itemStack.isEnchanted() || itemStack.getItem() instanceof EnchantedBookItem)) {
+        // Check if able to show, if so check if has enchant or is book
+        if (ConfigManager.GENERAL.showEnchantTooltip.get() && (itemStack.isEnchanted()
+                || itemStack.getItem() instanceof EnchantedBookItem)) {
             List<ITextComponent> tooltip = event.getToolTip();
 
-            if (!InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(), keyBindSneak.getKey().getKeyCode())) {
+            // If not sneaking, display tip to activate
+            if (!InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(),
+                    Minecraft.getInstance().gameSettings.keyBindSneak.getKey().getKeyCode())) {
                 tooltip.add(new StringTextComponent(
                         I18n.format("assistedprogression:tooltip.activate",
                                 ChatFormatting.RED,
-                                I18n.format(keyBindSneak.getTranslationKey()),
+                                I18n.format(Minecraft.getInstance().gameSettings.keyBindSneak.getTranslationKey()),
                                 ChatFormatting.WHITE)));
             } else {
-                ListNBT listNBT;
-                if (itemStack.getItem() instanceof EnchantedBookItem) {
-                    listNBT = EnchantedBookItem.getEnchantments(itemStack);
-                } else {
-                    listNBT = itemStack.getEnchantmentTagList();
-                }
+                // Add info
+                ListNBT listNBT = (itemStack.getItem() instanceof EnchantedBookItem) ?
+                        EnchantedBookItem.getEnchantments(itemStack) :
+                        itemStack.getEnchantmentTagList();
+
                 for (int i = 0; i < listNBT.size(); i++) {
                     CompoundNBT nbt = listNBT.getCompound(i);
                     String s = nbt.getString("id");
