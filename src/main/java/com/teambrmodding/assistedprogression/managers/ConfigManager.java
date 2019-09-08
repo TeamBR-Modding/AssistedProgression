@@ -1,36 +1,35 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambrmodding.assistedprogression.AssistedProgression;
-import com.teambrmodding.assistedprogression.lib.Reference;
-import net.minecraftforge.common.config.Configuration;
-
-import java.io.File;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 /**
  * This file was created for AssistedProgression
- * <p>
+ *
  * AssistedProgression is licensed under the
  * Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License:
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
- * @author Paul Davis - pauljoda
- * @since 11/13/17
+ * @author James Rogers - Dyonovan
+ * @since 08/31/19
  */
+
 public class ConfigManager {
-    public static final Configuration config = new Configuration(
-            new File(AssistedProgression.configFolderLocation + File.separator + "AssistedProgression.cfg"));
 
-    public static int totalRFMagnet = 25000;
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+    public static final General GENERAL = new General(BUILDER);
+    public static final ForgeConfigSpec SPEC = BUILDER.build();
 
-    public static void preinit() {
-        config.load();
 
-        totalRFMagnet = config.get(Reference.CONFIG_MAGNET, "Total RF Magnet", 25000,
-                "The max RF stored in the magnet").getInt();
+    public static class General {
 
-        File path = new File(AssistedProgression.configFolderLocation + File.separator + "Registries");
-        if(!path.exists())
-            //noinspection ResultOfMethodCallIgnored
-            path.mkdirs();
+        public final ForgeConfigSpec.ConfigValue<Boolean> showEnchantTooltip;
+
+        public General(ForgeConfigSpec.Builder builder) {
+            builder.push("Client");
+            showEnchantTooltip = builder
+                    .comment("If true, Enchantment Descriptions will be shown in item tooltips")
+                    .define("enableEnchantmentTooltips", true);
+            builder.pop();
+        }
     }
 }

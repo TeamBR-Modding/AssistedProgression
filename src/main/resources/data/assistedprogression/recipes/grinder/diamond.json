@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "tag": "forge:ores/diamond"
+  },
+  "output": {
+    "item": "minecraft:diamond",
+    "count": 2
+  }
+}

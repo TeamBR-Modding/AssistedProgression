@@ -1,0 +1,6 @@
+{
+  "variants": {
+      "powered=true" : { "model": "assistedprogression:block/player_plate/down"},
+      "powered=false" : { "model": "assistedprogression:block/player_plate/up"}
+  }
+}

@@ -1,60 +1,22 @@
 buildscript {
     repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.0.139', changing: true
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
+apply plugin: 'net.minecraftforge.gradle'
 
-repositories {
-    maven { // Waila
-        name "Mobius Repo"
-        url "http://mobiusstrip.eu/maven"
-    }
-    maven {
-        name 'BR Repo'
-        url "http://www.dyonovan.com/maven2/"
-    }
-    maven {
-      // location of the maven that hosts JEI files
-      name = "Progwml6 maven"
-      url = "http://dvs1.progwml6.com/files/maven"
-    }
-    maven {
-      // location of a maven mirror for JEI files, as a fallback
-      name = "ModMaven"
-      url = "modmaven.k-4u.nl"
-    }
-	maven { // The repo from which to get waila
-        name "Mobius Repo"
-        url "http://mobiusstrip.eu/maven"
-    }
-	maven {
-        url 'http://maven.epoxide.xyz'
-    }
-}
-
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 ext.configFile = file "gradle.properties"
 
-configFile.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
-configurations.all {
-    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
-}
-
 String build = ""
 if (project.hasProperty("teamcity")) {
-    build = "B" +"${project.ext['build.number']}"
+    build = "B" + project.ext["build.number"]
 }
 if (build == null || build == '') {
     version = "${project.minecraft_version}-${project.mod_version}"
@@ -65,56 +27,108 @@ if (build == null || build == '') {
 group= "com.teambrmodding.assistedprogression"
 archivesBaseName = "AssistedProgression"
 
-sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
-compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
-}
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
-    runDir = "run"
+//  version = project.minecraft_version + "-" + project.forge_version
 
-	mappings = "${config.MAPPINGS}"
-}
+//  replace "@VERSION@", project.mod_version
+//  replaceIn "Reference.java"
 
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
+    runs {
+        client {
+            workingDirectory project.file('run')
 
-dependencies {
-    // compile against the JEI API but do not include it at runtime
-  deobfProvided "mezz.jei:jei_${config.minecraft_version}:${config.JEI_version}:api"
-  // at runtime, use the full JEI jar
-  runtime "mezz.jei:jei_${config.minecraft_version}:${config.JEI_version}"
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-  compile group: "com.teambr.nucleus", name: "Nucleus", version: "1.12.2-" + "${config.nucleus_version}" +"-B+", classifier: "dev", changing: true
-	compile "mcp.mobius.waila:Waila:${config.WAILA_version}:dev"
-}
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
 
-processResources{
+            mods {
+                assistedprogression {
+                    source sourceSets.main
+                }
+            }
+        }
 
-	exclude '**/Thumbs.db'
+        server {
+            workingDirectory project.file('run')
 
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
 
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+            mods {
+                assistedprogression {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'assistedprogression', '--all', '--output', file('src/generated/resources/')
+
+            mods {
+                assistedprogression {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        mappings channel: 'snapshot', version: '20190903-1.14.3'
+//    makeObfSourceJar = false
     }
+}
 
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+repositories {
+    // Nucleus
+    maven {
+        url "http://www.dyonovan.com/maven2/"
+    }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
     }
 }
 
 configurations {
     deployerJars
+}
+
+processResources {
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'META-INF/mods.toml'
+
+        // replace version and mcversion
+        expand 'version': project.version
+    }
+
+    // copy everything else, thats not the mods.toml
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'META-INF/mods.toml', '**/psd/**'
+    }
+}
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
 }
 
 task devJar(type: Jar, dependsOn: 'classes') {
@@ -125,72 +139,50 @@ task devJar(type: Jar, dependsOn: 'classes') {
     classifier = 'dev'
 }
 
+task deobfJar(type: Jar) {
+    classifier = "deobf"
+    from sourceSets.main.output
+}
+
 task javadocJar(type: Zip, dependsOn: javadoc) {
     from 'build/docs/javadoc'
     classifier = 'javadoc'
 }
 
+task sourceJarJava(type: Jar, dependsOn: "classes") {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
 artifacts {
     archives devJar
-    //archives javadocJar
+    archives sourceJarJava
+    archives javadocJar
+    archives deobfJar
 }
 
-
-uploadArchives {
-    if (project.hasProperty('username') && project.hasProperty('password')) {
-        repositories {
-            mavenDeployer {
-                configuration = configurations.deployerJars
-                //repository(url: System.properties['URL']) {
-                repository(url: "ftp://dyonovan.com/srv/http/maven2") {
-                    authentication(userName: "${username}", password: "${password}")
-                }
-
-                pom {
-                    groupId = project.group
-                    version = project.version
-                    artifactId = project.archivesBaseName
-
-                    pom.project {
-                        name project.archivesBaseName
-                        packaging 'jar'
-                        description 'Bookshelf'
-                        url 'https://github.com/TeamBR-Modding/AssistedProgression'
-                        scm {
-                            url 'https://github.com/TeamBR-Modding/AssistedProgression'
-                            connection 'scm:git:git@github.com/TeamBR-Modding/AssistedProgression.git'
-                            developerConnection 'scm:git:git@github.com/TeamBR-Modding/AssistedProgression.git'
-                        }
-                        issueManagement {
-                            system 'github'
-                            url 'https://github.com/TeamBR-Modding/AssistedProgression/issues'
-                        }
-                        licenses {
-                            license {
-                                name 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License'
-                                url 'http://creativecommons.org/licenses/by-nc-sa/4.0/'
-                                distribution 'repo'
-                            }
-                        }
-                        developers {
-                            developer {
-                                id 'Dyonovan'
-                                name 'Dyonovan'
-                                roles {
-                                    role 'developer'
-                                }
-                            }
-                            developer {
-                                id 'pauljoda'
-                                name 'pauljoda'
-                                roles {
-                                    role 'developer'
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+configurations {
+    deployerJars
 }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:' + project.minecraft_version + "-" + project.forge_version
+    compile group: "com.teambr.nucleus",
+            name: "Nucleus",
+            version: "+",
+            classifier: "dev"
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${JEI_version}:api")
+    // at runtime, use the full JEI jar
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${JEI_version}")
+}
+

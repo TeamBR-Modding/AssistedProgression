@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "item": "minecraft:clay"
+  },
+  "output": {
+    "item": "minecraft:clay_ball",
+    "count": 4
+  }
+}

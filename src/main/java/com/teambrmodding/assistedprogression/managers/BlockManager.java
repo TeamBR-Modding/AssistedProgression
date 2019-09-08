@@ -1,7 +1,15 @@
 package com.teambrmodding.assistedprogression.managers;
 
-import com.teambr.nucleus.annotation.RegisteringBlock;
-import com.teambrmodding.assistedprogression.common.blocks.*;
+import com.teambrmodding.assistedprogression.common.block.CrafterBlock;
+import com.teambrmodding.assistedprogression.common.block.GrinderBlock;
+import com.teambrmodding.assistedprogression.common.block.PlayerPlateBlock;
+import com.teambrmodding.assistedprogression.common.block.RedstoneClockBlock;
+import com.teambrmodding.assistedprogression.lib.Reference;
+import net.minecraft.block.Block;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ObjectHolder;
 
 /**
  * This file was created for AssistedProgression
@@ -11,26 +19,29 @@ import com.teambrmodding.assistedprogression.common.blocks.*;
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * @author Paul Davis - pauljoda
- * @since 11/13/17
+ * @since 8/24/2019
  */
+@ObjectHolder(Reference.MOD_ID)
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BlockManager {
 
-    /*******************************************************************************************************************
-     * Block Variables                                                                                                 *
-     *******************************************************************************************************************/
+    @ObjectHolder("player_plate")
+    public static Block player_plate;
 
-    @RegisteringBlock
-    public static BlockCrafter blockCrafter = new BlockCrafter();
+    @ObjectHolder("grinder")
+    public static Block grinder;
 
-    @RegisteringBlock
-    public static BlockPlayerPlate blockPlayerPlate = new BlockPlayerPlate();
+    @ObjectHolder("crafter")
+    public static Block crafter;
 
-    @RegisteringBlock
-    public static BlockRedstoneClock blockRedstoneClock = new BlockRedstoneClock();
+    @ObjectHolder("redstone_clock")
+    public static Block redstone_clock;
 
-    @RegisteringBlock
-    public static BlockGrinder blockGrinder = new BlockGrinder();
-
-    @RegisteringBlock
-    public static BlockKineticGenerator blockKineticGenerator = new BlockKineticGenerator();
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
+        event.getRegistry().register(new PlayerPlateBlock());
+        event.getRegistry().register(new GrinderBlock());
+        event.getRegistry().register(new CrafterBlock());
+        event.getRegistry().register(new RedstoneClockBlock());
+    }
 }

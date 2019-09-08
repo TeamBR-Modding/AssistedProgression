@@ -1,6 +1,6 @@
 package com.teambrmodding.assistedprogression.common.container;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -13,7 +13,7 @@ import net.minecraft.util.text.ITextComponent;
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * @author Paul Davis - pauljoda
- * @since 11/13/17
+ * @since 9/5/2019
  */
 public class InventoryNull implements IInventory {
     /**
@@ -67,9 +67,7 @@ public class InventoryNull implements IInventory {
      * @param stack
      */
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
-
-    }
+    public void setInventorySlotContents(int index, ItemStack stack) { }
 
     /**
      * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
@@ -84,9 +82,7 @@ public class InventoryNull implements IInventory {
      * hasn't changed and skip it.
      */
     @Override
-    public void markDirty() {
-
-    }
+    public void markDirty() { }
 
     /**
      * Don't rename this method to canInteractWith due to conflicts with Container
@@ -94,19 +90,15 @@ public class InventoryNull implements IInventory {
      * @param player
      */
     @Override
-    public boolean isUsableByPlayer(EntityPlayer player) {
+    public boolean isUsableByPlayer(PlayerEntity player) {
         return false;
     }
 
     @Override
-    public void openInventory(EntityPlayer player) {
-
-    }
+    public void openInventory(PlayerEntity player) { }
 
     @Override
-    public void closeInventory(EntityPlayer player) {
-
-    }
+    public void closeInventory(PlayerEntity player) { }
 
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
@@ -117,50 +109,9 @@ public class InventoryNull implements IInventory {
      */
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public int getField(int id) {
-        return 0;
-    }
-
-    @Override
-    public void setField(int id, int value) {
-
-    }
-
-    @Override
-    public int getFieldCount() {
-        return 0;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    /**
-     * Get the registryName of this object. For players this returns their username
-     */
-    @Override
-    public String getName() {
-        return "INVENTORY_NULL";
-    }
-
-    /**
-     * Returns true if this thing is named
-     */
-    @Override
-    public boolean hasCustomName() {
         return false;
     }
 
-    /**
-     * Get the formatted ChatComponent that will be used for the sender's username in chat
-     */
     @Override
-    public ITextComponent getDisplayName() {
-        return null;
-    }
+    public void clear() { }
 }

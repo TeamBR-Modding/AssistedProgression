@@ -1,19 +1,26 @@
 package com.teambrmodding.assistedprogression.client;
 
-import com.teambr.nucleus.annotation.IRegisterable;
-import com.teambrmodding.assistedprogression.AssistedProgression;
-import com.teambrmodding.assistedprogression.client.models.ModelPipette;
-import com.teambrmodding.assistedprogression.client.renderers.tiles.TileGrinderRenderer;
+import com.teambrmodding.assistedprogression.client.model.ModelPipette;
+import com.teambrmodding.assistedprogression.client.render.GrinderTileRenderer;
+import com.teambrmodding.assistedprogression.client.tooltip.EnchantmentToolTip;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
-import com.teambrmodding.assistedprogression.common.tiles.TileGrinder;
+import com.teambrmodding.assistedprogression.common.item.DustItem;
+import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
+import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.util.IItemProvider;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.Random;
 
 /**
  * This file was created for AssistedProgression
@@ -23,29 +30,30 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * @author Paul Davis - pauljoda
- * @since 11/12/17
+ * @since 8/27/2019
  */
+@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientProxy extends CommonProxy {
-
     @Override
-    public void preInit(FMLPreInitializationEvent event) {
-        // Pipette models
-        ModelLoader.setCustomMeshDefinition(ItemManager.itemPipette, stack -> ModelPipette.LOCATION);
-        ModelBakery.registerItemVariants(ItemManager.itemPipette, ModelPipette.LOCATION);
-        ModelLoaderRegistry.registerLoader(ModelPipette.LoaderDynPipette.INSTANCE);
+    public void init() {
+        ClientRegistry.bindTileEntitySpecialRenderer(GrinderTile.class, new GrinderTileRenderer<>());
+        Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.iron_dust).getColor(),
+                (IItemProvider) () -> ItemManager.iron_dust);
+        Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.gold_dust).getColor(),
+                (IItemProvider) () -> ItemManager.gold_dust);
+
+        MinecraftForge.EVENT_BUS.addListener(EnchantmentToolTip::changeToolTip);
     }
 
-    @Override
-    public void init(FMLInitializationEvent event) {
-        // Item Models
-        AssistedProgression.registrationData.getBlocks().forEach(block -> ((IRegisterable<?>)block).registerRender());
-        AssistedProgression.registrationData.getItems().forEach(item   -> ((IRegisterable<?>)item).registerRender());
-
-        // Grinder
-        ClientRegistry.bindTileEntitySpecialRenderer(TileGrinder.class,
-                new TileGrinderRenderer<>());
+    @SubscribeEvent
+    public static void textureStitch(TextureStitchEvent.Pre event) {
+        event.addSprite(ModelPipette.maskLocation);
     }
 
-    @Override
-    public void postInit(FMLPostInitializationEvent event) { }
+    @SubscribeEvent
+    public static void modelBake(ModelBakeEvent event) {
+        IBakedModel baseModel = event.getModelRegistry().get(ModelPipette.LOCATION);
+        event.getModelRegistry().put(ModelPipette.LOCATION,
+                new ModelPipette.PipetteDynamicModel(event.getModelLoader(), baseModel));
+    }
 }

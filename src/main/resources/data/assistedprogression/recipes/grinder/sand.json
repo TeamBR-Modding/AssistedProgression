@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "tag": "forge:cobblestone"
+  },
+  "output": {
+    "item": "minecraft:sand",
+    "count": 2
+  }
+}

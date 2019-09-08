@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+issueTrackerURL="https://github.com/TeamBR-Modding/AssistedProgression/issues"
+
+[[mods]]
+  modId="assistedprogression"
+  namespace="assistedprogression"
+  version="${version}"
+  displayName="Assisted Progression"
+  displayURL="https://www.curseforge.com/minecraft/mc-mods/assistedprogression"
+  authors="pauljoda, Dyonovan"
+  description='''
+  Small things to help you along
+  '''

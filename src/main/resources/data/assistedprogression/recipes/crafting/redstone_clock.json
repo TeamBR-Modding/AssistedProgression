@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    "SBS",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "tag" : "forge:stone"
+    },
+    "R": {
+      "item" : "minecraft:redstone"
+    },
+    "B": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item" : "assistedprogression:redstone_clock"
+  }
+}

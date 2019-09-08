@@ -1,26 +1,25 @@
 package com.teambrmodding.assistedprogression;
 
-import com.teambr.nucleus.data.RegistrationData;
-import com.teambr.nucleus.helper.RegistrationHelper;
+import com.teambrmodding.assistedprogression.client.ClientProxy;
+import com.teambrmodding.assistedprogression.common.commands.GetEnchantmentList;
 import com.teambrmodding.assistedprogression.common.CommonProxy;
-import com.teambrmodding.assistedprogression.events.RenderEvents;
+import com.teambrmodding.assistedprogression.common.item.TrashBagItem;
 import com.teambrmodding.assistedprogression.lib.Reference;
-import com.teambrmodding.assistedprogression.managers.*;
-import net.minecraft.command.ServerCommandManager;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import com.teambrmodding.assistedprogression.managers.ConfigManager;
+import com.teambrmodding.assistedprogression.managers.RecipeHelper;
+import com.teambrmodding.assistedprogression.managers.ScreenHelper;
+import com.teambrmodding.assistedprogression.network.PacketManager;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-
-import java.io.File;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 /**
  * This file was created for AssistedProgression
@@ -32,63 +31,57 @@ import java.io.File;
  * @author Paul Davis - pauljoda
  * @since 11/13/17
  */
-@Mod(modid          = Reference.MOD_ID,
-        name           = Reference.MOD_NAME,
-        version        = Reference.VERSION,
-        dependencies   = Reference.DEPENDENCIES,
-        updateJSON     = Reference.UPDATE_JSON)
+@Mod(Reference.MOD_ID)
 public class AssistedProgression {
 
-    public static RegistrationData registrationData = new RegistrationData(Reference.MOD_ID);
+    // Proxy to wrap each side, prevents sided compile issues, use this for sidedness
+    private static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
-    @Mod.Instance
-    public static AssistedProgression INSTANCE;
+    /**
+     * Create the mod
+     */
+    public AssistedProgression() {
+        attachEvents();
 
-    public static String configFolderLocation;
-
-    @SidedProxy(clientSide = "com.teambrmodding.assistedprogression.client.ClientProxy",
-            serverSide = "com.teambrmodding.assistedprogression.common.CommonProxy")
-    public static CommonProxy proxy;
-
-    public static CreativeTabs tabAssistedProgression = new CreativeTabs("assistedprogression:main") {
-        @Override
-        public ItemStack getTabIconItem() {
-            return new ItemStack(Item.getItemFromBlock(BlockManager.blockGrinder));
-        }
-    };
-
-    public static CreativeTabs tabPipette = new CreativeTabs("assistedprogression:pipette") {
-        @Override
-        public ItemStack getTabIconItem() {
-            return new ItemStack(ItemManager.itemPipette);
-        }
-    };
-
-    @Mod.EventHandler
-    public static void preInit(FMLPreInitializationEvent event) {
-        configFolderLocation = event.getModConfigurationDirectory().getAbsolutePath() + File.separator + "AssistedProgression";
-        RegistrationHelper.fillRegistrationData(event, registrationData);
-        ConfigManager.preinit();
-        EventManager.registerEvents();
-        RecipeManager.preInit();
-        proxy.preInit(event);
-        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new ItemGuiManager());
+        PacketManager.initPackets();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ConfigManager.SPEC);
     }
 
-    @Mod.EventHandler
-    public static void init(FMLInitializationEvent event) {
-        RecipeManager.init();
-        if(event.getSide() == Side.CLIENT)
-            MinecraftForge.EVENT_BUS.register(new RenderEvents());
-        proxy.init(event);
+    /**
+     * Attach events to the buses before loading
+     */
+    private void attachEvents() {
+        // Loading steps
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
+        MinecraftForge.EVENT_BUS.addListener(this::serverStarted);
+
+        // Event attaches
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, RecipeHelper::registerRecipeSerializers);
+        MinecraftForge.EVENT_BUS.addListener(TrashBagItem::onItemPickup);
     }
 
-    public static void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit(event);
+    /**
+     * Common setup, called after all registering
+     * @param event Setup event
+     */
+    private void setup(final FMLCommonSetupEvent event) {
+        proxy.init();
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> ScreenHelper::registerScreens);
+        RecipeHelper.definePressurePlateValues();
     }
 
-    @Mod.EventHandler
-    public static void serverLoad(FMLServerAboutToStartEvent event) {
-        RecipeManager.initCommands((ServerCommandManager)event.getServer().getCommandManager());
+    /**
+     * Called when the server is starting, do dedicated server registering here
+     */
+    private void serverStarting(FMLServerStartingEvent event) {
+        new GetEnchantmentList(event.getCommandDispatcher());
+    }
+
+    /**
+     * Called when a server begins loading, after all registering
+     */
+    private void serverStarted(FMLServerStartedEvent event) {
+        RecipeHelper.generateDynamicGrinderRecipes(event.getServer().getRecipeManager());
     }
 }

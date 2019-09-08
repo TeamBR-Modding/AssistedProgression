@@ -1,0 +1,10 @@
+{
+  "type": "assistedprogression:grinder",
+  "input": {
+    "tag": "minecraft:sand"
+  },
+  "output": {
+    "item": "minecraft:gravel",
+    "count": 2
+  }
+}

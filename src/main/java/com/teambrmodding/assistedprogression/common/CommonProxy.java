@@ -1,8 +1,7 @@
 package com.teambrmodding.assistedprogression.common;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import com.teambrmodding.assistedprogression.managers.EventManager;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * This file was created for AssistedProgression
@@ -12,11 +11,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * http://creativecommons.org/licenses/by-nc-sa/4.0/
  *
  * @author Paul Davis - pauljoda
- * @since 11/13/17
+ * @since 8/27/2019
  */
 public class CommonProxy {
-
-    public void preInit(FMLPreInitializationEvent event) { }
-    public void init(FMLInitializationEvent event) {}
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void init() {
+        MinecraftForge.EVENT_BUS.addListener(EventManager::onPlayerLogin);
+    }
 }

@@ -1,0 +1,154 @@
+{
+  "_comment": "Creative Tabs",
+  "itemGroup.assistedprogression": "Assisted Progression",
+  "itemGroup.assistedprogression.pipettes": "Assisted Progression : Pipettes",
+
+  "_comment": "######################",
+  "_comment": "Blocks",
+  "_comment": "######################",
+
+  "_comment": "######################",
+  "_comment": "Items",
+  "_comment": "######################",
+
+  "_comment": "Magnets",
+  "item.assistedprogression.magnet": "Magnet",
+  "item.assistedprogression.electro_magnet": "Electomagnet",
+
+  "_comment": "TrashBags",
+  "item.assistedprogression.trash_bag": "Trash Bag",
+  "item.assistedprogression.hefty_bag": "Hefty Bag",
+
+  "_comment": "Spawner Relocator",
+  "item.assistedprogression.spawner_relocator": "Spawner Relocator",
+
+  "_comment": "Pipette",
+  "item.assistedprogression.pipette": "Pipette",
+
+  "_comment:": "Dusts",
+  "item.assistedprogression.iron_dust": "Iron Dust",
+  "item.assistedprogression.gold_dust": "Gold Dust",
+
+  "_comment": "######################",
+  "_comment": "Tile Entities",
+  "_comment": "######################",
+
+  "_comment": "Crafter",
+  "block.assistedprogression.crafter": "Dual Crafter",
+
+  "_comment": "Player Sensitive Pressure Plate",
+  "block.assistedprogression.player_plate": "Player Sensitive Pressure Plate",
+
+  "_comment": "Redstone Clock",
+  "block.assistedprogression.redstone_clock": "Redstone Clock",
+
+  "_comment": "Grinder",
+  "block.assistedprogression.grinder": "Grinder",
+
+  "_comment": "######################",
+  "_comment": "GUI",
+  "_comment": "######################",
+
+  "_comment": "Grinder",
+  "assistedprogression.grinder": "Grinder",
+  "assistedprogression.grinder.input": "Input",
+  "assistedprogression.grinder.grinding": "Grinding",
+  "assistedprogression.grinder.output": "Output",
+
+  "_comment": "######################",
+  "_comment": "Common Text",
+  "_comment": "######################",
+
+  "_comment": "Magnet",
+  "assistedprogression.text.magnetism": "Magnetism",
+  "assistedprogression.text.magnetEvil": "May attract unwanted objects",
+
+  "assistedprogression.text.active": "Active",
+  "assistedprogression.text.disabled": "Disabled",
+
+  "_comment": "Pipette",
+  "assistedprogression.text.pipette.empty": "Empty",
+  "assistedprogression.text.pipette.fluidStored": "Fluid Contained:",
+
+  "_comment": "Spawner Relocator",
+  "assistedprogression.text.spawnerRelocator.type": "%s%sType: %s",
+
+  "_comment": "######################",
+  "_comment": "Commands",
+  "_comment": "######################",
+
+  "commands.addGrinderRecipe.usage": "§cUsage: <input> <output> <outputAmount> <secondaryOutput(Optional)> <secondaryOutputChance(Optional)>",
+
+  "_comment": "######################",
+  "_comment": "Descriptions",
+  "_comment": "######################",
+
+  "crafter.desc": "Has two crafting grids with persistent inventories",
+  "grinder.desc": "Grinds ores and other resources for double ore output. Activate by placing a pressure plate on top and jumping on the plate. The higher you jump from, the more it progresses. The better the pressure plate the faster it processes",
+  "block_grinder.desc1": "Multiplier:",
+  "redstone_clock.desc": "Emits a redstone pulse once per second. Disable with a lever or other redstone signal",
+  "player_plate.desc": "Like a normal pressure plate, but will only respond to a player entity",
+
+  "item_electro_magnet.desc": "Attacts item entities and xp orbs, requires power. Shift+Right-Click to toggle activation",
+  "item_cheap_magnet.desc": "Attracts all sorts of things, some dangerous. Shift+Right-Click to toggle activation",
+  "item_exchanger.desc": "Exchanges blocks in a given area. Shift+Right-Click on a block to set as target and normal Right-Click to swap shown area. Shift-Right-Click on no blocks toggles exchange size",
+  "trash_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup",
+  "hefty_bag.desc": "Right click to open, will trash items matching what is in the inventory on pickup. Has 18 slots",
+  "spawner_relocator.desc": "Hold right click and release while looking at a spawner to pick it up, hold right click while aiming at a block to place it back down",
+  "pipette.desc": "Holds up to one bucket of fluid, useful for removing fluid amounts less than one bucket. Right click fluid handling tiles to insert and extract fluid",
+
+  "_comment": "######################",
+  "_comment": "JEI",
+  "_comment": "######################",
+
+  "jei_grinder_progress": "Progress Multiplier",
+  "jei_assistedprogression_grinder_place": "Place pressure plate on top and jump on top to grind",
+
+  "_comment": "######################",
+  "_comment": "Enchantment Descriptions",
+  "_comment": "######################",
+
+  "assistedprogression:tooltip.activate": "Hold %s%s%s for enchantment descriptions.",
+
+  "_comment": "######################",
+  "_comment": "Minecraft Enchantments",
+  "_comment": "######################",
+
+  "assistedprogression:minecraft:aqua_infinity": "-Speeds up how fast you can mine blocks underwater",
+  "assistedprogression:minecraft:bane_of_arthropods": "-Increases attack damage against spiders",
+  "assistedprogression:minecraft:binding_curse": "-Cursed item can not be removed from player",
+  "assistedprogression:minecraft:blast_protection": "-Reduces blast and explosion damage",
+  "assistedprogression:minecraft:channeling": "-Summons a lightning bolt at a targeted mob when enchanted item is thrown (targeted mob must be standing in raining)",
+  "assistedprogression:minecraft:depth_strider": "-Speeds up how fast you can move underwater",
+  "assistedprogression:minecraft:efficiency": "-Increases how fast you can mine",
+  "assistedprogression:minecraft:feather_falling": "-Reduces fall and teleportation damage",
+  "assistedprogression:minecraft:fire_aspect": "-Sets target on fire",
+  "assistedprogression:minecraft:fire_protection": "-Reduces damage caused by fire and lava",
+  "assistedprogression:minecraft:flame": "-Turns arrows into flaming arrows",
+  "assistedprogression:minecraft:fortune": "-Increases block drops from mining",
+  "assistedprogression:minecraft:frost_walker": "-Freezes water into ice so that you can walk on it",
+  "assistedprogression:minecraft:impaling": "-Increases attack damage again sea creatures",
+  "assistedprogression:minecraft:infinity": "-Shoots an infinite amount of arrows",
+  "assistedprogression:minecraft:knockback": "-Sends enemies backwards",
+  "assistedprogression:minecraft:looting": "-Increases amount of loot dropped when mob is killed",
+  "assistedprogression:minecraft:loyalty": "-Returns your weapon when it is thrown like a spear",
+  "assistedprogression:minecraft:luck_of_the_sea": "-Increases chances of catching valuable items",
+  "assistedprogression:minecraft:lure": "-Increases the rate of fish biting your hook",
+  "assistedprogression:minecraft:mending": "-Uses xp to mend your tools, weapons and armor",
+  "assistedprogression:minecraft:multishot": "-Shoot 3 arrows at the cost of one. Mutually exclusive with Piercing.",
+  "assistedprogression:minecraft:piercing": "-Arrows pass through multiple entities. Mutually exclusive with Multishot.",
+  "assistedprogression:minecraft:power": "-Increases damage dealt by bow",
+  "assistedprogression:minecraft:projectile_protection": "-Reduces projectile damage",
+  "assistedprogression:minecraft:protection": "-General protection against attacks, fire, lava, and falling",
+  "assistedprogression:minecraft:punch": "-Increases knockback dealt",
+  "assistedprogression:minecraft:quick_charge": "-Decreases crossbow reloading time.",
+  "assistedprogression:minecraft:respiration": "-Extends underwater breathing",
+  "assistedprogression:minecraft:riptide": "-Propels the player forward when enchanted item is thrown while in water or rain",
+  "assistedprogression:minecraft:sharpness": "-Increases attack damage dealt to mobs",
+  "assistedprogression:minecraft:silk_touch": "-Mines blocks themselves",
+  "assistedprogression:minecraft:smite": "-Increases attack damage against undead mobs",
+  "assistedprogression:minecraft:sweeping": "-Increases damage of sweep attack",
+  "assistedprogression:minecraft:thorns": "-Causes damage to attackers",
+
+  "assistedprogression:minecraft:vanishing_curse": "-Cursed item will disappear after player dies"
+}
