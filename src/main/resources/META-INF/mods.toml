@@ -7,8 +7,14 @@ issueTrackerURL="https://github.com/TeamBR-Modding/AssistedProgression/issues"
   namespace="assistedprogression"
   version="${version}"
   displayName="Assisted Progression"
-  displayURL="https://www.curseforge.com/minecraft/mc-mods/assistedprogression"
+  displayURL="https://www.curseforge.com/minecraft/mc-mods/assisted-progression"
   authors="pauljoda, Dyonovan"
   description='''
   Small things to help you along
   '''
+  [[dependencies.assistedprogression]]
+      modId="nucleus"
+      mandatory=true
+      versionRange="[1.14.4,)"
+      ordering="BEFORE"
+      side="BOTH"

@@ -86,8 +86,7 @@ minecraft {
             }
         }
 
-        mappings channel: 'snapshot', version: '20190903-1.14.3'
-//    makeObfSourceJar = false
+        mappings channel: 'snapshot', version: project.mappings
     }
 }
 
