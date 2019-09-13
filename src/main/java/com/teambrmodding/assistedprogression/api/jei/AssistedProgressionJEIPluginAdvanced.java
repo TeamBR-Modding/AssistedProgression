@@ -1,6 +1,7 @@
 package com.teambrmodding.assistedprogression.api.jei;
 
 import com.teambrmodding.assistedprogression.lib.Reference;
+import com.teambrmodding.assistedprogression.managers.ItemManager;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import com.teambrmodding.assistedprogression.recipe.GrinderRecipe;
 import mezz.jei.api.recipe.IFocus;
@@ -60,7 +61,8 @@ public class AssistedProgressionJEIPluginAdvanced implements IRecipeManagerPlugi
     @Override
     public <T, V> List<T> getRecipes(IRecipeCategory<T> recipeCategory, IFocus<V> focus) {
         if(recipeCategory == AssistedProgressionJEIPlugin.grinderCategory) {
-            if(focus == null)
+            if(focus == null ||
+                    (focus.getValue() instanceof ItemStack && (((ItemStack) focus.getValue()).getItem() == ItemManager.grinder)))
                 return (List<T>) RecipeHelper.grinderRecipes;
             else if(focus.getValue() instanceof ItemStack){
                 switch (focus.getMode()) {

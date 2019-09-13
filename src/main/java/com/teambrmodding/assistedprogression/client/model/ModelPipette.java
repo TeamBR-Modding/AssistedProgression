@@ -233,7 +233,7 @@ public final class ModelPipette implements IUnbakedModel {
             return FluidUtil.getFluidContained(stack)
                     .map(fluidStack -> {
                         Fluid fluid = fluidStack.getFluid();
-                        String name = fluid.getAttributes().getName();
+                        String name = fluid.getRegistryName().toString();
 
                         if (!cache.containsKey(name)) {
                             ModelPipette parent = new ModelPipette(null).process(ImmutableMap.of("fluid", name));
