@@ -156,7 +156,6 @@ public class TrashBagContainer extends BaseContainer {
      */
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        Slot slot = this.inventorySlots.get(index);
-        return slot != null ? slot.getStack() : ItemStack.EMPTY;
+        return ItemStack.EMPTY;
     }
 }
