@@ -118,14 +118,14 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
         }
 
         matrixStack.push();
-        matrixStack.scale(1F, 1F, 1F);
+        matrixStack.scale(2.2F, 2.2F, 2.2F);
         RenderHelper.enableStandardItemLighting();
         matrixStack.translate(-0.5, -0.5, 0);
 
         AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper()
-                .createDrawableIngredient(plates.get(timer.getValue() / 20)).draw(matrixStack, 22, 10);
+                .createDrawableIngredient(plates.get(timer.getValue() / 20)).draw(matrixStack, 6, -1);
         AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper()
-                .createDrawableIngredient(grinderStack).draw(matrixStack, 22, 50);
+                .createDrawableIngredient(grinderStack).draw(matrixStack, 6, 21);
 
         matrixStack.pop();
 
