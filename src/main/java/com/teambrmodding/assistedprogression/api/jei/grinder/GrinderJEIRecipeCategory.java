@@ -1,8 +1,8 @@
 package com.teambrmodding.assistedprogression.api.jei.grinder;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.teambr.nucleus.util.ClientUtils;
+import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.api.jei.AssistedProgressionJEIPlugin;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.BlockManager;
@@ -43,6 +43,8 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
     private ITickTimer timer;
     private ItemStack grinderStack;
     private List<ItemStack> plates;
+
+
 
     /**
      * Returns a unique ID for this recipe category.
@@ -115,13 +117,17 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
                 plates.add(new ItemStack(block));
         }
 
-        GlStateManager.pushMatrix();
-        GlStateManager.scaled(2.2, 2.2, 2.2);
+        matrixStack.push();
+        matrixStack.scale(1F, 1F, 1F);
         RenderHelper.enableStandardItemLighting();
-        GlStateManager.translated(-0.5, -0.5, 0);
-        Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(plates.get(timer.getValue() / 20), 6, -1);
-        Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(grinderStack, 6, 21);
-        GlStateManager.popMatrix();
+        matrixStack.translate(-0.5, -0.5, 0);
+
+        AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper()
+                .createDrawableIngredient(plates.get(timer.getValue() / 20)).draw(matrixStack, 22, 10);
+        AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper()
+                .createDrawableIngredient(grinderStack).draw(matrixStack, 22, 50);
+
+        matrixStack.pop();
 
         Minecraft.getInstance().fontRenderer.drawString(matrixStack,
                 ClientUtils.translate("jei_grinder_progress"),
