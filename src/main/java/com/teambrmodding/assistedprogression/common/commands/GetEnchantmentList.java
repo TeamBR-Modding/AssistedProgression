@@ -3,6 +3,7 @@ package com.teambrmodding.assistedprogression.common.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,9 +29,9 @@ public class GetEnchantmentList {
      *
      * @param dispatcher {@link CommandDispatcher}
      */
-    public GetEnchantmentList(CommandDispatcher<CommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(
-                literal("listEnchants")
+                Commands.literal("listEnchants")
                 .requires(cs -> cs.hasPermissionLevel(0))
                 .executes(ctx -> {
                             for (Enchantment enchantment : ForgeRegistries.ENCHANTMENTS.getValues()) {

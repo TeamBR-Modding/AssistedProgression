@@ -75,7 +75,7 @@ public class AssistedProgression {
      * Called when the server is starting, do dedicated server registering here
      */
     private void serverStarting(FMLServerStartingEvent event) {
-       // new GetEnchantmentList(event.getCommandDispatcher());
+       GetEnchantmentList.register(event.getServer().getCommandManager().getDispatcher());
     }
 
     /**
