@@ -70,10 +70,10 @@ public class TrashBagContainer extends BaseContainer {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getBackground() {
                 if (trashBag.getItem() == ItemManager.trash_bag)
-                    return Pair.of(RenderUtils.MC_ITEMS_RESOURCE_LOCATION,
+                    return Pair.of(RenderUtils.MC_BLOCKS_RESOURCE_LOCATION,
                             new ResourceLocation("assistedprogression:items/trash_bag"));
                 else
-                    return Pair.of(RenderUtils.MC_ITEMS_RESOURCE_LOCATION,
+                    return Pair.of(RenderUtils.MC_BLOCKS_RESOURCE_LOCATION,
                             new ResourceLocation("assistedprogression:items/hefty_bag"));            }
 
             @Override
