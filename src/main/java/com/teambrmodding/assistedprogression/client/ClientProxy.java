@@ -56,6 +56,6 @@ public class ClientProxy extends CommonProxy {
     public static void modelBake(ModelBakeEvent event) {
         IBakedModel baseModel = event.getModelRegistry().get(ModelPipette.LOCATION);
         event.getModelRegistry().put(ModelPipette.LOCATION,
-                new ModelPipette.PipetteDynamicModel(event.getModelLoader(), baseModel, null));
+                new ModelPipette.PipetteDynamicModel(event.getModelLoader(), baseModel, event.getModelLoader().MODEL_GENERATED.customData));
     }
 }

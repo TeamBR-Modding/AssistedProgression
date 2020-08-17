@@ -115,13 +115,13 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
                 plates.add(new ItemStack(block));
         }
 
-        GlStateManager.pushMatrix();
-        GlStateManager.scaled(2.2, 2.2, 2.2);
+        matrixStack.push();
+        matrixStack.scale(2.2F, 2.2F, 2.2F);
         RenderHelper.enableStandardItemLighting();
-        GlStateManager.translated(-0.5, -0.5, 0);
+       // matrixStack.translate(-0.5, -0.5, 0);
         Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(plates.get(timer.getValue() / 20), 6, -1);
         Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(grinderStack, 6, 21);
-        GlStateManager.popMatrix();
+        matrixStack.pop();
 
         Minecraft.getInstance().fontRenderer.drawString(matrixStack,
                 ClientUtils.translate("jei_grinder_progress"),
