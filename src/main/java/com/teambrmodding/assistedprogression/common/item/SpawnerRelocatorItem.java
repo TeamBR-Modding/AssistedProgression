@@ -128,7 +128,7 @@ public class SpawnerRelocatorItem extends Item implements IAdvancedToolTipProvid
             CompoundNBT compoundNBT = stack.getTag();
             CompoundNBT spawnData = compoundNBT.getCompound("SpawnData");
             EntityType entity =  ForgeRegistries.ENTITIES.getValue(new ResourceLocation(spawnData.getString("id")));
-            String spawnType = I18n.format(entity.getName().getUnformattedComponentText());
+            String spawnType = I18n.format(entity.toString());
 
             tooltip.add(new StringTextComponent(I18n.format("assistedprogression.text.spawnerRelocator.type",
                     TextFormatting.GOLD,
