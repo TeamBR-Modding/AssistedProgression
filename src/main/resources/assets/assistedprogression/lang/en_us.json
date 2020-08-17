@@ -114,7 +114,7 @@
   "_comment": "Minecraft Enchantments",
   "_comment": "######################",
 
-  "assistedprogression:minecraft:aqua_infinity": "-Speeds up how fast you can mine blocks underwater",
+  "assistedprogression:minecraft:aqua_affinity": "-Speeds up how fast you can mine blocks underwater",
   "assistedprogression:minecraft:bane_of_arthropods": "-Increases attack damage against spiders",
   "assistedprogression:minecraft:binding_curse": "-Cursed item can not be removed from player",
   "assistedprogression:minecraft:blast_protection": "-Reduces blast and explosion damage",
@@ -149,6 +149,7 @@
   "assistedprogression:minecraft:smite": "-Increases attack damage against undead mobs",
   "assistedprogression:minecraft:sweeping": "-Increases damage of sweep attack",
   "assistedprogression:minecraft:thorns": "-Causes damage to attackers",
-
-  "assistedprogression:minecraft:vanishing_curse": "-Cursed item will disappear after player dies"
+  "assistedprogression:minecraft:vanishing_curse": "-Cursed item will disappear after player dies",
+  "assistedprogression:minecraft:unbreaking": "-Increases item durability",
+  "assistedprogression:minecraft:soul_speed": "-Increases walking speed on soul sand or Soul Soil"
 }
