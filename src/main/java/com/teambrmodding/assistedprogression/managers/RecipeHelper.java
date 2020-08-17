@@ -128,18 +128,20 @@ public class RecipeHelper {
             if (!isValidGrinderInput(new ItemStack(oreItem), null)) {
                 // Iterate all tags for item in forge ore tag
                 for (ResourceLocation tag : oreItem.getTags()) {
-                    // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
-                    ResourceLocation testDustLocation
-                            = new ResourceLocation(tag.toString().replace("ores", "dusts"));
+                    if (tag.toString().contains("ores")) {
+                        // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
+                        ResourceLocation testDustLocation
+                                = new ResourceLocation(tag.toString().replace("ores", "dusts"));
 
-                    // We don't want to re-add the whole dust tag
-                    if (!testDustLocation.equals(dustLocation)
-                            && ItemTags.getCollection().get(testDustLocation) != null
-                            && ItemTags.getCollection().get(tag) != null) {
-                        ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
-                        output.setCount(2);
-                        addGrinderRecipe(null,
-                                ItemTags.getCollection().get(tag), output);
+                        // We don't want to re-add the whole dust tag
+                        if (!testDustLocation.equals(dustLocation)
+                                && ItemTags.getCollection().get(testDustLocation) != null
+                                && ItemTags.getCollection().get(tag) != null) {
+                            ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
+                            output.setCount(2);
+                            addGrinderRecipe(null,
+                                    ItemTags.getCollection().get(tag), output);
+                        }
                     }
                 }
             }
@@ -156,17 +158,19 @@ public class RecipeHelper {
             if (!isValidGrinderInput(new ItemStack(ingotItem), null)) {
                 // Iterate all tags for item in forge ingot tag
                 for (ResourceLocation tag : ingotItem.getTags()) {
-                    // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
-                    ResourceLocation testDustLocation
-                            = new ResourceLocation(tag.toString().replace("ingots", "dusts"));
+                    if (tag.toString().contains("ingots")) {
+                        // Attempt lookup for dust, structure should be matching in most cases so this should find proper dust
+                        ResourceLocation testDustLocation
+                                = new ResourceLocation(tag.toString().replace("ingots", "dusts"));
 
-                    // We don't want to re-add the whole dust tag
-                    if (!testDustLocation.equals(dustLocation)
-                            && ItemTags.getCollection().get(testDustLocation) != null
-                            && ItemTags.getCollection().get(tag) != null) {
-                        ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
-                        addGrinderRecipe(null,
-                                ItemTags.getCollection().get(tag), output);
+                        // We don't want to re-add the whole dust tag
+                        if (!testDustLocation.equals(dustLocation)
+                                && ItemTags.getCollection().get(testDustLocation) != null
+                                && ItemTags.getCollection().get(tag) != null) {
+                            ItemStack output = Ingredient.fromTag(ItemTags.getCollection().get(testDustLocation)).getMatchingStacks()[0].copy();
+                            addGrinderRecipe(null,
+                                    ItemTags.getCollection().get(tag), output);
+                        }
                     }
                 }
             }
