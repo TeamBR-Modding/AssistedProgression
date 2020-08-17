@@ -1,32 +1,24 @@
 package com.teambrmodding.assistedprogression.common.block;
 
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
-import com.teambrmodding.assistedprogression.lib.Reference;
-import com.teambrmodding.assistedprogression.managers.BlockManager;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.network.NetworkHooks;
+
+import java.util.List;
 
 /**
  * This file was created for AssistedProgression
@@ -71,7 +63,7 @@ public class GrinderBlock extends BaseBlock {
                 new Material(MaterialColor.STONE, false, false,
                         true, false,
                         false, false,
-                        false, PushReaction.NORMAL))
+                         PushReaction.NORMAL))
                         .harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.0F),
                 "grinder", GrinderTile.class);
     }
@@ -97,26 +89,39 @@ public class GrinderBlock extends BaseBlock {
         super.onLanded(worldIn, entityIn);
 
         if(entityIn instanceof PlayerEntity && entityIn.fallDistance > 0.0 &&
-                !worldIn.getBlockState(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ)).isAir(worldIn, new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ))) {
+                !worldIn.getBlockState(new BlockPos(entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ())).isAir(worldIn, new BlockPos(entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ()))) {
 
-            Block landedBlock = worldIn.getBlockState(new BlockPos(entityIn.posX, entityIn.posY, entityIn.posZ)).getBlock();
+            Block landedBlock = worldIn.getBlockState(new BlockPos(entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ())).getBlock();
 
             if(RecipeHelper.pressurePlates.containsKey(landedBlock))
-                ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.posX, entityIn.posY - 1, entityIn.posZ)))
+                ((GrinderTile)worldIn.getTileEntity(new BlockPos(entityIn.getPosX(), entityIn.getPosY() - 1, entityIn.getPosZ())))
                         .activateGrinder((int) entityIn.fallDistance, RecipeHelper.pressurePlates.get(landedBlock));
         }
-    }
-
-    @Override
-    public boolean isSolid(BlockState state) {
-        return false;
     }
 
     /**
      * Gets the render layer this block will render on. SOLID for solid blocks, CUTOUT or CUTOUT_MIPPED for on-off
      * transparency (glass, reeds), TRANSLUCENT for fully blended transparency (stained glass)
      */
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public boolean displayShiftForInfo(ItemStack stack) {
+        return false;
+    }
+
+    /**
+     * Used to get the tip to display
+     *
+     * @param stack
+     *
+     * @return The tip to display
+     */
+    @Override
+    public List<String> getToolTip(ItemStack stack) {
+        return null;
     }
 }

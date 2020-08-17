@@ -1,6 +1,5 @@
 package com.teambrmodding.assistedprogression.common.item;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import com.teambr.nucleus.client.gui.GuiColor;
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambr.nucleus.util.ClientUtils;
@@ -18,6 +17,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -100,15 +100,15 @@ public class PipetteItem extends Item implements IAdvancedToolTipProvider{
                         ClientUtils.translate("assistedprogression.text.pipette.fluidStored")));
         if(stack.hasTag()) {
             FluidStack currentStored = FluidUtil.getFluidContained(stack).orElse(null);
-            if(currentStored == null)
+            if(currentStored.isEmpty())
                 return;
 
             tooltip.add(new StringTextComponent("  " +
-                    ClientUtils.translate(currentStored.getFluid().getDefaultState().getBlockState().getBlock().getTranslationKey()) //TODO: Go back to fluid name when forge fixes
+                    currentStored.getDisplayName().getString()
                     + ": " + ClientUtils.formatNumber(currentStored.getAmount()) + " mb"));
         } else
             tooltip.add(new StringTextComponent("  "
-                    + ChatFormatting.RED + ClientUtils.translate("assistedprogression.text.pipette.empty")));
+                    + TextFormatting.RED + ClientUtils.translate("assistedprogression.text.pipette.empty")));
     }
 
     /**

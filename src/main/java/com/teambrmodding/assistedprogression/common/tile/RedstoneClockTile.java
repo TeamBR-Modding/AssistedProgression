@@ -3,6 +3,7 @@ package com.teambrmodding.assistedprogression.common.tile;
 import com.teambr.nucleus.common.tiles.Syncable;
 import com.teambrmodding.assistedprogression.common.block.RedstoneClockBlock;
 import com.teambrmodding.assistedprogression.managers.TileEntityManager;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.nbt.CompoundNBT;
 
@@ -51,8 +52,8 @@ public class RedstoneClockTile extends Syncable {
      *******************************************************************************************************************/
 
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void read(BlockState state, CompoundNBT compound) {
+        super.read(state, compound);
         delay = compound.getInt(("Delay"));
     }
 

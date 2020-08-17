@@ -5,6 +5,7 @@ import com.teambrmodding.assistedprogression.common.container.GrinderContainer;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.RecipeHelper;
 import com.teambrmodding.assistedprogression.managers.TileEntityManager;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -189,8 +190,8 @@ public class GrinderTile extends InventorySided implements INamedContainerProvid
      * @param compound The tag to read from
      */
     @Override
-    public void read(CompoundNBT compound) {
-        super.read(compound);
+    public void read(BlockState state, CompoundNBT compound) {
+        super.read(state, compound);
         progress = compound.getInt("Progress");
     }
 

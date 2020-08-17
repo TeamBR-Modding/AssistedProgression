@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.api.jei.grinder;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.api.jei.AssistedProgressionJEIPlugin;
@@ -20,6 +21,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,7 +99,7 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
      * @see IGuiHelper for useful functions.
      */
     @Override
-    public void draw(GrinderRecipe recipe, double mouseX, double mouseY) {
+    public void draw(GrinderRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         if(timer == null) {
             timer = AssistedProgressionJEIPlugin.jeiHelpers.getGuiHelper()
                     .createTickTimer((RecipeHelper.pressurePlates.keySet().size() - 1) * 20,
@@ -114,16 +117,17 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
 
         GlStateManager.pushMatrix();
         GlStateManager.scaled(2.2, 2.2, 2.2);
-        RenderHelper.enableGUIStandardItemLighting();
+        RenderHelper.enableStandardItemLighting();
         GlStateManager.translated(-0.5, -0.5, 0);
         Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(plates.get(timer.getValue() / 20), 6, -1);
         Minecraft.getInstance().getItemRenderer().renderItemAndEffectIntoGUI(grinderStack, 6, 21);
         GlStateManager.popMatrix();
 
-        Minecraft.getInstance().currentScreen.drawString(Minecraft.getInstance().fontRenderer,
+        Minecraft.getInstance().fontRenderer.drawString(matrixStack,
                 ClientUtils.translate("jei_grinder_progress"),
                 2, 4, 0xFFFFFF);
-        Minecraft.getInstance().currentScreen.drawString(Minecraft.getInstance().fontRenderer,
+
+        Minecraft.getInstance().fontRenderer.drawString(matrixStack,
                 "x" + RecipeHelper.pressurePlates.get(RecipeHelper.pressurePlates.keySet().toArray()[timer.getValue() / 20]),
                 48, 18, 0xFFFFFF);
     }
@@ -136,12 +140,13 @@ public class GrinderJEIRecipeCategory implements IRecipeCategory<GrinderRecipe> 
      * @return A list of strings, empty for nothing
      */
     @Override
-    public List<String> getTooltipStrings(GrinderRecipe recipe, double mouseX, double mouseY) {
+    public List<ITextComponent> getTooltipStrings(GrinderRecipe recipe, double mouseX, double mouseY) {
         if(mouseX > 15 && mouseX < 43) {
             if(mouseY >= 15 && mouseY <= 30) {
-                return Collections.singletonList(plates.get(timer.getValue() / 20).getDisplayName().getFormattedText());
+                return Collections.singletonList(plates.get(timer.getValue() / 20).getDisplayName());
             } else if (mouseY >= 45 && mouseY <= 79) {
-                return Collections.singletonList(ClientUtils.translate("jei_assistedprogression_grinder_place"));
+                return Collections.singletonList(
+                        new StringTextComponent(ClientUtils.translate("jei_assistedprogression_grinder_place")));
             }
         }
         return Collections.emptyList();

@@ -3,7 +3,6 @@ package com.teambrmodding.assistedprogression.common.block;
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambr.nucleus.util.ClientUtils;
 import com.teambr.nucleus.util.WorldUtils;
-import com.teambrmodding.assistedprogression.common.tile.CrafterTile;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
@@ -12,6 +11,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -69,7 +69,6 @@ public class BaseBlock extends ContainerBlock implements IAdvancedToolTipProvide
      * Called when the block is broken, allows us to drop items from inventory
      * @param worldIn The world
      * @param pos The pos
-     * @param state The state
      */
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -86,11 +85,12 @@ public class BaseBlock extends ContainerBlock implements IAdvancedToolTipProvide
 
     /**
      * Called when block is clicked, we will be using this to show the gui
+     * @return
      */
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos,
-                                    PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos,
+                                             PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (worldIn.isRemote) {
-            return true;
+            return ActionResultType.SUCCESS;
         }
         else {
             TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -98,7 +98,7 @@ public class BaseBlock extends ContainerBlock implements IAdvancedToolTipProvide
                 INamedContainerProvider grinder = (INamedContainerProvider) tileentity;
                 NetworkHooks.openGui((ServerPlayerEntity) player, grinder, pos);
             }
-            return true;
+            return ActionResultType.SUCCESS;
         }
     }
 

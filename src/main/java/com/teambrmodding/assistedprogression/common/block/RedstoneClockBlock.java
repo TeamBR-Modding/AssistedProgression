@@ -107,11 +107,6 @@ public class RedstoneClockBlock extends BaseBlock {
         return true;
     }
 
-    @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return true;
-    }
-
     /*******************************************************************************************************************
      * BlockState                                                                                                      *
      *******************************************************************************************************************/

@@ -139,7 +139,7 @@ public class TrashBagItem extends Item implements INamedContainerProvider, IAdva
                                 ItemStack.areItemStackTagsEqual(trashKey, pickedItem)) {
                             pickedItem.shrink(pickedItem.getCount());
                             player.world.playSound(null,
-                                    new BlockPos(player.posX, player.posY, player.posZ),
+                                    new BlockPos(player.getPosX(), player.getPosY(), player.getPosZ()),
                                     SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS,
                                     0.3F, 0.5F);
                             return; // Items voided, no need to continue

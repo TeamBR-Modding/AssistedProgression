@@ -1,6 +1,5 @@
 package com.teambrmodding.assistedprogression.client.tooltip;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import com.teambrmodding.assistedprogression.managers.ConfigManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -12,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -43,13 +43,13 @@ public class EnchantmentToolTip {
             List<ITextComponent> tooltip = event.getToolTip();
 
             // If not sneaking, display tip to activate
-            if (!InputMappings.isKeyDown(Minecraft.getInstance().mainWindow.getHandle(),
+            if (!InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(),
                     Minecraft.getInstance().gameSettings.keyBindSneak.getKey().getKeyCode())) {
                 tooltip.add(new StringTextComponent(
                         I18n.format("assistedprogression:tooltip.activate",
-                                ChatFormatting.RED,
+                                TextFormatting.RED,
                                 I18n.format(Minecraft.getInstance().gameSettings.keyBindSneak.getTranslationKey()),
-                                ChatFormatting.WHITE)));
+                                TextFormatting.WHITE)));
             } else {
                 // Add info
                 ListNBT listNBT = (itemStack.getItem() instanceof EnchantedBookItem) ?

@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.client.screen;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teambr.nucleus.util.ClientUtils;
 import com.teambr.nucleus.util.RenderUtils;
 import com.teambrmodding.assistedprogression.common.container.CrafterContainer;
@@ -41,24 +42,23 @@ public class CrafterScreen extends ContainerScreen<CrafterContainer> {
      * Screen                                                                                                          *
      *******************************************************************************************************************/
 
-    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
-    protected void drawGuiContainerForegroundLayer(int x, int y) {
-        this.font.drawString(ClientUtils.translate("block.assistedprogression.crafter"), (xSize / 2) - (font
-                .getStringWidth(ClientUtils.translate("block.assistedprogression.crafter")) / 2), 5, 0x404040);
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+        this.font.drawString(matrixStack, ClientUtils.translate("block.assistedprogression.crafter"),
+                (xSize / 2) - (font.getStringWidth(ClientUtils.translate("block.assistedprogression.crafter")) / 2),
+                5, 0x404040);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float f, int x, int y) {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtils.bindTexture(background);
-        blit(guiLeft, guiTop, 0, 0, xSize, ySize);
+        blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        renderHoveredToolTip(mouseX, mouseY);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(matrixStack);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 }

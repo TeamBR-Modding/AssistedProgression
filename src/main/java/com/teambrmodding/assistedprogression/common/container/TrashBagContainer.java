@@ -1,12 +1,16 @@
 package com.teambrmodding.assistedprogression.common.container;
 
+import com.mojang.datafixers.util.Pair;
 import com.teambr.nucleus.common.container.BaseContainer;
 import com.teambr.nucleus.common.container.slots.PhantomSlot;
 import com.teambr.nucleus.common.items.InventoryHandlerItem;
+import com.teambr.nucleus.helper.GuiHelper;
+import com.teambr.nucleus.util.RenderUtils;
 import com.teambrmodding.assistedprogression.common.item.TrashBagItem;
 import com.teambrmodding.assistedprogression.managers.ContainerManager;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -15,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nonnull;
@@ -36,10 +41,11 @@ public class TrashBagContainer extends BaseContainer {
 
     /**
      * Main container constructor, called on server side
-     * @param windowID The window id
+     *
+     * @param windowID        The window id
      * @param playerInventory Player's Inventory
-     * @param inventory The trash bag inventory
-     * @param trashBagStack The trashbag stack
+     * @param inventory       The trash bag inventory
+     * @param trashBagStack   The trashbag stack
      */
     public TrashBagContainer(int windowID, IInventory playerInventory,
                              InventoryHandlerItem inventory, ItemStack trashBagStack) {
@@ -62,12 +68,13 @@ public class TrashBagContainer extends BaseContainer {
         // Create the slot that will replace the trash bag itself, create a trashable slot
         Slot replacer = new Slot(new InventoryNull(), 0, -1000, 0) {
             @Override
-            public String getSlotTexture() {
+            public Pair<ResourceLocation, ResourceLocation> getBackground() {
                 if (trashBag.getItem() == ItemManager.trash_bag)
-                    return "assistedprogression:items/trash_bag";
+                    return Pair.of(RenderUtils.MC_ITEMS_RESOURCE_LOCATION,
+                            new ResourceLocation("assistedprogression:items/trash_bag"));
                 else
-                    return "assistedprogression:items/hefty_bag";
-            }
+                    return Pair.of(RenderUtils.MC_ITEMS_RESOURCE_LOCATION,
+                            new ResourceLocation("assistedprogression:items/hefty_bag"));            }
 
             @Override
             public boolean isItemValid(ItemStack p_75214_1_) {
@@ -75,25 +82,12 @@ public class TrashBagContainer extends BaseContainer {
             }
         };
         addSlot(replacer);
-
-        // Set replacer over the normal slot
-        for (Slot slot : inventorySlots) {
-            if (slot != null) {
-                if (!slot.getStack().isEmpty() && ItemStack.areItemStacksEqual(slot.getStack(), trashBag)) {
-                    int x = slot.xPos;
-                    int y = slot.yPos;
-                    slot.xPos = -1000;
-                    replacer.xPos = x;
-                    replacer.yPos = y;
-                    break;
-                }
-            }
-        }
     }
 
     /**
      * Client side call
-     * @param windowId The window
+     *
+     * @param windowId  The window
      * @param playerInv The player inventory
      * @param extraData Extra data packet, for fml
      */
@@ -133,6 +127,7 @@ public class TrashBagContainer extends BaseContainer {
 
     /**
      * Called when the container is exited
+     *
      * @param playerIn The player
      */
     @Override

@@ -1,11 +1,14 @@
 package com.teambrmodding.assistedprogression.client.render;
 
 import com.google.common.primitives.SignedBytes;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -31,11 +34,16 @@ public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRender
     // Custom entity, to pass around so we don't have to keep making so many instances
     private static ItemEntity customItem;
 
+    public GrinderTileRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
+        super(rendererDispatcherIn);
+    }
+
     @Override
-    public void render(T grinder, double x, double y, double z, float partialTicks, int destroyStage) {
+    public void render(T grinder, float partialTicks, MatrixStack matrixStackIn,
+                       IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         // Make sure not null
         if (customItem == null) {
-            customItem = new ItemEntity(EntityType.ITEM, this.getWorld());
+            customItem = new ItemEntity(EntityType.ITEM, renderDispatcher.world);
         }
 
         // Custom item renderer, don't want to use minecraft one since you can't change hover start on entity anymore
@@ -59,25 +67,24 @@ public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRender
         }
 
         // Render items
-        GlStateManager.pushMatrix();
+        matrixStackIn.push();
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GlStateManager.translated(x + 0.5D, y, z + 0.5D);
+        matrixStackIn.translate(0.5D, 0, 0.5D);
         for(int i = 4; i < 7; i++) {
             ItemStack stack = grinder.getStackInSlot(i);
             if(!stack.isEmpty()) {
                 customItem.setItem(stack);
-                GlStateManager.pushMatrix();
-                GlStateManager.scaled(0.45D, 0.45D, 0.45D);
+                matrixStackIn.push();
+                matrixStackIn.scale(0.45F, 0.45F, 0.45F);
 
                 // Each slot rotates 120 degrees, dropping 3 to offset slot to normal range for calculation
                 int rotation = (i - 3) * 120;
                 double xRot = 0.25 * Math.cos(Math.toRadians(rotation));
                 double zRot = 0.25 * Math.sin(Math.toRadians(rotation));
-                this.itemRenderer.doRender(customItem, xRot / 0.45, -0.1, zRot / 0.45,
-                        0.0F, 0);
-                GlStateManager.popMatrix();
+                this.itemRenderer.render(customItem, (float) (xRot / 0.45), partialTicks, matrixStackIn, bufferIn, combinedLightIn);
+                matrixStackIn.pop();
             }
         }
-        GlStateManager.popMatrix();
+        matrixStackIn.pop();
     }
 }

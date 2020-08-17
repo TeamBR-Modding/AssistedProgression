@@ -1,6 +1,7 @@
 modLoader="javafml"
 loaderVersion="[28,)"
 issueTrackerURL="https://github.com/TeamBR-Modding/AssistedProgression/issues"
+license="http://creativecommons.org/licenses/by-nc-sa/4.0/"
 
 [[mods]]
   modId="assistedprogression"
@@ -13,8 +14,8 @@ issueTrackerURL="https://github.com/TeamBR-Modding/AssistedProgression/issues"
   Small things to help you along
   '''
   [[dependencies.assistedprogression]]
-      modId="nucleus"
+      modId="nucleus_teambr"
       mandatory=true
-      versionRange="[1.14.4,)"
+      versionRange="[1.16.2,)"
       ordering="BEFORE"
       side="BOTH"

@@ -1,6 +1,5 @@
 package com.teambrmodding.assistedprogression.common.item;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambr.nucleus.common.IToolTipProvider;
 import com.teambr.nucleus.util.ClientUtils;
@@ -27,6 +26,7 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -104,7 +104,7 @@ public class SpawnerRelocatorItem extends Item implements IAdvancedToolTipProvid
                     tag.putInt("z", newPosition.getZ());
                     world.setBlockState(newPosition, Blocks.SPAWNER.getDefaultState());
                     MobSpawnerTileEntity spawnerTile = (MobSpawnerTileEntity) world.getTileEntity(newPosition);
-                    spawnerTile.read(tag);
+                    spawnerTile.read(world.getBlockState(newPosition), tag);
                     stack.setTag(null);
                 }
             }
@@ -131,8 +131,8 @@ public class SpawnerRelocatorItem extends Item implements IAdvancedToolTipProvid
             String spawnType = I18n.format(entity.getName().getUnformattedComponentText());
 
             tooltip.add(new StringTextComponent(I18n.format("assistedprogression.text.spawnerRelocator.type",
-                    ChatFormatting.GOLD,
-                    ChatFormatting.ITALIC,
+                    TextFormatting.GOLD,
+                    TextFormatting.ITALIC,
                     spawnType)));
         }
         super.addInformation(stack, world, tooltip, advanced);

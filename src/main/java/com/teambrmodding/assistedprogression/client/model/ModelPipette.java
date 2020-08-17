@@ -1,36 +1,40 @@
 package com.teambrmodding.assistedprogression.client.model;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.teambr.nucleus.client.ModelHelper;
+import com.google.common.base.Joiner;
+import com.google.common.collect.*;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.datafixers.util.Either;
+import com.mojang.datafixers.util.Pair;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.ISprite;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.MissingTextureSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.TransformationMatrix;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.*;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
-import net.minecraftforge.common.model.IModelState;
-import net.minecraftforge.common.model.TRSRTransformation;
+import net.minecraftforge.client.model.geometry.IModelGeometry;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.vecmath.Matrix4f;
 import java.util.*;
 import java.util.function.Function;
 
@@ -46,7 +50,7 @@ import java.util.function.Function;
  */
 
 @SuppressWarnings("deprecation")
-public final class ModelPipette implements IUnbakedModel {
+public final class ModelPipette implements IModelGeometry<ModelPipette> {
 
     /*******************************************************************************************************************
      * Variables                                                                                                       *
@@ -93,59 +97,74 @@ public final class ModelPipette implements IUnbakedModel {
      * Bakes the model with all relevant information, this is the "live" model
      * @param bakery Minecraft model bakery
      * @param spriteGetter Function to get textures
-     * @param sprite Sprite info
-     * @param format Vertex format
      * @return A model baked with all info present
      */
-    @SuppressWarnings("ConstantConditions")
     @Override
-    public IBakedModel bake(@Nonnull ModelBakery bakery, @Nonnull java.util.function.Function<ResourceLocation, TextureAtlasSprite>
-            spriteGetter, ISprite sprite, @Nullable VertexFormat format) {
+    public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial,
+            TextureAtlasSprite> spriteGetter, IModelTransform modelTransform,
+                            ItemOverrideList overrides, ResourceLocation modelLocation) {
 
-        // Setup Perspectives
-        IModelState state = sprite.getState();
-        ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transformMap = PerspectiveMapWrapper.getTransforms(state);
+        // Setup Render Material
+        RenderMaterial maskMaterial  = owner.resolveTexture("mask");
+
+        IModelTransform transformsFromModel = owner.getCombinedTransform();
 
         // Sprites and quads initialization
-        TRSRTransformation transform = state.apply(java.util.Optional.empty()).orElse(TRSRTransformation.identity());
-        TextureAtlasSprite fluidSprite = null;
-        TextureAtlasSprite particleSprite = null;
-        ImmutableList.Builder<BakedQuad> builder = ImmutableList.builder();
+        TextureAtlasSprite fluidSprite = fluid != Fluids.EMPTY ?
+                spriteGetter.apply(ForgeHooksClient.getBlockMaterial(fluid.getAttributes().getStillTexture())) :
+                null;
+        TextureAtlasSprite particleSprite = spriteGetter.apply(maskMaterial);
+
+        // Setup Perspectives
+        ImmutableMap<ItemCameraTransforms.TransformType, TransformationMatrix> transformMap =
+                PerspectiveMapWrapper.getTransforms(new ModelTransformComposition(transformsFromModel, modelTransform));
+
+
+        TransformationMatrix transform = modelTransform.getRotation();
+        ItemMultiLayerBakedModel.Builder builder =
+                ItemMultiLayerBakedModel.builder(owner, particleSprite,
+                        new PipetteOverrideList(bakery, owner),
+                        transformMap);
+
         Random random = new Random();
         random.setSeed(42);
-
-        // Load fluid sprite if not an empty pipette
-        if (fluid != Fluids.EMPTY) {
-            fluidSprite = spriteGetter.apply(fluid.getAttributes().getStillTexture());
-        }
+        builder.setParticle(particleSprite);
 
         // Draw the wrapped model, the pipette itself with no fluid or cover
-        builder.addAll(baseModel.getQuads(null, null, random));
+        builder.addQuads(RenderType.getTranslucent(), baseModel.getQuads(null, null, random));
+
+        // We are going to use the mask as a stencil for the liquid
+        TextureAtlasSprite liquidMask = spriteGetter.apply(maskMaterial);
 
         // Draw fluid
         if (fluidSprite != null) {
-            // We are going to use the mask as a stencil for the liquid
-            TextureAtlasSprite liquid = spriteGetter.apply(maskLocation);
 
             // Build new texture based on stencil
-            builder.addAll(ItemTextureQuadConverter.convertTextureHorizontal(format, transform, liquid, fluidSprite,
-                    NORTH_Z_FLUID, Direction.NORTH, fluid.getAttributes().getColor(), 1));
-            builder.addAll(ItemTextureQuadConverter.convertTextureHorizontal(format, transform, liquid, fluidSprite,
-                    SOUTH_Z_FLUID, Direction.SOUTH,  fluid.getAttributes().getColor(), 1));
+            int luminosity = fluid.getAttributes().getLuminosity();
+            int color = fluid.getAttributes().getColor();
+
+            builder.addQuads(ItemLayerModel.getLayerRenderType(luminosity > 0),
+                    ItemTextureQuadConverter.convertTexture(transform, liquidMask, fluidSprite,
+                            NORTH_Z_FLUID, Direction.NORTH, color, 1, luminosity));
+            builder.addQuads(ItemLayerModel.getLayerRenderType(luminosity > 0),
+                    ItemTextureQuadConverter.convertTexture(transform, liquidMask, fluidSprite,
+                            SOUTH_Z_FLUID, Direction.SOUTH, color, 1, luminosity));
+
             particleSprite = fluidSprite;
+            builder.setParticle(particleSprite);
         }
 
         // Draw mask
         if (maskLocation != null) {
             // Draw rest of pipette, the clear cover over the fluid, do this by making an item with texture of mask
             IBakedModel model =
-                    (new ItemLayerModel(ImmutableList.of(maskLocation))).bake(bakery, spriteGetter, sprite, format);
-            builder.addAll(model.getQuads(null, null, random));
-            particleSprite = model.getParticleTexture();
+                    (new ItemLayerModel(ImmutableList.of(maskMaterial))).bake(owner, bakery, spriteGetter,
+                            modelTransform, overrides, modelLocation);
+            builder.addQuads(RenderType.getTranslucent(), model.getQuads(null, null, random));
         }
 
         // The fully processed model
-        return new PipetteDynamicModel(bakery, baseModel, builder.build(), particleSprite, transformMap);
+        return builder.build();
     }
 
     /**
@@ -161,8 +180,7 @@ public final class ModelPipette implements IUnbakedModel {
      * @param customData Custom info
      * @return An instance of the model with custom data applied
      */
-    @Override
-    public ModelPipette process(ImmutableMap<String, String> customData) {
+    public ModelPipette withFluid(ImmutableMap<String, String> customData) {
         Fluid fluid = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(customData.get("fluid")));
 
         if (fluid == null) fluid = this.fluid;
@@ -171,6 +189,8 @@ public final class ModelPipette implements IUnbakedModel {
         return new ModelPipette(fluid);
     }
 
+
+
     /**
      * Get textures used in this model, not really needed for us as we stitch ours
      * @param modelGetter The texture getter
@@ -178,21 +198,13 @@ public final class ModelPipette implements IUnbakedModel {
      * @return List of textures used by this model
      */
     @Override
-    @Nonnull
-    public Collection<ResourceLocation> getTextures(@Nonnull java.util.function.Function<ResourceLocation, IUnbakedModel> modelGetter,
-                                                    @Nonnull Set<String> missingTextureErrors) {
-        ImmutableSet.Builder<ResourceLocation> builder = ImmutableSet.builder();
-        builder.add(maskLocation);
-        return builder.build();
-    }
+    public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function<ResourceLocation,
+            IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
+        Set<RenderMaterial> texs = Sets.newHashSet();
 
-    /**
-     * Not needed for us, return empty list
-     * @return Empty list
-     */
-    @Override
-    public Collection<ResourceLocation> getDependencies() {
-        return Collections.emptyList();
+        if (owner.isTexturePresent("mask")) texs.add(owner.resolveTexture("mask"));
+
+        return texs;
     }
 
     /*******************************************************************************************************************
@@ -210,13 +222,15 @@ public final class ModelPipette implements IUnbakedModel {
 
         // Reference to the minecraft model bakery
         public final ModelBakery bakery;
+        private final IModelConfiguration owner;
 
         /**
          * Creates the handler
          * @param bakery The instance of the minecraft model bakery
          */
-        public PipetteOverrideList(ModelBakery bakery) {
+        public PipetteOverrideList(ModelBakery bakery, IModelConfiguration own) {
             this.bakery = bakery;
+            this.owner = own;
         }
 
         /**
@@ -228,22 +242,21 @@ public final class ModelPipette implements IUnbakedModel {
          * @return The new model to render instead, we will wrap the original add fluid info
          */
         @Override
-        public IBakedModel getModelWithOverrides(@Nonnull IBakedModel originalModel, @Nonnull ItemStack stack,
-                                                 @Nullable World world, @Nullable LivingEntity entity) {
+        public IBakedModel func_239290_a_(IBakedModel originalModel, ItemStack stack, @Nullable ClientWorld world,
+                                          @Nullable LivingEntity entity) {
+
             return FluidUtil.getFluidContained(stack)
                     .map(fluidStack -> {
                         Fluid fluid = fluidStack.getFluid();
                         String name = fluid.getRegistryName().toString();
 
                         if (!cache.containsKey(name)) {
-                            ModelPipette parent = new ModelPipette(null).process(ImmutableMap.of("fluid", name));
+                            ModelPipette parent = new ModelPipette(null).withFluid(ImmutableMap.of("fluid", name));
                             parent.setBaseModel(originalModel);
-                            Function<ResourceLocation, TextureAtlasSprite> textureGetter;
-                            textureGetter = location -> Minecraft.getInstance().getTextureMap().getAtlasSprite(location.toString());
 
                             IBakedModel bakedModel
-                                    = parent.bake(bakery, textureGetter,
-                                    (SimpleModelState) ModelHelper.DEFAULT_TOOL_STATE, DefaultVertexFormats.ITEM);
+                                    = parent.bake(owner, bakery,
+                                    ModelLoader.defaultTextureGetter(), ModelRotation.X0_Y0, this, LOCATION);
                             cache.put(name, bakedModel);
                             return bakedModel;
                         }
@@ -273,13 +286,16 @@ public final class ModelPipette implements IUnbakedModel {
         // Minecraft generated model
         public IBakedModel baseModel;
 
+        public IModelConfiguration owner;
+
         public PipetteDynamicModel(ModelBakery bakery, IBakedModel base,
-                                   ImmutableList<BakedQuad> quads,
+                                   ImmutableList<BakedQuad> quads, IModelConfiguration owner,
                                    TextureAtlasSprite particle,
-                                   ImmutableMap<ItemCameraTransforms.TransformType, TRSRTransformation> transforms) {
-            super(quads, particle, transforms, new PipetteOverrideList(bakery));
+                                   ImmutableMap<ItemCameraTransforms.TransformType, TransformationMatrix> transforms) {
+            super(quads, particle, transforms, new PipetteOverrideList(bakery, owner), true, true);
             this.bakery = bakery;
             this.baseModel = base;
+            this.owner = owner;
         }
 
         /**
@@ -287,8 +303,8 @@ public final class ModelPipette implements IUnbakedModel {
          * @param modelBakery The instance of the model bakery
          * @param parent The model made by Minecraft
          */
-        public PipetteDynamicModel(ModelBakery modelBakery, IBakedModel parent) {
-            this(modelBakery, parent, ImmutableList.copyOf(parent.getQuads(null, null, new Random())),
+        public PipetteDynamicModel(ModelBakery modelBakery, IBakedModel parent, IModelConfiguration owner) {
+            this(modelBakery, parent, ImmutableList.copyOf(parent.getQuads(null, null, new Random())), owner,
                     parent.getParticleTexture(), PerspectiveMapWrapper.getTransforms(parent.getItemCameraTransforms()));
         }
 
@@ -301,31 +317,24 @@ public final class ModelPipette implements IUnbakedModel {
         public ItemOverrideList getOverrides() {
             if(PipetteOverrideList.INSTANCE == null ||
                     PipetteOverrideList.INSTANCE.bakery == null)
-                PipetteOverrideList.INSTANCE = new PipetteOverrideList(bakery);
+                PipetteOverrideList.INSTANCE = new PipetteOverrideList(bakery, owner);
             return PipetteOverrideList.INSTANCE;
         }
 
-        /**
-         * Handle transforms based on state
-         * @param cameraTransformType Camera Type
-         * @return Rotations for perspective
-         */
         @Override
-        @Nonnull
-        public Pair<? extends IBakedModel, Matrix4f> handlePerspective(@Nonnull ItemCameraTransforms.TransformType cameraTransformType) {
-            // Wrap the base and have it handle the movement
-            return PerspectiveMapWrapper
-                    .handlePerspective(
-                            this,
-                            ModelHelper.DEFAULT_TOOL_STATE,
-                            cameraTransformType);
+        public IBakedModel handlePerspective(ItemCameraTransforms.TransformType type, MatrixStack mat) {
+            return super.handlePerspective(type, mat);
         }
 
         /***************************************************************************************************************
          * Wrapper methods                                                                                             *
          ***************************************************************************************************************/
 
-        @Nonnull @Override public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) { return baseModel.getQuads(state, side, rand, extraData); }
+        @Nonnull @Override public List<BakedQuad> getQuads(@Nullable BlockState state,
+                                                           @Nullable Direction side, @Nonnull Random rand,
+                                                           @Nonnull IModelData extraData) {
+            return baseModel.getQuads(state, side, rand, extraData);
+        }
         @Override public IBakedModel getBakedModel() { return baseModel; }
         @Override public boolean isAmbientOcclusion() { return baseModel.isAmbientOcclusion(); }
         @Override public boolean isGui3d() { return baseModel.isGui3d(); }

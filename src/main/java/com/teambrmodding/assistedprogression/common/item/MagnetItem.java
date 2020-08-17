@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.common.item;
 
+import com.sun.javafx.geom.Vec3d;
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.client.resources.I18n;
@@ -18,7 +19,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -77,8 +77,8 @@ public class MagnetItem extends Item implements IAdvancedToolTipProvider {
             PlayerEntity player = (PlayerEntity) entityIn;
 
             AxisAlignedBB bb = new AxisAlignedBB(
-                    player.posX - RANGE, player.posY - RANGE, player.posZ - RANGE,
-                    player.posX + RANGE, player.posY + RANGE, player.posZ + RANGE);
+                    player.getPosX() - RANGE, player.getPosY() - RANGE, player.getPosZ() - RANGE,
+                    player.getPosX() + RANGE, player.getPosY() + RANGE, player.getPosZ() + RANGE);
 
             //Get Items First
             List<ItemEntity> itemEntities = worldIn.getEntitiesWithinAABB(ItemEntity.class, bb);
@@ -109,9 +109,9 @@ public class MagnetItem extends Item implements IAdvancedToolTipProvider {
                 for (Entity entity : entitiesInBox) {
                     // Create a vector pointing to the player
                     Vec3d motionVector = new Vec3d(
-                            player.posX - entity.posX,
-                            player.posY - entity.posY,
-                            player.posZ - entity.posZ);
+                            player.getPosX() - entity.getPosX(),
+                            player.getPosY() - entity.getPosY(),
+                            player.getPosZ() - entity.getPosZ());
                     // Don't let it get above one, speed will be adjusted below
                     if (motionVector.length() > 1)
                         motionVector.normalize();
@@ -121,7 +121,7 @@ public class MagnetItem extends Item implements IAdvancedToolTipProvider {
                     float speed = ATTRACT_SPEED + (isArrow ? 0.2F : 0F);
 
                     // Apply speed
-                    motionVector.add(speed, speed, speed);
+                    motionVector.add(new Vec3d(speed, speed, speed));
 
                     entity.setMotion(motionVector.x, motionVector.y, motionVector.z);
                     entity.velocityChanged = true;

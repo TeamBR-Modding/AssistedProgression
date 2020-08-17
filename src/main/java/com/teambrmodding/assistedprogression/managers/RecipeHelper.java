@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
@@ -119,7 +120,7 @@ public class RecipeHelper {
         /***************************************************************************************************************
          * Dust from Ore                                                                                               *
          ***************************************************************************************************************/
-        Tag<Item> oreTag  = ItemTags.getCollection().get(oreLocation);
+        ITag<Item> oreTag  = ItemTags.getCollection().get(oreLocation);
 
         // Get all items in the ore forge tag
         for(Item oreItem : oreTag.getAllElements()) {
@@ -147,7 +148,7 @@ public class RecipeHelper {
         /***************************************************************************************************************
          * Dust from Ingot                                                                                             *
          ***************************************************************************************************************/
-        Tag<Item> ingotTag  = ItemTags.getCollection().get(ingotLocation);
+        ITag<Item> ingotTag  = ItemTags.getCollection().get(ingotLocation);
 
         // Get all items in the ore forge tag
         for(Item ingotItem : ingotTag.getAllElements()) {
@@ -269,7 +270,7 @@ public class RecipeHelper {
      * @param input Input Tag
      * @param output Output ItemStack
      */
-    public static void addGrinderRecipe(@Nullable String label, Tag<Item> input, ItemStack output) {
+    public static void addGrinderRecipe(@Nullable String label, ITag<Item> input, ItemStack output) {
         grinderRecipes.add(new GrinderRecipe(
                 new ResourceLocation(Reference.MOD_ID,
                         label == null ? "grinder_recipe_auto_" + grinderRecipes.size() : label),

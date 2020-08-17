@@ -8,8 +8,10 @@ import com.teambrmodding.assistedprogression.common.item.DustItem;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import com.teambrmodding.assistedprogression.lib.Reference;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
+import com.teambrmodding.assistedprogression.managers.TileEntityManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -36,7 +38,7 @@ import java.util.Random;
 public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
-        ClientRegistry.bindTileEntitySpecialRenderer(GrinderTile.class, new GrinderTileRenderer<>());
+        ClientRegistry.bindTileEntityRenderer(TileEntityManager.grinder, GrinderTileRenderer::new);
         Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.iron_dust).getColor(),
                 (IItemProvider) () -> ItemManager.iron_dust);
         Minecraft.getInstance().getItemColors().register((color, ref) -> ((DustItem)ItemManager.gold_dust).getColor(),
@@ -54,6 +56,6 @@ public class ClientProxy extends CommonProxy {
     public static void modelBake(ModelBakeEvent event) {
         IBakedModel baseModel = event.getModelRegistry().get(ModelPipette.LOCATION);
         event.getModelRegistry().put(ModelPipette.LOCATION,
-                new ModelPipette.PipetteDynamicModel(event.getModelLoader(), baseModel));
+                new ModelPipette.PipetteDynamicModel(event.getModelLoader(), baseModel, null));
     }
 }

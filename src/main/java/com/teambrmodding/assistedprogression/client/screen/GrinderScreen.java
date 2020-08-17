@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.client.screen;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teambr.nucleus.client.gui.GuiBase;
 import com.teambr.nucleus.client.gui.component.display.GuiComponentText;
 import com.teambr.nucleus.util.ClientUtils;
@@ -57,9 +58,9 @@ public class GrinderScreen extends GuiBase<GrinderContainer> {
                     new DecimalFormat("#.##").format((grinder.progress / (double) GrinderTile.MAX_PROGRESS) * 100) + "%",
                     new Color(77, 77, 77)) {
                 @Override
-                public void renderOverlay(int guiLeft, int guiTop, int mouseX, int mouseY) {
+                public void renderOverlay(MatrixStack matrixStack, int guiLeft, int guiTop, int mouseX, int mouseY) {
                     setLabel(new DecimalFormat("#.##").format((grinder.progress / (double) GrinderTile.MAX_PROGRESS) * 100) + "%");
-                    super.renderOverlay(guiLeft, guiTop, mouseX, mouseY);
+                    super.renderOverlay(matrixStack, guiLeft, guiTop, mouseX, mouseY);
                 }
             });
         }
