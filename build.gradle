@@ -174,7 +174,7 @@ dependencies {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:' + project.minecraft_version + "-" + project.forge_version
-    compile group: "com.teambr.nucleus",
+   compile group: "com.teambr.nucleus",
             name: "Nucleus",
             version: "+",
             classifier: "dev"

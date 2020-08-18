@@ -81,7 +81,8 @@ public class GrinderTileRenderer<T extends GrinderTile> extends TileEntityRender
                 int rotation = (i - 3) * 120;
                 double xRot = 0.25 * Math.cos(Math.toRadians(rotation));
                 double zRot = 0.25 * Math.sin(Math.toRadians(rotation));
-                this.itemRenderer.render(customItem, (float) (xRot / 0.45), partialTicks, matrixStackIn, bufferIn, combinedLightIn);
+                matrixStackIn.translate(xRot / 0.45, 0.1, zRot / 0.45);
+                this.itemRenderer.render(customItem, 0, 4.5F, matrixStackIn, bufferIn, combinedLightIn);
                 matrixStackIn.pop();
             }
         }

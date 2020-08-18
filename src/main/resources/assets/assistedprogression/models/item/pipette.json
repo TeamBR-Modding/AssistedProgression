@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "mask": "assistedprogression:items/pipette"
+    "layer0": "assistedprogression:items/pipette",
+    "mask": "assistedprogression:items/pipette_mask"
   }
 }
