@@ -2,17 +2,22 @@ package com.teambrmodding.assistedprogression.client.screen;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teambr.nucleus.client.gui.GuiBase;
+import com.teambr.nucleus.client.gui.component.BaseComponent;
 import com.teambr.nucleus.client.gui.component.display.GuiComponentText;
+import com.teambr.nucleus.client.gui.component.display.GuiTabCollection;
 import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.common.container.GrinderContainer;
 import com.teambrmodding.assistedprogression.common.tile.GrinderTile;
 import com.teambrmodding.assistedprogression.lib.Reference;
+import com.teambrmodding.assistedprogression.managers.BlockManager;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 import java.awt.*;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  * This file was created for AssistedProgression
@@ -64,5 +69,15 @@ public class GrinderScreen extends GuiBase<GrinderContainer> {
                 }
             });
         }
+    }
+
+    @Override
+    protected void addRightTabs(GuiTabCollection tabs) {
+        ArrayList<BaseComponent> tabComponents = new ArrayList<>();
+        tabComponents.add(new GuiComponentText(this, 15, 5, "Test", Color.WHITE));
+
+        tabs.addTab(tabComponents, 120, 100, 177, 0, new ItemStack(BlockManager.grinder));
+        tabs.addTab(tabComponents, 120, 100, 177, 0, new ItemStack(BlockManager.grinder));
+
     }
 }
