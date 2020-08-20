@@ -88,6 +88,6 @@ public class PlayerPlateBlock extends AbstractPressurePlateBlock implements IAdv
     @Nullable
     @Override
     public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
-        return Collections.singletonList(ClientUtils.translate("player_plate.desc"));
+        return ClientUtils.wrapStringToLength(ClientUtils.translate("player_plate.desc"), 35);
     }
 }

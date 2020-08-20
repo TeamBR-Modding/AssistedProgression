@@ -1,5 +1,6 @@
 package com.teambrmodding.assistedprogression.common.item;
 
+import ca.weblite.objc.Client;
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambr.nucleus.common.IToolTipProvider;
 import com.teambr.nucleus.util.ClientUtils;
@@ -151,6 +152,6 @@ public class SpawnerRelocatorItem extends Item implements IAdvancedToolTipProvid
     @Nullable
     @Override
     public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
-        return Collections.singletonList(ClientUtils.translate("spawner_relocator.desc"));
+        return ClientUtils.wrapStringToLength(ClientUtils.translate("spawner_relocator.desc"), 35);
     }
 }

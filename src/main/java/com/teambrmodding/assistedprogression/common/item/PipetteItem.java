@@ -5,6 +5,7 @@ import com.teambr.nucleus.common.IAdvancedToolTipProvider;
 import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.AssistedProgression;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -145,6 +146,6 @@ public class PipetteItem extends Item implements IAdvancedToolTipProvider{
     @Nullable
     @Override
     public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
-        return Collections.singletonList(ClientUtils.translate("pipette.desc"));
+        return ClientUtils.wrapStringToLength(ClientUtils.translate("pipette.desc"), 35);
     }
 }

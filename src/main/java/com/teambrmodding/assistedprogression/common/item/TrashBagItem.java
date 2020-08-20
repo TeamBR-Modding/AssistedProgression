@@ -191,6 +191,6 @@ public class TrashBagItem extends Item implements INamedContainerProvider, IAdva
     @Nullable
     @Override
     public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
-        return Collections.singletonList(ClientUtils.translate(getRegistryName().getPath() + ".desc"));
+        return ClientUtils.wrapStringToLength(ClientUtils.translate(getRegistryName().getPath() + ".desc"), 35);
     }
 }

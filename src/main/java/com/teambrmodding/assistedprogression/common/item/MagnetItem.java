@@ -2,6 +2,7 @@ package com.teambrmodding.assistedprogression.common.item;
 
 import com.sun.javafx.geom.Vec3d;
 import com.teambr.nucleus.common.IAdvancedToolTipProvider;
+import com.teambr.nucleus.util.ClientUtils;
 import com.teambrmodding.assistedprogression.managers.ItemManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
@@ -159,7 +160,7 @@ public class MagnetItem extends Item implements IAdvancedToolTipProvider {
     @OnlyIn(Dist.CLIENT)
     @Override
     public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
-        return Collections.singletonList(I18n.format("item_cheap_magnet.desc"));
+        return ClientUtils.wrapStringToLength(I18n.format("item_cheap_magnet.desc"), 35);
     }
 }
 

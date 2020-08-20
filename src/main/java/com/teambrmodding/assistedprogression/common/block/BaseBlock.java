@@ -140,6 +140,6 @@ public class BaseBlock extends ContainerBlock implements IAdvancedToolTipProvide
     @Nullable
     @Override
     public List<String> getAdvancedToolTip(@Nonnull ItemStack stack) {
-        return Collections.singletonList(ClientUtils.translate(this.registryName + ".desc"));
+        return ClientUtils.wrapStringToLength(ClientUtils.translate(this.registryName + ".desc"), 35);
     }
 }
