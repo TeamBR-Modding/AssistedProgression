@@ -70,14 +70,4 @@ public class GrinderScreen extends GuiBase<GrinderContainer> {
             });
         }
     }
-
-    @Override
-    protected void addRightTabs(GuiTabCollection tabs) {
-        ArrayList<BaseComponent> tabComponents = new ArrayList<>();
-        tabComponents.add(new GuiComponentText(this, 15, 5, "Test", Color.WHITE));
-
-        tabs.addTab(tabComponents, 120, 100, 177, 0, new ItemStack(BlockManager.grinder));
-        tabs.addTab(tabComponents, 120, 100, 177, 0, new ItemStack(BlockManager.grinder));
-
-    }
 }
